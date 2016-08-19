@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="allocator">
+      <UniqueIdentifier>{afb0c701-979d-41d3-9209-12c9dd4583a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{534be40c-e3d6-4530-b0f1-b5087f190620}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="dll">
+      <UniqueIdentifier>{0cc0f045-af87-4589-935c-40f776e1cee3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="log">
+      <UniqueIdentifier>{473b6ff9-9865-4282-bf4c-3d77e1380e74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="io">
+      <UniqueIdentifier>{87033a29-3f90-4916-a5a7-20279a634e56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="math">
+      <UniqueIdentifier>{870a58b6-05c1-471f-9416-b41c456a31d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="base">
+      <UniqueIdentifier>{e230c276-0f98-4a09-81df-7d9b34cef6c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="error">
+      <UniqueIdentifier>{a0a9f6c5-43e8-4310-b709-8d5770df0941}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="config">
+      <UniqueIdentifier>{fe5e6ae9-6601-4b5f-b078-7092f692071a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{5a7af82e-ab13-4866-9716-535dbcf18fc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{dfdff7ec-7a3d-47a7-a360-e4b0bbb85312}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="allocator\allocator.h">
+      <Filter>allocator</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\defines.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\platform.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="dll\dll.h">
+      <Filter>dll</Filter>
+    </ClInclude>
+    <ClInclude Include="io\file_stream.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="io\memory_stream.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="io\stream.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="math\math.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix44.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\matrix44_cal.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\point.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="math\vector.h">
+      <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="dll\dll_system.h">
+      <Filter>dll</Filter>
+    </ClInclude>
+    <ClInclude Include="dll\module.h">
+      <Filter>dll</Filter>
+    </ClInclude>
+    <ClInclude Include="error\error.h">
+      <Filter>error</Filter>
+    </ClInclude>
+    <ClInclude Include="io\reader.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="io\writer.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="io\xml_writer.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="io\xml_stream.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="config\config.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="config\config_group.h">
+      <Filter>config</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\string_utils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="io\file_system.h">
+      <Filter>io</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\file_utils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="base\object.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\singleton.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="base\smart_ptr.h">
+      <Filter>base</Filter>
+    </ClInclude>
+    <ClInclude Include="log\log.h">
+      <Filter>log</Filter>
+    </ClInclude>
+    <ClInclude Include="resource\resource.h">
+      <Filter>resource</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dll\dll.cpp">
+      <Filter>dll</Filter>
+    </ClCompile>
+    <ClCompile Include="io\file_stream.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="io\memory_stream.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="io\stream.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="math\matrix44.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="math\matrix44_cal.cpp">
+      <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="dll\dll_system.cpp">
+      <Filter>dll</Filter>
+    </ClCompile>
+    <ClCompile Include="dll\module.cpp">
+      <Filter>dll</Filter>
+    </ClCompile>
+    <ClCompile Include="io\reader.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="io\writer.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="io\xml_writer.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="io\xml_stream.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="config\config.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="config\config_group.cpp">
+      <Filter>config</Filter>
+    </ClCompile>
+    <ClCompile Include="io\file_system.cpp">
+      <Filter>io</Filter>
+    </ClCompile>
+    <ClCompile Include="log\log.cpp">
+      <Filter>log</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
