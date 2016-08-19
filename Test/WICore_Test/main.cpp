@@ -10,8 +10,8 @@ int main()
 	WingCore::WING_LOG_INFO("Wing Engine test");
 
 
-	WingCore::DllSystem::getInstance()->open("D:/github/Wing/Bin/Runtime/X86/WIRendererD.dll");
-	WingCore::DllSystem::getInstance()->close("Renderer");
+	//WingCore::DllSystem::getInstance()->open("D:/github/Wing/Bin/Runtime/X86/WIRendererD.dll");
+	//WingCore::DllSystem::getInstance()->close("Renderer");
 
 
 	WingCore::Config* config = WING_NEW WingCore::Config();
