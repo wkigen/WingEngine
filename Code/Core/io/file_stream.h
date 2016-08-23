@@ -7,7 +7,7 @@
 
 namespace WingCore
 {
-	class WING_API FileStream :public Stream
+	class WING_CORE_API FileStream :public Stream
 	{
 	public:
 		FileStream();

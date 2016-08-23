@@ -13,18 +13,23 @@ namespace WingCore
 
 typedef Module*				(*WingDllMain) ();
 
-	class WING_API DllSystem:public Singleton<DllSystem>
+	class WING_CORE_API DllSystem:public Singleton<DllSystem>
 	{
 
 		friend class Singleton<DllSystem>;
 
-
 	public:
+		DllSystem();
+		~DllSystem();
+
+		bool	create();
+		void	destroy();
+
 		bool	open(const std::string dllPath);
 		void	close(const std::string name);
 
 	private:
-
+		bool					mCreate;
 		std::list<Module*>		mDllList;
 	};
 

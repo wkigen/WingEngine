@@ -8,7 +8,7 @@
 
 namespace WingCore
 {
-	class WING_API XMLStream :public Stream
+	class WING_CORE_API XMLStream :public Stream
 	{
 	public:
 		XMLStream();

@@ -6,7 +6,7 @@
 namespace WingCore
 {
 
-	class WING_API Writer
+	class WING_CORE_API Writer
 	{
 	public:
 		Writer();

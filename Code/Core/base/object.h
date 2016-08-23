@@ -6,7 +6,7 @@
 namespace WingCore
 {
 
-	class WING_API Object
+	class WING_CORE_API Object
 	{
 
 	public:

@@ -5,7 +5,7 @@
 
 namespace WingCore
 {
-	class WING_API Reader
+	class WING_CORE_API Reader
 	{
 	public:
 		Reader();

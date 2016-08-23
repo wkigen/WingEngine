@@ -7,7 +7,7 @@
 namespace WingCore
 {
 
-	class WING_API FileUtils
+	class WING_CORE_API FileUtils
 	{
 
 	public:

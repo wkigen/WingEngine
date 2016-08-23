@@ -4,6 +4,33 @@
 
 namespace WingCore
 {
+	DllSystem::DllSystem()
+		:mCreate(false)
+	{
+
+	}
+
+	DllSystem::~DllSystem()
+	{
+
+	}
+
+	bool DllSystem::create()
+	{
+		if (!mCreate)
+		{
+			WING_LOG_WARN("DllSystem has been create");
+			return false;
+		}
+
+		mCreate = true;
+		return true;
+	}
+
+	void DllSystem::destroy()
+	{
+
+	}
 
 	bool DllSystem::open(const std::string dllPath)
 	{

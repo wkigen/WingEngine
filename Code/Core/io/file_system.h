@@ -10,14 +10,16 @@
 
 namespace WingCore
 {
-	class WING_API FileSystem : public Singleton<FileSystem>
+	class WING_CORE_API FileSystem : public Singleton<FileSystem>
 	{
 
 		friend class Singleton<FileSystem>;
 
 	public:
-		FileSystem();
 		~FileSystem();
+
+		bool create();
+		void detroy();
 
 		bool isExist(std::string name);
 		void addDirectories(std::string dir);
@@ -28,9 +30,12 @@ namespace WingCore
 		void saveFile(std::string path, MemoryStream& stream);
 
 	private:
+		FileSystem();
 
-		std::list<std::string> mBaseDirectories;
-		std::list<std::string> mDirectories;
+	private:
+		bool					mCreate;
+		std::list<std::string>	mBaseDirectories;
+		std::list<std::string>	mDirectories;
 	};
 }
 

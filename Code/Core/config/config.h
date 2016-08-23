@@ -7,7 +7,7 @@
 
 namespace WingCore
 {
-	class WING_API Config
+	class WING_CORE_API Config
 	{
 	public:
 		Config();

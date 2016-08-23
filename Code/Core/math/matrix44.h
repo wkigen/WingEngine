@@ -14,7 +14,7 @@ namespace WingCore
 		float data[16];
 	}matrix_data;
 
-	class WING_API Matrix44
+	class WING_CORE_API Matrix44
 	{
 	public:
 		Matrix44();

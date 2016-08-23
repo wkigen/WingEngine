@@ -19,9 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{6FC755DE-1250-4E8A-9A55-F2547D112A81}</ProjectGuid>
-    <RootNamespace>WingEngine</RootNamespace>
+    <ProjectGuid>{DE14912F-64A7-4713-9E54-D39560750C56}</ProjectGuid>
+    <RootNamespace>Core</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>WingCore</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -78,11 +79,17 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>./;..\3rdparty\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;WING_DEBUG;WING_CORE_EXPORTS;WING_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>copy Debugx86\WingCoreD.dll ..\..\Bin\Runtime\x86\
+copy Debugx86\WingCoreD.lib ..\..\Bin\Lib\x86\</Command>
     </PostBuildEvent>
+    <Link>
+      <AdditionalLibraryDirectories>..\..\Bin\Lib\X86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>tinyxml2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -118,6 +125,61 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="allocator\allocator.h" />
+    <ClInclude Include="application\application.h" />
+    <ClInclude Include="application\main.h" />
+    <ClInclude Include="base\object.h" />
+    <ClInclude Include="base\singleton.h" />
+    <ClInclude Include="base\smart_ptr.h" />
+    <ClInclude Include="common\common.h" />
+    <ClInclude Include="common\defines.h" />
+    <ClInclude Include="common\platform.h" />
+    <ClInclude Include="config\config.h" />
+    <ClInclude Include="config\config_group.h" />
+    <ClInclude Include="dll\dll.h" />
+    <ClInclude Include="dll\dll_system.h" />
+    <ClInclude Include="dll\module.h" />
+    <ClInclude Include="error\error.h" />
+    <ClInclude Include="io\file_stream.h" />
+    <ClInclude Include="io\file_system.h" />
+    <ClInclude Include="io\memory_stream.h" />
+    <ClInclude Include="io\reader.h" />
+    <ClInclude Include="io\stream.h" />
+    <ClInclude Include="io\writer.h" />
+    <ClInclude Include="io\xml_stream.h" />
+    <ClInclude Include="io\xml_writer.h" />
+    <ClInclude Include="log\log.h" />
+    <ClInclude Include="math\math.h" />
+    <ClInclude Include="math\matrix44.h" />
+    <ClInclude Include="math\matrix44_cal.h" />
+    <ClInclude Include="math\point.h" />
+    <ClInclude Include="math\vector.h" />
+    <ClInclude Include="resource\resource.h" />
+    <ClInclude Include="utils\file_utils.h" />
+    <ClInclude Include="utils\string_utils.h" />
+    <ClInclude Include="window\window.h" />
+    <ClInclude Include="window\windowWindows.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="application\application.cpp" />
+    <ClCompile Include="config\config.cpp" />
+    <ClCompile Include="config\config_group.cpp" />
+    <ClCompile Include="dll\dll.cpp" />
+    <ClCompile Include="dll\dll_system.cpp" />
+    <ClCompile Include="dll\module.cpp" />
+    <ClCompile Include="io\file_stream.cpp" />
+    <ClCompile Include="io\file_system.cpp" />
+    <ClCompile Include="io\memory_stream.cpp" />
+    <ClCompile Include="io\reader.cpp" />
+    <ClCompile Include="io\stream.cpp" />
+    <ClCompile Include="io\writer.cpp" />
+    <ClCompile Include="io\xml_stream.cpp" />
+    <ClCompile Include="io\xml_writer.cpp" />
+    <ClCompile Include="log\log.cpp" />
+    <ClCompile Include="math\matrix44.cpp" />
+    <ClCompile Include="math\matrix44_cal.cpp" />
+    <ClCompile Include="window\window.cpp" />
+    <ClCompile Include="window\windowWindows.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

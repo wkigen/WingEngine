@@ -34,6 +34,12 @@
     <Filter Include="resource">
       <UniqueIdentifier>{dfdff7ec-7a3d-47a7-a360-e4b0bbb85312}</UniqueIdentifier>
     </Filter>
+    <Filter Include="window">
+      <UniqueIdentifier>{9085c518-1c5e-4653-9a3a-cec04f7e854c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="application">
+      <UniqueIdentifier>{2da6a12d-a466-47a0-899d-a2140d77ab69}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="allocator\allocator.h">
@@ -126,6 +132,18 @@
     <ClInclude Include="resource\resource.h">
       <Filter>resource</Filter>
     </ClInclude>
+    <ClInclude Include="window\window.h">
+      <Filter>window</Filter>
+    </ClInclude>
+    <ClInclude Include="window\windowWindows.h">
+      <Filter>window</Filter>
+    </ClInclude>
+    <ClInclude Include="application\application.h">
+      <Filter>application</Filter>
+    </ClInclude>
+    <ClInclude Include="application\main.h">
+      <Filter>application</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dll\dll.cpp">
@@ -175,6 +193,15 @@
     </ClCompile>
     <ClCompile Include="log\log.cpp">
       <Filter>log</Filter>
+    </ClCompile>
+    <ClCompile Include="window\window.cpp">
+      <Filter>window</Filter>
+    </ClCompile>
+    <ClCompile Include="window\windowWindows.cpp">
+      <Filter>window</Filter>
+    </ClCompile>
+    <ClCompile Include="application\application.cpp">
+      <Filter>application</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

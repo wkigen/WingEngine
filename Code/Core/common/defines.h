@@ -4,10 +4,10 @@
 
 #include <stdint.h>
 
-#if WING_EXPORTS && WING_PLATFORM_WIN32
-#define WING_API _declspec( dllexport )
+#if WING_CORE_EXPORTS && WING_PLATFORM_WIN32
+#define WING_CORE_API _declspec( dllexport )
 #else
-#define WING_API _declspec(dllimport)
+#define WING_CORE_API _declspec(dllimport)
 #endif
 
 typedef unsigned char	uint8;

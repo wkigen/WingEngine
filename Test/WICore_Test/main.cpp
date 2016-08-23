@@ -3,6 +3,28 @@
 #include "log\log.h"
 #include "dll\dll_system.h"
 #include "config\config.h"
+#include "window\windowWindows.h"
+#include "application\application.h"
+#include "application\main.h"
+
+
+class App :public WingCore::Application
+{
+public:
+	virtual bool init() 
+	{
+		return true;
+	}
+
+	virtual void clear()
+	{
+
+	}
+
+};
+
+WING_MAIN(App);
+
 
 int main()
 {
@@ -21,6 +43,15 @@ int main()
 	config->getAttrbute("11111", "1", value1);
 	real value2;
 	config->getAttrbute("11111", "2", value2);
+	WING_DELETE(config);
+
+	/*
+	WingCore::WindowWindows* window = WING_NEW WingCore::WindowWindows();
+	window->init();
+	WING_DELETE(window);
+	*/
+
+	WingMain();
 
 	return 0;
 }

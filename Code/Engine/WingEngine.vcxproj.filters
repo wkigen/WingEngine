@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="system">
+      <UniqueIdentifier>{787297fb-fb78-4a85-b0c7-d91f9cea082d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{eee9a242-0424-452f-be9e-949302fbc4d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="application">
+      <UniqueIdentifier>{f46acb26-4e3c-434a-b79f-e9a362dd03a5}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common\engine_defines.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="application\engine_application.h">
+      <Filter>application</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="application\engine_application.cpp">
+      <Filter>application</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

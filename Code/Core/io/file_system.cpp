@@ -1,22 +1,44 @@
 #include "file_system.h"
 #include "common\platform.h"
 #include "allocator\allocator.h"
+#include "log\log.h"
 
 namespace WingCore
 {
 	FileSystem::FileSystem()
+		:mCreate(false)
 	{
+
+	}
+
+	FileSystem::~FileSystem()
+	{
+
+	}
+
+	bool FileSystem::create()
+	{
+		if (!mCreate)
+		{
+			WING_LOG_WARN("FileSystem has been create");
+			return false;
+		}
+
 		char exeFullPath[MAX_PATH];
 #if WING_PLATFORM_WIN32
 		GetModuleFileName(NULL, exeFullPath, MAX_PATH);
 #endif
 		mBaseDirectories.push_back(exeFullPath);
 		mDirectories.push_back("./");
+
+		mCreate = true;
+		return true;
 	}
 
-	FileSystem::~FileSystem()
+	void FileSystem::detroy()
 	{
-
+		mBaseDirectories.clear();
+		mDirectories.clear();
 	}
 
 	bool FileSystem::isExist(std::string name)

@@ -19,7 +19,7 @@ namespace WingCore
 		};
 	};
 
-	typedef struct WING_API ConfigAttribute
+	typedef struct WING_CORE_API ConfigAttribute
 	{
 		ConfigAttribute()
 			:mName("")
@@ -35,7 +35,7 @@ namespace WingCore
 	}ConfigGroupAttribute;
 
 
-	typedef struct WING_API ConfigGroup
+	typedef struct WING_CORE_API ConfigGroup
 	{
 		ConfigGroup()
 			:mName("")

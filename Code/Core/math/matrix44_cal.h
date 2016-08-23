@@ -48,9 +48,9 @@ namespace WingCore
 		return mtxLookAt(eyev, tmp, up);
 	}
 
-	inline WING_API Matrix44 mtxProjectLh(float _fovy, float _aspect, float _near, float _far);
+	inline WING_CORE_API Matrix44 mtxProjectLh(float _fovy, float _aspect, float _near, float _far);
 
-	inline WING_API Matrix44 mtxProjXYWH(float _x, float _y, float _width, float _height, float _near, float _far);
+	inline WING_CORE_API Matrix44 mtxProjXYWH(float _x, float _y, float _width, float _height, float _near, float _far);
 }
 
 #endif

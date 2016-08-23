@@ -5,7 +5,7 @@
 
 namespace WingCore
 {
-	class WING_API MemoryStream:public Stream
+	class WING_CORE_API MemoryStream:public Stream
 	{
 	public:
 		MemoryStream();

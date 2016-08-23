@@ -7,7 +7,7 @@
 
 namespace WingCore
 {
-	class WING_API XMLWriter
+	class WING_CORE_API XMLWriter
 	{
 	public:
 		XMLWriter();

@@ -8,7 +8,7 @@
 namespace WingCore
 {
 
-	class WING_API StringUtils
+	class WING_CORE_API StringUtils
 	{
 
 	public:

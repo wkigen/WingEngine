@@ -10,7 +10,7 @@
 namespace WingCore
 {
 	
-	class WING_API LogSystem : public Singleton<LogSystem>
+	class WING_CORE_API LogSystem : public Singleton<LogSystem>
 	{
 
 	friend class Singleton<LogSystem>;
