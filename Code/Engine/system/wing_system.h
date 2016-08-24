@@ -2,7 +2,8 @@
 #define _WING_ENGINE_ENGINE_SYSTEM_H_
 
 #include "base\singleton.h"
-#include "common\defines.h"
+#include "common\engine_defines.h"
+#include "config\config.h"
 
 namespace WingEngine
 {
@@ -13,16 +14,21 @@ namespace WingEngine
 		friend class WingCore::Singleton<WingSystem>;
 
 	public:
-		~WingSystem();
+		virtual ~WingSystem();
 
-		bool init();
+		bool create();
 		void destroy();
+
+		void readConfig();
+		void setDefaultConfig();
 
 	private:
 		WingSystem();
 
-	private:
+		
 
+	private:
+		WingCore::Config mConfig;
 	};
 
 }

@@ -16,11 +16,13 @@ namespace WingCore
 	friend class Singleton<LogSystem>;
 
 	public:
+		virtual ~LogSystem();
+
 		void print(const char* type, const char* str, ...);
 
 	private:
 		LogSystem();
-		~LogSystem();
+		
 
 	private:
 		std::string			mFileName;

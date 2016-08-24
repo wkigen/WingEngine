@@ -1,4 +1,5 @@
 #include "wing_system.h"
+#include "io\file_system.h"
 
 namespace WingEngine
 {
@@ -12,13 +13,23 @@ namespace WingEngine
 
 	}
 
-	bool WingSystem::init()
+	bool WingSystem::create()
 	{
 
 		return true;
 	}
 
 	void WingSystem::destroy()
+	{
+
+	}
+
+	void WingSystem::setDefaultConfig()
+	{
+		mConfig.setAttribute("WingEngine", "version", "0.01");
+	}
+
+	void WingSystem::readConfig()
 	{
 
 	}

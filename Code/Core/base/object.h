@@ -11,7 +11,7 @@ namespace WingCore
 
 	public:
 		Object():mRefCount(0){};
-		~Object() {};
+		virtual ~Object() {};
 
 		inline uint32	addReference() { mRefCount++; return mRefCount; }
 

@@ -9,7 +9,7 @@ namespace WingCore
 	{
 	public:
 		MemoryStream();
-		~MemoryStream();
+		virtual ~MemoryStream();
 
 		bool open(void* data, uint64 size,ACCESS::Enum access);
 		void close();

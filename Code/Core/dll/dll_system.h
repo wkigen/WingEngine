@@ -19,14 +19,17 @@ typedef Module*				(*WingDllMain) ();
 		friend class Singleton<DllSystem>;
 
 	public:
-		DllSystem();
-		~DllSystem();
+		
+		virtual ~DllSystem();
 
 		bool	create();
 		void	destroy();
 
 		bool	open(const std::string dllPath);
 		void	close(const std::string name);
+
+	private:
+		DllSystem();
 
 	private:
 		bool					mCreate;

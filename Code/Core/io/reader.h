@@ -10,7 +10,7 @@ namespace WingCore
 	public:
 		Reader();
 		Reader(Stream* stream);
-		~Reader();
+		virtual ~Reader();
 
 		virtual void	setStream(Stream* stream);
 
@@ -27,7 +27,8 @@ namespace WingCore
 		virtual uint64	readUint64();
 
 		virtual uint16	readString(char* dst);
-	private:
+
+	protected:
 		Stream* mStream;
 	};
 

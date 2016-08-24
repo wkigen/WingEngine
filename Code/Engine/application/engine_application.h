@@ -12,7 +12,7 @@ namespace WingEngine
 
 	public:
 		EngineApplication();
-		~EngineApplication();
+		virtual ~EngineApplication();
 
 		virtual void create();
 		virtual void destroy();

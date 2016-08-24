@@ -126,9 +126,11 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
   <ItemGroup>
     <ClInclude Include="application\engine_application.h" />
     <ClInclude Include="common\engine_defines.h" />
+    <ClInclude Include="system\wing_system.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp" />
+    <ClCompile Include="system\wing_system.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

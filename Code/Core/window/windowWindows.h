@@ -12,7 +12,7 @@ namespace WingCore
 	public:
 
 		WindowWindows();
-		~WindowWindows();
+		virtual ~WindowWindows();
 
 		virtual bool init();
 		virtual void destriy();

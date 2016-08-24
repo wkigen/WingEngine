@@ -18,10 +18,16 @@
     <ClInclude Include="application\engine_application.h">
       <Filter>application</Filter>
     </ClInclude>
+    <ClInclude Include="system\wing_system.h">
+      <Filter>system</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp">
       <Filter>application</Filter>
+    </ClCompile>
+    <ClCompile Include="system\wing_system.cpp">
+      <Filter>system</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -22,10 +22,13 @@ namespace WingEngine
 
 		WingCore::FileSystem::getInstance()->create();
 		WingCore::DllSystem::getInstance()->create();
+
 	}
 
 	void EngineApplication::destroy()
 	{
+
+
 		WingCore::DllSystem::getInstance()->destroy();
 		WingCore::FileSystem::getInstance()->detroy();
 		WingCore::Application::destroy();

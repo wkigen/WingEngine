@@ -11,7 +11,7 @@ namespace WingCore
 	public:
 		Writer();
 		Writer(Stream* stream);
-		~Writer();
+		virtual ~Writer();
 
 		virtual void	setStream(Stream* stream);
 

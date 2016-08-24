@@ -15,7 +15,7 @@ namespace WingCore
 	{
 	public:
 		Window();
-		~Window();
+		virtual ~Window();
 
 		virtual bool init() = 0;
 		virtual void destriy() = 0;

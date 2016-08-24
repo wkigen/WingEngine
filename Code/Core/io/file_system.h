@@ -16,7 +16,7 @@ namespace WingCore
 		friend class Singleton<FileSystem>;
 
 	public:
-		~FileSystem();
+		virtual ~FileSystem();
 
 		bool create();
 		void detroy();
