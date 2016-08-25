@@ -10,7 +10,7 @@ namespace WingCore
 {
 	class WING_CORE_API Config:public Resource
 	{
-		RESOURCE_TYPE(ResourceType::CONFIG)
+		RESOURCE_TYPE(RespirceTypeConfig)
 	public:
 		Config();
 		~Config();

@@ -26,8 +26,8 @@ namespace WingCore
 		template<class T>
 		T* loadResource(std::string name);
 
-		void addWriter(ResourceType::Enum type, Writer* writer);
-		void addReader(ResourceType::Enum type, Reader* reader);
+		void addWriter(uint32 type, Writer* writer);
+		void addReader(uint32 type, Reader* reader);
 		
 	private:
 		ResourceSystem();
@@ -35,9 +35,9 @@ namespace WingCore
 
 
 	private:
-		std::map<std::string, Resource>			mResource[ResourceType::COUNT];
-		std::map<ResourceType::Enum, Writer*>	mResourceWriters;
-		std::map<ResourceType::Enum, Reader*>	mResourceReaders;
+		std::map<std::string, Resource>			mResource[ResourceTypeMax];
+		std::map<uint32, Writer*>	mResourceWriters;
+		std::map<uint32, Reader*>	mResourceReaders;
 	};
 	
 	template<class T>

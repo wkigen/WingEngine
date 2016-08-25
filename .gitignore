@@ -23,3 +23,5 @@ Test/WICore_Test/Debugx86
 Test/WICore_Test/Debugx64
 Test/WIEngineTest/Debugx86
 Test/WIEngineTest/Debugx64
+Code/RendererGL/Debugx86
+Code/RendererGL/Debugx64

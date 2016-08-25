@@ -6,22 +6,14 @@
 
 namespace WingCore
 {
-	struct ModuleType
-	{
-		enum Enum
-		{
-			RENDERER,
-
-			COUNT,
-		};
-	};
+#define ModuleTypeNull	0
 
 	struct Module
 	{
 		Module()
 			:mHandle(nullptr)
 			,mObject(nullptr)
-			,mType(ModuleType::COUNT)
+			,mType(ModuleTypeNull)
 			,mName("")
 		{
 
@@ -29,7 +21,7 @@ namespace WingCore
 
 		void*				mHandle;
 		void*				mObject;
-		ModuleType::Enum	mType;
+		uint32				mType;
 		std::string			mName;
 	};
 }

@@ -1,5 +1,4 @@
 #include "file_stream.h"
-#include "common\common.h"
 #include "log\log.h"
 
 namespace WingCore

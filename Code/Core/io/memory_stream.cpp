@@ -1,5 +1,4 @@
 #include "memory_stream.h"
-#include "common\common.h"
 #include "allocator\allocator.h"
 #include "log\log.h"
 

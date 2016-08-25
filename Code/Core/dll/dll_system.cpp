@@ -17,12 +17,11 @@ namespace WingCore
 
 	bool DllSystem::create()
 	{
-		if (!mCreate)
+		if (mCreate)
 		{
 			WING_LOG_WARN("DllSystem has been create");
 			return false;
 		}
-
 		mCreate = true;
 		return true;
 	}
@@ -48,7 +47,7 @@ namespace WingCore
 				return true;
 			}
 		}
-
+		WING_LOG_INFO("Plugin fail loaded %s", dllPath.c_str());
 		return false;
 	}
 
@@ -66,6 +65,22 @@ namespace WingCore
 			}
 			iter++;
 		}
+	}
+
+
+	std::list<Module*> DllSystem::getMoudles(uint32 type)
+	{
+		std::list<Module*> modules;
+		std::list<Module*>::iterator iter = mDllList.begin();
+		while (iter != mDllList.end())
+		{
+			if ((*iter)->mType == type)
+			{
+				modules.push_back((*iter));
+			}
+			iter++;
+		}
+		return modules;
 	}
 
 }

@@ -29,17 +29,17 @@ namespace WingCore
 		FileStream			mLogFileStream;
 		Writer				mWriter;
 	};
+}
 
-#define WING_LOG_INFO(str,...)		LogSystem::getInstance()->print("Info",str,__VA_ARGS__)
-#define WING_LOG_WARN(str,...)		LogSystem::getInstance()->print("Warn",str,__VA_ARGS__)
-#define WING_LOG_ERROR(str,...)		LogSystem::getInstance()->print("Error",str,__VA_ARGS__)
+#define WING_LOG_INFO(str,...)		WingCore::LogSystem::getInstance()->print("Info",str,__VA_ARGS__)
+#define WING_LOG_WARN(str,...)		WingCore::LogSystem::getInstance()->print("Warn",str,__VA_ARGS__)
+#define WING_LOG_ERROR(str,...)		WingCore::LogSystem::getInstance()->print("Error",str,__VA_ARGS__)
 #ifdef	WING_DEBUG
-#define WING_LOG_DEBUG(str,...)		LogSystem::getInstance()->print("Debug",str,__VA_ARGS__)
+#define WING_LOG_DEBUG(str,...)		WingCore::LogSystem::getInstance()->print("Debug",str,__VA_ARGS__)
 #else
 #define WING_LOG_DEBUG(str,...)
 #endif
 
-}
 
 
 #endif

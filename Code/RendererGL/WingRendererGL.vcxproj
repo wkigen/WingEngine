@@ -19,13 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{4C30B5FB-1E44-4E97-AF33-1F4E787CED53}</ProjectGuid>
-    <RootNamespace>WIEngineTest</RootNamespace>
+    <ProjectGuid>{AEC11174-B830-450A-ADD6-3EFEB0D3A7C4}</ProjectGuid>
+    <RootNamespace>WingRendererGL</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -78,15 +78,16 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\Code\Engine;..\..\Code\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Core;..\Engine;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WING_DEBUG;WING_RENDERERGL_EXPORTS;WING_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
-    <Link>
-      <AdditionalDependencies>WingCoreD.lib;WingEngineD.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\Bin\Lib\X86</AdditionalLibraryDirectories>
-    </Link>
     <PostBuildEvent>
-      <Command>copy Debugx86\WIEngineTestD.exe ..\..\Bin\Runtime\x86\</Command>
+      <Command>copy Debugx86\WingRendererGLD.dll ..\..\Bin\Runtime\x86\</Command>
     </PostBuildEvent>
+    <Link>
+      <AdditionalLibraryDirectories>..\..\Bin\Lib\X86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>WingEngineD.lib</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -122,7 +123,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="renderergl.cpp" />
+    <ClCompile Include="render_context_gl.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="renderergl.h" />
+    <ClInclude Include="render_context_gl.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

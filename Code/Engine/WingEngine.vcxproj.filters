@@ -10,6 +10,9 @@
     <Filter Include="application">
       <UniqueIdentifier>{f46acb26-4e3c-434a-b79f-e9a362dd03a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="renderer">
+      <UniqueIdentifier>{071ae49a-62c9-41d9-8df6-f923cd7ec111}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\engine_defines.h">
@@ -21,6 +24,15 @@
     <ClInclude Include="system\wing_system.h">
       <Filter>system</Filter>
     </ClInclude>
+    <ClInclude Include="renderer\renderer_system.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\renderer_context.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="common\constant.h">
+      <Filter>common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp">
@@ -28,6 +40,12 @@
     </ClCompile>
     <ClCompile Include="system\wing_system.cpp">
       <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\renderer_system.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\renderer_context.cpp">
+      <Filter>renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

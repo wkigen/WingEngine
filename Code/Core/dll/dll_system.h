@@ -28,12 +28,17 @@ typedef Module*				(*WingDllMain) ();
 		bool	open(const std::string dllPath);
 		void	close(const std::string name);
 
+		std::list<Module*>	getMoudles(uint32 type);
+
 	private:
 		DllSystem();
 
+	protected:
+		std::list<Module*>		mDllList;
+
 	private:
 		bool					mCreate;
-		std::list<Module*>		mDllList;
+		
 	};
 
 

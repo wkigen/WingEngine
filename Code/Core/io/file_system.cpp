@@ -18,7 +18,7 @@ namespace WingCore
 
 	bool FileSystem::create()
 	{
-		if (!mCreate)
+		if (mCreate)
 		{
 			WING_LOG_WARN("FileSystem has been create");
 			return false;

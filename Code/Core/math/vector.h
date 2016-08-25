@@ -1,7 +1,6 @@
 #ifndef _IAKROS_VECTOR_H_
 #define _IAKROS_VECTOR_H_
 
-#include "common/common.h"
 #include "common\platform.h"
 #include "math.h"
 

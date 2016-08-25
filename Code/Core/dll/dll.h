@@ -1,7 +1,6 @@
 #ifndef _WING_CORE_DLL_H_
 #define	_WING_CORE_DLL_H_
 
-#include "common\common.h"
 #include "common\defines.h"
 #include "common\platform.h"
 

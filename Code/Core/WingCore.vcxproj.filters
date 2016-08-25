@@ -45,9 +45,6 @@
     <ClInclude Include="allocator\allocator.h">
       <Filter>allocator</Filter>
     </ClInclude>
-    <ClInclude Include="common\common.h">
-      <Filter>common</Filter>
-    </ClInclude>
     <ClInclude Include="common\defines.h">
       <Filter>common</Filter>
     </ClInclude>

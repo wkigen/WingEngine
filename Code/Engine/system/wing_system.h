@@ -4,6 +4,7 @@
 #include "base\singleton.h"
 #include "common\engine_defines.h"
 #include "config\config.h"
+#include "renderer\renderer_system.h"
 
 namespace WingEngine
 {
@@ -22,13 +23,13 @@ namespace WingEngine
 		void readConfig();
 		void setDefaultConfig();
 
+
 	private:
 		WingSystem();
 
-		
-
 	private:
-		WingCore::Config mConfig;
+		WingCore::Config	mConfig;
+		bool				mCreate;
 	};
 
 }
