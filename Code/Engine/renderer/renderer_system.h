@@ -16,14 +16,18 @@ namespace WingEngine
 	public:
 		~RendererSystem();
 
-		bool create();
+		bool create(void* windowHandle);
 		void destroy();
+
+		void render();
 
 	private:
 		RendererSystem();
 		
 	private:
-		bool				mCreate;
+		std::string								mRendererName;
+		RendererContext*						mRendererContext;
+		bool									mCreate;
 		std::map<std::string, RendererContext*> mRendererContexts;
 
 	};

@@ -13,6 +13,9 @@
     <Filter Include="renderer">
       <UniqueIdentifier>{071ae49a-62c9-41d9-8df6-f923cd7ec111}</UniqueIdentifier>
     </Filter>
+    <Filter Include="shader">
+      <UniqueIdentifier>{629c2daa-aaf2-4550-a92e-e7df1a1b637c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\engine_defines.h">
@@ -33,6 +36,12 @@
     <ClInclude Include="common\constant.h">
       <Filter>common</Filter>
     </ClInclude>
+    <ClInclude Include="renderer\program.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="shader\test_shader.h">
+      <Filter>shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp">
@@ -45,6 +54,9 @@
       <Filter>renderer</Filter>
     </ClCompile>
     <ClCompile Include="renderer\renderer_context.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\program.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
   </ItemGroup>

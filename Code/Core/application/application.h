@@ -18,10 +18,10 @@ namespace WingCore
 		virtual bool init()=0;
 		virtual void clear()=0;
 		
-		virtual void run();
+		virtual void run()=0;
 		virtual void stop();
-		
-	private:
+
+	protected:
 		bool	mExit;
 		Window* mWindow;
 

@@ -23,7 +23,7 @@ namespace WingEngine
 		void readConfig();
 		void setDefaultConfig();
 
-
+		void run();
 	private:
 		WingSystem();
 

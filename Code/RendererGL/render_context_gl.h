@@ -1,6 +1,7 @@
 #ifndef _WING_RENDERERGL_RENDERER_CONTEXT_GL_H_
 #define _WING_RENDERERGL_RENDERER_CONTEXT_GL_H_
 
+#include <GL/glew.h>
 #include "renderer\renderer_context.h"
 
 namespace WingRendererGL
@@ -12,10 +13,13 @@ namespace WingRendererGL
 		RendererContextGL();
 		virtual ~RendererContextGL();
 
+		virtual bool create(void* windowHandle)=0;
+		virtual void destroy()=0;
 
-		virtual bool create();
-		virtual void destroy();
+		virtual WingEngine::Program*	createProgram(std::string name, std::string vs, std::string fs);
+		virtual void					useProgram(std::string name);
 
+		virtual void render();
 	};
 
 

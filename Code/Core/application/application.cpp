@@ -32,28 +32,8 @@ namespace WingCore
 		WING_DELETE(mWindow);
 	}
 
-	void Application::run()
-	{
-		while (!mExit)
-		{
-
-#ifdef WING_PLATFORM_WIN32
-			MSG sMsg;
-			while (PeekMessage(&sMsg, nullptr, 0, 0, FALSE)) {
-				if (sMsg.message == WM_QUIT)
-					stop();
-				GetMessage(&sMsg, nullptr, 0, 0);
-				TranslateMessage(&sMsg);
-				DispatchMessage(&sMsg);
-			}
-#endif
-		}
-	}
-
 	void Application::stop()
 	{
 		mExit = true;
 	}
-
-
 }

@@ -150,6 +150,9 @@
     <ClInclude Include="config\config_writer.h">
       <Filter>config</Filter>
     </ClInclude>
+    <ClInclude Include="base\queue.h">
+      <Filter>base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dll\dll.cpp">

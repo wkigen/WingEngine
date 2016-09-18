@@ -16,7 +16,7 @@ namespace WingEngine
 
 	}
 
-	bool RendererSystem::create()
+	bool RendererSystem::create(void* windowHandle)
 	{
 		if (mCreate)
 		{
@@ -25,22 +25,44 @@ namespace WingEngine
 		}
 		mCreate = true;
 
-
 		std::list<WingCore::Module*> rendererDll = WingCore::DllSystem::getInstance()->getMoudles(ModuleTypeRenderer);
 		std::list<WingCore::Module*>::iterator iter = rendererDll.begin();
+
 		while (iter != rendererDll.end())
 		{
 			RendererContext* context = (RendererContext*)(*iter)->mObject;
 			if (context)
+			{
+				context->create(windowHandle);
 				mRendererContexts[(*iter)->mName] = context;
+			}
 			iter++;
 		}
 
+		if (mRendererContexts.size() <= 0)
+		{
+			WING_LOG_WARN("no RendererContext !!");
+			return false;
+		}
+
+		mRendererName = mRendererContexts.begin()->first;
+		mRendererContext = mRendererContexts.begin()->second;
 		return true;
 	}
 
 	void RendererSystem::destroy()
 	{
+		std::map<std::string, RendererContext*>::iterator iter = mRendererContexts.begin();
+		while (iter != mRendererContexts.end())
+		{
+			iter->second->destroy();
+			iter++;
+		}
+	}
 
+	void RendererSystem::render()
+	{
+		//todo
+		mRendererContext->render();
 	}
 }

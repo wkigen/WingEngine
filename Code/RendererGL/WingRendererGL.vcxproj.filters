@@ -3,9 +3,13 @@
   <ItemGroup>
     <ClCompile Include="renderergl.cpp" />
     <ClCompile Include="render_context_gl.cpp" />
+    <ClCompile Include="render_context_win_gl.cpp" />
+    <ClCompile Include="program_gl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderergl.h" />
     <ClInclude Include="render_context_gl.h" />
+    <ClInclude Include="render_context_win_gl.h" />
+    <ClInclude Include="program_gl.h" />
   </ItemGroup>
 </Project>

@@ -38,13 +38,13 @@ namespace WingCore
 		wndcls.lpfnWndProc = WndProc;							//指向窗口过程函数  
 		wndcls.lpszClassName = "WingEngine";						//指定窗口类名字  
 		wndcls.lpszMenuName = NULL;									//指定菜单资源名字  
-		wndcls.style = CS_HREDRAW | CS_VREDRAW;						//指定窗口类型样式  
+		wndcls.style = CS_HREDRAW | CS_VREDRAW ;						//指定窗口类型样式  
 
 		RegisterClass(&wndcls);										//注册窗口
 
 		mHandle = (void*)CreateWindow("WingEngine"
 			, "WingEngine"
-			, WS_OVERLAPPEDWINDOW | WS_VISIBLE
+			, WS_SYSMENU |WS_MAXIMIZEBOX | WS_MINIMIZEBOX |WS_VISIBLE&~WS_SIZEBOX
 			, 0
 			, 0
 			, mWidth

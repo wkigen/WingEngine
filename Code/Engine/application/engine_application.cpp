@@ -5,8 +5,6 @@
 
 namespace WingEngine
 {
-
-
 	EngineApplication::EngineApplication()
 	{
 
@@ -25,24 +23,40 @@ namespace WingEngine
 		WingCore::DllSystem::getInstance()->create();
 
 		WingSystem::getInstance()->create();
-		RendererSystem::getInstance()->create();
+		RendererSystem::getInstance()->create(mWindow->getHandle());
 	}
 
 	void EngineApplication::destroy()
 	{
-
+		RendererSystem::getInstance()->destroy();
 		WingSystem::getInstance()->destroy();
 
 		WingCore::DllSystem::getInstance()->destroy();
 		WingCore::FileSystem::getInstance()->detroy();
 
+
 		WingCore::Application::destroy();
-		RendererSystem::getInstance()->destroy();
 	}
 
 	void EngineApplication::run()
 	{
-		WingCore::Application::run();
+		while (!mExit)
+		{
+
+#ifdef WING_PLATFORM_WIN32
+			MSG sMsg;
+			while (PeekMessage(&sMsg, nullptr, 0, 0, FALSE)) {
+				if (sMsg.message == WM_QUIT)
+					stop();
+				GetMessage(&sMsg, nullptr, 0, 0);
+				TranslateMessage(&sMsg);
+				DispatchMessage(&sMsg);
+			}
+#endif
+			WingSystem::getInstance()->run();
+		}
+
+		
 	}
 
 }
