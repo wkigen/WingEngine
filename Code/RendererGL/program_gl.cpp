@@ -74,6 +74,9 @@ namespace WingRendererGL
 
 		glLinkProgram(mProgramID);
 		printProgramInfoLog(mProgramID);
+
+		glDeleteShader(_vs);
+		glDeleteShader(_fs);
 	}
 
 

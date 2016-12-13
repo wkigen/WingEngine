@@ -2,6 +2,7 @@
 #define _WING_RENDERERGL_RENDERER_CONTEXT_GL_H_
 
 #include <GL/glew.h>
+#include "GL\wglew.h"
 #include "renderer\renderer_context.h"
 
 namespace WingRendererGL
@@ -20,6 +21,13 @@ namespace WingRendererGL
 		virtual void					useProgram(std::string name);
 
 		virtual void render();
+
+
+
+
+
+		GLuint vertexbuffer;
+		GLuint VertexArrayID;
 	};
 
 

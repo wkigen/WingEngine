@@ -48,7 +48,10 @@ namespace WingRendererGL
 		mHRC = wglCreateContext(mHDC);
 		wglMakeCurrent(mHDC, mHRC);
 
-		GLenum GlewInitResult = glewInit();
+		if (GLEW_OK != glewInit())
+		{
+			return false;
+		}
 
 		return true;
 	}

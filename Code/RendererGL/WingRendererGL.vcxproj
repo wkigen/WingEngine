@@ -86,7 +86,7 @@
     </PostBuildEvent>
     <Link>
       <AdditionalLibraryDirectories>..\..\Bin\Lib\X86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WingEngineD.lib;glew32.lib;Opengl32.lib;DelayImp.lib;gdi32.lib;psapi.lib;user32.lib</AdditionalDependencies>
+      <AdditionalDependencies>WingEngineD.lib;WingCoreD.lib;glew32.lib;Opengl32.lib;DelayImp.lib;gdi32.lib;psapi.lib;user32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

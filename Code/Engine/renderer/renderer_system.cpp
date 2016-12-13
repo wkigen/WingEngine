@@ -2,6 +2,7 @@
 #include "log\log.h"
 #include "dll\dll_system.h"
 #include "common\constant.h"
+#include "shader\test_shader.h"
 
 namespace WingEngine
 {
@@ -39,7 +40,7 @@ namespace WingEngine
 			iter++;
 		}
 
-		if (mRendererContexts.size() <= 0)
+		if (mRendererContexts.size() == 0)
 		{
 			WING_LOG_WARN("no RendererContext !!");
 			return false;
@@ -47,6 +48,10 @@ namespace WingEngine
 
 		mRendererName = mRendererContexts.begin()->first;
 		mRendererContext = mRendererContexts.begin()->second;
+
+		mRendererContext->createProgram("test", test_vs, test_fs);
+		mRendererContext->useProgram("test");
+
 		return true;
 	}
 
@@ -64,5 +69,6 @@ namespace WingEngine
 	{
 		//todo
 		mRendererContext->render();
+		::Sleep(10);
 	}
 }
