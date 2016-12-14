@@ -54,6 +54,10 @@ namespace WingEngine
 			}
 #endif
 			WingSystem::getInstance()->run();
+
+			RendererSystem::getInstance()->render();
+
+			
 		}
 
 		

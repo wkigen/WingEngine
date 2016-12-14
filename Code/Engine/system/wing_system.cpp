@@ -47,6 +47,6 @@ namespace WingEngine
 
 	void WingSystem::run()
 	{
-		RendererSystem::getInstance()->render();
+		
 	}
 }

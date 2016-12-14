@@ -15,6 +15,7 @@ namespace WingRendererGL
 		virtual ~RendererContextGL();
 
 		virtual bool create(void* windowHandle)=0;
+		virtual void swapBuffers() = 0;
 		virtual void destroy()=0;
 
 		virtual WingEngine::Program*	createProgram(std::string name, std::string vs, std::string fs);

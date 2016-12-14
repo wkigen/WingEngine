@@ -23,13 +23,12 @@ public:
 
 };
 
-WING_MAIN(App);
 
 
 int main()
 {
 
-	WingCore::WING_LOG_INFO("Wing Engine test");
+	WING_LOG_INFO("Wing Engine test");
 
 
 	//WingCore::DllSystem::getInstance()->open("D:/github/Wing/Bin/Runtime/X86/WIRendererD.dll");
@@ -51,7 +50,6 @@ int main()
 	WING_DELETE(window);
 	*/
 
-	WingMain();
 
 	return 0;
 }

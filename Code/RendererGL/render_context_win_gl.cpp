@@ -1,4 +1,5 @@
 #include "render_context_win_gl.h"
+#include "log\log.h"
 
 namespace WingRendererGL
 {
@@ -53,7 +54,18 @@ namespace WingRendererGL
 			return false;
 		}
 
+		const GLubyte* name = glGetString(GL_VENDOR);				//返回负责当前OpenGL实现厂商的名字  
+		const GLubyte* biaoshifu = glGetString(GL_RENDERER);		//返回一个渲染器标识符，通常是个硬件平台  
+		const GLubyte* OpenGLVersion = glGetString(GL_VERSION);		//返回当前OpenGL实现的版本号  
+
+		WING_LOG_INFO("the opengl version is %s", OpenGLVersion);
+
 		return true;
+	}
+
+	void RendererContextWinGL::swapBuffers()
+	{
+		::SwapBuffers(mHDC);
 	}
 
 	void RendererContextWinGL::destroy()

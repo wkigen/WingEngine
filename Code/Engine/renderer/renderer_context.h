@@ -17,6 +17,7 @@ namespace WingEngine
 		virtual ~RendererContext() {};
 
 		virtual bool		create(void* windowHandle) = 0;
+		virtual void		swapBuffers() = 0;
 		virtual void		destroy() = 0;
 
 		virtual void		addProgram(std::string name, Program* program);
