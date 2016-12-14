@@ -5,6 +5,9 @@
 #include <map>
 #include "common\engine_defines.h"
 #include "program.h"
+#include "camera.h"
+
+using namespace WingCore;
 
 namespace WingEngine
 {
@@ -13,8 +16,8 @@ namespace WingEngine
 	{
 
 	public:
-		RendererContext() {};
-		virtual ~RendererContext() {};
+		RendererContext();
+		virtual ~RendererContext();
 
 		virtual bool		create(void* windowHandle) = 0;
 		virtual void		swapBuffers() = 0;
@@ -27,9 +30,10 @@ namespace WingEngine
 
 		virtual void		render() = 0;
 
-
-	private:
+		Camera*				getMainCamera() { return mMainCamera; }
+	protected:
 		std::map<std::string, Program*> mPrograms;
+		Camera* mMainCamera;
 
 	};
 }

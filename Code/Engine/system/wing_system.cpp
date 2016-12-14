@@ -20,7 +20,7 @@ namespace WingEngine
 	{
 		if (mCreate)
 		{
-			WING_LOG_WARN("DllSystem has been create");
+			WING_LOG_WARN("WingSystem has been create");
 			return false;
 		}
 		mCreate = true;

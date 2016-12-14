@@ -127,6 +127,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="application\engine_application.h" />
     <ClInclude Include="common\constant.h" />
     <ClInclude Include="common\engine_defines.h" />
+    <ClInclude Include="renderer\camera.h" />
     <ClInclude Include="renderer\program.h" />
     <ClInclude Include="renderer\renderer_context.h" />
     <ClInclude Include="renderer\renderer_system.h" />
@@ -135,6 +136,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp" />
+    <ClCompile Include="renderer\camera.cpp" />
     <ClCompile Include="renderer\program.cpp" />
     <ClCompile Include="renderer\renderer_context.cpp" />
     <ClCompile Include="renderer\renderer_system.cpp" />

@@ -3,6 +3,7 @@
 
 #include "common\platform.h"
 #include "math.h"
+#include "error\error.h"
 
 namespace WingCore
 {
@@ -118,7 +119,7 @@ namespace WingCore
 	template<class u>
 	inline Vector<T> Vector<T>::operator/(u n) const
 	{
-		IKAROS_ASSERT(n != 0);
+		WING_ASSERT(n != 0);
 		return Vector(x / n, y / n, z / n);
 	}
 
@@ -126,7 +127,7 @@ namespace WingCore
 	template<class u>
 	inline Vector<T>& Vector<T>::operator/=(u n)
 	{
-		IKAROS_ASSERT(n != 0);
+		WING_ASSERT(n != 0);
 		x /= n;
 		y /= n;
 		z /= n;
@@ -136,7 +137,7 @@ namespace WingCore
 	template<class T>
 	inline T Vector<T>::operator[](int n) const
 	{
-		IKAROS_ASSERT(n >= 0 && n<3);
+		WING_ASSERT(n >= 0 && n<3);
 		if (n == 0) return x;
 		if (n == 1) return y;
 		if (n == 2) return z;

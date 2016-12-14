@@ -35,6 +35,8 @@ namespace WingRendererGL
 
 	void RendererContextGL::render()
 	{
+		Vector<float> tra(0, 0, -0.01);
+		mMainCamera->translation(tra);
 
 		glLoadIdentity();
 		glTranslatef(0.0, 0.0, -1.0);

@@ -42,6 +42,9 @@
     <ClInclude Include="shader\test_shader.h">
       <Filter>shader</Filter>
     </ClInclude>
+    <ClInclude Include="renderer\camera.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp">
@@ -57,6 +60,9 @@
       <Filter>renderer</Filter>
     </ClCompile>
     <ClCompile Include="renderer\program.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\camera.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
   </ItemGroup>

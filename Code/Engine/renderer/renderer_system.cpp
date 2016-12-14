@@ -69,6 +69,5 @@ namespace WingEngine
 	{
 		//todo
 		mRendererContext->render();
-		::Sleep(10);
 	}
 }
