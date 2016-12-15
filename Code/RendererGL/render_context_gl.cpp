@@ -55,7 +55,7 @@ namespace WingRendererGL
 
 	void RendererContextGL::render()
 	{
-		Vector<float> tra(0.01, 0, 0);
+		Vector<float> tra(0.001f, 0, 0);
 		mMainCamera->translation(tra);
 
 		setUniformMatrix44f(PROJECTMODELVIEWMARTIX, mMainCamera->getProjectModelMatrix44());
