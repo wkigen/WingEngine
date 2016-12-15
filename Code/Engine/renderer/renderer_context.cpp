@@ -6,15 +6,22 @@ namespace WingEngine
 {
 	RendererContext::RendererContext()
 	{
-		Point<float> eye(0,0,-1);
-		Point<float> at(0, 0, 0);
-		Vector<float> up(0, 1, 0);
-		mMainCamera = WING_NEW Camera(eye,at,up);
+	
 	}
 
 	RendererContext::~RendererContext()
 	{
 
+	}
+
+	bool RendererContext::create(void* windowHandle, uint32 width, uint32 height)
+	{
+		Point<float> eye(0, 0, -10);
+		Point<float> at(0, 0, 0);
+		Vector<float> up(0, 1, 0);
+		mMainCamera = WING_NEW Camera(45, width / height,0,-1, eye, at, up);
+
+		return false;
 	}
 
 	void RendererContext::addProgram(std::string name, Program* program)

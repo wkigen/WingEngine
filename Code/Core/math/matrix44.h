@@ -155,22 +155,22 @@ namespace WingCore
 		m21 = cos_rz * -sin_rx + sin_rz * sin_ry * cos_rx;
 		m22 = cos_ry *  cos_rx;
 
-		Matrix44 P(*this);
+	
 
-		x[0][0] = P[0][0] * m00 + P[1][0] * m01 + P[2][0] * m02;
-		x[0][1] = P[0][1] * m00 + P[1][1] * m01 + P[2][1] * m02;
-		x[0][2] = P[0][2] * m00 + P[1][2] * m01 + P[2][2] * m02;
-		x[0][3] = P[0][3] * m00 + P[1][3] * m01 + P[2][3] * m02;
+		mData._data[0][0] = mData._data[0][0] * m00 + mData._data[1][0] * m01 + mData._data[2][0] * m02;
+		mData._data[0][1] = mData._data[0][1] * m00 + mData._data[1][1] * m01 + mData._data[2][1] * m02;
+		mData._data[0][2] = mData._data[0][2] * m00 + mData._data[1][2] * m01 + mData._data[2][2] * m02;
+		mData._data[0][3] = mData._data[0][3] * m00 + mData._data[1][3] * m01 + mData._data[2][3] * m02;
 
-		x[1][0] = P[0][0] * m10 + P[1][0] * m11 + P[2][0] * m12;
-		x[1][1] = P[0][1] * m10 + P[1][1] * m11 + P[2][1] * m12;
-		x[1][2] = P[0][2] * m10 + P[1][2] * m11 + P[2][2] * m12;
-		x[1][3] = P[0][3] * m10 + P[1][3] * m11 + P[2][3] * m12;
+		mData._data[1][0] = mData._data[0][0] * m10 + mData._data[1][0] * m11 + mData._data[2][0] * m12;
+		mData._data[1][1] = mData._data[0][1] * m10 + mData._data[1][1] * m11 + mData._data[2][1] * m12;
+		mData._data[1][2] = mData._data[0][2] * m10 + mData._data[1][2] * m11 + mData._data[2][2] * m12;
+		mData._data[1][3] = mData._data[0][3] * m10 + mData._data[1][3] * m11 + mData._data[2][3] * m12;
 
-		x[2][0] = P[0][0] * m20 + P[1][0] * m21 + P[2][0] * m22;
-		x[2][1] = P[0][1] * m20 + P[1][1] * m21 + P[2][1] * m22;
-		x[2][2] = P[0][2] * m20 + P[1][2] * m21 + P[2][2] * m22;
-		x[2][3] = P[0][3] * m20 + P[1][3] * m21 + P[2][3] * m22;
+		mData._data[2][0] = mData._data[0][0] * m20 + mData._data[1][0] * m21 + mData._data[2][0] * m22;
+		mData._data[2][1] = mData._data[0][1] * m20 + mData._data[1][1] * m21 + mData._data[2][1] * m22;
+		mData._data[2][2] = mData._data[0][2] * m20 + mData._data[1][2] * m21 + mData._data[2][2] * m22;
+		mData._data[2][3] = mData._data[0][3] * m20 + mData._data[1][3] * m21 + mData._data[2][3] * m22;
 
 		return *this;
 	}

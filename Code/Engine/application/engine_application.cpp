@@ -23,7 +23,7 @@ namespace WingEngine
 		WingCore::DllSystem::getInstance()->create();
 
 		WingSystem::getInstance()->create();
-		RendererSystem::getInstance()->create(mWindow->getHandle());
+		RendererSystem::getInstance()->create(mWindow->getHandle(),mWindow->getWidth(),mWindow->getHeight());
 	}
 
 	void EngineApplication::destroy()

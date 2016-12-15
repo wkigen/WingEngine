@@ -45,6 +45,9 @@
     <ClInclude Include="renderer\camera.h">
       <Filter>renderer</Filter>
     </ClInclude>
+    <ClInclude Include="shader\shader.h">
+      <Filter>shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp">

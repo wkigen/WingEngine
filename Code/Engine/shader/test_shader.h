@@ -3,10 +3,10 @@
 
 #include <string>
 
-const std::string test_vs = "   \
+const std::string test_vs = "uniform mat4 u_ProjectModelViewMatrix;   \
 							void main()  \
 							{	\
-								gl_Position =ftransform();    	\
+								gl_Position = u_ProjectModelViewMatrix *  gl_Vertex ;    	\
 							}  \ ";
 
 

@@ -42,7 +42,6 @@ namespace WingRendererGL
 
 
 	ProgramGL::ProgramGL()
-		:mProgramID(UINT32MAX)
 	{
 
 	}

@@ -15,8 +15,9 @@ namespace WingRendererGL
 	}
 
 
-	bool RendererContextWinGL::create(void* windowHandle)
+	bool RendererContextWinGL::create(void* windowHandle, uint32 width, uint32 height)
 	{
+		RendererContextGL::create(windowHandle, width, height);
 
 		mHwnd = (HWND)windowHandle;
 		mHDC = GetDC(mHwnd);

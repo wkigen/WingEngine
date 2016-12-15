@@ -19,7 +19,7 @@ namespace WingRendererGL
 		virtual void destroy();
 
 	private:
-		GLuint mProgramID;
+	
 
 	};
 }

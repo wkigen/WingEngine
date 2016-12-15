@@ -7,8 +7,8 @@
 namespace WingCore
 {
 
-#define WING_WINDOW_WIDTH	1280
-#define WING_WINDOW_HEIGHT	720
+#define WING_WINDOW_WIDTH	800
+#define WING_WINDOW_HEIGHT	600
 
 
 	class WING_CORE_API Window

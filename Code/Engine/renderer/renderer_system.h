@@ -16,7 +16,7 @@ namespace WingEngine
 	public:
 		~RendererSystem();
 
-		bool create(void* windowHandle);
+		bool create(void* windowHandle,uint32 width, uint32 height);
 		void destroy();
 
 		void render();
@@ -29,6 +29,8 @@ namespace WingEngine
 		RendererContext*						mRendererContext;
 		bool									mCreate;
 		std::map<std::string, RendererContext*> mRendererContexts;
+		uint32									mWidth;
+		uint32									mHeight;
 
 	};
 }

@@ -13,7 +13,7 @@ namespace WingRendererGL
 		RendererContextWinGL();
 		virtual ~RendererContextWinGL();
 
-		virtual bool create(void* windowHandle);
+		virtual bool create(void* windowHandle,uint32 width, uint32 height);
 		virtual void swapBuffers();
 		virtual void destroy();
 

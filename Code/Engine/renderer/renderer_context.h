@@ -6,6 +6,7 @@
 #include "common\engine_defines.h"
 #include "program.h"
 #include "camera.h"
+#include "shader\shader.h"
 
 using namespace WingCore;
 
@@ -19,7 +20,7 @@ namespace WingEngine
 		RendererContext();
 		virtual ~RendererContext();
 
-		virtual bool		create(void* windowHandle) = 0;
+		virtual bool		create(void* windowHandle,uint32 width,uint32 height);
 		virtual void		swapBuffers() = 0;
 		virtual void		destroy() = 0;
 
@@ -28,12 +29,15 @@ namespace WingEngine
 		virtual Program*	createProgram(std::string name, std::string vs, std::string fs)=0;
 		virtual void		useProgram(std::string name)=0;
 
+		virtual void		setUniformMatrix44f(std::string name, Matrix44 matrix)=0;
+
 		virtual void		render() = 0;
 
 		Camera*				getMainCamera() { return mMainCamera; }
 	protected:
 		std::map<std::string, Program*> mPrograms;
 		Camera* mMainCamera;
+		Program* mCurrProgram;
 
 	};
 }

@@ -13,15 +13,20 @@ namespace WingEngine
 	{
 
 	public:
-		Camera(Point<float> _eye, Point<float> _view, Vector<float> _up);
+		Camera(float _fovy, float _aspect, float _near, float _far,Point<float> _eye, Point<float> _view, Vector<float> _up);
 		~Camera();
 
-		void translation(const Vector<float> &t);
+		void		translation(const Vector<float> &t);
+		void		rotate(const Vector<float> &t);
+
+		Matrix44	getModelViewMatrinx44() { return mModelViewMatrix44; }
+		Matrix44	getProjectViewMatrinx44() { return mProjectViewMatrix44; }
+		Matrix44	getProjectModelMatrix44() { return mProjectModelMatrix44; }
 
 	private:
 		Point<float> mEye, mView;
 		Vector<float> nUp;
-		Matrix44 mMatrix44;
+		Matrix44 mModelViewMatrix44,mProjectViewMatrix44,mProjectModelMatrix44;
 	};
 }
 

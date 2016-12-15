@@ -8,6 +8,8 @@ namespace WingEngine
 {
 	RendererSystem::RendererSystem()
 		:mCreate(false)
+		,mWidth(0)
+		,mHeight(0)
 	{
 
 	}
@@ -17,7 +19,7 @@ namespace WingEngine
 
 	}
 
-	bool RendererSystem::create(void* windowHandle)
+	bool RendererSystem::create(void* windowHandle,uint32 width,uint32 height)
 	{
 		if (mCreate)
 		{
@@ -25,6 +27,8 @@ namespace WingEngine
 			return false;
 		}
 		mCreate = true;
+		mWidth = width;
+		mHeight = height;
 
 		std::list<WingCore::Module*> rendererDll = WingCore::DllSystem::getInstance()->getMoudles(ModuleTypeRenderer);
 		std::list<WingCore::Module*>::iterator iter = rendererDll.begin();
@@ -34,7 +38,7 @@ namespace WingEngine
 			RendererContext* context = (RendererContext*)(*iter)->mObject;
 			if (context)
 			{
-				context->create(windowHandle);
+				context->create(windowHandle, mWidth, mHeight);
 				mRendererContexts[(*iter)->mName] = context;
 			}
 			iter++;
