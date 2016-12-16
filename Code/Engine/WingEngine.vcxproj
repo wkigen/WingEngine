@@ -129,8 +129,10 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="common\engine_defines.h" />
     <ClInclude Include="renderer\camera.h" />
     <ClInclude Include="renderer\program.h" />
+    <ClInclude Include="renderer\renderable.h" />
     <ClInclude Include="renderer\renderer_context.h" />
     <ClInclude Include="renderer\renderer_system.h" />
+    <ClInclude Include="scene\node.h" />
     <ClInclude Include="shader\shader.h" />
     <ClInclude Include="shader\test_shader.h" />
     <ClInclude Include="system\wing_system.h" />
@@ -139,8 +141,10 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClCompile Include="application\engine_application.cpp" />
     <ClCompile Include="renderer\camera.cpp" />
     <ClCompile Include="renderer\program.cpp" />
+    <ClCompile Include="renderer\renderable.cpp" />
     <ClCompile Include="renderer\renderer_context.cpp" />
     <ClCompile Include="renderer\renderer_system.cpp" />
+    <ClCompile Include="scene\node.cpp" />
     <ClCompile Include="system\wing_system.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

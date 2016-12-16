@@ -16,6 +16,9 @@
     <Filter Include="shader">
       <UniqueIdentifier>{629c2daa-aaf2-4550-a92e-e7df1a1b637c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{b0344704-5a6c-4b6b-8727-cbbdecbef840}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\engine_defines.h">
@@ -48,6 +51,12 @@
     <ClInclude Include="shader\shader.h">
       <Filter>shader</Filter>
     </ClInclude>
+    <ClInclude Include="scene\node.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\renderable.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp">
@@ -66,6 +75,12 @@
       <Filter>renderer</Filter>
     </ClCompile>
     <ClCompile Include="renderer\camera.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\node.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\renderable.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
   </ItemGroup>

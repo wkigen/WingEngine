@@ -53,7 +53,7 @@ namespace WingRendererGL
 		glUniformMatrix4fv(location, 1, 1, matrix.mData.data);
 	}
 
-	void RendererContextGL::render()
+	void RendererContextGL::render(Renderable* renderables)
 	{
 		Vector<float> tra(0.001f, 0, 0);
 		mMainCamera->translation(tra);

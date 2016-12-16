@@ -5,6 +5,8 @@
 #include "base\singleton.h"
 #include <map>
 #include "renderer_context.h"
+#include "renderable.h"
+#include <queue>
 
 namespace WingEngine
 {
@@ -21,6 +23,9 @@ namespace WingEngine
 
 		void render();
 
+
+		void addRenderable(Renderable* able);
+
 	private:
 		RendererSystem();
 		
@@ -31,6 +36,7 @@ namespace WingEngine
 		std::map<std::string, RendererContext*> mRendererContexts;
 		uint32									mWidth;
 		uint32									mHeight;
+		std::queue<Renderable*>					mRenderables;
 
 	};
 }

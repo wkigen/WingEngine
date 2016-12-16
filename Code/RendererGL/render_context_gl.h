@@ -4,6 +4,9 @@
 #include <GL/glew.h>
 #include "GL\wglew.h"
 #include "renderer\renderer_context.h"
+#include "renderer\renderable.h"
+
+using namespace WingEngine;
 
 namespace WingRendererGL
 {
@@ -22,14 +25,8 @@ namespace WingRendererGL
 		virtual void					useProgram(std::string name);
 		virtual void					setUniformMatrix44f(std::string name,Matrix44 matrix);
 
-		virtual void render();
+		virtual void render(Renderable* renderables);
 
-
-
-
-
-		GLuint vertexbuffer;
-		GLuint VertexArrayID;
 	};
 
 

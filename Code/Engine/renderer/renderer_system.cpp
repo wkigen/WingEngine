@@ -71,7 +71,16 @@ namespace WingEngine
 
 	void RendererSystem::render()
 	{
-		//todo
-		mRendererContext->render();
+		while (!mRenderables.empty())
+		{
+			mRendererContext->render(mRenderables.front());
+			mRenderables.pop();
+		};
+	}
+
+
+	void RendererSystem::addRenderable(Renderable* able)
+	{
+		mRenderables.push(able);
 	}
 }

@@ -7,6 +7,7 @@
 #include "program.h"
 #include "camera.h"
 #include "shader\shader.h"
+#include "renderable.h"
 
 using namespace WingCore;
 
@@ -26,12 +27,13 @@ namespace WingEngine
 
 		virtual void		addProgram(std::string name, Program* program);
 		virtual Program*	getProgram(std::string name);
+
 		virtual Program*	createProgram(std::string name, std::string vs, std::string fs)=0;
 		virtual void		useProgram(std::string name)=0;
 
 		virtual void		setUniformMatrix44f(std::string name, Matrix44 matrix)=0;
 
-		virtual void		render() = 0;
+		virtual void		render(Renderable* renderables) = 0;
 
 		Camera*				getMainCamera() { return mMainCamera; }
 	protected:
