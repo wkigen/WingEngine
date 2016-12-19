@@ -10,7 +10,7 @@ namespace WingEngine
 	{
 
 	public:
-		Node(Node* parentNode);
+		Node();
 		~Node();
 
 

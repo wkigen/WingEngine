@@ -11,7 +11,7 @@ namespace WingEngine
 	{
 
 	public:
-		Renderable(Node* parentNode);
+		Renderable();
 		~Renderable();
 
 

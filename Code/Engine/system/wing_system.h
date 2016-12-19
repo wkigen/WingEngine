@@ -3,7 +3,6 @@
 
 #include "base\singleton.h"
 #include "common\engine_defines.h"
-#include "config\config.h"
 #include "renderer\renderer_system.h"
 
 namespace WingEngine
@@ -28,7 +27,7 @@ namespace WingEngine
 		WingSystem();
 
 	private:
-		WingCore::Config	mConfig;
+
 		bool				mCreate;
 	};
 

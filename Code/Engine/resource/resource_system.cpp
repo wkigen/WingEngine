@@ -1,7 +1,7 @@
 #include "resource_system.h"
 
 
-namespace WingCore
+namespace WingEngine
 {
 	ResourceSystem::ResourceSystem()
 	{
@@ -23,18 +23,18 @@ namespace WingCore
 
 	}
 
-	void ResourceSystem::addWriter(uint32 type, Writer* writer)
+	void ResourceSystem::addWriter(uint32 type, ResourceWriter* writer)
 	{
-		std::map<uint32, Writer*>::iterator itor = mResourceWriters.find(type);
+		std::map<uint32, ResourceWriter*>::iterator itor = mResourceWriters.find(type);
 		if (itor == mResourceWriters.end())
 			WING_LOG_WARN("is exist writer of type[%d]",type);
 
 		mResourceWriters[type] = writer;
 	}
 
-	void ResourceSystem::addReader(uint32 type, Reader* reader)
+	void ResourceSystem::addReader(uint32 type, ResourceReader* reader)
 	{
-		std::map<uint32, Reader*>::iterator itor = mResourceReaders.find(type);
+		std::map<uint32, ResourceReader*>::iterator itor = mResourceReaders.find(type);
 		if (itor == mResourceReaders.end())
 			WING_LOG_WARN("is exist reader of type[%d]", type);
 

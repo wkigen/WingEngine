@@ -25,9 +25,6 @@
     <Filter Include="error">
       <UniqueIdentifier>{a0a9f6c5-43e8-4310-b709-8d5770df0941}</UniqueIdentifier>
     </Filter>
-    <Filter Include="config">
-      <UniqueIdentifier>{fe5e6ae9-6601-4b5f-b078-7092f692071a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="utils">
       <UniqueIdentifier>{5a7af82e-ab13-4866-9716-535dbcf18fc8}</UniqueIdentifier>
     </Filter>
@@ -36,9 +33,6 @@
     </Filter>
     <Filter Include="application">
       <UniqueIdentifier>{2da6a12d-a466-47a0-899d-a2140d77ab69}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="resource">
-      <UniqueIdentifier>{4fbe5ce5-5f90-4d95-8aeb-6868de3dd386}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -93,12 +87,6 @@
     <ClInclude Include="io\writer.h">
       <Filter>io</Filter>
     </ClInclude>
-    <ClInclude Include="config\config.h">
-      <Filter>config</Filter>
-    </ClInclude>
-    <ClInclude Include="config\config_group.h">
-      <Filter>config</Filter>
-    </ClInclude>
     <ClInclude Include="utils\string_utils.h">
       <Filter>utils</Filter>
     </ClInclude>
@@ -131,24 +119,6 @@
     </ClInclude>
     <ClInclude Include="application\main.h">
       <Filter>application</Filter>
-    </ClInclude>
-    <ClInclude Include="resource\resource.h">
-      <Filter>resource</Filter>
-    </ClInclude>
-    <ClInclude Include="resource\resource_system.h">
-      <Filter>resource</Filter>
-    </ClInclude>
-    <ClInclude Include="io\resource_reader.h">
-      <Filter>io</Filter>
-    </ClInclude>
-    <ClInclude Include="config\config_reader.h">
-      <Filter>config</Filter>
-    </ClInclude>
-    <ClInclude Include="io\resource_writer.h">
-      <Filter>io</Filter>
-    </ClInclude>
-    <ClInclude Include="config\config_writer.h">
-      <Filter>config</Filter>
     </ClInclude>
     <ClInclude Include="base\queue.h">
       <Filter>base</Filter>
@@ -185,12 +155,6 @@
     <ClCompile Include="io\writer.cpp">
       <Filter>io</Filter>
     </ClCompile>
-    <ClCompile Include="config\config.cpp">
-      <Filter>config</Filter>
-    </ClCompile>
-    <ClCompile Include="config\config_group.cpp">
-      <Filter>config</Filter>
-    </ClCompile>
     <ClCompile Include="io\file_system.cpp">
       <Filter>io</Filter>
     </ClCompile>
@@ -205,24 +169,6 @@
     </ClCompile>
     <ClCompile Include="application\application.cpp">
       <Filter>application</Filter>
-    </ClCompile>
-    <ClCompile Include="resource\resource.cpp">
-      <Filter>resource</Filter>
-    </ClCompile>
-    <ClCompile Include="resource\resource_system.cpp">
-      <Filter>resource</Filter>
-    </ClCompile>
-    <ClCompile Include="io\resource_reader.cpp">
-      <Filter>io</Filter>
-    </ClCompile>
-    <ClCompile Include="config\config_reader.cpp">
-      <Filter>config</Filter>
-    </ClCompile>
-    <ClCompile Include="io\resource_writer.cpp">
-      <Filter>io</Filter>
-    </ClCompile>
-    <ClCompile Include="config\config_writer.cpp">
-      <Filter>config</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,10 +1,10 @@
-#ifndef _WING_CORE_RESOURCE_WRITER_H_
-#define _WING_CORE_RESOURCE_WRITER_H_
+#ifndef _WING_ENGINE_RESOURCE_WRITER_H_
+#define _WING_ENGINE_RESOURCE_WRITER_H_
 
-#include "writer.h"
+#include "io\writer.h"
 #include "resource\resource.h"
 
-namespace WingCore
+namespace WingEngine
 {
 	class WING_CORE_API ResourceWriter:public Writer
 	{

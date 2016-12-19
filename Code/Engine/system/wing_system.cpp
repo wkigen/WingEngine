@@ -37,7 +37,7 @@ namespace WingEngine
 
 	void WingSystem::setDefaultConfig()
 	{
-		mConfig.setAttribute("WingEngine", "version", "0.01");
+	
 	}
 
 	void WingSystem::readConfig()

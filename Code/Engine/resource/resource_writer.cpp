@@ -1,0 +1,1 @@
+#include "resource_writer.h"

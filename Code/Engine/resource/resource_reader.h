@@ -1,10 +1,10 @@
-#ifndef _WING_CORE_RESOURCE_READER_H_
-#define _WING_CORE_RESOURCE_READER_H_
+#ifndef _WING_ENGINE_RESOURCE_READER_H_
+#define _WING_ENGINE_RESOURCE_READER_H_
 
-#include "reader.h"
+#include "io\reader.h"
 #include "resource\resource.h"
 
-namespace WingCore
+namespace WingEngine
 {
 	class WING_CORE_API ResourceReader:public Reader
 	{
