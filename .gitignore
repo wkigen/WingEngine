@@ -25,3 +25,5 @@ Test/WIEngineTest/Debugx86
 Test/WIEngineTest/Debugx64
 Code/RendererGL/Debugx86
 Code/RendererGL/Debugx64
+Tools/MeshConvert/Debugx86
+Tools/MeshConvert/Debugx64
