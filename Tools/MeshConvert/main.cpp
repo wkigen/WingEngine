@@ -18,6 +18,12 @@ https://github.com/assimp/assimp
 #include <assimp/DefaultLogger.hpp>
 #include <zlib.h>
 
+
+#include "io\file_system.h"
+#include "io\writer.h"
+#include "mesh\mesh_define.h"
+
+using namespace WingCore;
 using namespace Assimp;
 
 Assimp::Importer* globalImporter;
@@ -44,11 +50,29 @@ bool convert(char* input,char* output)
 		return false;
 	}
 
+	FileStream stream ;
+	if (!FileSystem::getInstance()->openFile(output, stream, WingCore::ACCESS::Write))
+	{
+		printf("创建文件失败 %s", output);
+		return false;
+	}
+
+	Writer* writer = new Writer(&stream);
+	
+	writer->writeString(MESH_MAGIC_NUMBER);
+
 	if (scene->HasMeshes())
 	{
 		for (int kk = 0; kk > scene->mNumMaterials; kk++)
 		{
 			const aiMaterial* material = scene->mMaterials[kk];
+			if (material->GetTextureCount(aiTextureType_DIFFUSE) > 0) {
+				aiString Path;
+				if (material->GetTexture(aiTextureType_DIFFUSE, 0, &Path, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS)
+				{
+
+				}
+			}
 		}
 
 
@@ -56,7 +80,7 @@ bool convert(char* input,char* output)
 		{
 
 			const aiMesh* aimesh = *(scene->mMeshes + ii);
-			char* name = aimesh->mName.C_Str;
+			const char* name = aimesh->mName.C_Str();
 			for (int jj = 0; jj < aimesh->mNumVertices; jj++)
 			{
 				const aiVector3D* pPos = &(aimesh->mVertices[jj]);
@@ -86,6 +110,8 @@ int main(int argc, char* argv[])
 	Assimp::Importer imp;
 	imp.SetPropertyBool("GLOB_MEASURE_TIME", true);
 	globalImporter = &imp;
+
+	FileSystem::getInstance()->create();
 
 	if (!strcmp(argv[1], "convert") || !strcmp(argv[1], "--convert") || !strcmp(argv[1], "-c")) {
 		

@@ -152,6 +152,7 @@ copy Debugx86\WingCoreD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="math\vector.h" />
     <ClInclude Include="utils\file_utils.h" />
     <ClInclude Include="utils\string_utils.h" />
+    <ClInclude Include="utils\system_utils.h" />
     <ClInclude Include="window\window.h" />
     <ClInclude Include="window\windowWindows.h" />
   </ItemGroup>

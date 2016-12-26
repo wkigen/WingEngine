@@ -27,6 +27,8 @@ namespace WingCore
 		virtual int64	writeInt64(int64 src);
 		virtual uint64	writeUint64(uint64 src);
 
+		virtual real	writeReal(real src);
+
 		virtual uint16	writeString(char* dst);
 		virtual uint16	writeStringEnd(char* dst);
 

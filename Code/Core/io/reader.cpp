@@ -80,6 +80,13 @@ namespace WingCore
 		return dst;
 	}
 
+	real Reader::readReal()
+	{
+		real dst;
+		int size = mStream->read(&dst, sizeof(real));
+		return dst;
+	}
+
 	uint16 Reader::readString(char* dst)
 	{
 		char temp;

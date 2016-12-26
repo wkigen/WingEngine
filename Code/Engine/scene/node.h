@@ -2,6 +2,7 @@
 #define _WING_ENGINE_NODE_H_
 
 #include "common\engine_defines.h"
+#include <map>
 
 namespace WingEngine
 {
@@ -13,10 +14,16 @@ namespace WingEngine
 		Node();
 		~Node();
 
+		virtual void			setName(std::string name);
+		virtual std::string		getName();
+
+		virtual void			addChild(Node* child);
+		virtual Node*			getChild(std::string name);
 
 	protected:
-
-		Node* mParentNode;
+		std::string						mName;
+		Node*							mParentNode;
+		std::map<std::string, Node*>	mChildren;
 	};
 
 }

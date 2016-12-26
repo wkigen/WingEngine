@@ -72,6 +72,12 @@ namespace WingCore
 		return size;
 	}
 
+	real Writer::writeReal(real src)
+	{
+		int size = mStream->write(&src, sizeof(real));
+		return size;
+	}
+
 	uint16	Writer::writeString(char* dst)
 	{
 		char temp = *dst;

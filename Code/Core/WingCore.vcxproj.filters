@@ -123,6 +123,9 @@
     <ClInclude Include="base\queue.h">
       <Filter>base</Filter>
     </ClInclude>
+    <ClInclude Include="utils\system_utils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dll\dll.cpp">

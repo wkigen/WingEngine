@@ -128,6 +128,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="common\constant.h" />
     <ClInclude Include="common\engine_defines.h" />
     <ClInclude Include="mesh\mesh.h" />
+    <ClInclude Include="mesh\mesh_define.h" />
     <ClInclude Include="mesh\mesh_reader.h" />
     <ClInclude Include="mesh\submesh.h" />
     <ClInclude Include="renderer\camera.h" />

@@ -7,7 +7,7 @@ namespace WingEngine
 	{
 		if (resource->getResourceType() != ResourceTypeMesh)
 		{
-			WING_LOG_ERROR("error type of the resource to read the mesh");
+			WING_LOG_ERROR("is not the type of mesh");
 			return false;
 		}
 

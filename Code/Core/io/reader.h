@@ -26,6 +26,8 @@ namespace WingCore
 		virtual int64	readInt64();
 		virtual uint64	readUint64();
 
+		virtual real	readReal();
+
 		virtual uint16	readString(char* dst);
 
 	protected:

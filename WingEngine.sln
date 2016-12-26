@@ -34,6 +34,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{869576B3-1D39-421A-96BC-C9F7E4049CF2}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MeshConvert", "Tools\MeshConvert\MeshConvert.vcxproj", "{2CFC48EA-53A4-4197-BCCD-929202E2E62F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DE14912F-64A7-4713-9E54-D39560750C56} = {DE14912F-64A7-4713-9E54-D39560750C56}
+		{6FC755DE-1250-4E8A-9A55-F2547D112A81} = {6FC755DE-1250-4E8A-9A55-F2547D112A81}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

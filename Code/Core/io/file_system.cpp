@@ -26,7 +26,7 @@ namespace WingCore
 
 		char exeFullPath[MAX_PATH];
 #if WING_PLATFORM_WIN32
-		GetModuleFileName(NULL, exeFullPath, MAX_PATH);
+		GetCurrentDirectory(MAX_PATH,exeFullPath );
 #endif
 		mBaseDirectories.push_back(exeFullPath);
 		mDirectories.push_back("./");
@@ -86,6 +86,8 @@ namespace WingCore
 				{
 					return true;
 				}
+
+				curr++;
 			}
 		}
 		return false;
