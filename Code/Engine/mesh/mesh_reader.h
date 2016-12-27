@@ -6,10 +6,13 @@
 
 namespace WingEngine
 {
-	class WING_CORE_API MeshReader:public ResourceReader
+	class MeshReader:public ResourceReader
 	{
 
 	public:
+		MeshReader();
+		~MeshReader();
+
 		virtual bool readResource(Resource* resource);
 
 	};

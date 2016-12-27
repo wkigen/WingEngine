@@ -6,9 +6,12 @@
 
 namespace WingEngine
 {
-	class WING_CORE_API ResourceWriter:public Writer
+	class ResourceWriter:public Writer
 	{
 	public:
+		ResourceWriter();
+		~ResourceWriter();
+
 		virtual bool writerResource(Resource* resource)=0;
 	};
 

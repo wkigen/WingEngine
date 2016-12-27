@@ -37,6 +37,10 @@ namespace WingEngine
 
 
 	private:
+
+		bool				mCreate;
+
+
 		std::map<std::string, Resource*>			mResource[ResourceTypeMax];
 		std::map<uint32, ResourceWriter*>			mResourceWriters;
 		std::map<uint32, ResourceReader*>			mResourceReaders;

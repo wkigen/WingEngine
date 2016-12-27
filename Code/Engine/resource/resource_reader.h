@@ -6,10 +6,14 @@
 
 namespace WingEngine
 {
-	class WING_CORE_API ResourceReader:public Reader
+
+	class ResourceReader:public Reader
 	{
 	public:
-		virtual bool readResource(Resource* resource)=0;
+		ResourceReader();
+		~ResourceReader();
+
+		virtual bool readResource(Resource* resource) = 0;
 	};
 
 }

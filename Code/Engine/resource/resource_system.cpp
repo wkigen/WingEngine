@@ -1,5 +1,5 @@
 #include "resource_system.h"
-
+#include "mesh\mesh_reader.h"
 
 namespace WingEngine
 {
@@ -15,6 +15,19 @@ namespace WingEngine
 
 	bool ResourceSystem::create()
 	{
+		if (mCreate)
+		{
+			WING_LOG_WARN("ResourceSystem has been create");
+			return false;
+		}
+		mCreate = true;
+
+		MeshReader* meshReader = new MeshReader();
+
+
+
+		addReader(ResourceTypeMesh, meshReader);
+
 		return true;
 	}
 

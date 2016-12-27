@@ -87,6 +87,9 @@
     <ClInclude Include="mesh\mesh_define.h">
       <Filter>mesh</Filter>
     </ClInclude>
+    <ClInclude Include="scene\scene_system.h">
+      <Filter>scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp">
@@ -133,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="mesh\mesh_reader.cpp">
       <Filter>mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="scene\scene_system.cpp">
+      <Filter>scene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

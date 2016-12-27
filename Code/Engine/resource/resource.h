@@ -25,8 +25,6 @@ namespace WingEngine
 
 	public:
 
-		virtual void read(Stream* stream) = 0;
-		virtual void write(Stream* stream) = 0;
 	private:
 		
 	};

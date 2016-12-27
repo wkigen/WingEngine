@@ -141,6 +141,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="resource\resource_system.h" />
     <ClInclude Include="resource\resource_writer.h" />
     <ClInclude Include="scene\node.h" />
+    <ClInclude Include="scene\scene_system.h" />
     <ClInclude Include="shader\shader.h" />
     <ClInclude Include="shader\test_shader.h" />
     <ClInclude Include="system\wing_system.h" />
@@ -160,6 +161,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClCompile Include="resource\resource_system.cpp" />
     <ClCompile Include="resource\resource_writer.cpp" />
     <ClCompile Include="scene\node.cpp" />
+    <ClCompile Include="scene\scene_system.cpp" />
     <ClCompile Include="system\wing_system.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

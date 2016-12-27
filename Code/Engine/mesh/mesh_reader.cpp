@@ -3,6 +3,16 @@
 
 namespace WingEngine
 {
+	MeshReader::MeshReader()
+	{
+
+	}
+
+	MeshReader::~MeshReader()
+	{
+
+	}
+
 	bool MeshReader::readResource(Resource* resource)
 	{
 		if (resource->getResourceType() != ResourceTypeMesh)

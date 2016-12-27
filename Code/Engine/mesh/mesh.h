@@ -19,8 +19,6 @@ namespace WingEngine
 		Mesh();
 		~Mesh();
 
-		virtual void read(Stream* stream);
-		virtual void write(Stream* stream);
 
 	private:
 		std::map<std::string, Submesh*> mSubmeshs;

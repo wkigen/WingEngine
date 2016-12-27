@@ -59,18 +59,22 @@ bool convert(char* input,char* output)
 
 	Writer* writer = new Writer(&stream);
 	
-	writer->writeString(MESH_MAGIC_NUMBER);
+	writer->writeString(MESH_MAGIC_NUMBER);			//魔数
+
+	writer->writeInt16(scene->mNumMaterials);		//纹理数
+
+	writer->writeInt64(scene->mNumMeshes);			//网格部件数
 
 	if (scene->HasMeshes())
 	{
-		for (int kk = 0; kk > scene->mNumMaterials; kk++)
+		for (int kk = 0; kk < scene->mNumMaterials; kk++)
 		{
 			const aiMaterial* material = scene->mMaterials[kk];
 			if (material->GetTextureCount(aiTextureType_DIFFUSE) > 0) {
 				aiString Path;
 				if (material->GetTexture(aiTextureType_DIFFUSE, 0, &Path, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS)
 				{
-
+					writer->writeStringEnd((char *)Path.C_Str());		//纹理文件
 				}
 			}
 		}
@@ -87,9 +91,23 @@ bool convert(char* input,char* output)
 				const aiVector3D* pNormal = aimesh->HasNormals() ? &(aimesh->mNormals[jj]) : (new aiVector3D());
 				const aiVector3D* pTexCoord = aimesh->HasTextureCoords(0) ? &(aimesh->mTextureCoords[0][jj]) : (new aiVector3D());
 
+				writer->writeReal(pPos->x);
+				writer->writeReal(pPos->y);
+				writer->writeReal(pPos->z);
+
+				writer->writeReal(pNormal->x);
+				writer->writeReal(pNormal->y);
+				writer->writeReal(pNormal->z);
+
+				writer->writeReal(pTexCoord->x);
+				writer->writeReal(pTexCoord->y);
+				writer->writeReal(pTexCoord->z);
 			}
 		}
 	}
+
+	stream.close();
+	delete writer;
 
 	return true;
 }

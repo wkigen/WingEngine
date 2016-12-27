@@ -11,8 +11,6 @@
 *.idb
 *.tlog
 *.opendb
-Bin/Lib/
-Bin/Runtime/
 Code/3rdparty/tinyxml2/tinyxml2/Debugx86
 Code/3rdparty/tinyxml2/tinyxml2/Debugx64
 Code/Core/Debugx86

@@ -12,13 +12,4 @@ namespace WingEngine
 
 	}
 
-	void Mesh::read(Stream* stream)
-	{
-
-	}
-
-	void Mesh::write(Stream* stream)
-	{
-
-	}
 }
