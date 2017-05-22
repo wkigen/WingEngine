@@ -3,6 +3,8 @@
 
 #include "stream.h"
 
+#define IS_SPACE(c) (' ' == c || '\t' == c || '\r' ==c || '\n' == c )
+
 namespace WingCore
 {
 	class WING_CORE_API Reader
@@ -27,6 +29,8 @@ namespace WingCore
 		virtual uint64	readUint64();
 
 		virtual real	readReal();
+
+		virtual void	skipSpace();
 
 		virtual uint16	readString(char* dst);
 

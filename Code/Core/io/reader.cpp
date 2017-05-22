@@ -87,11 +87,22 @@ namespace WingCore
 		return dst;
 	}
 
+	void Reader::skipSpace() 
+	{
+
+		char temp;
+		while (mStream->read(&temp, 1) == 1 && IS_SPACE(temp))
+		{
+		}
+		mStream->seek(-1, Whence::Current);
+	}
+
 	uint16 Reader::readString(char* dst)
 	{
 		char temp;
 		uint16 len = 0;
-		while (mStream->read(&temp, 1) == 1 && temp != '\0')
+
+		while (mStream->read(&temp, 1) == 1 && !IS_SPACE(temp))
 		{
 			*dst = temp;
 			dst++;

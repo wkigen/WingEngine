@@ -89,6 +89,7 @@ namespace WingCore
 
 				curr++;
 			}
+			base++;
 		}
 		return false;
 	}

@@ -4,10 +4,24 @@
     <Filter Include="src">
       <UniqueIdentifier>{50ac8ae8-ad24-4ba3-9ebf-4caf4cb8d010}</UniqueIdentifier>
     </Filter>
+    <Filter Include="md5">
+      <UniqueIdentifier>{3d78ca2b-40e4-479e-9e15-b984ae961c0f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="md5\md5_convert.cpp">
+      <Filter>md5</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="md5\md5_convert.h">
+      <Filter>md5</Filter>
+    </ClInclude>
+    <ClInclude Include="md5\md5_define.h">
+      <Filter>md5</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

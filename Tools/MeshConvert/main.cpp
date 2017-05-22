@@ -22,6 +22,9 @@ https://github.com/assimp/assimp
 #include "io\file_system.h"
 #include "io\writer.h"
 #include "mesh\mesh_define.h"
+#include "allocator\allocator.h"
+
+#include "md5\md5_convert.h"
 
 using namespace WingCore;
 using namespace Assimp;
@@ -125,18 +128,19 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	Assimp::Importer imp;
-	imp.SetPropertyBool("GLOB_MEASURE_TIME", true);
-	globalImporter = &imp;
-
 	FileSystem::getInstance()->create();
 
 	if (!strcmp(argv[1], "convert") || !strcmp(argv[1], "--convert") || !strcmp(argv[1], "-c")) {
 		
 		if (argc == 4)
 		{
-			convert(argv[2], argv[3]);
-			return 0;
+			FileStream stream;
+			if (FileSystem::getInstance()->openFile(argv[2], stream, ACCESS::Read))
+			{
+				MD5Convert md5convert;
+				md5convert.parse(stream);
+
+			}
 		}
 		else
 		{
