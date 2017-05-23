@@ -137,8 +137,13 @@ int main(int argc, char* argv[])
 			FileStream stream;
 			if (FileSystem::getInstance()->openFile(argv[2], stream, ACCESS::Read))
 			{
+				uint64 fileLen = stream.getSize();
+				void* data = WING_ALLOC(fileLen);
+				uint64 size = stream.read(data, fileLen);
+				MemoryStream meStream;
+				meStream.open(data, fileLen, ACCESS::Read);
 				MD5Convert md5convert;
-				md5convert.parse(stream);
+				md5convert.parse(meStream);
 
 			}
 		}

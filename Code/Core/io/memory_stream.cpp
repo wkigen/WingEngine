@@ -89,7 +89,7 @@ namespace WingCore
 	{
 		if (mData)
 		{
-			if (off > mSize)
+			if (off > (int64)mSize)
 				off = mSize;
 
 			uint64 offSize = mSize - (mData - mCur);
@@ -101,7 +101,7 @@ namespace WingCore
 				break;
 			case WingCore::Whence::Current:
 
-				if (off > offSize)
+				if (off > (int64)offSize)
 					off = offSize;
 				mCur = mCur + off;
 				break;
@@ -121,7 +121,7 @@ namespace WingCore
 	{
 		if (mData)
 		{
-			return mData - mCur;
+			return mCur - mData;
 		}
 		else
 		{
