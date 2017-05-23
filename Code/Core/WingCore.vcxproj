@@ -170,6 +170,7 @@ copy Debugx86\WingCoreD.lib ..\..\Bin\Lib\x86\</Command>
     <ClCompile Include="log\log.cpp" />
     <ClCompile Include="math\matrix44.cpp" />
     <ClCompile Include="math\matrix44_cal.cpp" />
+    <ClCompile Include="utils\string_utils.cpp" />
     <ClCompile Include="window\window.cpp" />
     <ClCompile Include="window\windowWindows.cpp" />
   </ItemGroup>

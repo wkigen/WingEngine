@@ -3,6 +3,7 @@
 
 //head
 #define MDSVERSION "MD5Version"
+#define COMMANDLINE "commandline"
 #define NUMJOINTS "numJoints"
 #define NUMMESHES "numMeshes"
 

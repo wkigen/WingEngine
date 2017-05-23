@@ -32,7 +32,7 @@ namespace WingCore
 	{
 		virtual uint64	read(void* dst, uint64 size) { return 0; };
 		virtual uint64	write(void* src, uint64 size) { return 0; };
-		virtual uint64	seek(uint64 off, Whence::Enum type) { return 0; };
+		virtual uint64	seek(int64 off, Whence::Enum type) { return 0; };
 		virtual uint64	tell() { return 0; };
 		virtual uint64	getSize() { return 0; };
 

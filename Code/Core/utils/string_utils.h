@@ -13,46 +13,24 @@ namespace WingCore
 
 	public:
 
-		static inline uint64 covertInt(std::string str)
-		{
-			return convertNumeric<uint64>(str);
-		}
+		static inline uint64 covertInt(std::string str);
 
-		static inline real covertReal(std::string str)
-		{
-			return convertNumeric<real>(str);
-		}
+		static inline real covertReal(std::string str);
 
-		static inline std::string covertString(uint64 value)
-		{
-			return covertString<uint64>(value);
-		}
+		static inline std::string covertString(uint64 value);
 
-		static inline std::string covertString(real value)
-		{
-			return covertString<real>(value);
-		}
+		static inline std::string covertString(real value);
 
 	private:
 		template<class T>
-		static inline T convertNumeric(std::string str)
-		{
-			T value;
-			std::stringstream ss(str);
-			ss >> value;
-			return value;
-		}
+		static inline T convertNumeric(std::string str);
 
 		template<class T>
-		static inline std::string covertString(T value)
-		{
-			std::stringstream ss;
-			ss << value;
-			return ss.str();
-		}
+		static inline std::string covertString(T value);
 
 	};
 
+	
 }
 
 #endif

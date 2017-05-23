@@ -66,7 +66,7 @@ namespace WingCore
 			return 0;
 	}
 
-	uint64 FileStream::seek(uint64 off, Whence::Enum type)
+	uint64 FileStream::seek(int64 off, Whence::Enum type)
 	{
 		if (mFile)
 		{

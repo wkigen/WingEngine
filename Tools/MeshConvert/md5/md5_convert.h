@@ -4,6 +4,7 @@
 #include "io\stream.h"
 
 using namespace WingCore;
+
 class MD5Convert
 {
 
@@ -15,7 +16,9 @@ public:
 
 private:
 
-
+	int mVersion;
+	int mNumJoints;
+	int mNumMeshes;
 };
 
 #endif // !_MDCONVERT_H_

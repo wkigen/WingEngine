@@ -173,5 +173,8 @@
     <ClCompile Include="application\application.cpp">
       <Filter>application</Filter>
     </ClCompile>
+    <ClCompile Include="utils\string_utils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -85,7 +85,7 @@ namespace WingCore
 		}
 	}
 
-	uint64 MemoryStream::seek(uint64 off, Whence::Enum type)
+	uint64 MemoryStream::seek(int64 off, Whence::Enum type)
 	{
 		if (mData)
 		{

@@ -89,7 +89,6 @@ namespace WingCore
 
 	void Reader::skipSpace() 
 	{
-
 		char temp;
 		while (mStream->read(&temp, 1) == 1 && IS_SPACE(temp))
 		{
@@ -101,13 +100,28 @@ namespace WingCore
 	{
 		char temp;
 		uint16 len = 0;
-
-		while (mStream->read(&temp, 1) == 1 && !IS_SPACE(temp))
+		while (mStream->read(&temp, 1) == 1 && temp != '\0')
 		{
 			*dst = temp;
 			dst++;
 			len++;
 		}
+		*dst = '\0';
+		dst -= len;
+		return len;
+	}
+
+	uint16	Reader::readWord(char* dst)
+	{
+		char temp;
+		uint16 len = 0;
+		while (mStream->read(&temp, 1) == 1 && temp != '\0' && !IS_SPACE(temp))
+		{
+			*dst = temp;
+			dst++;
+			len++;
+		}
+
 		*dst = '\0';
 		dst -= len;
 		return len;

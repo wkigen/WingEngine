@@ -34,6 +34,7 @@ namespace WingCore
 
 		virtual uint16	readString(char* dst);
 
+		virtual uint16	readWord(char* dst);
 	protected:
 		Stream* mStream;
 	};
