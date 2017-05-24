@@ -9,6 +9,13 @@
 
 //body
 #define JOINTS "joints"
-
+#define MESH "mesh"
+#define SHADER "shader"
+#define NUMVERTS "numverts"
+#define VERT "vert"
+#define NUMTRIS "numtris"
+#define TRI "tri"
+#define NUMWEIGHTS "numweights"
+#define WEIGHT "weight"
 
 #endif

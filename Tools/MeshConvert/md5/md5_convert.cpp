@@ -1,10 +1,9 @@
 #include "md5_convert.h"
-#include "io\reader.h"
 #include <string.h>
 #include "md5_define.h"
 #include "log\log.h"
 #include "utils\string_utils.h"
-
+#include "allocator\allocator.h"
 
 MD5Convert::MD5Convert()
 {
@@ -15,6 +14,45 @@ MD5Convert::~MD5Convert()
 {
 }
 
+void MD5Convert::readReal2(Reader& reader, real* des)
+{
+	char temp[256];
+
+	// (
+	reader.readWord(temp);
+
+
+	reader.readWord(temp);
+	des[0] = StringUtils::covertReal(temp);
+
+	reader.readWord(temp);
+	des[1] = StringUtils::covertReal(temp);
+
+	// )
+	reader.readWord(temp);
+}
+
+
+void MD5Convert::readReal3(Reader& reader, real* des)
+{
+	char temp[256];
+
+	// (
+	reader.readWord(temp);
+
+
+	reader.readWord(temp);
+	des[0] = StringUtils::covertReal(temp);
+
+	reader.readWord(temp);
+	des[1] = StringUtils::covertReal(temp);
+
+	reader.readWord(temp);
+	des[2] = StringUtils::covertReal(temp);
+
+	// )
+	reader.readWord(temp);
+}
 
 bool MD5Convert::parse(Stream& stream)
 {
@@ -27,7 +65,6 @@ bool MD5Convert::parse(Stream& stream)
 	reader.setStream(&stream);
 
 	//version
-	reader.skipSpace();
 	readLen = reader.readWord(token);
 	if (!strcmp(MDSVERSION, token) == 0) {
 		WING_LOG_ERROR("md5 文件头错误");
@@ -37,7 +74,6 @@ bool MD5Convert::parse(Stream& stream)
 	mVersion = StringUtils::covertInt(temp);
 
 	//commonline
-	reader.skipSpace();
 	readLen = reader.readWord(token);
 	if (!strcmp(COMMANDLINE, token) == 0) {
 		WING_LOG_ERROR("md5 命令行错误");
@@ -46,7 +82,6 @@ bool MD5Convert::parse(Stream& stream)
 	reader.readWord(temp);
 
 	//numJoints
-	reader.skipSpace();
 	readLen = reader.readWord(token);
 	if (!strcmp(NUMJOINTS, token) == 0) {
 		WING_LOG_ERROR("md5 节点数错误");
@@ -56,7 +91,6 @@ bool MD5Convert::parse(Stream& stream)
 	mNumJoints = StringUtils::covertInt(temp);
 
 	//numMeshes
-	reader.skipSpace();
 	readLen = reader.readWord(token);
 	if (!strcmp(NUMMESHES, token) == 0) {
 		WING_LOG_ERROR("md5 网格数错误");
@@ -66,9 +100,161 @@ bool MD5Convert::parse(Stream& stream)
 	mNumMeshes = StringUtils::covertInt(temp);
 
 	reader.skipSpace();
-	while (reader.readWord(token) != 0) {
-		if (strcmp(COMMANDLINE, token)) {
-
+	while (reader.readWord(token) != 0 )
+	{
+		if (strcmp(JOINTS, token) == 0)
+		{
+			parseJoints(reader);
+		}
+		else if (strcmp(MESH, token) == 0)
+		{
+			parseMesh(reader);
 		}
 	}
+}
+
+
+void MD5Convert::parseJoints(Reader& reader)
+{
+	char temp[256];
+	char temp2[256];
+
+	//{
+	reader.readWord(temp);
+
+	for (uint32 ii = 0; ii < mNumJoints; ii++)
+	{
+		MD5Joints joints;
+
+		//名字
+		reader.readWord(temp);
+		uint32 count = 0;
+		uint32 len = strlen(temp);
+		for (uint32 jj = 1; jj < len-1; jj++) {
+			temp2[count] = temp[jj];
+			count++;
+		}
+		temp2[count] = '\0';
+		joints.name = temp2;
+
+		//父索引
+		reader.readWord(temp);
+		joints.parentIndex = StringUtils::covertInt(temp);
+
+		//坐标
+		readReal3(reader, joints.postion);
+
+		//四元素
+		readReal3(reader, joints.quaterninos);
+
+		// //
+		reader.skipSpace();
+		reader.readLine(temp);
+
+		mJoints.push_back(joints);
+	}
+
+	// }
+	reader.readWord(temp);
+}
+
+void MD5Convert::parseMesh(Reader& reader)
+{
+	char temp[256];
+
+	//{
+	reader.readWord(temp);
+
+	MD5Mesh mesh;
+
+
+	while (reader.readWord(temp) != 0 && strcmp(temp, "}") != 0)
+	{
+		if (strcmp(temp, SHADER) == 0)
+		{
+			reader.readWord(temp);
+			mesh.texture = temp;
+		}
+		else if (strcmp(temp,NUMVERTS) == 0)
+		{
+			reader.readWord(temp);
+			mesh.numverts = StringUtils::covertInt(temp);
+
+			mesh.verts = (MD5Vert*)WING_ALLOC(sizeof(MD5Vert)*mesh.numverts);
+
+			for (int32 ii = 0; ii < mesh.numverts; ii++)
+			{
+				MD5Vert vert;
+
+				reader.readWord(temp);
+
+				reader.readWord(temp);
+				vert.index = StringUtils::covertInt(temp);
+
+				readReal2(reader, vert.textureCoordinate);
+
+				reader.readWord(temp);
+				vert.wightIndex = StringUtils::covertInt(temp);
+
+				reader.readWord(temp);
+				vert.wightCount = StringUtils::covertInt(temp);
+
+				mesh.verts[ii] = vert;
+			}
+			
+		}
+		else if (strcmp(temp, NUMTRIS) == 0)
+		{
+			reader.readWord(temp);
+			mesh.numtris = StringUtils::covertInt(temp);
+			mesh.tris = (MD5Tri*)WING_ALLOC(sizeof(MD5Tri)*mesh.numtris);
+
+			for (int32 ii = 0; ii < mesh.numtris; ii++)
+			{
+				MD5Tri tri;
+				reader.readWord(temp);
+
+				reader.readWord(temp);
+				tri.index = StringUtils::covertInt(temp);
+
+				reader.readWord(temp);
+				tri.vertIndex1 = StringUtils::covertInt(temp);
+
+				reader.readWord(temp);
+				tri.vertIndex2 = StringUtils::covertInt(temp);
+
+				reader.readWord(temp);
+				tri.vertIndex3 = StringUtils::covertInt(temp);
+
+				mesh.tris[ii] = tri;
+			}
+		}
+		else if (strcmp(temp, NUMWEIGHTS) == 0)
+		{
+			reader.readWord(temp);
+			mesh.numweights = StringUtils::covertInt(temp);
+			mesh.weight = (MD5Weight*)WING_ALLOC(sizeof(MD5Weight)*mesh.numweights);
+
+			for (int32 ii = 0; ii < mesh.numweights; ii++)
+			{
+				MD5Weight weight;
+				reader.readWord(temp);
+
+				reader.readWord(temp);
+				weight.index = StringUtils::covertInt(temp);
+
+				reader.readWord(temp);
+				weight.jointsIndex = StringUtils::covertInt(temp);
+
+				reader.readWord(temp);
+				weight.weightRatio = StringUtils::covertReal(temp);
+
+				readReal3(reader, weight.postion);
+
+				mesh.weight[ii] = weight;
+			}
+		}
+	}
+
+	mMeshs.push_back(mesh);
 }

@@ -96,6 +96,22 @@ namespace WingCore
 		mStream->seek(-1, Whence::Current);
 	}
 
+
+	uint16 Reader::readLine(char* dst)
+	{
+		char temp;
+		uint16 len = 0;
+		while (mStream->read(&temp, 1) == 1 && temp != '\n')
+		{
+			*dst = temp;
+			dst++;
+			len++;
+		}
+		*dst = '\0';
+		dst -= len;
+		return len;
+	}
+
 	uint16 Reader::readString(char* dst)
 	{
 		char temp;
@@ -113,6 +129,8 @@ namespace WingCore
 
 	uint16	Reader::readWord(char* dst)
 	{
+		skipSpace();
+
 		char temp;
 		uint16 len = 0;
 		while (mStream->read(&temp, 1) == 1 && temp != '\0' && !IS_SPACE(temp))

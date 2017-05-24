@@ -32,6 +32,8 @@ namespace WingCore
 
 		virtual void	skipSpace();
 
+		virtual uint16	readLine(char* dst);
+
 		virtual uint16	readString(char* dst);
 
 		virtual uint16	readWord(char* dst);
