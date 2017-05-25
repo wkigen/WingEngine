@@ -15,6 +15,20 @@ MD5Convert::~MD5Convert()
 {
 }
 
+
+void MD5Convert::ComputeQuatW(Quaternion quat)
+{
+	float t = 1.0f - (quat.x * quat.x) - (quat.y * quat.y) - (quat.z * quat.z);
+	if (t < 0.0f)
+	{
+		quat.w = 0.0f;
+	}
+	else
+	{
+		quat.w = -sqrtf(t);
+	}
+}
+
 void MD5Convert::readReal2(Reader& reader, real* des)
 {
 	char temp[256];
@@ -305,5 +319,14 @@ void MD5Convert::wirteMesh(Writer& writer, Mesh& mesh)
 
 void MD5Convert::readAnimation(Reader& reader)
 {
+
+}
+
+
+
+void MD5Convert::toWingMesh(WingEngine::Mesh& mesh)
+{
+
+
 
 }

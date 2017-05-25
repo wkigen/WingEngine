@@ -192,7 +192,7 @@ namespace WingCore
 		return Vector<T>(ABS(x), ABS(y), ABS(z));
 	}
 
-	typedef Vector<float> Vectorf;
+	typedef Vector<real> Vectorf;
 	typedef Vector<int> Vectori;
 
 }

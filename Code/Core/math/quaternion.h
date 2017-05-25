@@ -28,6 +28,7 @@ namespace WingCore
 		inline real length() const;
 		inline void normalize();
 
+		inline Quaternion conjugate() const { return Quaternion(-x, -y, -z, w); }
 
 		inline Matrix44 toMatrix() const;
 

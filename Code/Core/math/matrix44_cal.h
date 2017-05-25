@@ -6,51 +6,19 @@
 
 namespace WingCore
 {
-	template<class T>
-	inline Matrix44 mtxLookAt(Vector<T>& eye, Vector<T>& view, Vector<T>& up)
-	{
-		
-		Vector<T> right = up.cross(view);
+	WING_CORE_API Matrix44 lhToRh(Matrix44& m);
 
-		right.normalize();
+	WING_CORE_API Matrix44 mtxLookAt(Vectorf& eye, Vectorf& view, Vectorf& up);
 
-		up = view.cross(right);
+	WING_CORE_API Matrix44 mtxLookAtLh(Pointf eye, Pointf at, Vectorf up);
 
-		float m[4][4] = { 0 };
-		m[0][0] = right[0];
-		m[0][1] = up[0];
-		m[0][2] = view[0];
+	WING_CORE_API Matrix44 mtxLookAtRh(Pointf eye, Pointf at, Vectorf up);
 
-		m[1][0] = right[1];
-		m[1][1] = up[1];
-		m[1][2] = view[1];
+	WING_CORE_API Matrix44 mtxProjectLh(real _fovy, real _aspect, real _near, real _far);
 
-		m[2][0] = right[2];
-		m[2][1] = up[2];
-		m[2][2] = view[2];
+	WING_CORE_API Matrix44 mtxProjectRh(real _fovy, real _aspect, real _near, real _far);
 
-		m[3][0] = -right.dot(eye);
-		m[3][1] = -up.dot(eye);
-		m[3][2] = -view.dot(eye);
-		m[3][3] = 1.0f;
-
-		return Matrix44(m);
-	}
-
-
-	template<class T>
-	inline Matrix44 mtxLookAtLh(Point<T> eye, Point<T> at, Vector<T> up)
-	{
-		Vector<T> tmp = at - eye;
-		tmp.normalize();
-
-		Vector<T> eyev = eye - Point<T>(0, 0, 0);
-		return mtxLookAt(eyev, tmp, up);
-	}
-
-	inline WING_CORE_API Matrix44 mtxProjectLh(float _fovy, float _aspect, float _near, float _far);
-
-	inline WING_CORE_API Matrix44 mtxProjXYWH(float _x, float _y, float _width, float _height, float _near, float _far);
+	WING_CORE_API Matrix44 mtxProjXYWH(real _x, real _y, real _width, real _height, real _near, real _far);
 }
 
 #endif

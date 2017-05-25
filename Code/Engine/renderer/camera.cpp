@@ -2,15 +2,9 @@
 
 namespace WingEngine
 {
-	Camera::Camera(float _fovy, float _aspect, float _near, float _far, Point<float> _eye, Point<float> _view, Vector<float> _up)
+	Camera::Camera(real _fovy, real _aspect, real _near, real _far, Pointf _eye, Pointf _view, Vectorf _up)
 	{
-		mEye = _eye;
-		mView = _view;
-		nUp = _up;
-
-		mProjectViewMatrix44 = mtxProjectLh(_fovy, _aspect, _near, _far);
-		mModelViewMatrix44 = mtxLookAtLh(mEye, mView, nUp);
-		mProjectModelMatrix44 = mProjectViewMatrix44 * mModelViewMatrix44;
+		setCamera(_fovy, _aspect, _near, _far, _eye, _view, _up);
 	}
 
 
@@ -19,20 +13,23 @@ namespace WingEngine
 
 	}
 
-
-	void Camera::translation(const Vector<float> &t)
+	void Camera::setCamera(real _fovy, real _aspect, real _near, real _far, Pointf _eye, Pointf _view, Vectorf _up)
 	{
-		Matrix44 traMatrix44;
-		traMatrix44.setTranslation(t);
-		mModelViewMatrix44 *= traMatrix44;
-
-		mProjectModelMatrix44 = mProjectViewMatrix44 * mModelViewMatrix44;
+		Matrix44 lookatMatrix = mtxLookAtRh(_eye, _view, _up);
+		mProjectViewMatrix44 = mtxProjectRh(_fovy, _aspect, _near, _far);
+		mProjectModelMatrix44 = lookatMatrix * mProjectViewMatrix44 ;
 	}
 
-	void Camera::rotate(const Vector<float> &t)
-	{
-		mModelViewMatrix44.rotate(t);
 
-		mProjectModelMatrix44 = mProjectViewMatrix44 * mModelViewMatrix44;
+	void Camera::translation(const Vectorf &t)
+	{
+		Node::translation(t);
+		mProjectModelMatrix44 = mModelMatrix44 * mProjectViewMatrix44 ;
+	}
+
+	void Camera::rotate(const Vectorf &t)
+	{
+		Node::rotate(t);
+		mProjectModelMatrix44 = mModelMatrix44 * mProjectViewMatrix44 ;
 	}
 }

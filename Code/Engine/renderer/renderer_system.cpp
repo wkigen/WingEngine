@@ -3,6 +3,7 @@
 #include "dll\dll_system.h"
 #include "common\constant.h"
 #include "shader\test_shader.h"
+#include "allocator\allocator.h"
 
 namespace WingEngine
 {
@@ -29,6 +30,11 @@ namespace WingEngine
 		mCreate = true;
 		mWidth = width;
 		mHeight = height;
+
+		Pointf eye(0, 0, 3);
+		Pointf view(0, 0, 0);
+		Vectorf up(0, 1, 0);
+		mCamera.setCamera(45,1.9104477f, 1, 10, eye, view, up);
 
 		std::list<WingCore::Module*> rendererDll = WingCore::DllSystem::getInstance()->getMoudles(ModuleTypeRenderer);
 		std::list<WingCore::Module*>::iterator iter = rendererDll.begin();
@@ -71,11 +77,15 @@ namespace WingEngine
 
 	void RendererSystem::render()
 	{
-		while (!mRenderables.empty())
-		{
-			mRendererContext->render(mRenderables.front());
-			mRenderables.pop();
-		};
+		//while (!mRenderables.empty())
+		//{
+			//mRendererContext->render(NULL);
+			//mRenderables.pop();
+		//};
+
+		mRendererContext->clear();
+		mRendererContext->render(NULL,mCamera.getmProjectModelMatrix44());
+		mRendererContext->swapBuffers();
 	}
 
 

@@ -18,14 +18,17 @@ namespace WingRendererGL
 		virtual ~RendererContextGL();
 
 		virtual bool create(void* windowHandle, uint32 width, uint32 height);
-		virtual void swapBuffers() = 0;
 		virtual void destroy()=0;
+
+		virtual void swapBuffers() = 0;
+
+		virtual void clear();
 
 		virtual WingEngine::Program*	createProgram(std::string name, std::string vs, std::string fs);
 		virtual void					useProgram(std::string name);
 		virtual void					setUniformMatrix44f(std::string name,Matrix44 matrix);
 
-		virtual void render(Renderable* renderables);
+		virtual void render(Renderable* renderables, Matrix44 projectMatrix);
 
 	};
 

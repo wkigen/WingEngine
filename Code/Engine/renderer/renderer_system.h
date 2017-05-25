@@ -7,6 +7,7 @@
 #include "renderer_context.h"
 #include "renderable.h"
 #include <queue>
+#include "camera.h"
 
 namespace WingEngine
 {
@@ -23,8 +24,9 @@ namespace WingEngine
 
 		void render();
 
-
 		void addRenderable(Renderable* able);
+
+		Camera* getCamera() { return &mCamera; }
 
 	private:
 		RendererSystem();
@@ -37,7 +39,7 @@ namespace WingEngine
 		uint32									mWidth;
 		uint32									mHeight;
 		std::queue<Renderable*>					mRenderables;
-
+		Camera									mCamera;
 	};
 }
 

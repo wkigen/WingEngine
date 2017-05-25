@@ -21,7 +21,8 @@ namespace WingEngine
 
 
 	private:
-		std::map<std::string, Submesh*> mSubmeshs;
+		std::map<std::string, Submesh*> mSubMeshs;
+		uint32	mSubMeshNum;
 	};
 
 }

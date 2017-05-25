@@ -5,6 +5,8 @@
 #include "io\reader.h"
 #include "io\writer.h"
 #include <list>
+#include  "mesh\mesh.h"
+#include "math\quaternion.h"
 
 using namespace WingCore;
 
@@ -65,7 +67,11 @@ public:
 
 	void readAnimation(Reader& reader);
 
+
+	void toWingMesh(WingEngine::Mesh& mesh);
 private:
+
+	void ComputeQuatW(Quaternion quat);
 
 	void parseJoints(Reader& reader);
 	void parseMesh(Reader& reader);

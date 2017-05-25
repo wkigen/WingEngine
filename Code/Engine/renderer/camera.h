@@ -3,30 +3,29 @@
 
 
 #include "common\engine_defines.h"
-#include "math\matrix44_cal.h"
+#include "scene\node.h"
 
-using namespace WingCore;
 
 namespace WingEngine
 {
-	class WING_ENGINE_API Camera
+	class WING_ENGINE_API Camera : public Node
 	{
 
 	public:
-		Camera(float _fovy, float _aspect, float _near, float _far,Point<float> _eye, Point<float> _view, Vector<float> _up);
+		Camera() {};
+		Camera(real _fovy, real _aspect, real _near, real _far,Pointf _eye, Pointf _view, Vectorf _up);
 		~Camera();
 
-		void		translation(const Vector<float> &t);
-		void		rotate(const Vector<float> &t);
+		void		setCamera(real _fovy, real _aspect, real _near, real _far, Pointf _eye, Pointf _view, Vectorf _up);
 
-		Matrix44	getModelViewMatrinx44() { return mModelViewMatrix44; }
-		Matrix44	getProjectViewMatrinx44() { return mProjectViewMatrix44; }
-		Matrix44	getProjectModelMatrix44() { return mProjectModelMatrix44; }
+		void		translation(const Vectorf &t);
+		void		rotate(const Vectorf &t);
+
+		Matrix44	getmProjectModelMatrix44() {return mProjectModelMatrix44; }
 
 	private:
-		Point<float> mEye, mView;
-		Vector<float> nUp;
-		Matrix44 mModelViewMatrix44,mProjectViewMatrix44,mProjectModelMatrix44;
+
+		Matrix44 mProjectViewMatrix44,mProjectModelMatrix44;
 	};
 }
 

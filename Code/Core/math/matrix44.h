@@ -43,13 +43,15 @@ namespace WingCore
 		const Matrix44 &    setAxisAngle(const Vector<T>& ax, T ang);
 
 		template <class T>
-		const Matrix44 &    rotate(const Vector<T> &r);
+		const Matrix44 &    setRotate(const Vector<T> &r);
 
 		template <class T>
 		const Matrix44 &    setScale(const Vector<T> s);
 
 		template <class T>
 		const Matrix44 &    setTranslation(const Vector<T> &t);
+
+		inline const Matrix44 &	transpose() const;
 
 		//--------------------------------------
 		// static
@@ -130,7 +132,7 @@ namespace WingCore
 	}
 
 	template <class T>
-	const Matrix44& Matrix44::rotate(const Vector<T> &r)
+	const Matrix44& Matrix44::setRotate(const Vector<T> &r)
 	{
 		T cos_rz, sin_rz, cos_ry, sin_ry, cos_rx, sin_rx;
 		T m00, m01, m02;
@@ -255,6 +257,15 @@ namespace WingCore
 		det.z = z / w;
 	}
 
+
+	inline const Matrix44 & Matrix44::transpose() const
+	{
+		return Matrix44(
+			mData._data[0][0], mData._data[1][0], mData._data[2][0], mData._data[3][0],
+			mData._data[0][1], mData._data[1][1], mData._data[2][1], mData._data[3][1],
+			mData._data[0][2], mData._data[1][2], mData._data[2][2], mData._data[3][2],
+			mData._data[0][3], mData._data[1][3], mData._data[2][3], mData._data[3][3]);
+	}
 }
 
 #endif

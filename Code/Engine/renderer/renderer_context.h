@@ -8,6 +8,7 @@
 #include "camera.h"
 #include "shader\shader.h"
 #include "renderable.h"
+#include "math\matrix44.h"
 
 using namespace WingCore;
 
@@ -22,8 +23,10 @@ namespace WingEngine
 		virtual ~RendererContext();
 
 		virtual bool		create(void* windowHandle,uint32 width,uint32 height);
-		virtual void		swapBuffers() = 0;
 		virtual void		destroy() = 0;
+
+		virtual void		swapBuffers() = 0;
+		virtual void		clear() = 0;
 
 		virtual void		addProgram(std::string name, Program* program);
 		virtual Program*	getProgram(std::string name);
@@ -33,12 +36,10 @@ namespace WingEngine
 
 		virtual void		setUniformMatrix44f(std::string name, Matrix44 matrix)=0;
 
-		virtual void		render(Renderable* renderables) = 0;
+		virtual void		render(Renderable* renderables,Matrix44 projectMatrix) = 0;
 
-		Camera*				getMainCamera() { return mMainCamera; }
 	protected:
 		std::map<std::string, Program*> mPrograms;
-		Camera* mMainCamera;
 		Program* mCurrProgram;
 
 	};

@@ -46,4 +46,19 @@ namespace WingEngine
 		WING_LOG_ERROR("can not find the child [%s]",name.c_str());
 		return nullptr;
 	}
+
+
+	void Node::translation(const Vectorf &t)
+	{
+		Matrix44 traMatrix44;
+		traMatrix44.setTranslation(t);
+		mModelMatrix44 *= traMatrix44;
+	}
+
+	void Node::rotate(const Vectorf &t)
+	{
+		Matrix44 traMatrix44;
+		traMatrix44.setRotate(t);
+		mModelMatrix44 *= traMatrix44;
+	}
 }

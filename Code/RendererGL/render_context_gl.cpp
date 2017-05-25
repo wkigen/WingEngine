@@ -18,8 +18,14 @@ namespace WingRendererGL
 	bool RendererContextGL::create(void* windowHandle, uint32 width, uint32 height)
 	{
 		RendererContext::create(windowHandle, width, height);
+		glEnable(GL_DEPTH_TEST);
 
 		return false;
+	}
+
+	void RendererContextGL::clear()
+	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	WingEngine::Program* RendererContextGL::createProgram(std::string name, std::string vs, std::string fs)
@@ -43,32 +49,27 @@ namespace WingRendererGL
 
 	void RendererContextGL::setUniformMatrix44f(std::string name, Matrix44 matrix)
 	{
-		GLuint location =  glGetUniformLocation(mCurrProgram->getProgramID(), name.c_str());
+		GLint location =  glGetUniformLocation(mCurrProgram->getProgramID(), name.c_str());
 		if (location == -1)
 		{
 			WING_LOG_ERROR("can't no find uniform %s",name.c_str());
 			return;
 		}
 
-		glUniformMatrix4fv(location, 1, 1, matrix.mData.data);
+		glUniformMatrix4fv(location, 1,true, matrix.mData.data);
 	}
 
-	void RendererContextGL::render(Renderable* renderables)
+	void RendererContextGL::render(Renderable* renderables,Matrix44 projectMatrix)
 	{
-		Vector<float> tra(0.001f, 0, 0);
-		mMainCamera->translation(tra);
-
-		setUniformMatrix44f(PROJECTMODELVIEWMARTIX, mMainCamera->getProjectModelMatrix44());
-
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		setUniformMatrix44f(PROJECTMODELVIEWMARTIX, projectMatrix);
 
 		glBegin(GL_TRIANGLES);
-		glVertex3f(1.0f, 0.0f, 0.0f);
 		glVertex3f(-1.0f, 0.0f, 0.0f);
 		glVertex3f(0.0f, 1.0f, 0.0f);
+		glVertex3f(1.0f, 0.0f, 0.0f);
 		glEnd();
 
-		swapBuffers();
+
 	}
 
 }

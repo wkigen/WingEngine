@@ -2,6 +2,7 @@
 #include "io\file_system.h"
 #include "dll\dll_system.h"
 #include "log\log.h"
+#include "allocator\allocator.h"
 
 namespace WingEngine
 {
@@ -25,7 +26,7 @@ namespace WingEngine
 		}
 		mCreate = true;
 
-		mRootNode = new Node();
+		mRootNode = WING_NEW Node();
 		mRootNode->setName(ROOTNODE);
 
 		return true;

@@ -3,6 +3,8 @@
 #include "dll\dll_system.h"
 #include "system\wing_system.h"
 
+using namespace WingCore;
+
 namespace WingEngine
 {
 	EngineApplication::EngineApplication()
@@ -17,10 +19,10 @@ namespace WingEngine
 
 	void EngineApplication::create()
 	{
-		WingCore::Application::create();
+		Application::create();
 
-		WingCore::FileSystem::getInstance()->create();
-		WingCore::DllSystem::getInstance()->create();
+		FileSystem::getInstance()->create();
+		DllSystem::getInstance()->create();
 
 		WingSystem::getInstance()->create();
 		RendererSystem::getInstance()->create(mWindow->getHandle(),mWindow->getWidth(),mWindow->getHeight());
@@ -31,11 +33,10 @@ namespace WingEngine
 		RendererSystem::getInstance()->destroy();
 		WingSystem::getInstance()->destroy();
 
-		WingCore::DllSystem::getInstance()->destroy();
-		WingCore::FileSystem::getInstance()->detroy();
+		DllSystem::getInstance()->destroy();
+		FileSystem::getInstance()->detroy();
 
-
-		WingCore::Application::destroy();
+		Application::destroy();
 	}
 
 	void EngineApplication::run()
