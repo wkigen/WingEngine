@@ -55,13 +55,13 @@ namespace WingRendererGL
 		const char *vv = vs.c_str();
 		const char *ff = fs.c_str();
 
-		GLuint _vs = glCreateShader(GL_VERTEX_SHADER);
+		GLint _vs = glCreateShader(GL_VERTEX_SHADER);
 		glShaderSource(_vs, 1, &vv, NULL);
 		glCompileShader(_vs);
 		printShaderInfoLog(_vs);
 
 
-		GLuint _fs = glCreateShader(GL_FRAGMENT_SHADER);
+		GLint _fs = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(_fs, 1, &ff, NULL);
 		glCompileShader(_fs);
 		printShaderInfoLog(_fs);
@@ -81,7 +81,7 @@ namespace WingRendererGL
 
 	void ProgramGL::use()
 	{
-		if (mProgramID != UINT32MAX)
+		if (mProgramID != INVALID_PROGRAM)
 		{
 			glUseProgram(mProgramID);
 		}
@@ -89,7 +89,7 @@ namespace WingRendererGL
 
 	void ProgramGL::destroy()
 	{
-		if (mProgramID != UINT32MAX)
+		if (mProgramID != INVALID_PROGRAM)
 		{
 			glDeleteProgram(mProgramID);
 		}

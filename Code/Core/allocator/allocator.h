@@ -5,7 +5,7 @@
 #include "common\defines.h"
 
 #define WING_ALLOC(size)		::malloc(size)
-#define WING_FREE(ptr)			::free(ptr)
+#define WING_FREE(ptr)			if(ptr) { ::free(ptr); }
 
 #define WING_NEW				new
 #define WING_DELETE(ptr)		if(ptr) { delete ptr; ptr = nullptr;}

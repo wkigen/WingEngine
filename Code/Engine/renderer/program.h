@@ -4,6 +4,7 @@
 #include "common\defines.h"
 #include "common\engine_defines.h"
 #include <string>
+#include "common\constant.h"
 
 namespace WingEngine
 {
@@ -11,16 +12,17 @@ namespace WingEngine
 	{
 
 	public:
+
 		Program();
 		~Program();
 		virtual void create(std::string vs,std::string fs)=0;
 		virtual void use() = 0;
 		virtual void destroy()=0;
 
-		uint32 getProgramID() { return mProgramID; }
+		int32 getProgramID() { return mProgramID; }
 
 	protected:
-		uint32 mProgramID;
+		int32 mProgramID;
 	};
 
 }

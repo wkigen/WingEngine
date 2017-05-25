@@ -14,8 +14,8 @@ namespace WingEngine
 #define ResourceTypeMesh	2
 #define ResourceTypeMax		30
 
-#define RESOURCE_TYPE(type)		const static uint32 mType = type; \
-								static inline uint32 getResourceType() { return mType; }
+#define RESOURCE_TYPE(type)		const static uint32 mResourceType = type; \
+								static inline uint32 getResourceType() { return mResourceType; }
 
 	class WING_ENGINE_API Resource
 	{

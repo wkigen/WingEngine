@@ -24,9 +24,11 @@ namespace WingRendererGL
 
 		virtual void clear();
 
-		virtual WingEngine::Program*	createProgram(std::string name, std::string vs, std::string fs);
-		virtual void					useProgram(std::string name);
-		virtual void					setUniformMatrix44f(std::string name,Matrix44 matrix);
+		virtual WingEngine::Program* createProgram(std::string name, std::string vs, std::string fs);
+		virtual void useProgram(std::string name);
+	
+		virtual int32 getUniformMatrix44f(int32 programId, std::string name);
+		virtual void setUniformMatrix44f(int32 location,int32 count, Matrix44 matrix);
 
 		virtual void render(Renderable* renderables, Matrix44 projectMatrix);
 

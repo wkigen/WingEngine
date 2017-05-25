@@ -3,7 +3,7 @@
 namespace WingEngine
 {
 	Program::Program()
-		:mProgramID(UINT32MAX)
+		:mProgramID(INVALID_PROGRAM)
 	{
 
 	}

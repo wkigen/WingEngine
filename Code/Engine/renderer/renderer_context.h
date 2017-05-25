@@ -3,6 +3,7 @@
 
 #include <string>
 #include <map>
+#include "common\constant.h"
 #include "common\engine_defines.h"
 #include "program.h"
 #include "camera.h"
@@ -11,6 +12,7 @@
 #include "math\matrix44.h"
 
 using namespace WingCore;
+
 
 namespace WingEngine
 {
@@ -34,7 +36,8 @@ namespace WingEngine
 		virtual Program*	createProgram(std::string name, std::string vs, std::string fs)=0;
 		virtual void		useProgram(std::string name)=0;
 
-		virtual void		setUniformMatrix44f(std::string name, Matrix44 matrix)=0;
+		virtual int32		getUniformMatrix44f(int32 programId,std::string name)=0;
+		virtual void		setUniformMatrix44f(int32 location, int32 count, Matrix44 matrix) =0;
 
 		virtual void		render(Renderable* renderables,Matrix44 projectMatrix) = 0;
 

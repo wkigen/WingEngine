@@ -47,21 +47,25 @@ namespace WingRendererGL
 		}
 	}
 
-	void RendererContextGL::setUniformMatrix44f(std::string name, Matrix44 matrix)
+	int32 RendererContextGL::getUniformMatrix44f(int32 programId, std::string name)
 	{
-		GLint location =  glGetUniformLocation(mCurrProgram->getProgramID(), name.c_str());
-		if (location == -1)
+		GLint location = glGetUniformLocation(programId, name.c_str());
+		if (location == INVALID_LOCALTION)
 		{
-			WING_LOG_ERROR("can't no find uniform %s",name.c_str());
-			return;
+			WING_LOG_ERROR("can't no find uniform %s", name.c_str());
 		}
+		return location;
+	}
 
-		glUniformMatrix4fv(location, 1,true, matrix.mData.data);
+	void RendererContextGL::setUniformMatrix44f(int32 location, int32 count, Matrix44 matrix)
+	{
+		glUniformMatrix4fv(location, count,false, matrix.mData.data);
 	}
 
 	void RendererContextGL::render(Renderable* renderables,Matrix44 projectMatrix)
 	{
-		setUniformMatrix44f(PROJECTMODELVIEWMARTIX, projectMatrix);
+		int32 location = getUniformMatrix44f(mCurrProgram->getProgramID(), PROJECTMODELVIEWMARTIX);
+		setUniformMatrix44f(location,1, projectMatrix);
 
 		glBegin(GL_TRIANGLES);
 		glVertex3f(-1.0f, 0.0f, 0.0f);
