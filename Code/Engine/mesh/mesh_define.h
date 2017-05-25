@@ -3,6 +3,6 @@
 
 
 #define MESH_MAGIC_NUMBER	"WIMS"		//0x57494D53
-
+#define MESH_VERSION		1
 
 #endif

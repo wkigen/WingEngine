@@ -4,6 +4,7 @@
 #include "log\log.h"
 #include "utils\string_utils.h"
 #include "allocator\allocator.h"
+#include "mesh\mesh_define.h"
 
 MD5Convert::MD5Convert()
 {
@@ -54,15 +55,15 @@ void MD5Convert::readReal3(Reader& reader, real* des)
 	reader.readWord(temp);
 }
 
-bool MD5Convert::parse(Stream& stream)
+bool MD5Convert::readMD5Mesh(Stream& stream)
 {
 
 	Reader reader;
+	reader.setStream(&stream);
+
 	char token[256];
 	char temp[256];
 	int readLen = 0;
-
-	reader.setStream(&stream);
 
 	//version
 	readLen = reader.readWord(token);
@@ -173,7 +174,14 @@ void MD5Convert::parseMesh(Reader& reader)
 		if (strcmp(temp, SHADER) == 0)
 		{
 			reader.readWord(temp);
-			mesh.texture = temp;
+			uint32 count = 0;
+			uint32 len = strlen(temp);
+			mesh.texture = (char*)WING_ALLOC(len + 1);
+			for (uint32 jj = 1; jj < len - 1; jj++) {
+				mesh.texture[count] = temp[jj];
+				count++;
+			}
+			mesh.texture[count] = '\0';
 		}
 		else if (strcmp(temp,NUMVERTS) == 0)
 		{
@@ -247,7 +255,7 @@ void MD5Convert::parseMesh(Reader& reader)
 				weight.jointsIndex = StringUtils::covertInt(temp);
 
 				reader.readWord(temp);
-				weight.weightRatio = StringUtils::covertReal(temp);
+				weight.weightBias = StringUtils::covertReal(temp);
 
 				readReal3(reader, weight.postion);
 
@@ -257,4 +265,45 @@ void MD5Convert::parseMesh(Reader& reader)
 	}
 
 	mMeshs.push_back(mesh);
+}
+
+
+void MD5Convert::writeMD5Mesh(Stream& stream)
+{
+	Writer writer;
+	writer.setStream(&stream);
+	
+	writer.writeString(MESH_MAGIC_NUMBER);
+	//版本
+	writer.writeInt32(MESH_VERSION);
+	//mesh数
+	writer.writeInt32(mNumMeshes);
+
+	std::list<Mesh>::iterator beg = mMeshs.begin();
+	for (; beg != mMeshs.end(); beg++)
+	{
+		wirteMesh(writer,*beg);
+	}
+}
+
+
+void MD5Convert::wirteMesh(Writer& writer, Mesh& mesh)
+{
+	//顶点数
+	writer.writeInt32(mesh.numverts);
+	//索引
+	writer.writeInt32(mesh.numtris);
+	//权重
+	writer.writeInt32(mesh.numweights);
+	//纹理
+	writer.writeStringEnd(mesh.texture);
+
+
+}
+
+
+
+void MD5Convert::readAnimation(Reader& reader)
+{
+
 }

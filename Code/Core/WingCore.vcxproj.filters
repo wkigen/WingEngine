@@ -126,6 +126,9 @@
     <ClInclude Include="utils\system_utils.h">
       <Filter>utils</Filter>
     </ClInclude>
+    <ClInclude Include="math\quaternion.h">
+      <Filter>math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dll\dll.cpp">
@@ -175,6 +178,9 @@
     </ClCompile>
     <ClCompile Include="utils\string_utils.cpp">
       <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="math\quaternion.cpp">
+      <Filter>math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@
 
 #include "io\stream.h"
 #include "io\reader.h"
+#include "io\writer.h"
 #include <list>
 
 using namespace WingCore;
@@ -27,7 +28,7 @@ typedef struct weight
 {
 	int32 index;
 	int32 jointsIndex;
-	real weightRatio;
+	real weightBias;
 	real postion[3];
 }MD5Weight;
 
@@ -59,14 +60,24 @@ public:
 	MD5Convert();
 	~MD5Convert();
 
-	bool parse(Stream& stream);
+	bool readMD5Mesh(Stream& stream);
+	void writeMD5Mesh(Stream& stream);
+
+	void readAnimation(Reader& reader);
 
 private:
+
 	void parseJoints(Reader& reader);
 	void parseMesh(Reader& reader);
 
 	void readReal2(Reader& reader, real* des);
 	void readReal3(Reader& reader, real* des);
+
+
+
+	void wirteMesh(Writer& writer, Mesh& mesh);
+
+
 private:
 
 	uint32 mVersion;

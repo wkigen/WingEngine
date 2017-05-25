@@ -134,17 +134,22 @@ int main(int argc, char* argv[])
 		
 		if (argc == 4)
 		{
-			FileStream stream;
-			if (FileSystem::getInstance()->openFile(argv[2], stream, ACCESS::Read))
+			FileStream inStream,outStream;
+			if (FileSystem::getInstance()->openFile(argv[2], inStream, ACCESS::Read))
 			{
-				uint64 fileLen = stream.getSize();
+				uint64 fileLen = inStream.getSize();
 				void* data = WING_ALLOC(fileLen);
-				uint64 size = stream.read(data, fileLen);
+				uint64 size = inStream.read(data, fileLen);
 				MemoryStream meStream;
 				meStream.open(data, size, ACCESS::Read);
 				MD5Convert md5convert;
-				md5convert.parse(meStream);
+				md5convert.readMD5Mesh(meStream);
 
+
+				if (FileSystem::getInstance()->openFile(argv[3], outStream, ACCESS::Write))
+				{
+					md5convert.writeMD5Mesh(outStream);
+				}
 			}
 		}
 		else

@@ -10,8 +10,8 @@ namespace WingCore
 {
 	typedef union _matrix_data
 	{
-		float _data[4][4];
-		float data[16];
+		real _data[4][4];
+		real data[16];
 	}matrix_data;
 
 	class WING_CORE_API Matrix44
@@ -19,22 +19,22 @@ namespace WingCore
 	public:
 		Matrix44();
 
-		Matrix44(float n);
+		Matrix44(real n);
 
-		Matrix44(float m[4][4]);
+		Matrix44(real m[4][4]);
 
 		Matrix44(const Matrix44& m);
 
-		Matrix44(float a, float b, float c, float d,
-			float e, float f, float g, float h,
-			float i, float j, float k, float l,
-			float m, float n, float o, float p);
+		Matrix44(real a, real b, real c, real d,
+			real e, real f, real g, real h,
+			real i, real j, real k, real l,
+			real m, real n, real o, real p);
 
 		~Matrix44(){}
 		
 		Matrix44& operator=(const Matrix44 &m);
 
-		inline float operator[](int i) const;
+		inline real operator[](int i) const;
 
 		inline const Matrix44& operator *= (const Matrix44 &m);
 		inline Matrix44 operator*(const Matrix44 &m);
@@ -75,7 +75,7 @@ namespace WingCore
 		return *this;
 	}
 
-	inline float Matrix44::operator[](int i) const
+	inline real Matrix44::operator[](int i) const
 	{
 		return mData.data[i];
 	}

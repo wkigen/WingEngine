@@ -79,10 +79,11 @@ namespace WingCore
 		std::list<std::string>::iterator base = mBaseDirectories.begin();
 		while (base != mBaseDirectories.end())
 		{
+			std::string tempBase = *base;
 			std::list<std::string>::iterator curr = mDirectories.begin();
 			while (curr != mDirectories.end())
 			{
-				if (stream.open(base->append((*curr)).append(name).c_str(), access))
+				if (stream.open(tempBase.append((*curr)).append(name).c_str(), access))
 				{
 					return true;
 				}
