@@ -36,6 +36,10 @@ namespace WingEngine
 		virtual Program*	createProgram(std::string name, std::string vs, std::string fs)=0;
 		virtual void		useProgram(std::string name)=0;
 
+		virtual int32		bindStaticArrayBuffers(uint64 size, void* data) = 0;
+		virtual int32		bindDynamicArrayBuffers(uint64 size, void* data) = 0;
+		virtual int32		bindElementBuffers(uint64 size, void* data) = 0;
+
 		virtual int32		getUniformMatrix44f(int32 programId,std::string name)=0;
 		virtual void		setUniformMatrix44f(int32 location, int32 count, Matrix44 matrix) =0;
 

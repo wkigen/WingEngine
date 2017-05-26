@@ -14,7 +14,7 @@ namespace WingEngine
 
 	SceneSystem::~SceneSystem()
 	{
-
+		
 	}
 
 	bool SceneSystem::create()

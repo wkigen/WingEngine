@@ -7,6 +7,7 @@ namespace WingCore
 	class SmartPtr
 	{
 	public:
+
 		SmartPtr(T* ptr)
 			:mPtr(nullptr)
 		{

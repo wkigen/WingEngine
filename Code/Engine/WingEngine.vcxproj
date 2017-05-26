@@ -127,15 +127,20 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="application\engine_application.h" />
     <ClInclude Include="common\constant.h" />
     <ClInclude Include="common\engine_defines.h" />
+    <ClInclude Include="geometry\cube.h" />
+    <ClInclude Include="geometry\geometry.h" />
     <ClInclude Include="mesh\mesh.h" />
     <ClInclude Include="mesh\mesh_define.h" />
     <ClInclude Include="mesh\mesh_reader.h" />
     <ClInclude Include="mesh\submesh.h" />
     <ClInclude Include="renderer\camera.h" />
+    <ClInclude Include="renderer\indeice_data.h" />
+    <ClInclude Include="renderer\material.h" />
     <ClInclude Include="renderer\program.h" />
     <ClInclude Include="renderer\renderable.h" />
     <ClInclude Include="renderer\renderer_context.h" />
     <ClInclude Include="renderer\renderer_system.h" />
+    <ClInclude Include="renderer\vertix_data.h" />
     <ClInclude Include="resource\resource.h" />
     <ClInclude Include="resource\resource_reader.h" />
     <ClInclude Include="resource\resource_system.h" />
@@ -148,14 +153,19 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp" />
+    <ClCompile Include="geometry\cube.cpp" />
+    <ClCompile Include="geometry\geometry.cpp" />
     <ClCompile Include="mesh\mesh.cpp" />
     <ClCompile Include="mesh\mesh_reader.cpp" />
     <ClCompile Include="mesh\submesh.cpp" />
     <ClCompile Include="renderer\camera.cpp" />
+    <ClCompile Include="renderer\indeice_data.cpp" />
+    <ClCompile Include="renderer\material.cpp" />
     <ClCompile Include="renderer\program.cpp" />
     <ClCompile Include="renderer\renderable.cpp" />
     <ClCompile Include="renderer\renderer_context.cpp" />
     <ClCompile Include="renderer\renderer_system.cpp" />
+    <ClCompile Include="renderer\vertix_data.cpp" />
     <ClCompile Include="resource\resource.cpp" />
     <ClCompile Include="resource\resource_reader.cpp" />
     <ClCompile Include="resource\resource_system.cpp" />

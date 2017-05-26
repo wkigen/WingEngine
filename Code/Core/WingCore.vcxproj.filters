@@ -120,9 +120,6 @@
     <ClInclude Include="application\main.h">
       <Filter>application</Filter>
     </ClInclude>
-    <ClInclude Include="base\queue.h">
-      <Filter>base</Filter>
-    </ClInclude>
     <ClInclude Include="utils\system_utils.h">
       <Filter>utils</Filter>
     </ClInclude>

@@ -4,7 +4,7 @@
 #define INVALID_LOCALTION -1
 #define INVALID_PROGRAM -1
 #define INVALID_TEXTURE -1
-#define INVALID_BUFFERS -1
+#define INVALID_BUFFERS 0
 
 
 
@@ -12,9 +12,15 @@
 #define ModuleTypeRenderer 1
 
 
-//resource type from 2 ** in wingcore reousrch.h
-//max	ResourceTypeMax		30
-#define RespirceTypeTexture	2
+//resource type
+#define ResourceTypeNull	0
+#define ResourceTypeConfig	1
+#define ResourceTypeMesh	2
+#define ResourceTypeMax		30
+
+
+//render type
+#define	RenderTypeNULL	1
 
 
 #endif

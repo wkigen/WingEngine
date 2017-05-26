@@ -129,7 +129,6 @@ copy Debugx86\WingCoreD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="application\application.h" />
     <ClInclude Include="application\main.h" />
     <ClInclude Include="base\object.h" />
-    <ClInclude Include="base\queue.h" />
     <ClInclude Include="base\singleton.h" />
     <ClInclude Include="base\smart_ptr.h" />
     <ClInclude Include="common\defines.h" />

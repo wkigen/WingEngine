@@ -1,6 +1,8 @@
 #ifndef _WING_ENGINE_NODE_H_
 #define _WING_ENGINE_NODE_H_
 
+#include "base\object.h"
+#include "base\smart_ptr.h"
 #include "common\engine_defines.h"
 #include "math\matrix44.h"
 #include "math\matrix44_cal.h"

@@ -3,10 +3,12 @@
 
 #include <string>
 
-const std::string test_vs = "uniform mat4 u_ProjectModelViewMatrix;   \
+const std::string test_vs = "\
+							uniform mat4 u_ProjectViewMatrix;   \
+							uniform mat4 u_ModelViewMatrix;   \
 							void main()  \
 							{	\
-								gl_Position = u_ProjectModelViewMatrix * gl_Vertex ;    	\
+								gl_Position = u_ProjectViewMatrix * u_ModelViewMatrix * gl_Vertex ;    	\
 							}  \ ";
 
 

@@ -47,6 +47,40 @@ namespace WingRendererGL
 		}
 	}
 
+
+	int32 RendererContextGL::bindStaticArrayBuffers(uint64 size, void* data)
+	{
+		GLuint bufferId;
+		glGenBuffers(1, &bufferId);
+		glBindBuffer(GL_ARRAY_BUFFER, bufferId);
+		glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, INVALID_BUFFERS);
+
+		return bufferId;
+	}
+
+	int32 RendererContextGL::bindDynamicArrayBuffers(uint64 size, void* data)
+	{
+		GLuint bufferId;
+		glGenBuffers(1, &bufferId);
+		glBindBuffer(GL_ARRAY_BUFFER, bufferId);
+		glBufferData(GL_ARRAY_BUFFER, size, data, GL_DYNAMIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, INVALID_BUFFERS);
+
+		return bufferId;
+	}
+
+	int32 RendererContextGL::bindElementBuffers(uint64 size, void* data)
+	{
+		GLuint bufferId;
+		glGenBuffers(1, &bufferId);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferId);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, INVALID_BUFFERS);
+
+		return bufferId;
+	}
+
 	int32 RendererContextGL::getUniformMatrix44f(int32 programId, std::string name)
 	{
 		GLint location = glGetUniformLocation(programId, name.c_str());

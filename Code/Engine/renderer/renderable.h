@@ -2,6 +2,9 @@
 #define _WING_ENGINE_RENDERABLE_H_
 
 #include "scene\node.h"
+#include "material.h"
+#include "vertix_data.h"
+#include "indeice_data.h"
 
 namespace WingEngine
 {
@@ -11,21 +14,18 @@ namespace WingEngine
 	{
 
 	public:
+
 		Renderable();
 		~Renderable();
 
-		virtual real* createData(uint64 size);
-		virtual uint32* createIndeice(uint64 size);
+		VertixData getVertixData() { return *mVertixData; }
+		void setVertixData(VertixData* vertrixdata) { mVertixData = vertrixdata; }
 
+		
 	private:
 
-		//data struct
-		//POSITION       NORMAL         TEXTURE_COORDINATE
-		//3(real)        3(real)        2(real)
-		real* mData;
-		//indice struce
-		//1(uint32)
-		uint32* mIndeice;
+		SmartPtr<VertixData> mVertixData;
+		SmartPtr<IndeiceData> mIndeiceData;
 
 	};
 

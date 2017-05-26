@@ -6,13 +6,10 @@
 
 using namespace WingCore;
 
+#include "common\constant.h"
+
 namespace WingEngine
 {
-
-#define ResourceTypeNull	0
-#define ResourceTypeConfig	1
-#define ResourceTypeMesh	2
-#define ResourceTypeMax		30
 
 #define RESOURCE_TYPE(type)		const static uint32 mResourceType = type; \
 								static inline uint32 getResourceType() { return mResourceType; }

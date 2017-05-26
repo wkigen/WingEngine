@@ -28,6 +28,8 @@ namespace WingEngine
 
 		Camera* getCamera() { return &mCamera; }
 
+		RendererContext* getRendererContext() { return mRendererContext; }
+
 	private:
 		RendererSystem();
 		

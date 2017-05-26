@@ -25,6 +25,9 @@
     <Filter Include="mesh">
       <UniqueIdentifier>{12214434-5520-4be8-aadd-04e50d06351d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="geometry">
+      <UniqueIdentifier>{46c7c0ce-d0ec-4fd8-ac6a-4a6cef1b2253}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\engine_defines.h">
@@ -90,6 +93,21 @@
     <ClInclude Include="scene\scene_system.h">
       <Filter>scene</Filter>
     </ClInclude>
+    <ClInclude Include="geometry\cube.h">
+      <Filter>geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry\geometry.h">
+      <Filter>geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\material.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\vertix_data.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\indeice_data.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp">
@@ -139,6 +157,21 @@
     </ClCompile>
     <ClCompile Include="scene\scene_system.cpp">
       <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="geometry\cube.cpp">
+      <Filter>geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="geometry\geometry.cpp">
+      <Filter>geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\material.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\vertix_data.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\indeice_data.cpp">
+      <Filter>renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
