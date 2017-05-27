@@ -158,6 +158,7 @@ copy Debugx86\WingCoreD.lib ..\..\Bin\Lib\x86\</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\application.cpp" />
+    <ClCompile Include="base\object.cpp" />
     <ClCompile Include="dll\dll.cpp" />
     <ClCompile Include="dll\dll_system.cpp" />
     <ClCompile Include="dll\module.cpp" />

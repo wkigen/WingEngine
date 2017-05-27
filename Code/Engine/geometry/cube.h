@@ -2,11 +2,11 @@
 #define _WING_ENGINE_CUBE_H_
 
 #include "geometry.h"
-
+#include "common\engine_defines.h"
 namespace WingEngine
 {
 
-	class Cube :public Geometry
+	class WING_ENGINE_API Cube :public Geometry
 	{
 	public:
 

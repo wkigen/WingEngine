@@ -42,6 +42,7 @@ namespace WingEngine
 		uint32									mHeight;
 		std::queue<Renderable*>					mRenderables;
 		Camera									mCamera;
+
 	};
 }
 

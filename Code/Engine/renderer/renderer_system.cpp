@@ -5,6 +5,8 @@
 #include "shader\test_shader.h"
 #include "allocator\allocator.h"
 
+using namespace WingCore;
+
 namespace WingEngine
 {
 	RendererSystem::RendererSystem()
@@ -34,9 +36,9 @@ namespace WingEngine
 		Pointf eye(0, 0, 3);
 		Pointf view(0, 0, 0);
 		Vectorf up(0, 1, 0);
-		mCamera.setCamera(45,1.9104477f, 1, 10, eye, view, up);
+		mCamera.setCamera(45,(real)mWidth /(real)mHeight, 1, 10, eye, view, up);
 
-		std::list<WingCore::Module*> rendererDll = WingCore::DllSystem::getInstance()->getMoudles(ModuleTypeRenderer);
+		std::list<WingCore::Module*> rendererDll = DllSystem::getInstance()->getMoudles(ModuleTypeRenderer);
 		std::list<WingCore::Module*>::iterator iter = rendererDll.begin();
 
 		while (iter != rendererDll.end())
@@ -77,14 +79,12 @@ namespace WingEngine
 
 	void RendererSystem::render()
 	{
-		//while (!mRenderables.empty())
-		//{
-			//mRendererContext->render(NULL);
-			//mRenderables.pop();
-		//};
-
 		mRendererContext->clear();
-		mRendererContext->render(NULL,mCamera.getmProjectModelMatrix44());
+		while (!mRenderables.empty())
+		{
+			mRendererContext->render(mRenderables.front(),mCamera.getmProjectModelMatrix44());
+			mRenderables.pop();
+		};
 		mRendererContext->swapBuffers();
 	}
 
@@ -93,4 +93,5 @@ namespace WingEngine
 	{
 		mRenderables.push(able);
 	}
+
 }

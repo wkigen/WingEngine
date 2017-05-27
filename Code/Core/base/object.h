@@ -10,14 +10,15 @@ namespace WingCore
 	{
 
 	public:
-		Object():mRefCount(0){};
-		virtual ~Object() {};
 
-		inline uint32	addReference() { mRefCount++; return mRefCount; }
+		Object();
+		virtual ~Object();
 
-		inline uint32	release() { mRefCount--; return mRefCount; }
+		virtual uint32	addReference();
 
-		inline uint32	getRefCount() { return mRefCount; }
+		virtual uint32	release();
+
+		virtual uint32	getRefCount();
 
 	private:
 		uint32	mRefCount;

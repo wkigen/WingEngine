@@ -179,5 +179,8 @@
     <ClCompile Include="math\quaternion.cpp">
       <Filter>math</Filter>
     </ClCompile>
+    <ClCompile Include="base\object.cpp">
+      <Filter>base</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

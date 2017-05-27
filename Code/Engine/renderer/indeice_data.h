@@ -15,17 +15,22 @@ namespace WingEngine
 		IndeiceData();
 		~IndeiceData();
 
-		virtual void* createData(uint64 num);
+		void* createData(uint64 num);
 
-		virtual void* getData() { return mData; }
+		void* getData() { return mData; }
 
-		virtual uint64 getDataNum() { return mDataNum; }
+		uint64 getDataNum() { return mDataNum; }
 
+		void bindGPUBuffer();
+
+		uint32 getGPUBufferId() { return mGPUBufferId; }
 	private:
 		//indice struce
 		//1(uint32)
 		void* mData;
 		uint64 mDataNum;
+		uint64 mDataSize;
+		uint32 mGPUBufferId;
 	};
 
 

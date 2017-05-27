@@ -1,6 +1,6 @@
 #include "indeice_data.h"
 #include "allocator\allocator.h"
-
+#include "renderer_system.h"
 
 namespace WingEngine
 {
@@ -18,9 +18,15 @@ namespace WingEngine
 	void* IndeiceData::createData(uint64 num)
 	{
 		mDataNum = num;
-		mData = WING_ALLOC(sizeof(real)*mDataNum * 3 * 3 * 2);
+		mDataSize = sizeof(uint32)*mDataNum;
+		mData = WING_ALLOC(mDataSize);
 		return mData;
 	}
 
+	void IndeiceData::bindGPUBuffer()
+	{
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+		mGPUBufferId = context->bindElementBuffers(mDataSize, mData);
+	}
 
 }

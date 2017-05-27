@@ -14,18 +14,23 @@ namespace WingEngine
 		VertixData();
 		~VertixData();
 
-		virtual void* createData(uint64 num);
+		void* createData(uint64 num);
 
-		virtual void* getData() { return mData; }
+		void* getData() { return mData; }
 
-		virtual uint64 getDataNum() { return mDataNum; }
+		uint64 getDataNum() { return mDataNum; }
 
+		void bindGPUBuffer();
+
+		uint32 getGPUBufferId() { return mGPUBufferId; }
 	private:
 		//data struct
 		//POSITION       NORMAL         TEXTURE_COORDINATE
 		//3(real)        3(real)        2(real)
 		void* mData;
 		uint64 mDataNum;
+		uint64 mDataSize;
+		uint32 mGPUBufferId;
 	};
 
 

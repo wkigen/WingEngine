@@ -7,6 +7,8 @@
 #include "math\matrix44.h"
 #include "math\matrix44_cal.h"
 #include <map>
+#include "common\constant.h"
+#include "allocator\allocator.h"
 
 using namespace WingCore;
 
@@ -14,12 +16,15 @@ using namespace WingCore;
 namespace WingEngine
 {
 
-	class WING_ENGINE_API Node
+
+	class WING_ENGINE_API Node :public Object
 	{
 
 	public:
 		Node();
 		~Node();
+
+		virtual uint32 getRenderType() { return mRenderType; }
 
 		virtual void			setName(std::string name);
 		virtual std::string		getName();
@@ -38,6 +43,8 @@ namespace WingEngine
 		Node*							mParentNode;
 		std::map<std::string, Node*>	mChildren;
 		Matrix44						mModelMatrix44;
+
+		uint32 mRenderType;
 	};
 
 }

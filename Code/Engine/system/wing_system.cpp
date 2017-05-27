@@ -2,6 +2,9 @@
 #include "io\file_system.h"
 #include "dll\dll_system.h"
 #include "log\log.h"
+#include "scene\scene_system.h"
+
+using namespace WingCore;
 
 namespace WingEngine
 {
@@ -26,7 +29,7 @@ namespace WingEngine
 		mCreate = true;
 
 		//todo
-		WingCore::DllSystem::getInstance()->open("WingRendererGLD.dll");
+		DllSystem::getInstance()->open("WingRendererGLD.dll");
 
 		return true;
 	}
@@ -47,6 +50,6 @@ namespace WingEngine
 
 	void WingSystem::run()
 	{
-		
+		SceneSystem::getInstance()->addNodeToRenderer();
 	}
 }

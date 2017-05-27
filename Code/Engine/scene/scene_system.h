@@ -4,6 +4,7 @@
 #include "base\singleton.h"
 #include "common\engine_defines.h"
 #include "node.h"
+#include <map>
 
 namespace WingEngine
 {
@@ -21,14 +22,23 @@ namespace WingEngine
 		bool create();
 		void destroy();
 
+		void addNode(std::string name, Node* node);
+
+		Node* findNode(std::string name);
+
+		void removeNode(std::string name);
+
+		void addNodeToRenderer();
+
 	private:
 		SceneSystem();
 
 	private:
 
 		bool				mCreate;
-
 		Node*				mRootNode;
+		std::map<std::string, SmartPtr<Node>> mNode;
+		
 	};
 
 }

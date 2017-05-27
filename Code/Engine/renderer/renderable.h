@@ -18,10 +18,12 @@ namespace WingEngine
 		Renderable();
 		~Renderable();
 
-		VertixData getVertixData() { return *mVertixData; }
-		void setVertixData(VertixData* vertrixdata) { mVertixData = vertrixdata; }
+		virtual VertixData getVertixData() { return *mVertixData; }
+		virtual void setVertixData(VertixData* vertrixdata) { mVertixData = vertrixdata; }
 
-		
+		virtual IndeiceData getIndeiceData() { return *mIndeiceData; }
+		virtual void setIndeiceData(IndeiceData* indeiceData) { mIndeiceData = indeiceData; }
+
 	private:
 
 		SmartPtr<VertixData> mVertixData;

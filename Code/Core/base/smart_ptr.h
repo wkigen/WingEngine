@@ -8,6 +8,11 @@ namespace WingCore
 	{
 	public:
 
+		SmartPtr()
+			:mPtr(nullptr)
+		{
+		}
+
 		SmartPtr(T* ptr)
 			:mPtr(nullptr)
 		{

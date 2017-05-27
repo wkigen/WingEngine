@@ -98,8 +98,11 @@ namespace WingRendererGL
 
 	void RendererContextGL::render(Renderable* renderables,Matrix44 projectMatrix)
 	{
-		int32 location = getUniformMatrix44f(mCurrProgram->getProgramID(), PROJECTMODELVIEWMARTIX);
+		int32 location = getUniformMatrix44f(mCurrProgram->getProgramID(), PROJECTVIEWMARTIX);
 		setUniformMatrix44f(location,1, projectMatrix);
+
+		int32 location1 = getUniformMatrix44f(mCurrProgram->getProgramID(), MODELVIEWMARTIX);
+		setUniformMatrix44f(location1, 1, renderables->getModelViewMatrinx44());
 
 		glBegin(GL_TRIANGLES);
 		glVertex3f(-1.0f, 0.0f, 0.0f);

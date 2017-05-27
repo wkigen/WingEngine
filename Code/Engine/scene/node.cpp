@@ -4,6 +4,7 @@
 namespace WingEngine
 {
 	Node::Node()
+		:mRenderType(RenderTypeNULL)
 	{
 
 	}

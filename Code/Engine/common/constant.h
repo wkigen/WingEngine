@@ -21,6 +21,6 @@
 
 //render type
 #define	RenderTypeNULL	1
-
+#define RenderTypeGeometry 2
 
 #endif
