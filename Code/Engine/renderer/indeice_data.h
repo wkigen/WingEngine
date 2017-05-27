@@ -21,6 +21,8 @@ namespace WingEngine
 
 		uint64 getDataNum() { return mDataNum; }
 
+		uint64 getDataSize() { return mDataSize; }
+
 		void bindGPUBuffer();
 
 		uint32 getGPUBufferId() { return mGPUBufferId; }
@@ -28,6 +30,7 @@ namespace WingEngine
 		//indice struce
 		//1(uint32)
 		void* mData;
+		uint32 mElementSize;
 		uint64 mDataNum;
 		uint64 mDataSize;
 		uint32 mGPUBufferId;

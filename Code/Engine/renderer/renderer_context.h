@@ -40,10 +40,20 @@ namespace WingEngine
 		virtual int32		bindDynamicArrayBuffers(uint64 size, void* data) = 0;
 		virtual int32		bindElementBuffers(uint64 size, void* data) = 0;
 
-		virtual int32		getUniformMatrix44f(int32 programId,std::string name)=0;
+		virtual void		bindArrayBuffers(uint32 bufferId) = 0;
+		virtual void		bindElementBuffers(uint32 bufferId) = 0;
+		
+		virtual void		vertexAttribPointer(uint32 location,uint32 size,bool normalized, uint32 stride, void* pointer) = 0;
+
+		virtual void		enableVertexAttribArray(uint32 location) = 0;
+		virtual void		disableVertexAttribArray() = 0;
+
+		virtual int32		getAttribLocation(int32 programId, std::string name) = 0;
+
+		virtual int32		getUniformMatrix44fLocation(int32 programId,std::string name)=0;
 		virtual void		setUniformMatrix44f(int32 location, int32 count, Matrix44 matrix) =0;
 
-		virtual void		render(Renderable* renderables,Matrix44 projectMatrix) = 0;
+		virtual void		render(Renderable* renderables) = 0;
 
 	protected:
 		std::map<std::string, Program*> mPrograms;

@@ -30,11 +30,21 @@ namespace WingRendererGL
 		virtual int32 bindStaticArrayBuffers(uint64 size, void* data);
 		virtual int32 bindDynamicArrayBuffers(uint64 size, void* data);
 		virtual int32 bindElementBuffers(uint64 size, void* data);
-	
-		virtual int32 getUniformMatrix44f(int32 programId, std::string name);
-		virtual void setUniformMatrix44f(int32 location,int32 count, Matrix44 matrix);
 
-		virtual void render(Renderable* renderables, Matrix44 projectMatrix);
+		virtual void bindArrayBuffers(uint32 bufferId);
+		virtual void bindElementBuffers(uint32 bufferId);
+	
+		virtual void  enableVertexAttribArray(uint32 location);
+		virtual void  disableVertexAttribArray();
+
+		virtual int32 getAttribLocation(int32 programId, std::string name);
+
+		virtual void vertexAttribPointer(uint32 location, uint32 size, bool normalized, uint32 stride, void* pointer);
+
+		virtual int32 getUniformMatrix44fLocation(int32 programId, std::string name);
+		virtual void  setUniformMatrix44f(int32 location,int32 count, Matrix44 matrix);
+
+		virtual void render(Renderable* renderables);
 
 	};
 

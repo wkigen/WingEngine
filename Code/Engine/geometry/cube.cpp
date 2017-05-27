@@ -1,4 +1,5 @@
 #include "cube.h"
+#include "pass\base_pass.h"
 
 namespace WingEngine
 {
@@ -49,10 +50,18 @@ namespace WingEngine
 
 		memcpy(data, static_data, sizeof(static_data));
 		memcpy(indeice, static_indice, sizeof(static_indice));
+		
+		vData->bindGPUBuffer();
+		iData->bindGPUBuffer();
 
 		setVertixData(vData);
 		setIndeiceData(iData);
 
+	
+
+		BasePass* pass = WING_NEW BasePass(this);
+		pass->init();
+		setRenderPass(pass);
 	}
 
 	Cube::~Cube()

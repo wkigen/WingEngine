@@ -3,17 +3,17 @@
 
 #include <string>
 
-const std::string test_vs = "\
+const std::string base_vs = "\
 							attribute vec4 a_position;	\
-							uniform mat4 u_ProjectViewMatrix;   \
-							uniform mat4 u_ModelViewMatrix;   \
+							uniform mat4 u_projectViewMatrix;   \
+							uniform mat4 u_modelViewMatrix;   \
 							void main()  \
 							{	\
-								gl_Position = u_ProjectViewMatrix * u_ModelViewMatrix * a_position ;    	\
+								gl_Position = u_projectViewMatrix * u_modelViewMatrix * a_position ;    	\
 							}  \ ";
 
 
-const std::string test_fs = "void main()	\
+const std::string base_fs = "void main()	\
 							{	\
 								gl_FragColor = vec4(0.4,0.4,0.8,1.0); 	\
 							}  \ ";

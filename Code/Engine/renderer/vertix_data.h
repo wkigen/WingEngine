@@ -20,6 +20,10 @@ namespace WingEngine
 
 		uint64 getDataNum() { return mDataNum; }
 
+		uint64 getDataSize() { return mDataSize; }
+
+		uint64 getElementSize() { return mElementSize; }
+
 		void bindGPUBuffer();
 
 		uint32 getGPUBufferId() { return mGPUBufferId; }
@@ -29,6 +33,7 @@ namespace WingEngine
 		//3(real)        3(real)        2(real)
 		void* mData;
 		uint64 mDataNum;
+		uint32 mElementSize;
 		uint64 mDataSize;
 		uint32 mGPUBufferId;
 	};

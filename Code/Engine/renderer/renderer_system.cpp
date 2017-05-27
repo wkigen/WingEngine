@@ -82,7 +82,7 @@ namespace WingEngine
 		mRendererContext->clear();
 		while (!mRenderables.empty())
 		{
-			mRendererContext->render(mRenderables.front(),mCamera.getmProjectModelMatrix44());
+			mRendererContext->render(mRenderables.front());
 			mRenderables.pop();
 		};
 		mRendererContext->swapBuffers();

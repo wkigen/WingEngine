@@ -81,7 +81,42 @@ namespace WingRendererGL
 		return bufferId;
 	}
 
-	int32 RendererContextGL::getUniformMatrix44f(int32 programId, std::string name)
+	void RendererContextGL::bindArrayBuffers(uint32 bufferId)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, bufferId);
+	}
+
+	void RendererContextGL::bindElementBuffers(uint32 bufferId)
+	{
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferId);
+	}
+
+	void RendererContextGL::enableVertexAttribArray(uint32 location)
+	{
+		glEnableVertexAttribArray(location);
+	}
+
+	void RendererContextGL::disableVertexAttribArray()
+	{
+		glDisableVertexAttribArray(0);
+	}
+
+	int32 RendererContextGL::getAttribLocation(int32 programId, std::string name)
+	{
+		GLint location = glGetAttribLocation(programId, name.c_str());
+		if (location == INVALID_LOCALTION)
+		{
+			WING_LOG_ERROR("can't no find uniform %s", name.c_str());
+		}
+		return location;
+	}
+
+	void RendererContextGL::vertexAttribPointer(uint32 location, uint32 size, bool normalized, uint32 stride, void* pointer)
+	{
+		glVertexAttribPointer(location, size, GL_FLOAT, normalized, stride, pointer);
+	}
+
+	int32 RendererContextGL::getUniformMatrix44fLocation(int32 programId, std::string name)
 	{
 		GLint location = glGetUniformLocation(programId, name.c_str());
 		if (location == INVALID_LOCALTION)
@@ -96,21 +131,19 @@ namespace WingRendererGL
 		glUniformMatrix4fv(location, count,false, matrix.mData.data);
 	}
 
-	void RendererContextGL::render(Renderable* renderables,Matrix44 projectMatrix)
+	void RendererContextGL::render(Renderable* renderable)
 	{
-		int32 location = getUniformMatrix44f(mCurrProgram->getProgramID(), PROJECTVIEWMARTIX);
-		setUniformMatrix44f(location,1, projectMatrix);
+		renderable->getRenderPass()->bind();
 
-		int32 location1 = getUniformMatrix44f(mCurrProgram->getProgramID(), MODELVIEWMARTIX);
-		setUniformMatrix44f(location1, 1, renderables->getModelViewMatrinx44());
+		glBindBuffer(GL_ARRAY_BUFFER, renderable->getVertixData().getGPUBufferId());
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderable->getIndeiceData().getGPUBufferId());
+		
+		glDrawElements(GL_TRIANGLES, renderable->getIndeiceData().getDataNum(),GL_UNSIGNED_INT, 0);
 
-		glBegin(GL_TRIANGLES);
-		glVertex3f(-1.0f, 0.0f, 0.0f);
-		glVertex3f(0.0f, 1.0f, 0.0f);
-		glVertex3f(1.0f, 0.0f, 0.0f);
-		glEnd();
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-
+		renderable->getRenderPass()->unBind();
 	}
 
 }

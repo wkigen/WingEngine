@@ -12,13 +12,13 @@ namespace WingEngine
 
 	IndeiceData::~IndeiceData()
 	{
-		WING_FREE(mData);
 	}
 
 	void* IndeiceData::createData(uint64 num)
 	{
 		mDataNum = num;
-		mDataSize = sizeof(uint32)*mDataNum;
+		mElementSize = 1;
+		mDataSize = sizeof(uint32)*mDataNum * mElementSize;
 		mData = WING_ALLOC(mDataSize);
 		return mData;
 	}

@@ -28,6 +28,9 @@
     <Filter Include="geometry">
       <UniqueIdentifier>{46c7c0ce-d0ec-4fd8-ac6a-4a6cef1b2253}</UniqueIdentifier>
     </Filter>
+    <Filter Include="pass">
+      <UniqueIdentifier>{7245fcdf-789f-4a62-a36a-ed9bb934b7ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\engine_defines.h">
@@ -108,6 +111,15 @@
     <ClInclude Include="renderer\indeice_data.h">
       <Filter>renderer</Filter>
     </ClInclude>
+    <ClInclude Include="renderer\render_pass.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="pass\base_pass.h">
+      <Filter>pass</Filter>
+    </ClInclude>
+    <ClInclude Include="shader\base_shader.h">
+      <Filter>shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp">
@@ -172,6 +184,12 @@
     </ClCompile>
     <ClCompile Include="renderer\indeice_data.cpp">
       <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\render_pass.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="pass\base_pass.cpp">
+      <Filter>pass</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
