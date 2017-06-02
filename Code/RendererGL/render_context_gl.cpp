@@ -18,7 +18,6 @@ namespace WingRendererGL
 	bool RendererContextGL::create(void* windowHandle, uint32 width, uint32 height)
 	{
 		RendererContext::create(windowHandle, width, height);
-		glEnable(GL_DEPTH_TEST);
 
 		return false;
 	}
@@ -89,6 +88,18 @@ namespace WingRendererGL
 	void RendererContextGL::bindElementBuffers(uint32 bufferId)
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferId);
+	}
+
+	void RendererContextGL::enableDepth(bool enable)
+	{
+		if (enable)
+		{
+			glEnable(GL_DEPTH_TEST);
+		}
+		else
+		{
+			glDisable(GL_DEPTH_TEST);
+		}
 	}
 
 	void RendererContextGL::enableVertexAttribArray(uint32 location)

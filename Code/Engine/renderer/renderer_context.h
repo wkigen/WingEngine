@@ -42,6 +42,8 @@ namespace WingEngine
 
 		virtual void		bindArrayBuffers(uint32 bufferId) = 0;
 		virtual void		bindElementBuffers(uint32 bufferId) = 0;
+
+		virtual void		enableDepth(bool enable) = 0;
 		
 		virtual void		vertexAttribPointer(uint32 location,uint32 size,bool normalized, uint32 stride, void* pointer) = 0;
 

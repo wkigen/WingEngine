@@ -32,6 +32,8 @@ namespace WingEngine
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
 
+		context->enableDepth(true);
+
 		mProgram->use();
 		
 		context->bindArrayBuffers(renderable->getVertixData().getGPUBufferId());
@@ -53,6 +55,8 @@ namespace WingEngine
 	void GeometryPass::unBind()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+
+		context->enableDepth(false);
 
 		context->bindArrayBuffers(INVALID_BUFFERS);
 		context->bindElementBuffers(INVALID_BUFFERS);

@@ -33,6 +33,8 @@ namespace WingRendererGL
 
 		virtual void bindArrayBuffers(uint32 bufferId);
 		virtual void bindElementBuffers(uint32 bufferId);
+
+		virtual void enableDepth(bool enable);
 	
 		virtual void  enableVertexAttribArray(uint32 location);
 		virtual void  disableVertexAttribArray();
