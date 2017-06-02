@@ -77,9 +77,9 @@ namespace WingCore
 
 	Matrix44 mtxProjXYWH(real _x, real _y, real _width, real _height, real _near, real _far)
 	{
-		const float diff = _far - _near;
-		const float aa =  _far / diff;
-		const float bb =  _near * aa;
+		const real diff = _far - _near;
+		const real aa =  _far / diff;
+		const real bb =  _near * aa;
 
 		float m[4][4] = { 0 };
 

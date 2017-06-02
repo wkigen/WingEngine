@@ -18,8 +18,8 @@ namespace WingEngine
 	void* VertixData::createData(uint64 num)
 	{
 		mDataNum = num;
-		mElementSize = 3 * 3 * 2;
-		mDataSize = sizeof(real)*mDataNum * mElementSize;
+		mElementSize = sizeof(real) *( 3 + 3 + 2);
+		mDataSize = mDataNum * mElementSize;
 		mData = WING_ALLOC(mDataSize);
 		return mData;
 	}

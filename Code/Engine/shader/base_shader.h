@@ -9,7 +9,7 @@ const std::string base_vs = "\
 							uniform mat4 u_modelViewMatrix;   \
 							void main()  \
 							{	\
-								gl_Position = u_projectViewMatrix * u_modelViewMatrix * a_position ;    	\
+								gl_Position = u_projectViewMatrix* a_position ;    	\
 							}  \ ";
 
 

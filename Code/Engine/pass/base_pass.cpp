@@ -22,9 +22,8 @@ namespace WingEngine
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 		mProgram = context->createProgram("base", base_vs, base_fs);
 
-		
 		mAttribPosition = context->getAttribLocation(mProgram->getProgramID(), POSITION);
-		mUniformModelMatrix = context->getUniformMatrix44fLocation(mProgram->getProgramID(), PROJECTVIEWMARTIX);
+		mUniformModelMatrix = context->getUniformMatrix44fLocation(mProgram->getProgramID(), MODELVIEWMARTIX);
 		mUniformProjectdViewMatrix = context->getUniformMatrix44fLocation(mProgram->getProgramID(), PROJECTVIEWMARTIX);
 	}
 
@@ -39,7 +38,7 @@ namespace WingEngine
 		context->bindArrayBuffers(mRenderable->getVertixData().getGPUBufferId());
 		context->bindElementBuffers(mRenderable->getIndeiceData().getGPUBufferId());
 
-		context->vertexAttribPointer(mAttribPosition, mRenderable->getVertixData().getDataSize(), false, mRenderable->getVertixData().getElementSize(), 0);
+		context->vertexAttribPointer(mAttribPosition, 3, false, mRenderable->getVertixData().getElementSize(), 0);
 
 		context->setUniformMatrix44f(mUniformModelMatrix, 1, mRenderable->getModelViewMatrinx44());
 		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44);

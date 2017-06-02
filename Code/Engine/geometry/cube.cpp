@@ -4,13 +4,12 @@
 namespace WingEngine
 {
 
-	real static_data[8*3*3*2] = 
+	real static_data[] = 
 	{
 		-1.0,-1.0,1.0,   0.0,0.0,0.0,  0.0,0.0,
 		1.0,-1.0,1.0,   0.0,0.0,0.0,  1.0,0.0,
 		1.0,1.0,1.0,   0.0,0.0,0.0,  1.0,1.0,
 		-1.0,1.0,1.0,   0.0,0.0,0.0,  0.0,1.0,
-
 
 		-1.0,-1.0,-1.0,   0.0,0.0,0.0,  0.0,0.0,
 		1.0,-1.0,-1.0,   0.0,0.0,0.0,  1.0,0.0,
@@ -18,25 +17,25 @@ namespace WingEngine
 		-1.0,1.0,-1.0,   0.0,0.0,0.0,  0.0,1.0,
 	};
 
-	uint32 static_indice[36]=
+	uint32 static_indice[]=
 	{
-		1,2,4,
-		2,3,4,
+		0,1,3,
+		1,2,3,
+
+		1,5,2,
+		5,6,2,
 
 		2,6,3,
 		6,7,3,
 
-		3,7,4,
-		7,8,4,
+		4,0,7,
+		0,3,7,
 
-		5,1,8,
-		1,4,8,
+		5,1,4,
+		1,0,4,
 
-		6,2,5,
-		2,1,5,
-
-		5,6,8,
-		6,7,8,
+		4,5,7,
+		5,6,7,
 	};
 
 	Cube::Cube()
@@ -46,7 +45,7 @@ namespace WingEngine
 		VertixData* vData = WING_NEW VertixData();
 		IndeiceData* iData = WING_NEW IndeiceData();
 		real* data = (real*)vData->createData(8);
-		uint32* indeice = (uint32*)iData->createData(36);
+		uint32* indeice = (uint32*)iData->createData(sizeof(static_indice));
 
 		memcpy(data, static_data, sizeof(static_data));
 		memcpy(indeice, static_indice, sizeof(static_indice));
@@ -56,8 +55,6 @@ namespace WingEngine
 
 		setVertixData(vData);
 		setIndeiceData(iData);
-
-	
 
 		BasePass* pass = WING_NEW BasePass(this);
 		pass->init();

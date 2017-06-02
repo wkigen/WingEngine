@@ -16,8 +16,6 @@ namespace WingEngine
 
 	bool RendererContext::create(void* windowHandle, uint32 width, uint32 height)
 	{
-
-
 		return false;
 	}
 
