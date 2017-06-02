@@ -13,14 +13,43 @@
 
 
 //resource type
-#define ResourceTypeNull	0
-#define ResourceTypeConfig	1
-#define ResourceTypeMesh	2
-#define ResourceTypeMax		30
-
+enum ResourceType
+{
+	ResourceTypeNull,
+	ResourceTypeConfig,
+	ResourceTypeMesh,
+	ResourceTypeMax,
+};
 
 //render type
-#define	RenderTypeNULL	1
-#define RenderTypeGeometry 2
+enum RenderType
+{
+	RenderTypeNULL,
+	RenderTypeGeometry,
+};
+
+
+//data element type
+enum DataElementType
+{
+	DataElementUByte,
+	DataElementByte,
+	DataElementUShort,
+	DataElementShort,
+	DataElementUInt,
+	DataElementInt,
+	DataElementULong,
+	DataElementLong,
+	DataElementReal,
+};
+
+enum DataElementName
+{
+	DataElementIndice,
+	DataElementPosition,
+	DataElementNormal,
+	DataElementTexture,
+	DataElementColor,
+};
 
 #endif

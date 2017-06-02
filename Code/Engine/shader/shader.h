@@ -2,6 +2,7 @@
 #define _WING_ENGINE_SHADER_H_
 
 #define POSITION					"a_position"
+#define COLOR						"a_color"
 #define TEXTIRECOORDINATE			"a_textureCoordinate"
 
 #define PROJECTVIEWMARTIX			"u_projectViewMatrix"

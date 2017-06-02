@@ -16,17 +16,15 @@ namespace WingEngine
 	{
 	public:
 
-		RenderPass(Renderable* renderable) ;
+		RenderPass() ;
 		~RenderPass();
 
 		virtual void init() = 0;
 
-		virtual void bind() = 0;
+		virtual void bind(Renderable* renderable) = 0;
 		virtual void unBind() = 0;
 
 	protected:
-
-		Renderable* mRenderable;
 
 	};
 

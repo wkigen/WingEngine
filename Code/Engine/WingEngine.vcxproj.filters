@@ -120,6 +120,15 @@
     <ClInclude Include="shader\base_shader.h">
       <Filter>shader</Filter>
     </ClInclude>
+    <ClInclude Include="renderer\data_element.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="shader\geometry_shader.h">
+      <Filter>shader</Filter>
+    </ClInclude>
+    <ClInclude Include="pass\geometry_pass.h">
+      <Filter>pass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp">
@@ -189,6 +198,12 @@
       <Filter>renderer</Filter>
     </ClCompile>
     <ClCompile Include="pass\base_pass.cpp">
+      <Filter>pass</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\data_element.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="pass\geometry_pass.cpp">
       <Filter>pass</Filter>
     </ClCompile>
   </ItemGroup>

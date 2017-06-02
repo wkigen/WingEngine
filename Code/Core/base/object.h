@@ -1,6 +1,7 @@
 #ifndef _WING_CORE_OBJECT_H_
 #define _WING_CORE_OBJECT_H_
 
+#include "smart_ptr.h"
 #include "common\defines.h"
 
 namespace WingCore

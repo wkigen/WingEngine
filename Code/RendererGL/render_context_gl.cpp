@@ -133,7 +133,7 @@ namespace WingRendererGL
 
 	void RendererContextGL::render(Renderable* renderable)
 	{
-		renderable->getRenderPass()->bind();
+		renderable->getRenderPass()->bind(renderable);
 
 		glBindBuffer(GL_ARRAY_BUFFER, renderable->getVertixData().getGPUBufferId());
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderable->getIndeiceData().getGPUBufferId());

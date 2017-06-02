@@ -5,8 +5,7 @@ namespace WingEngine
 {
 
 
-	RenderPass::RenderPass(Renderable* renderable)
-		:mRenderable(renderable)
+	RenderPass::RenderPass()
 	{
 	}
 
@@ -14,4 +13,5 @@ namespace WingEngine
 	{
 
 	}
+
 }

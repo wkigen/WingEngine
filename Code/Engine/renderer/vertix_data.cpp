@@ -15,11 +15,11 @@ namespace WingEngine
 
 	}
 
-	void* VertixData::createData(uint64 num)
+	void* VertixData::createData(uint64 num, DataElement* dataElement)
 	{
 		mDataNum = num;
-		mElementSize = sizeof(real) *( 3 + 3 + 2);
-		mDataSize = mDataNum * mElementSize;
+		mDataElement = dataElement;
+		mDataSize = mDataNum * mDataElement->getSize();
 		mData = WING_ALLOC(mDataSize);
 		return mData;
 	}

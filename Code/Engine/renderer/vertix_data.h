@@ -1,9 +1,11 @@
 #ifndef _WING_ENGINE_VERTIX_DATA_H_
 #define _WING_ENGINE_VERTIX_DATA_H_
 
+#include "base\smart_ptr.h"
 #include "base\object.h"
 #include "common\defines.h"
 #include "common\engine_defines.h"
+#include "data_element.h"
 
 namespace WingEngine
 {
@@ -14,7 +16,7 @@ namespace WingEngine
 		VertixData();
 		~VertixData();
 
-		void* createData(uint64 num);
+		void* createData(uint64 num, DataElement* dataElement);
 
 		void* getData() { return mData; }
 
@@ -22,7 +24,7 @@ namespace WingEngine
 
 		uint64 getDataSize() { return mDataSize; }
 
-		uint64 getElementSize() { return mElementSize; }
+		DataElement* getElement() { return mDataElement; }
 
 		void bindGPUBuffer();
 
@@ -33,7 +35,7 @@ namespace WingEngine
 		//3(real)        3(real)        2(real)
 		void* mData;
 		uint64 mDataNum;
-		uint32 mElementSize;
+		SmartPtr<DataElement> mDataElement;
 		uint64 mDataSize;
 		uint32 mGPUBufferId;
 	};

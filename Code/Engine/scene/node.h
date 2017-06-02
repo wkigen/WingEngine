@@ -36,6 +36,7 @@ namespace WingEngine
 
 		virtual void			translation(const Vectorf &t);
 		virtual void			rotate(const Vectorf &t);
+		virtual void			scale(const Vectorf &t);
 
 	protected:
 
@@ -44,7 +45,7 @@ namespace WingEngine
 		std::map<std::string, Node*>	mChildren;
 		Matrix44						mModelMatrix44;
 
-		uint32 mRenderType;
+		RenderType mRenderType;
 	};
 
 }

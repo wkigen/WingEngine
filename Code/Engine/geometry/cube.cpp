@@ -1,20 +1,20 @@
 #include "cube.h"
-#include "pass\base_pass.h"
+#include "pass\geometry_pass.h"
 
 namespace WingEngine
 {
 
 	real static_data[] = 
 	{
-		-1.0,-1.0,1.0,   0.0,0.0,0.0,  0.0,0.0,
-		1.0,-1.0,1.0,   0.0,0.0,0.0,  1.0,0.0,
-		1.0,1.0,1.0,   0.0,0.0,0.0,  1.0,1.0,
-		-1.0,1.0,1.0,   0.0,0.0,0.0,  0.0,1.0,
+		-1.0,-1.0,1.0,   0.0,0.0,0.0,  0.0,0.0,  1.0,0.0,0.0,1.0,
+		1.0,-1.0,1.0,   0.0,0.0,0.0,  1.0,0.0,  1.0,0.0,0.0,1.0,
+		1.0,1.0,1.0,   0.0,0.0,0.0,  1.0,1.0,  1.0,0.0,0.0,1.0,
+		-1.0,1.0,1.0,   0.0,0.0,0.0,  0.0,1.0,  1.0,0.0,0.0,1.0,
 
-		-1.0,-1.0,-1.0,   0.0,0.0,0.0,  0.0,0.0,
-		1.0,-1.0,-1.0,   0.0,0.0,0.0,  1.0,0.0,
-		1.0,1.0,-1.0,   0.0,0.0,0.0,  1.0,1.0,
-		-1.0,1.0,-1.0,   0.0,0.0,0.0,  0.0,1.0,
+		-1.0,-1.0,-1.0,   0.0,0.0,0.0,  0.0,0.0,  0.0,0.0,1.0,1.0,
+		1.0,-1.0,-1.0,   0.0,0.0,0.0,  1.0,0.0,  0.0,0.0,1.0,1.0,
+		1.0,1.0,-1.0,   0.0,0.0,0.0,  1.0,1.0,  0.0,0.0,1.0,1.0,
+		-1.0,1.0,-1.0,   0.0,0.0,0.0,  0.0,1.0,  0.0,0.0,1.0,1.0,
 	};
 
 	uint32 static_indice[]=
@@ -43,11 +43,18 @@ namespace WingEngine
 		mRenderType = RenderTypeGeometry;
 
 		VertixData* vData = WING_NEW VertixData();
-		IndeiceData* iData = WING_NEW IndeiceData();
-		real* data = (real*)vData->createData(8);
-		uint32* indeice = (uint32*)iData->createData(sizeof(static_indice));
-
+		DataElement* vElement = WING_NEW DataElement(DataElementType::DataElementReal,12);
+		vElement->addElementFromat(DataElementName::DataElementPosition, 3, 0);
+		vElement->addElementFromat(DataElementName::DataElementNormal, 3, 3);
+		vElement->addElementFromat(DataElementName::DataElementTexture, 2, 6);
+		vElement->addElementFromat(DataElementName::DataElementColor, 4, 8);
+		real* data = (real*)vData->createData(8, vElement);
 		memcpy(data, static_data, sizeof(static_data));
+
+		IndeiceData* iData = WING_NEW IndeiceData();
+		DataElement* iElement = WING_NEW DataElement(DataElementType::DataElementUInt,1);
+		iElement->addElementFromat(DataElementName::DataElementIndice, 1, 0);
+		uint32* indeice = (uint32*)iData->createData(sizeof(static_indice), iElement);
 		memcpy(indeice, static_indice, sizeof(static_indice));
 		
 		vData->bindGPUBuffer();
@@ -56,9 +63,11 @@ namespace WingEngine
 		setVertixData(vData);
 		setIndeiceData(iData);
 
-		BasePass* pass = WING_NEW BasePass(this);
+		GeometryPass* pass = WING_NEW GeometryPass();
 		pass->init();
 		setRenderPass(pass);
+
+		scale(Vectorf(0.5, 0.5, 0.5));
 	}
 
 	Cube::~Cube()

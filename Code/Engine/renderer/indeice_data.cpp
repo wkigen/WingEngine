@@ -14,11 +14,11 @@ namespace WingEngine
 	{
 	}
 
-	void* IndeiceData::createData(uint64 num)
+	void* IndeiceData::createData(uint64 num, DataElement* dataElement)
 	{
 		mDataNum = num;
-		mElementSize = 1;
-		mDataSize = sizeof(uint32)*mDataNum * mElementSize;
+		mDataElement = dataElement;
+		mDataSize = mDataNum * mDataElement->getSize();
 		mData = WING_ALLOC(mDataSize);
 		return mData;
 	}

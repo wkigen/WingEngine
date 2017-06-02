@@ -12,11 +12,11 @@ namespace WingEngine
 
 	public:
 
-		BasePass(Renderable* renderable);
+		BasePass();
 		~BasePass();
 
 		virtual void init();
-		virtual void bind();
+		virtual void bind(Renderable* renderable);
 		virtual void unBind();
 
 	protected:

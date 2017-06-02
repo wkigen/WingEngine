@@ -3,19 +3,24 @@
 
 #include <string>
 
-const std::string base_vs = "\
+const std::string geometry_vs = "\
 							attribute vec4 a_position;	\
+							attribute vec4 a_color;	\
 							uniform mat4 u_projectViewMatrix;   \
 							uniform mat4 u_modelViewMatrix;   \
+							varying vec4 v_color;	\
 							void main()  \
 							{	\
+								v_color = a_color;	\
 								gl_Position = u_projectViewMatrix* u_modelViewMatrix *a_position ;    	\
 							}  \ ";
 
 
-const std::string base_fs = "void main()	\
+const std::string geometry_fs = "\
+							varying vec4 v_color;	\
+							void main()	\
 							{	\
-								gl_FragColor = vec4(0.4,0.4,0.8,1.0); 	\
+								gl_FragColor = v_color; 	\
 							}  \ ";
 
 #endif

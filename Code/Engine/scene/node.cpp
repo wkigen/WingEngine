@@ -58,8 +58,15 @@ namespace WingEngine
 
 	void Node::rotate(const Vectorf &t)
 	{
-		Matrix44 traMatrix44;
-		traMatrix44.setRotate(t);
-		mModelMatrix44 *= traMatrix44;
+		Matrix44 rotMatrix44;
+		rotMatrix44.setRotate(t);
+		mModelMatrix44 *= rotMatrix44;
+	}
+
+	void Node::scale(const Vectorf &t)
+	{
+		Matrix44 scaMatrix44;
+		scaMatrix44.setScale(t);
+		mModelMatrix44 *= scaMatrix44;
 	}
 }

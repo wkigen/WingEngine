@@ -1,49 +1,56 @@
-#include "base_pass.h"
+#include "geometry_pass.h"
 #include "renderer\renderer_system.h"
-#include "shader\base_shader.h"
+#include "shader\geometry_shader.h"
 
 namespace WingEngine
 {
 
 
-	BasePass::BasePass()
+	GeometryPass::GeometryPass()
 	{
 
 	}
 
-	BasePass::~BasePass()
+	GeometryPass::~GeometryPass()
 	{
 
 	}
 
-	void BasePass::init()
+	void GeometryPass::init()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		mProgram = context->createProgram("base", base_vs, base_fs);
+		mProgram = context->createProgram("geometry", geometry_vs, geometry_fs);
 
 		mAttribPosition = context->getAttribLocation(mProgram->getProgramID(), POSITION);
+		mAttribColor = context->getAttribLocation(mProgram->getProgramID(), COLOR);
 		mUniformModelMatrix = context->getUniformMatrix44fLocation(mProgram->getProgramID(), MODELVIEWMARTIX);
 		mUniformProjectdViewMatrix = context->getUniformMatrix44fLocation(mProgram->getProgramID(), PROJECTVIEWMARTIX);
 	}
 
-	void BasePass::bind(Renderable* renderable)
+	void GeometryPass::bind(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
 
 		mProgram->use();
-		context->enableVertexAttribArray(mAttribPosition);
-
+		
 		context->bindArrayBuffers(renderable->getVertixData().getGPUBufferId());
 		context->bindElementBuffers(renderable->getIndeiceData().getGPUBufferId());
+		
+		DataElement* dataElement = renderable->getVertixData().getElement();
+		context->enableVertexAttribArray(mAttribPosition);
+		ElementFormat positionFormat = renderable->getVertixData().getElement()->getElementFormat(DataElementName::DataElementPosition);
+		context->vertexAttribPointer(mAttribPosition, positionFormat.mSize, false, dataElement->getSize(), (void*)(positionFormat.mOffest*dataElement->getElementTypeSize()));
 
-		context->vertexAttribPointer(mAttribPosition, 3, false, renderable->getVertixData().getElement()->getSize(), 0);
+		context->enableVertexAttribArray(mAttribColor);
+		ElementFormat colorFormat = renderable->getVertixData().getElement()->getElementFormat(DataElementName::DataElementColor);
+		context->vertexAttribPointer(mAttribColor, colorFormat.mSize, false, dataElement->getSize(), (void*)(colorFormat.mOffest*dataElement->getElementTypeSize()));
 
 		context->setUniformMatrix44f(mUniformModelMatrix, 1, renderable->getModelViewMatrinx44());
 		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44);
 	}
 
-	void BasePass::unBind()
+	void GeometryPass::unBind()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 

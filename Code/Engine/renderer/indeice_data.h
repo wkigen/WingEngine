@@ -4,6 +4,7 @@
 #include "base\object.h"
 #include "common\defines.h"
 #include "common\engine_defines.h"
+#include "data_element.h"
 
 namespace WingEngine
 {
@@ -15,7 +16,7 @@ namespace WingEngine
 		IndeiceData();
 		~IndeiceData();
 
-		void* createData(uint64 num);
+		void* createData(uint64 num,DataElement* dataElement);
 
 		void* getData() { return mData; }
 
@@ -30,7 +31,7 @@ namespace WingEngine
 		//indice struce
 		//1(uint32)
 		void* mData;
-		uint32 mElementSize;
+		SmartPtr<DataElement> mDataElement;
 		uint64 mDataNum;
 		uint64 mDataSize;
 		uint32 mGPUBufferId;
