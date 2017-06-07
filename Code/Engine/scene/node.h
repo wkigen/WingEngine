@@ -35,7 +35,7 @@ namespace WingEngine
 		virtual Matrix44		getModelViewMatrinx44() { return mModelMatrix44; }
 
 		virtual void			translation(const Vectorf &t);
-		virtual void			rotate(const Vectorf &t);
+		virtual void			rotate(const Vectorf &t, const real angle);
 		virtual void			scale(const Vectorf &t);
 
 	protected:

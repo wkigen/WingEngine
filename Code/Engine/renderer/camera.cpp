@@ -27,9 +27,9 @@ namespace WingEngine
 		mProjectModelMatrix44 = mModelMatrix44 * mProjectViewMatrix44 ;
 	}
 
-	void Camera::rotate(const Vectorf &t)
+	void Camera::rotate(const Vectorf &t, const real angle)
 	{
-		Node::rotate(t);
+		Node::rotate(t,angle);
 		mProjectModelMatrix44 = mModelMatrix44 * mProjectViewMatrix44 ;
 	}
 }

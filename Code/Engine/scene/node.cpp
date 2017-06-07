@@ -56,10 +56,10 @@ namespace WingEngine
 		mModelMatrix44 *= traMatrix44;
 	}
 
-	void Node::rotate(const Vectorf &t)
+	void Node::rotate(const Vectorf &t,const real angle)
 	{
 		Matrix44 rotMatrix44;
-		rotMatrix44.setRotate(t);
+		rotMatrix44.setAxisAngle(t, angle);
 		mModelMatrix44 *= rotMatrix44;
 	}
 

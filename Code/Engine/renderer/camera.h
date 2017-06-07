@@ -19,7 +19,7 @@ namespace WingEngine
 		void		setCamera(real _fovy, real _aspect, real _near, real _far, Pointf _eye, Pointf _view, Vectorf _up);
 
 		void		translation(const Vectorf &t);
-		void		rotate(const Vectorf &t);
+		void		rotate(const Vectorf &t, const real angle);
 
 		Matrix44	getmProjectModelMatrix44() {return mProjectModelMatrix44; }
 
