@@ -31,6 +31,9 @@
     <Filter Include="pass">
       <UniqueIdentifier>{7245fcdf-789f-4a62-a36a-ed9bb934b7ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="light">
+      <UniqueIdentifier>{001f6b55-53c1-4708-8f30-5b5f5e916aa6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\engine_defines.h">
@@ -129,6 +132,21 @@
     <ClInclude Include="pass\geometry_pass.h">
       <Filter>pass</Filter>
     </ClInclude>
+    <ClInclude Include="light\light.h">
+      <Filter>light</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\color.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="light\point_light.h">
+      <Filter>light</Filter>
+    </ClInclude>
+    <ClInclude Include="resource\image.h">
+      <Filter>resource</Filter>
+    </ClInclude>
+    <ClInclude Include="resource\image_reader.h">
+      <Filter>resource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp">
@@ -205,6 +223,21 @@
     </ClCompile>
     <ClCompile Include="pass\geometry_pass.cpp">
       <Filter>pass</Filter>
+    </ClCompile>
+    <ClCompile Include="light\light.cpp">
+      <Filter>light</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\color.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="light\point_light.cpp">
+      <Filter>light</Filter>
+    </ClCompile>
+    <ClCompile Include="resource\image.cpp">
+      <Filter>resource</Filter>
+    </ClCompile>
+    <ClCompile Include="resource\image_reader.cpp">
+      <Filter>resource</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

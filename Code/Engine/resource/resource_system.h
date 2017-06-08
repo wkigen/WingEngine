@@ -1,6 +1,8 @@
 #ifndef _WING_ENGINE_RESOURCE_SYSTEM_H_
 #define _WING_ENGINE_RESOURCE_SYSTEM_H_
 
+
+#include "base\smart_ptr.h"
 #include "base\singleton.h"
 #include "resource.h"
 #include <map>
@@ -9,6 +11,7 @@
 #include "common\engine_defines.h"
 #include "resource_reader.h"
 #include "resource_writer.h"
+#include "allocator\allocator.h"
 
 using namespace WingCore;
 
@@ -41,7 +44,7 @@ namespace WingEngine
 		bool				mCreate;
 
 
-		std::map<std::string, Resource*>			mResource[ResourceTypeMax];
+		std::map<std::string, SmartPtr<Resource>>	mResource[ResourceTypeMax];
 		std::map<uint32, ResourceWriter*>			mResourceWriters;
 		std::map<uint32, ResourceReader*>			mResourceReaders;
 	};
@@ -61,7 +64,7 @@ namespace WingEngine
 			{
 				T* resource = WING_NEW T();
 				itor->second->setStream(stream);
-				itor->second->readResource(resource);
+				itor->second->readResource<T>(resource);
 				mResource[type] = resource;
 				return resource;
 			}

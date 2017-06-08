@@ -17,6 +17,7 @@ enum ResourceType
 {
 	ResourceTypeNull,
 	ResourceTypeConfig,
+	ResourceTypeImage,
 	ResourceTypeMesh,
 	ResourceTypeMax,
 };
@@ -26,6 +27,7 @@ enum RenderType
 {
 	RenderTypeNULL,
 	RenderTypeGeometry,
+	RenderTypeMesh,
 };
 
 
@@ -51,5 +53,14 @@ enum DataElementName
 	DataElementTexture,
 	DataElementColor,
 };
+
+enum ColorType
+{
+	ColorTypeRGB,
+	ColorTypeRGBA,
+	ColorTypeBGR,
+	ColorTypeBGRA,
+};
+
 
 #endif
