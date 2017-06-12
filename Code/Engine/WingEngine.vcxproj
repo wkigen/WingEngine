@@ -78,7 +78,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\;..\Core\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\Core\;..\3rdparty\</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WING_DEBUG;WING_ENGINE_EXPORTS;WING_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
@@ -87,7 +87,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalLibraryDirectories>..\..\Bin\Lib\X86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WingCoreD.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>WingCoreD.lib;zlib.lib;LibPNG.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

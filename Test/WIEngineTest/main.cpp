@@ -1,7 +1,6 @@
 #include <Windows.h>
-#include "geometry\cube.h"
-#include "application\engine_application.h"
-#include "scene\scene_system.h"
+#include "wing_engine.h"
+
 using namespace WingEngine;
 
 class App :public EngineApplication
@@ -13,6 +12,7 @@ public:
 		Cube* cube = new Cube;
 		SceneSystem::getInstance()->addNode("cube",cube);
 
+		ResourceSystem::getInstance()->loadResource<Image>("res/image/test.png");
 		return true;
 	}
 

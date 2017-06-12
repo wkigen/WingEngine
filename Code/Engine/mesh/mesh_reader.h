@@ -13,17 +13,11 @@ namespace WingEngine
 		MeshReader();
 		~MeshReader();
 
-		template<class T>
-		 bool readResource(Resource* resource);
+		virtual bool readResource(Resource* resource) { return false; };
 
 	};
 
 
-	template<class T>
-	 bool MeshReader::readResource(Resource* resource)
-	{
-		return false;
-	}
 }
 
 #endif

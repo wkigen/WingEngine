@@ -11,8 +11,7 @@ using namespace WingCore;
 namespace WingEngine
 {
 
-#define RESOURCE_TYPE(type)		const static uint32 mResourceType = type; \
-								static inline uint32 getResourceType() { return mResourceType; }
+#define RESOURCE_TYPE(type)		const static uint32 StaticResourceType = type; 
 
 	class WING_ENGINE_API Resource:public Object
 	{
@@ -20,9 +19,13 @@ namespace WingEngine
 	public:
 		RESOURCE_TYPE(ResourceTypeNull)
 
-		
-	private:
-		
+		Resource();
+		~Resource();
+
+		virtual uint32 getResourceType() { return mResourceType; }
+
+	protected:
+		ResourceType mResourceType;
 	};
 
 }

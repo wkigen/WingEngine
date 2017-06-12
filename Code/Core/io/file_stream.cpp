@@ -18,27 +18,27 @@ namespace WingCore
 	{
 		if (access == ACCESS::Read)
 		{
-			mFile = fopen(filePath, "r");
+			mFile = fopen(filePath, "rb");
 		}
 		else if (access == (ACCESS::Read | ACCESS::Write))
 		{
-			mFile = fopen(filePath, "r+");
+			mFile = fopen(filePath, "rb+");
 		}
 		else if (access == (ACCESS::Read | ACCESS::Write|ACCESS::Create))
 		{
-			mFile = fopen(filePath, "w+");
+			mFile = fopen(filePath, "wb+");
 		}
 		else if (access == (ACCESS::Write))
 		{
-			mFile = fopen(filePath, "w");
+			mFile = fopen(filePath, "wb");
 		}
 		else if (access == (ACCESS::Read | ACCESS::Append))
 		{
-			mFile = fopen(filePath, "a+");
+			mFile = fopen(filePath, "ab+");
 		}
 		else if (access == ACCESS::Append)
 		{
-			mFile = fopen(filePath, "a");
+			mFile = fopen(filePath, "ab");
 		}
 		
 		if (!mFile)

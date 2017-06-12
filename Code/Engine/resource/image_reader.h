@@ -4,7 +4,17 @@
 #include "resource\resource_reader.h"
 #include "image.h"
 #include "log\log.h"
+#include "LibPNG\png.h"
 
+#define PNG_BYTES_TO_CHECK 4  
+
+typedef struct
+{
+	png_byte* data;
+	int32 size;
+	int32 offset;
+
+}PngData;
 
 namespace WingEngine
 {
@@ -15,27 +25,11 @@ namespace WingEngine
 		ImageReader();
 		~ImageReader();
 
-		template<class T>
-		 bool readResource(T* resource);
+		virtual bool readResource(Resource* resource);
 
+	private:
+		static void pngReadCallback(png_structp png_ptr, png_bytep data, png_size_t length);
 	};
-
-
-	template<class T>
-	 bool ImageReader::readResource(T* resource)
-	{
-		if (T->getResourceType() != ResourceTypeImage)
-		{
-			WING_LOG_ERROR("is not the type of mesh");
-			return false;
-		}
-
-		Image* image = (Image*)resource;
-
-
-
-		return true;
-	}
 
 }
 

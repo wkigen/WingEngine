@@ -23,7 +23,7 @@ namespace WingEngine
 
 	private:
 		void* mData;
-		uint64 mHight;
+		uint64 mHeight;
 		uint64 mWidth;
 		uint8 mBit;
 		ColorType mColorType;

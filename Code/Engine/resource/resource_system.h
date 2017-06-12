@@ -55,7 +55,7 @@ namespace WingEngine
 	template<class T>
 	T* ResourceSystem::loadResource(std::string name)
 	{
-		uint32 type = T::getResourceType();
+		uint32 type = T::StaticResourceType;
 		std::map<uint32, ResourceReader*>::iterator itor = mResourceReaders.find(type);
 		if (itor != mResourceReaders.end())
 		{
@@ -63,9 +63,9 @@ namespace WingEngine
 			if (FileSystem::getInstance()->openFile(name, stream,ACCESS::Read))
 			{
 				T* resource = WING_NEW T();
-				itor->second->setStream(stream);
-				itor->second->readResource<T>(resource);
-				mResource[type] = resource;
+				itor->second->setStream(&stream);
+				itor->second->readResource(resource);
+				mResource[type][name] = (Resource*)resource;
 				return resource;
 			}
 		}

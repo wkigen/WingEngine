@@ -2,7 +2,7 @@
 #include "io\file_system.h"
 #include "dll\dll_system.h"
 #include "system\wing_system.h"
-
+#include "resource\resource_system.h"
 using namespace WingCore;
 
 namespace WingEngine
@@ -25,12 +25,16 @@ namespace WingEngine
 		DllSystem::getInstance()->create();
 
 		WingSystem::getInstance()->create();
+		ResourceSystem::getInstance()->create();
+
 		RendererSystem::getInstance()->create(mWindow->getHandle(),mWindow->getWidth(),mWindow->getHeight());
 	}
 
 	void EngineApplication::destroy()
 	{
 		RendererSystem::getInstance()->destroy();
+
+		ResourceSystem::getInstance()->destroy();
 		WingSystem::getInstance()->destroy();
 
 		DllSystem::getInstance()->destroy();

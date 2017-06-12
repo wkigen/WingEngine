@@ -126,6 +126,7 @@
     <ClInclude Include="math\quaternion.h">
       <Filter>math</Filter>
     </ClInclude>
+    <ClInclude Include="..\Engine\wing_engine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dll\dll.cpp">

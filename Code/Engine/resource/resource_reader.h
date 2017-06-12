@@ -1,6 +1,7 @@
 #ifndef _WING_ENGINE_RESOURCE_READER_H_
 #define _WING_ENGINE_RESOURCE_READER_H_
 
+#include "allocator\allocator.h"
 #include "common\constant.h"
 #include "io\reader.h"
 #include "resource\resource.h"
@@ -14,8 +15,8 @@ namespace WingEngine
 		ResourceReader();
 		~ResourceReader();
 
-		template<class T>
-		bool readResource(T* resource) = 0;
+		virtual bool readResource(Resource* resource) { return false; };
+
 	};
 
 }

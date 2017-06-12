@@ -1,5 +1,6 @@
 #include "resource_system.h"
 #include "mesh\mesh_reader.h"
+#include "image_reader.h"
 
 namespace WingEngine
 {
@@ -22,11 +23,12 @@ namespace WingEngine
 		}
 		mCreate = true;
 
-		MeshReader* meshReader = new MeshReader();
-
+		MeshReader* meshReader = WING_NEW MeshReader();
+		ImageReader* imageReader = WING_NEW ImageReader();
 
 
 		addReader(ResourceTypeMesh, meshReader);
+		addReader(ResourceTypeImage, imageReader);
 
 		return true;
 	}

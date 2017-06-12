@@ -58,8 +58,6 @@ enum ColorType
 {
 	ColorTypeRGB,
 	ColorTypeRGBA,
-	ColorTypeBGR,
-	ColorTypeBGRA,
 };
 
 
