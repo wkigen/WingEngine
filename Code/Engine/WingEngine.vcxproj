@@ -138,6 +138,8 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="pass\base_pass.h" />
     <ClInclude Include="pass\geometry_pass.h" />
     <ClInclude Include="pass\geometry_texture_pass.h" />
+    <ClInclude Include="plugin\plugin.h" />
+    <ClInclude Include="plugin\plugin_system.h" />
     <ClInclude Include="renderer\camera.h" />
     <ClInclude Include="renderer\color.h" />
     <ClInclude Include="renderer\data_element.h" />
@@ -178,6 +180,8 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClCompile Include="pass\base_pass.cpp" />
     <ClCompile Include="pass\geometry_pass.cpp" />
     <ClCompile Include="pass\geometry_texture_pass.cpp" />
+    <ClCompile Include="plugin\plugin.cpp" />
+    <ClCompile Include="plugin\plugin_system.cpp" />
     <ClCompile Include="renderer\camera.cpp" />
     <ClCompile Include="renderer\color.cpp" />
     <ClCompile Include="renderer\data_element.cpp" />

@@ -1,19 +1,20 @@
-#ifndef _WING_CORE_MODULE_H_
-#define _WING_CORE_MODULE_H_
+#ifndef _WING_ENGINE_PLUGIN_H_
+#define _WING_ENGINE_PLUGIN_H_
 
 #include <string>
 #include "common\defines.h"
+#include "common\constant.h"
 
-namespace WingCore
+namespace WingEngine
 {
-#define ModuleTypeNull	0
 
-	struct Module
+
+	struct Plugin
 	{
-		Module()
+		Plugin()
 			:mHandle(nullptr)
 			,mObject(nullptr)
-			,mType(ModuleTypeNull)
+			,mType(PluginTypeNull)
 			,mName("")
 		{
 

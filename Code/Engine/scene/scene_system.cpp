@@ -1,6 +1,6 @@
 #include "scene_system.h"
 #include "io\file_system.h"
-#include "dll\dll_system.h"
+#include "plugin/plugin_system.h"
 #include "log\log.h"
 #include "allocator\allocator.h"
 #include "renderer\renderer_system.h"

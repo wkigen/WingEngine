@@ -7,11 +7,6 @@
 #define INVALID_BUFFERS 0
 
 
-
-//module type from 1 ** in wingcore module.h
-#define ModuleTypeRenderer 1
-
-
 //resource type
 enum ResourceType
 {
@@ -60,5 +55,11 @@ enum ColorFormat
 	ColorFormatRGBA,
 };
 
+
+enum  PluginType
+{
+	PluginTypeNull,
+	PluginTypeRenderer,
+};
 
 #endif

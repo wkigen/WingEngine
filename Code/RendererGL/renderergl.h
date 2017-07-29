@@ -1,7 +1,7 @@
 #ifndef _WING_RENDERERGL_RENDERERGL_H_
 #define _WING_RENDERERGL_RENDERERGL_H_
 
-#include "dll\module.h"
+#include "plugin\plugin.h"
 
 
 #if WING_RENDERERGL_EXPORTS && WING_PLATFORM_WIN32
@@ -14,7 +14,7 @@
 extern "C"
 {
 
-	WING_RENDERERGL_API WingCore::Module* WingDllMain();
+	WING_RENDERERGL_API WingEngine::Plugin* WingDllMain();
 
 }
 

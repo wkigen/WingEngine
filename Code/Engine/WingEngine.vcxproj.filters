@@ -34,6 +34,9 @@
     <Filter Include="light">
       <UniqueIdentifier>{001f6b55-53c1-4708-8f30-5b5f5e916aa6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="plugin">
+      <UniqueIdentifier>{73493ce1-9476-434c-a49b-b0148327e521}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\engine_defines.h">
@@ -157,6 +160,12 @@
       <Filter>pass</Filter>
     </ClInclude>
     <ClInclude Include="wing_engine.h" />
+    <ClInclude Include="plugin\plugin_system.h">
+      <Filter>plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="plugin\plugin.h">
+      <Filter>plugin</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp">
@@ -254,6 +263,12 @@
     </ClCompile>
     <ClCompile Include="pass\geometry_texture_pass.cpp">
       <Filter>pass</Filter>
+    </ClCompile>
+    <ClCompile Include="plugin\plugin_system.cpp">
+      <Filter>plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="plugin\plugin.cpp">
+      <Filter>plugin</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

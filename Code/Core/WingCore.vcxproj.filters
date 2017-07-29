@@ -72,12 +72,6 @@
     <ClInclude Include="math\vector.h">
       <Filter>math</Filter>
     </ClInclude>
-    <ClInclude Include="dll\dll_system.h">
-      <Filter>dll</Filter>
-    </ClInclude>
-    <ClInclude Include="dll\module.h">
-      <Filter>dll</Filter>
-    </ClInclude>
     <ClInclude Include="error\error.h">
       <Filter>error</Filter>
     </ClInclude>
@@ -145,12 +139,6 @@
     </ClCompile>
     <ClCompile Include="math\matrix44_cal.cpp">
       <Filter>math</Filter>
-    </ClCompile>
-    <ClCompile Include="dll\dll_system.cpp">
-      <Filter>dll</Filter>
-    </ClCompile>
-    <ClCompile Include="dll\module.cpp">
-      <Filter>dll</Filter>
     </ClCompile>
     <ClCompile Include="io\reader.cpp">
       <Filter>io</Filter>

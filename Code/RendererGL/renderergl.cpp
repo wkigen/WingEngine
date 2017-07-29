@@ -3,15 +3,15 @@
 #include "render_context_win_gl.h"
 #include "common\constant.h"
 
-static WingCore::Module* sModule = nullptr;
+static WingEngine::Plugin* sPlugin = nullptr;
 
-WingCore::Module* WingDllMain()
+WingEngine::Plugin* WingDllMain()
 {
-	sModule = WING_NEW WingCore::Module();
-	sModule->mName = "RendererGL";
+	sPlugin = WING_NEW WingEngine::Plugin();
+	sPlugin->mName = "RendererGL";
 #if WING_PLATFORM_WIN32
-	sModule->mObject = WING_NEW WingRendererGL::RendererContextWinGL();
+	sPlugin->mObject = WING_NEW WingRendererGL::RendererContextWinGL();
 #endif
-	sModule->mType = ModuleTypeRenderer;
-	return sModule;
+	sPlugin->mType = PluginTypeRenderer;
+	return sPlugin;
 }

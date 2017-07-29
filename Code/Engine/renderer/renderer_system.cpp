@@ -1,6 +1,6 @@
 #include "renderer_system.h"
 #include "log\log.h"
-#include "dll\dll_system.h"
+#include "plugin\plugin_system.h"
 #include "common\constant.h"
 #include "shader\test_shader.h"
 #include "allocator\allocator.h"
@@ -40,8 +40,8 @@ namespace WingEngine
 		Vectorf up(0, 1, 0);
 		mCamera.setCamera(45,(real)mWidth /(real)mHeight, 1, 10, eye, view, up);
 
-		std::list<WingCore::Module*> rendererDll = DllSystem::getInstance()->getMoudles(ModuleTypeRenderer);
-		std::list<WingCore::Module*>::iterator iter = rendererDll.begin();
+		std::list<Plugin*> rendererDll = PluginSystem::getInstance()->getPlugin(PluginTypeRenderer);
+		std::list<Plugin*>::iterator iter = rendererDll.begin();
 
 		while (iter != rendererDll.end())
 		{

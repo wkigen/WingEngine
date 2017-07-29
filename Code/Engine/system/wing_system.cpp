@@ -1,6 +1,6 @@
 #include "wing_system.h"
 #include "io\file_system.h"
-#include "dll\dll_system.h"
+#include "plugin\plugin_system.h"
 #include "log\log.h"
 #include "scene\scene_system.h"
 
@@ -29,7 +29,7 @@ namespace WingEngine
 		mCreate = true;
 
 		//todo
-		DllSystem::getInstance()->open("WingRendererGLD.dll");
+		PluginSystem::getInstance()->open("WingRendererGLD.dll");
 
 		return true;
 	}
