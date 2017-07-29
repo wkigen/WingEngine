@@ -54,10 +54,10 @@ enum DataElementName
 	DataElementColor,
 };
 
-enum ColorType
+enum ColorFormat
 {
-	ColorTypeRGB,
-	ColorTypeRGBA,
+	ColorFormatRGB,
+	ColorFormatRGBA,
 };
 
 

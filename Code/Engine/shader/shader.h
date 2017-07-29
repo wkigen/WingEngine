@@ -8,6 +8,7 @@
 #define PROJECTVIEWMARTIX			"u_projectViewMatrix"
 #define MODELVIEWMARTIX				"u_modelViewMatrix"
 #define PROJECTMODELVIEWMARTIX		"u_projectModelViewMatrix"
+#define TEXTURE						"u_Texture"
 
 
 

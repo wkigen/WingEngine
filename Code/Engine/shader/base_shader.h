@@ -1,5 +1,5 @@
-#ifndef _WING_ENGINE_TEST_SHADER_H_
-#define _WING_ENGINE_TEST_SHADER_H_
+#ifndef _WING_ENGINE_BASE_SHADER_H_
+#define _WING_ENGINE_BASE_SHADER_H_
 
 #include <string>
 

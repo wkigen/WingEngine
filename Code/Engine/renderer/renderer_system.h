@@ -8,6 +8,7 @@
 #include "renderable.h"
 #include <queue>
 #include "camera.h"
+#include "pass\base_pass.h"
 
 namespace WingEngine
 {
@@ -26,6 +27,8 @@ namespace WingEngine
 
 		void addRenderable(Renderable* able);
 
+		BasePass* getRenderPass(std::string name);
+
 		Camera* getCamera() { return &mCamera; }
 
 		RendererContext* getRendererContext() { return mRendererContext; }
@@ -38,6 +41,7 @@ namespace WingEngine
 		RendererContext*						mRendererContext;
 		bool									mCreate;
 		std::map<std::string, RendererContext*> mRendererContexts;
+		std::map<std::string, SmartPtr<BasePass>>		mRenderPass;
 		uint32									mWidth;
 		uint32									mHeight;
 		std::queue<Renderable*>					mRenderables;

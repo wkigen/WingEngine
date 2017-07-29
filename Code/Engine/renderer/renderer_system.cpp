@@ -4,6 +4,8 @@
 #include "common\constant.h"
 #include "shader\test_shader.h"
 #include "allocator\allocator.h"
+#include "pass\geometry_pass.h"
+#include "pass\geometry_texture_pass.h"
 
 using namespace WingCore;
 
@@ -64,6 +66,15 @@ namespace WingEngine
 		mRendererContext->createProgram("test", test_vs, test_fs);
 		mRendererContext->useProgram("test");
 
+		SmartPtr<GeometryPass> geometryPass = WING_NEW GeometryPass();
+		geometryPass->init();
+		mRenderPass["GeometryPass"] = geometryPass;
+
+		SmartPtr<GeometryTexturePass> geometryTexturePass = WING_NEW GeometryTexturePass();
+		geometryTexturePass->init();
+		mRenderPass["GeometryTexturePass"] = geometryTexturePass;
+	
+
 		return true;
 	}
 
@@ -92,6 +103,17 @@ namespace WingEngine
 	void RendererSystem::addRenderable(Renderable* able)
 	{
 		mRenderables.push(able);
+	}
+
+
+	BasePass* RendererSystem::getRenderPass(std::string name)
+	{
+		std::map<std::string, SmartPtr<BasePass>>::iterator iter = mRenderPass.find(name);
+		if (iter != mRenderPass.end())
+		{
+			return iter->second;
+		}
+		return nullptr;
 	}
 
 }

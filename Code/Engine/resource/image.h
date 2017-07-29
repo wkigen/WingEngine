@@ -15,18 +15,20 @@ namespace WingEngine
 		Image();
 		~Image();
 
-		void* createData(uint8 bit, ColorType colorType,uint64 width, uint64 height);
+		void* createData(uint8 bit, ColorFormat colorType,uint64 width, uint64 height);
 		void* getData();
 
 		uint64 getWidth();
 		uint64 getHeight();
+
+		ColorFormat getColorFormat() { return mColorFormat; }
 
 	private:
 		void* mData;
 		uint64 mHeight;
 		uint64 mWidth;
 		uint8 mBit;
-		ColorType mColorType;
+		ColorFormat mColorFormat;
 	};
 }
 

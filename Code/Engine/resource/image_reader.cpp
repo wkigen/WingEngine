@@ -110,10 +110,10 @@ namespace WingEngine
 		switch (colorType)
 		{
 		case PNG_COLOR_TYPE_RGB_ALPHA:
-			imageData = (png_bytep)image->createData(bitsComponent, ColorTypeRGBA, width, height);
+			imageData = (png_bytep)image->createData(bitsComponent, ColorFormatRGBA, width, height);
 			break;
 		case PNG_COLOR_TYPE_RGB:
-			imageData = (png_bytep)image->createData(bitsComponent, ColorTypeRGBA, width, height);
+			imageData = (png_bytep)image->createData(bitsComponent, ColorFormatRGB, width, height);
 			break;
 		default:
 			WING_LOG_ERROR("can not read png without rgba & rgb");
@@ -131,7 +131,8 @@ namespace WingEngine
 		png_bytepp row_pointers = new png_bytep[height];
 		for (uint32 i = 0; i <height; ++i)
 		{
-			row_pointers[i] = (imageData + i * rowbytes);
+			//·­×ª
+			row_pointers[i] = (imageData + (height-i -1) * rowbytes);
 		}
 		png_read_image(png_ptr,row_pointers);
 

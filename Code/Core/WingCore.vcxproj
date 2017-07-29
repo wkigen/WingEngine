@@ -125,7 +125,6 @@ copy Debugx86\WingCoreD.lib ..\..\Bin\Lib\x86\</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Engine\wing_engine.h" />
     <ClInclude Include="allocator\allocator.h" />
     <ClInclude Include="application\application.h" />
     <ClInclude Include="application\main.h" />

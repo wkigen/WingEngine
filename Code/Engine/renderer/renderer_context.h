@@ -29,6 +29,8 @@ namespace WingEngine
 
 		virtual void		swapBuffers() = 0;
 		virtual void		clear() = 0;
+		
+		virtual uint32		WECFormat2ORFormat(ColorFormat colorType) = 0;
 
 		virtual void		addProgram(std::string name, Program* program);
 		virtual Program*	getProgram(std::string name);
@@ -39,9 +41,11 @@ namespace WingEngine
 		virtual int32		bindStaticArrayBuffers(uint64 size, void* data) = 0;
 		virtual int32		bindDynamicArrayBuffers(uint64 size, void* data) = 0;
 		virtual int32		bindElementBuffers(uint64 size, void* data) = 0;
+		virtual int32		bindTextureBuffers(ColorFormat colorType,uint32 width,uint32 height, ColorFormat format,void* pixels) = 0;
 
 		virtual void		bindArrayBuffers(uint32 bufferId) = 0;
 		virtual void		bindElementBuffers(uint32 bufferId) = 0;
+		virtual void		bindTexture(uint32 bufferId) = 0;
 
 		virtual void		enableDepth(bool enable) = 0;
 		
@@ -52,7 +56,7 @@ namespace WingEngine
 
 		virtual int32		getAttribLocation(int32 programId, std::string name) = 0;
 
-		virtual int32		getUniformMatrix44fLocation(int32 programId,std::string name)=0;
+		virtual int32		getUniformLocation(int32 programId,std::string name)=0;
 		virtual void		setUniformMatrix44f(int32 location, int32 count, Matrix44 matrix) =0;
 
 		virtual void		render(Renderable* renderables) = 0;

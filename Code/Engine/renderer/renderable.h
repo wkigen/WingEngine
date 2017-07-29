@@ -19,20 +19,24 @@ namespace WingEngine
 		Renderable();
 		~Renderable();
 
-		virtual VertixData getVertixData() { return *mVertixData; }
+		virtual VertixData* getVertixData() { return mVertixData; }
 		virtual void setVertixData(VertixData* vertrixdata) { mVertixData = vertrixdata; }
 
-		virtual IndeiceData getIndeiceData() { return *mIndeiceData; }
+		virtual IndeiceData* getIndeiceData() { return mIndeiceData; }
 		virtual void setIndeiceData(IndeiceData* indeiceData) { mIndeiceData = indeiceData; }
 
 		virtual void setRenderPass(RenderPass* pass) { mRenderPass = pass; }
 		virtual RenderPass* getRenderPass() { return mRenderPass; }
+
+		virtual void setMaterial(Material* material) { mMaterial = material; }
+		virtual Material* getMaterial() { return mMaterial; }
 
 	private:
 
 		SmartPtr<VertixData> mVertixData;
 		SmartPtr<IndeiceData> mIndeiceData;
 		SmartPtr<RenderPass> mRenderPass;
+		SmartPtr<Material> mMaterial;
 	};
 
 

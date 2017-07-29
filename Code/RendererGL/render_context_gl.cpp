@@ -27,6 +27,19 @@ namespace WingRendererGL
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
+	uint32 RendererContextGL::WECFormat2ORFormat(ColorFormat colorType)
+	{
+		switch (colorType)
+		{
+		case ColorFormatRGB:
+			return GL_RGB;
+		case ColorFormatRGBA:
+			return GL_RGBA;
+		default:
+			return GL_RGBA;
+		}
+	}
+
 	WingEngine::Program* RendererContextGL::createProgram(std::string name, std::string vs, std::string fs)
 	{
 		ProgramGL* program = WING_NEW ProgramGL();
@@ -80,6 +93,17 @@ namespace WingRendererGL
 		return bufferId;
 	}
 
+	int32 RendererContextGL::bindTextureBuffers(ColorFormat colorFormat, uint32 width, uint32 height, ColorFormat format, void* pixels)
+	{
+		unsigned int textureID;
+		glGenTextures(1, &textureID);
+		glBindTexture(GL_TEXTURE_2D, textureID);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexImage2D(GL_TEXTURE_2D, 0, WECFormat2ORFormat(colorFormat), width, height, 0, WECFormat2ORFormat(format), GL_UNSIGNED_BYTE, pixels);
+		return textureID;
+	}
+
 	void RendererContextGL::bindArrayBuffers(uint32 bufferId)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, bufferId);
@@ -88,6 +112,11 @@ namespace WingRendererGL
 	void RendererContextGL::bindElementBuffers(uint32 bufferId)
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferId);
+	}
+
+	void RendererContextGL::bindTexture(uint32 bufferId)
+	{
+		glBindTexture(GL_TEXTURE_2D,bufferId);
 	}
 
 	void RendererContextGL::enableDepth(bool enable)
@@ -127,7 +156,7 @@ namespace WingRendererGL
 		glVertexAttribPointer(location, size, GL_FLOAT, normalized, stride, pointer);
 	}
 
-	int32 RendererContextGL::getUniformMatrix44fLocation(int32 programId, std::string name)
+	int32 RendererContextGL::getUniformLocation(int32 programId, std::string name)
 	{
 		GLint location = glGetUniformLocation(programId, name.c_str());
 		if (location == INVALID_LOCALTION)
@@ -146,10 +175,10 @@ namespace WingRendererGL
 	{
 		renderable->getRenderPass()->bind(renderable);
 
-		glBindBuffer(GL_ARRAY_BUFFER, renderable->getVertixData().getGPUBufferId());
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderable->getIndeiceData().getGPUBufferId());
+		glBindBuffer(GL_ARRAY_BUFFER, renderable->getVertixData()->getGPUBufferId());
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderable->getIndeiceData()->getGPUBufferId());
 		
-		glDrawElements(GL_TRIANGLES, renderable->getIndeiceData().getDataNum(),GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, renderable->getIndeiceData()->getDataNum(),GL_UNSIGNED_INT, 0);
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);

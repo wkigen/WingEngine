@@ -1,20 +1,23 @@
-#include "color.h"
+#include "texture.h"
+#include "renderer_system.h"
 
 namespace WingEngine
 {
-	Color::Color(float _r , float _g, float _b , float _a )
-		:r(_r)
-		,g(_g)
-		,b(_b)
-		,a(_a)
+	Texture::Texture(Image* image)
+		:mImage(image)
 	{
 
 	}
 
-	Color::~Color()
+	Texture::~Texture()
 	{
 
 	}
 
-
+	void Texture::bindGPUBuffer() 
+	{
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+		mGPUBufferId = context->bindTextureBuffers(mImage->getColorFormat(), mImage->getWidth(),
+			mImage->getHeight(), mImage->getColorFormat(), mImage->getData());
+	}
 }

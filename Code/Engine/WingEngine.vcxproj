@@ -137,6 +137,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="mesh\submesh.h" />
     <ClInclude Include="pass\base_pass.h" />
     <ClInclude Include="pass\geometry_pass.h" />
+    <ClInclude Include="pass\geometry_texture_pass.h" />
     <ClInclude Include="renderer\camera.h" />
     <ClInclude Include="renderer\color.h" />
     <ClInclude Include="renderer\data_element.h" />
@@ -147,6 +148,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="renderer\renderer_context.h" />
     <ClInclude Include="renderer\renderer_system.h" />
     <ClInclude Include="renderer\render_pass.h" />
+    <ClInclude Include="renderer\texture.h" />
     <ClInclude Include="renderer\vertix_data.h" />
     <ClInclude Include="resource\image.h" />
     <ClInclude Include="resource\image_reader.h" />
@@ -158,9 +160,11 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="scene\scene_system.h" />
     <ClInclude Include="shader\base_shader.h" />
     <ClInclude Include="shader\geometry_shader.h" />
+    <ClInclude Include="shader\geometry_texture_shader.h" />
     <ClInclude Include="shader\shader.h" />
     <ClInclude Include="shader\test_shader.h" />
     <ClInclude Include="system\wing_system.h" />
+    <ClInclude Include="wing_engine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp" />
@@ -173,6 +177,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClCompile Include="mesh\submesh.cpp" />
     <ClCompile Include="pass\base_pass.cpp" />
     <ClCompile Include="pass\geometry_pass.cpp" />
+    <ClCompile Include="pass\geometry_texture_pass.cpp" />
     <ClCompile Include="renderer\camera.cpp" />
     <ClCompile Include="renderer\color.cpp" />
     <ClCompile Include="renderer\data_element.cpp" />
@@ -183,6 +188,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClCompile Include="renderer\renderer_context.cpp" />
     <ClCompile Include="renderer\renderer_system.cpp" />
     <ClCompile Include="renderer\render_pass.cpp" />
+    <ClCompile Include="renderer\texture.cpp" />
     <ClCompile Include="renderer\vertix_data.cpp" />
     <ClCompile Include="resource\image.cpp" />
     <ClCompile Include="resource\image_reader.cpp" />

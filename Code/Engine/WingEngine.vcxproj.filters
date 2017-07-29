@@ -147,6 +147,16 @@
     <ClInclude Include="resource\image_reader.h">
       <Filter>resource</Filter>
     </ClInclude>
+    <ClInclude Include="renderer\texture.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="shader\geometry_texture_shader.h">
+      <Filter>shader</Filter>
+    </ClInclude>
+    <ClInclude Include="pass\geometry_texture_pass.h">
+      <Filter>pass</Filter>
+    </ClInclude>
+    <ClInclude Include="wing_engine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp">
@@ -238,6 +248,12 @@
     </ClCompile>
     <ClCompile Include="resource\image_reader.cpp">
       <Filter>resource</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\texture.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="pass\geometry_texture_pass.cpp">
+      <Filter>pass</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

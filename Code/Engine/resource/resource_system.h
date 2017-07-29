@@ -31,6 +31,9 @@ namespace WingEngine
 		template<class T>
 		T* loadResource(std::string name);
 
+		template<class T>
+		T* getResource(std::string name);
+
 		void addWriter(uint32 type, ResourceWriter* writer);
 		void addReader(uint32 type, ResourceReader* reader);
 		
@@ -75,6 +78,20 @@ namespace WingEngine
 		}
 		return nullptr;
 	}
+
+	template<class T>
+	T* ResourceSystem::getResource(std::string name)
+	{
+		uint32 type = T::StaticResourceType;
+		std::map<std::string, SmartPtr<Resource>>::iterator itor = mResource[type].find(name);
+		if (itor != mResource[type].end()) {
+			return (T*)itor->second.getPtr();
+		}
+		return nullptr;
+
+	}
+
+
 
 }
 

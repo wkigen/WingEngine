@@ -11,24 +11,24 @@ namespace WingEngine
 
 	Image::~Image()
 	{
-
+		WING_FREE(mData);
 	}
 
-	void* Image::createData(uint8 bit, ColorType colorType, uint64 width, uint64 height)
+	void* Image::createData(uint8 bit, ColorFormat colorFormat, uint64 width, uint64 height)
 	{
 		mBit = bit;
 		mWidth = width;
 		mHeight = height;
-		mColorType = colorType;
+		mColorFormat = colorFormat;
 
-		uint32 _colorType ;
-		switch (colorType)
+		uint32 _colorFormat;
+		switch (colorFormat)
 		{
-		case ColorTypeRGB:
-			_colorType = 3;
+		case ColorFormatRGB:
+			_colorFormat = 3;
 			break;
-		case ColorTypeRGBA:
-			_colorType = 4;
+		case ColorFormatRGBA:
+			_colorFormat = 4;
 			break;
 		default:
 			return nullptr;
@@ -46,7 +46,7 @@ namespace WingEngine
 			break;
 		}
 
-		mData = WING_ALLOC(_bit * width * height * _colorType);
+		mData = WING_ALLOC(_bit * width * height * _colorFormat);
 		
 		return mData;
 	}

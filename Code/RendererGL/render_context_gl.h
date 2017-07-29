@@ -24,15 +24,19 @@ namespace WingRendererGL
 
 		virtual void clear();
 
+		virtual uint32 WECFormat2ORFormat(ColorFormat colorType);
+
 		virtual WingEngine::Program* createProgram(std::string name, std::string vs, std::string fs);
 		virtual void useProgram(std::string name);
 
 		virtual int32 bindStaticArrayBuffers(uint64 size, void* data);
 		virtual int32 bindDynamicArrayBuffers(uint64 size, void* data);
 		virtual int32 bindElementBuffers(uint64 size, void* data);
+		virtual int32 bindTextureBuffers(ColorFormat colorType, uint32 width, uint32 height, ColorFormat format, void* pixels);
 
 		virtual void bindArrayBuffers(uint32 bufferId);
 		virtual void bindElementBuffers(uint32 bufferId);
+		virtual void bindTexture(uint32 bufferId);
 
 		virtual void enableDepth(bool enable);
 	
@@ -43,7 +47,7 @@ namespace WingRendererGL
 
 		virtual void vertexAttribPointer(uint32 location, uint32 size, bool normalized, uint32 stride, void* pointer);
 
-		virtual int32 getUniformMatrix44fLocation(int32 programId, std::string name);
+		virtual int32 getUniformLocation(int32 programId, std::string name);
 		virtual void  setUniformMatrix44f(int32 location,int32 count, Matrix44 matrix);
 
 		virtual void render(Renderable* renderables);
