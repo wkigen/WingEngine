@@ -61,7 +61,7 @@ namespace WingCore
 		//×ªÖÃ
 		inline const Matrix44 &	transpose() const;
 		//Äæ
-		inline const Matrix44 &	inverse() const;
+		inline const bool	inverse(Matrix44 &m) const;
 
 		//--------------------------------------
 		// static
@@ -295,7 +295,7 @@ namespace WingCore
 			mData._data[0][3], mData._data[1][3], mData._data[2][3], mData._data[3][3]);
 	}
 
-	inline const Matrix44 &	Matrix44::inverse() const
+	inline const bool Matrix44::inverse(Matrix44 &inverse) const
 	{
 		real a0 = mData.data[0] * mData.data[5] - mData.data[1] * mData.data[4];
 		real a1 = mData.data[0] * mData.data[6] - mData.data[2] * mData.data[4];
@@ -314,10 +314,9 @@ namespace WingCore
 		real det = a0 * b5 - a1 * b4 + a2 * b3 + a3 * b2 - a4 * b1 + a5 * b0;
 
 		// ÊÇ·ñ¿ÉÄæ
-		if (Math<real>::fabs(det) <= 0)
-			return nullptr;
+		if (!det)
+			return false;
 
-		Matrix44 inverse;
 		inverse.mData.data[0] = mData.data[5] * b5 - mData.data[6] * b4 + mData.data[7] * b3;
 		inverse.mData.data[1] = -mData.data[1] * b5 + mData.data[2] * b4 - mData.data[3] * b3;
 		inverse.mData.data[2] = mData.data[13] * a5 - mData.data[14] * a4 + mData.data[15] * a3;
@@ -340,7 +339,7 @@ namespace WingCore
 
 		inverse = inverse *  (1.0f/det);
 
-		return inverse;
+		return true;
 
 	}
 }

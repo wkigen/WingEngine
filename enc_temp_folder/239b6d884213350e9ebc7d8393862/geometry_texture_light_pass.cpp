@@ -66,6 +66,10 @@ namespace WingEngine
 		renderable->getModelViewMatrinx44().inverse(inverseTranspose);
 		inverseTranspose = inverseTranspose.transpose();
 
+
+
+
+
 		context->setUniformMatrix44f(mUniformTransposeInverseMatrix, 1, inverseTranspose);
 
 		context->setUniform3f(mUniformViewPosition, viewPosition.x, viewPosition.y, viewPosition.z);

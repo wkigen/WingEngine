@@ -26,7 +26,7 @@ const std::string geometry_texture_light_vs = "\
 								lightdir = normalize(lightPos - pos.xyz);	\
 								vec3 eyedir = normalize(v_viewPosition - pos.xyz);	\
 								halfvec = normalize(lightdir + eyedir);	\
-								v_normal = vec3(normalize( a_normal));	\
+								v_normal = vec3(normalize(u_transposeInverseMatrix * a_normal));	\
 							}  \ ";
 
 
