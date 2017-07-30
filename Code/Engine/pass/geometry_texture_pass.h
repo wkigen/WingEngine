@@ -19,8 +19,7 @@ namespace WingEngine
 		virtual void unBind();
 
 	protected:
-		int32 mAttribTextureCoordinate;
-		int32 mUniformTexture;
+
 
 	};
 

@@ -57,6 +57,10 @@ namespace WingEngine
 		virtual int32		getAttribLocation(int32 programId, std::string name) = 0;
 
 		virtual int32		getUniformLocation(int32 programId,std::string name)=0;
+		virtual void		setUniform1f(int32 location, real one) = 0;
+		virtual void		setUniform2f(int32 location, real one, real two) = 0;
+		virtual void		setUniform3f(int32 location, real one, real two, real three) = 0;
+		virtual void		setUniform4f(int32 location, real one, real two, real three, real four) = 0;
 		virtual void		setUniformMatrix44f(int32 location, int32 count, Matrix44 matrix) =0;
 
 		virtual void		render(Renderable* renderables) = 0;

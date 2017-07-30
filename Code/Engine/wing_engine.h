@@ -9,9 +9,9 @@
 
 
 #include "geometry\cube.h"
+#include "geometry\plane.h"
 
-
-#include "pass\geometry_pass.h"
+#include "pass\geometry_color_pass.h"
 #include "pass\geometry_texture_pass.h"
 
 #include "renderer\renderer_system.h"

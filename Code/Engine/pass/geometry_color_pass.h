@@ -6,20 +6,20 @@
 namespace WingEngine
 {
 
-	class GeometryPass : public BasePass
+	class GeometryColorPass : public BasePass
 	{
 
 	public:
 
-		GeometryPass();
-		~GeometryPass();
+		GeometryColorPass();
+		~GeometryColorPass();
 
 		virtual void init();
 		virtual void bind(Renderable* renderable);
 		virtual void unBind();
 
 	protected:
-		int32 mAttribColor;
+		
 
 	};
 

@@ -4,8 +4,9 @@
 #include "common\constant.h"
 #include "shader\test_shader.h"
 #include "allocator\allocator.h"
-#include "pass\geometry_pass.h"
+#include "pass\geometry_color_pass.h"
 #include "pass\geometry_texture_pass.h"
+#include "pass\geometry_texture_light_pass.h"
 
 using namespace WingCore;
 
@@ -35,7 +36,7 @@ namespace WingEngine
 		mWidth = width;
 		mHeight = height;
 
-		Pointf eye(0, 0, 3);
+		Pointf eye(0, 4, 4);
 		Pointf view(0, 0, 0);
 		Vectorf up(0, 1, 0);
 		mCamera.setCamera(45,(real)mWidth /(real)mHeight, 1, 10, eye, view, up);
@@ -66,7 +67,7 @@ namespace WingEngine
 		mRendererContext->createProgram("test", test_vs, test_fs);
 		mRendererContext->useProgram("test");
 
-		SmartPtr<GeometryPass> geometryPass = WING_NEW GeometryPass();
+		SmartPtr<GeometryColorPass> geometryPass = WING_NEW GeometryColorPass();
 		geometryPass->init();
 		mRenderPass["GeometryPass"] = geometryPass;
 
@@ -74,6 +75,9 @@ namespace WingEngine
 		geometryTexturePass->init();
 		mRenderPass["GeometryTexturePass"] = geometryTexturePass;
 	
+		SmartPtr<GeometryTextureLightPass> geometryTextureLightPass = WING_NEW GeometryTextureLightPass();
+		geometryTextureLightPass->init();
+		mRenderPass["GeometryTextureLightPass"] = geometryTextureLightPass;
 
 		return true;
 	}

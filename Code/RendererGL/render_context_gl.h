@@ -48,6 +48,11 @@ namespace WingRendererGL
 		virtual void vertexAttribPointer(uint32 location, uint32 size, bool normalized, uint32 stride, void* pointer);
 
 		virtual int32 getUniformLocation(int32 programId, std::string name);
+
+		virtual void  setUniform1f(int32 location, real one);
+		virtual void  setUniform2f(int32 location, real one, real two);
+		virtual void  setUniform3f(int32 location, real one, real two, real three);
+		virtual void  setUniform4f(int32 location, real one, real two, real three, real four);
 		virtual void  setUniformMatrix44f(int32 location,int32 count, Matrix44 matrix);
 
 		virtual void render(Renderable* renderables);

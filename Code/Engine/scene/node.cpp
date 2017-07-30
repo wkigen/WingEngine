@@ -53,6 +53,7 @@ namespace WingEngine
 	{
 		Matrix44 traMatrix44;
 		traMatrix44.setTranslation(t);
+		mPosition = traMatrix44 * mPosition;
 		mModelMatrix44 *= traMatrix44;
 	}
 
@@ -60,6 +61,7 @@ namespace WingEngine
 	{
 		Matrix44 rotMatrix44;
 		rotMatrix44.setAxisAngle(t, angle);
+		mPosition = rotMatrix44 * mPosition;
 		mModelMatrix44 *= rotMatrix44;
 	}
 
@@ -67,6 +69,7 @@ namespace WingEngine
 	{
 		Matrix44 scaMatrix44;
 		scaMatrix44.setScale(t);
+		mPosition = scaMatrix44 * mPosition;
 		mModelMatrix44 *= scaMatrix44;
 	}
 }

@@ -1,5 +1,5 @@
-#ifndef _WING_ENGINE_GEOMETRY_TEXTURE_SHADER_H_
-#define _WING_ENGINE_GEOMETRY_TEXTURE_SHADER_H_
+#ifndef _WING_ENGINE_GEOMETRY_TEXTURE_LIGHT_SHADER_H_
+#define _WING_ENGINE_GEOMETRY_TEXTURE_LIGHT_SHADER_H_
 
 #include <string>
 
@@ -18,10 +18,10 @@ const std::string geometry_texture_vs = "\
 
 const std::string geometry_texture_fs = "\
 							varying vec2 v_textureCoordinate;	\
-							uniform sampler2D u_Texture; \
+							uniform sampler2D u_texture; \
 							void main()	\
 							{	\
-								gl_FragColor = texture2D(u_Texture, v_textureCoordinate); \
+								gl_FragColor = texture2D(u_texture, v_textureCoordinate); \
 							}  \ ";
 
 #endif

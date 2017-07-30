@@ -1,9 +1,9 @@
-#ifndef _WING_ENGINE_GEOMETRY_SHADER_H_
-#define _WING_ENGINE_GEOMETRY_SHADER_H_
+#ifndef _WING_ENGINE_GEOMETRY_COLOR_SHADER_H_
+#define _WING_ENGINE_GEOMETRY_COLOR_SHADER_H_
 
 #include <string>
 
-const std::string geometry_vs = "\
+const std::string geometry_color_vs = "\
 							attribute vec4 a_position;	\
 							attribute vec4 a_color;	\
 							uniform mat4 u_projectViewMatrix;   \
@@ -16,7 +16,7 @@ const std::string geometry_vs = "\
 							}  \ ";
 
 
-const std::string geometry_fs = "\
+const std::string geometry_color_fs = "\
 							varying vec4 v_color;	\
 							void main()	\
 							{	\

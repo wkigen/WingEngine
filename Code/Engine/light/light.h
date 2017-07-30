@@ -1,8 +1,10 @@
 #ifndef _WING_ENGINE_LIGHT_H_
 #define _WING_ENGINE_LIGHT_H_
 
+#include "common\constant.h"
 #include "scene\node.h"
 #include "renderer\color.h"
+#include "math\vector.h"
 
 namespace WingEngine
 {
@@ -14,6 +16,8 @@ namespace WingEngine
 		Light();
 		~Light();
 
+		virtual LightType getLightType() { return mLightType; }
+
 		virtual bool getEnable();
 		virtual void setEnable(bool enable);
 
@@ -23,11 +27,16 @@ namespace WingEngine
 		virtual void setColor(Color color);
 		virtual Color getColor();
 
-	protected:
+		virtual void setDirection(Vectorf direction) { mDirection = direction; }
+		virtual Vectorf getDirection() { return mDirection; }
 
+	protected:
+		LightType mLightType;
 		real mRange;
 		Color mColor;
 		bool mEnable;
+		Vectorf mDirection;
+
 
 	};
 

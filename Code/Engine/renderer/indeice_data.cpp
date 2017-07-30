@@ -12,6 +12,7 @@ namespace WingEngine
 
 	IndeiceData::~IndeiceData()
 	{
+		WING_FREE(mData)
 	}
 
 	void* IndeiceData::createData(uint64 num, DataElement* dataElement)

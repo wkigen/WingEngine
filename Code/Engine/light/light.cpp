@@ -5,7 +5,7 @@ namespace WingEngine
 	Light::Light()
 		:mEnable(false)
 	{
-
+		mLightType = LightTypeNull;
 	}
 
 	Light::~Light()

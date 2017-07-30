@@ -1,25 +1,25 @@
-#include "geometry_pass.h"
+#include "geometry_color_pass.h"
 #include "renderer\renderer_system.h"
-#include "shader\geometry_shader.h"
+#include "shader\geometry_color_shader.h"
 
 namespace WingEngine
 {
 
 
-	GeometryPass::GeometryPass()
+	GeometryColorPass::GeometryColorPass()
 	{
 
 	}
 
-	GeometryPass::~GeometryPass()
+	GeometryColorPass::~GeometryColorPass()
 	{
 
 	}
 
-	void GeometryPass::init()
+	void GeometryColorPass::init()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		mProgram = context->createProgram("geometry", geometry_vs, geometry_fs);
+		mProgram = context->createProgram("geometry_color", geometry_color_vs, geometry_color_fs);
 
 		mAttribPosition = context->getAttribLocation(mProgram->getProgramID(), POSITION);
 		mAttribColor = context->getAttribLocation(mProgram->getProgramID(), COLOR);
@@ -27,7 +27,7 @@ namespace WingEngine
 		mUniformProjectdViewMatrix = context->getUniformLocation(mProgram->getProgramID(), PROJECTVIEWMARTIX);
 	}
 
-	void GeometryPass::bind(Renderable* renderable)
+	void GeometryColorPass::bind(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
@@ -52,7 +52,7 @@ namespace WingEngine
 		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44);
 	}
 
-	void GeometryPass::unBind()
+	void GeometryColorPass::unBind()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 

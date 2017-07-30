@@ -7,6 +7,12 @@
 #define INVALID_BUFFERS 0
 
 
+enum PluginType
+{
+	PluginTypeNull,
+	PluginTypeRenderer,
+};
+
 //resource type
 enum ResourceType
 {
@@ -55,11 +61,11 @@ enum ColorFormat
 	ColorFormatRGBA,
 };
 
-
-enum  PluginType
+enum LightType
 {
-	PluginTypeNull,
-	PluginTypeRenderer,
+	LightTypeNull,
+	LightTypePoint,
+	LightTypeDirection,
 };
 
 #endif

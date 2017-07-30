@@ -166,6 +166,26 @@ namespace WingRendererGL
 		return location;
 	}
 
+	void RendererContextGL::setUniform1f(int32 location, real one)
+	{
+		glUniform1f(location, one);
+	}
+
+	void RendererContextGL::setUniform2f(int32 location,  real one, real two)
+	{
+		glUniform2f(location, one,two);
+	}
+
+	void RendererContextGL::setUniform3f(int32 location, real one, real two, real three)
+	{
+		glUniform3f(location, one, two,three);
+	}
+
+	void RendererContextGL::setUniform4f(int32 location, real one, real two, real three, real four)
+	{
+		glUniform4f(location, one, two,three,four);
+	}
+
 	void RendererContextGL::setUniformMatrix44f(int32 location, int32 count, Matrix44 matrix)
 	{
 		glUniformMatrix4fv(location, count,false, matrix.mData.data);

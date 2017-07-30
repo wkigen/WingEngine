@@ -38,14 +38,16 @@ namespace WingEngine
 		virtual void			rotate(const Vectorf &t, const real angle);
 		virtual void			scale(const Vectorf &t);
 
+		virtual Vectorf			getPosition() { return mPosition; };
+
 	protected:
 
 		std::string						mName;
 		Node*							mParentNode;
 		std::map<std::string, Node*>	mChildren;
 		Matrix44						mModelMatrix44;
-
-		RenderType mRenderType;
+		Vectorf							mPosition;
+		RenderType						mRenderType;
 	};
 
 }

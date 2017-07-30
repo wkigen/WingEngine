@@ -23,8 +23,14 @@ namespace WingEngine
 
 		Program* mProgram;
 		int32 mAttribPosition;
+		int32 mAttribNormal;
 		int32 mUniformModelMatrix;
 		int32 mUniformProjectdViewMatrix;
+		int32 mUniformTransposeInverseMatrix;
+		int32 mAttribTextureCoordinate;
+		int32 mUniformTexture;
+		int32 mAttribColor;
+		int32 mUniformViewPosition;
 
 	};
 

@@ -4,6 +4,7 @@
 #include <memory>
 #include "vector.h"
 #include "point.h"
+#include "math\math.h"
 #include "common\defines.h"
 
 namespace WingCore
@@ -37,7 +38,13 @@ namespace WingCore
 		inline real operator[](int i) const;
 
 		inline const Matrix44& operator *= (const Matrix44 &m);
+
 		inline Matrix44 operator*(const Matrix44 &m);
+
+		inline Matrix44 operator*(const real &v);
+
+		template <class T>
+		inline Vector<T> operator*(const Vector<T> &v);
 
 		template <class T>
 		const Matrix44 &    setAxisAngle(const Vector<T>& ax, T ang);
@@ -51,7 +58,10 @@ namespace WingCore
 		template <class T>
 		const Matrix44 &    setTranslation(const Vector<T> &t);
 
+		//×ªÖÃ
 		inline const Matrix44 &	transpose() const;
+		//Äæ
+		inline const Matrix44 &	inverse() const;
 
 		//--------------------------------------
 		// static
@@ -99,6 +109,24 @@ namespace WingCore
 		multiply(*this, m, tmp);
 
 		return tmp;
+	}
+
+	inline Matrix44 Matrix44::operator*(const real &v)
+	{
+		Matrix44 tmp(*this);
+		for (uint8 i = 0; i < 16; i++)
+		{
+			tmp.mData.data[i] = tmp.mData.data[i] * v;
+		}
+		return tmp;
+	}
+
+	template <class T>
+	inline Vector<T> Matrix44::operator*(const Vector<T> &v)
+	{
+		Vector<T> des;
+		multiply(*this, v, des);
+		return des;
 	}
 
 	template <class T>
@@ -247,10 +275,10 @@ namespace WingCore
 	{
 		T x, y, z, w;
 	
-		x = src[0] * m[0][0] + src[1] * m[1][0] + src[2] * m[2][0] + m[3][0];
-		y = src[0] * m[0][1] + src[1] * m[1][1] + src[2] * m[2][1] + m[3][1];
-		z = src[0] * m[0][2] + src[1] * m[1][2] + src[2] * m[2][2] + m[3][2];
-		w = src[0] * m[0][3] + src[1] * m[1][3] + src[2] * m[2][3] + m[3][3];
+		x = src[0] * m.mData._data[0][0] + src[1] * m.mData._data[1][0] + src[2] * m.mData._data[2][0] + m.mData._data[3][0];
+		y = src[0] * m.mData._data[0][1] + src[1] * m.mData._data[1][1] + src[2] * m.mData._data[2][1] + m.mData._data[3][1];
+		z = src[0] * m.mData._data[0][2] + src[1] * m.mData._data[1][2] + src[2] * m.mData._data[2][2] + m.mData._data[3][2];
+		w = src[0] * m.mData._data[0][3] + src[1] * m.mData._data[1][3] + src[2] * m.mData._data[2][3] + m.mData._data[3][3];
 
 		det.x = x / w;
 		det.y = y / w;
@@ -265,6 +293,55 @@ namespace WingCore
 			mData._data[0][1], mData._data[1][1], mData._data[2][1], mData._data[3][1],
 			mData._data[0][2], mData._data[1][2], mData._data[2][2], mData._data[3][2],
 			mData._data[0][3], mData._data[1][3], mData._data[2][3], mData._data[3][3]);
+	}
+
+	inline const Matrix44 &	Matrix44::inverse() const
+	{
+		real a0 = mData.data[0] * mData.data[5] - mData.data[1] * mData.data[4];
+		real a1 = mData.data[0] * mData.data[6] - mData.data[2] * mData.data[4];
+		real a2 = mData.data[0] * mData.data[7] - mData.data[3] * mData.data[4];
+		real a3 = mData.data[1] * mData.data[6] - mData.data[2] * mData.data[5];
+		real a4 = mData.data[1] * mData.data[7] - mData.data[3] * mData.data[5];
+		real a5 = mData.data[2] * mData.data[7] - mData.data[3] * mData.data[6];
+		real b0 = mData.data[8] * mData.data[13] - mData.data[9] * mData.data[12];
+		real b1 = mData.data[8] * mData.data[14] - mData.data[10] * mData.data[12];
+		real b2 = mData.data[8] * mData.data[15] - mData.data[11] * mData.data[12];
+		real b3 = mData.data[9] * mData.data[14] - mData.data[10] * mData.data[13];
+		real b4 = mData.data[9] * mData.data[15] - mData.data[11] * mData.data[13];
+		real b5 = mData.data[10] * mData.data[15] - mData.data[11] * mData.data[14];
+
+
+		real det = a0 * b5 - a1 * b4 + a2 * b3 + a3 * b2 - a4 * b1 + a5 * b0;
+
+		// ÊÇ·ñ¿ÉÄæ
+		if (Math<real>::fabs(det) <= 0)
+			return nullptr;
+
+		Matrix44 inverse;
+		inverse.mData.data[0] = mData.data[5] * b5 - mData.data[6] * b4 + mData.data[7] * b3;
+		inverse.mData.data[1] = -mData.data[1] * b5 + mData.data[2] * b4 - mData.data[3] * b3;
+		inverse.mData.data[2] = mData.data[13] * a5 - mData.data[14] * a4 + mData.data[15] * a3;
+		inverse.mData.data[3] = -mData.data[9] * a5 + mData.data[10] * a4 - mData.data[11] * a3;
+
+		inverse.mData.data[4] = -mData.data[4] * b5 + mData.data[6] * b2 - mData.data[7] * b1;
+		inverse.mData.data[5] = mData.data[0] * b5 - mData.data[2] * b2 + mData.data[3] * b1;
+		inverse.mData.data[6] = -mData.data[12] * a5 + mData.data[14] * a2 - mData.data[15] * a1;
+		inverse.mData.data[7] = mData.data[8] * a5 - mData.data[10] * a2 + mData.data[11] * a1;
+
+		inverse.mData.data[8] = mData.data[4] * b4 - mData.data[5] * b2 + mData.data[7] * b0;
+		inverse.mData.data[9] = -mData.data[0] * b4 + mData.data[1] * b2 - mData.data[3] * b0;
+		inverse.mData.data[10] = mData.data[12] * a4 - mData.data[13] * a2 + mData.data[15] * a0;
+		inverse.mData.data[11] = -mData.data[8] * a4 + mData.data[9] * a2 - mData.data[11] * a0;
+
+		inverse.mData.data[12] = -mData.data[4] * b3 + mData.data[5] * b1 - mData.data[6] * b0;
+		inverse.mData.data[13] = mData.data[0] * b3 - mData.data[1] * b1 + mData.data[2] * b0;
+		inverse.mData.data[14] = -mData.data[12] * a3 + mData.data[13] * a1 - mData.data[14] * a0;
+		inverse.mData.data[15] = mData.data[8] * a3 - mData.data[9] * a1 + mData.data[10] * a0;
+
+		inverse = inverse *  (1.0f/det);
+
+		return inverse;
+
 	}
 }
 

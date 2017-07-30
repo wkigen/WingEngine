@@ -12,7 +12,7 @@ namespace WingEngine
 
 	VertixData::~VertixData()
 	{
-
+		WING_FREE(mData)
 	}
 
 	void* VertixData::createData(uint64 num, DataElement* dataElement)

@@ -129,12 +129,6 @@
     <ClInclude Include="renderer\data_element.h">
       <Filter>renderer</Filter>
     </ClInclude>
-    <ClInclude Include="shader\geometry_shader.h">
-      <Filter>shader</Filter>
-    </ClInclude>
-    <ClInclude Include="pass\geometry_pass.h">
-      <Filter>pass</Filter>
-    </ClInclude>
     <ClInclude Include="light\light.h">
       <Filter>light</Filter>
     </ClInclude>
@@ -165,6 +159,21 @@
     </ClInclude>
     <ClInclude Include="plugin\plugin.h">
       <Filter>plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry\plane.h">
+      <Filter>geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="shader\geometry_texture_light_shader.h">
+      <Filter>shader</Filter>
+    </ClInclude>
+    <ClInclude Include="pass\geometry_texture_light_pass.h">
+      <Filter>pass</Filter>
+    </ClInclude>
+    <ClInclude Include="shader\geometry_color_shader.h">
+      <Filter>shader</Filter>
+    </ClInclude>
+    <ClInclude Include="pass\geometry_color_pass.h">
+      <Filter>pass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -240,9 +249,6 @@
     <ClCompile Include="renderer\data_element.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
-    <ClCompile Include="pass\geometry_pass.cpp">
-      <Filter>pass</Filter>
-    </ClCompile>
     <ClCompile Include="light\light.cpp">
       <Filter>light</Filter>
     </ClCompile>
@@ -269,6 +275,15 @@
     </ClCompile>
     <ClCompile Include="plugin\plugin.cpp">
       <Filter>plugin</Filter>
+    </ClCompile>
+    <ClCompile Include="geometry\plane.cpp">
+      <Filter>geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="pass\geometry_texture_light_pass.cpp">
+      <Filter>pass</Filter>
+    </ClCompile>
+    <ClCompile Include="pass\geometry_color_pass.cpp">
+      <Filter>pass</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
