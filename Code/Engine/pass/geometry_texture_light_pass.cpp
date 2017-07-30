@@ -29,6 +29,7 @@ namespace WingEngine
 		mUniformProjectdViewMatrix = context->getUniformLocation(mProgram->getProgramID(), PROJECTVIEWMARTIX);
 		mUniformTransposeInverseMatrix = context->getUniformLocation(mProgram->getProgramID(), TRANSPOSEINVERSEMATRIX);
 		mUniformViewPosition = context->getUniformLocation(mProgram->getProgramID(), VIEWPOSITION);
+		mUniformShiness = context->getUniformLocation(mProgram->getProgramID(), SHINESS);
 	}
 
 	void GeometryTextureLightPass::bind(Renderable* renderable)
@@ -65,10 +66,11 @@ namespace WingEngine
 		Matrix44 inverseTranspose;
 		renderable->getModelViewMatrinx44().inverse(inverseTranspose);
 		inverseTranspose = inverseTranspose.transpose();
-
 		context->setUniformMatrix44f(mUniformTransposeInverseMatrix, 1, inverseTranspose);
 
 		context->setUniform3f(mUniformViewPosition, viewPosition.x, viewPosition.y, viewPosition.z);
+
+		context->setUniform1f(mUniformShiness, 1);
 	}
 
 	void GeometryTextureLightPass::unBind()

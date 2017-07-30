@@ -19,8 +19,13 @@ namespace WingEngine
 		virtual void setTexture(Texture* texture) { mTexture = texture; }
 		virtual Texture* getTexture() { return mTexture; }
 
+
+		virtual void setShiness(int8 shiness) { mShiness = shiness; }
+		virtual uint8 getShiness() { return mShiness; }
+
 	private:
 		SmartPtr<Texture> mTexture;
+		uint8 mShiness;
 	};
 
 

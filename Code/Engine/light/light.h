@@ -31,12 +31,13 @@ namespace WingEngine
 		virtual Vectorf getDirection() { return mDirection; }
 
 	protected:
+
 		LightType mLightType;
 		real mRange;
 		Color mColor;
 		bool mEnable;
 		Vectorf mDirection;
-
+		
 
 	};
 

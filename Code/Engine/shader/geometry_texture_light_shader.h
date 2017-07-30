@@ -21,7 +21,7 @@ const std::string geometry_texture_light_vs = "\
 								vec3 lightPos = vec3(5.0,5.0,0.0);	\
 								gl_Position = u_projectViewMatrix* u_modelViewMatrix * a_position ;    	\
 								v_textureCoordinate = a_textureCoordinate;	\
-								vec4 pos =u_modelViewMatrix * a_position ;  \
+								vec4 pos = u_modelViewMatrix * a_position ;  \
 								pos = pos / pos.w; \
 								lightdir = normalize(lightPos - pos.xyz);	\
 								vec3 eyedir = normalize(v_viewPosition - pos.xyz);	\
@@ -32,6 +32,7 @@ const std::string geometry_texture_light_vs = "\
 
 const std::string geometry_texture_light_fs = "\
 							uniform sampler2D u_texture; \
+							uniform float u_shiness; \
 							varying vec3 v_normal;	\
 							varying vec3 lightdir;	\
 							varying vec3 halfvec;	\
@@ -39,7 +40,6 @@ const std::string geometry_texture_light_fs = "\
 							float amb = 0.3;	\
 							float diff = 0.4;	\
 							float spec = 0.3;	\
-							float shiness = 16;	\
 							void main()	\
 							{	\
 								vec3 color = texture2D(u_texture, v_textureCoordinate).rgb;  \
@@ -50,7 +50,7 @@ const std::string geometry_texture_light_fs = "\
 								if (diffusefract > 0.0) {	\
 									vec3 halfvecN = normalize(halfvec);	\
 									specularfract = max(dot(halfvecN, normalN), 0.0);	\
-									specularfract = pow(specularfract, shiness);	\
+									specularfract = pow(specularfract, u_shiness);	\
 								}	\
 								gl_FragColor = vec4(amb * color + diff * color * diffusefract+ spec * color * specularfract, 1.0);	\
 							}  \ ";
