@@ -30,6 +30,9 @@ namespace WingEngine
 		mUniformTransposeInverseMatrix = context->getUniformLocation(mProgram->getProgramID(), TRANSPOSEINVERSEMATRIX);
 		mUniformViewPosition = context->getUniformLocation(mProgram->getProgramID(), VIEWPOSITION);
 		mUniformShiness = context->getUniformLocation(mProgram->getProgramID(), SHINESS);
+		mUniformAmbient = context->getUniformLocation(mProgram->getProgramID(), AMBIENT);
+		mUniformDiffuse = context->getUniformLocation(mProgram->getProgramID(), DIFFUSE);
+		mUniformSpecular = context->getUniformLocation(mProgram->getProgramID(), SPECULAR);
 	}
 
 	void GeometryTextureLightPass::bind(Renderable* renderable)
@@ -37,6 +40,7 @@ namespace WingEngine
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
 		Vectorf viewPosition = RendererSystem::getInstance()->getCamera()->getPosition();
+		Material* material = renderable->getMaterial();
 
 		context->enableDepth(true);
 
@@ -70,7 +74,10 @@ namespace WingEngine
 
 		context->setUniform3f(mUniformViewPosition, viewPosition.x, viewPosition.y, viewPosition.z);
 
-		context->setUniform1f(mUniformShiness, 1);
+		context->setUniform1f(mUniformShiness, material->getShiness());
+		context->setUniform3f(mUniformAmbient, material->getAmbient());
+		context->setUniform3f(mUniformDiffuse, material->getDiffuse());
+		context->setUniform3f(mUniformSpecular, material->getSpecluar());
 	}
 
 	void GeometryTextureLightPass::unBind()

@@ -26,12 +26,21 @@ public:
 		texture->bindGPUBuffer();
 		SmartPtr<Material> matrial = new Material();
 		matrial->setTexture(texture);
+		matrial->setShiness(16);
+		matrial->setAmbient(Vectorf(1, 1, 1));
+		matrial->setDiffuse(Vectorf(1, 1, 1));
+		matrial->setSpecular(Vectorf(1, 1, 1));
 		cube->setMaterial(matrial);
+		
 
 		SmartPtr<Texture> texture2 = new Texture(whiteImage);
 		texture2->bindGPUBuffer();
 		SmartPtr<Material> matrial2 = new Material();
 		matrial2->setTexture(texture2);
+		matrial2->setShiness(16);
+		matrial2->setAmbient(Vectorf(1, 1, 1));
+		matrial2->setDiffuse(Vectorf(1, 1, 1));
+		matrial2->setSpecular(Vectorf(1, 1, 1));
 		plane->setMaterial(matrial2);
 
 		return true;

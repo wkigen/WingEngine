@@ -4,6 +4,7 @@
 #include "common\engine_defines.h"
 #include "base\object.h"
 #include "texture.h"
+#include "math\vector.h"
 
 using namespace WingCore;
 
@@ -19,13 +20,24 @@ namespace WingEngine
 		virtual void setTexture(Texture* texture) { mTexture = texture; }
 		virtual Texture* getTexture() { return mTexture; }
 
-
 		virtual void setShiness(int8 shiness) { mShiness = shiness; }
 		virtual uint8 getShiness() { return mShiness; }
+
+		virtual void setAmbient(Vectorf ambient) { mAmbient = ambient; }
+		virtual Vectorf getAmbient() { return mAmbient; }
+
+		virtual void setDiffuse(Vectorf diffuse) { mDiffuse = diffuse; }
+		virtual Vectorf getDiffuse() { return mDiffuse; }
+
+		virtual void setSpecular(Vectorf specular) { mSpecular = specular; }
+		virtual Vectorf getSpecluar() { return mSpecular; }
 
 	private:
 		SmartPtr<Texture> mTexture;
 		uint8 mShiness;
+		Vectorf mAmbient;
+		Vectorf mDiffuse;
+		Vectorf mSpecular;
 	};
 
 

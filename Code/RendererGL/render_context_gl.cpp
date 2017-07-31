@@ -181,6 +181,11 @@ namespace WingRendererGL
 		glUniform3f(location, one, two,three);
 	}
 
+	void RendererContextGL::setUniform3f(int32 location, Vectorf v)
+	{
+		setUniform3f(location, v.x, v.y, v.z);
+	}
+
 	void RendererContextGL::setUniform4f(int32 location, real one, real two, real three, real four)
 	{
 		glUniform4f(location, one, two,three,four);

@@ -33,6 +33,9 @@ const std::string geometry_texture_light_vs = "\
 const std::string geometry_texture_light_fs = "\
 							uniform sampler2D u_texture; \
 							uniform float u_shiness; \
+							uniform vec3 u_ambient; \
+							uniform vec3 u_diffuse; \
+							uniform vec3 u_specular; \
 							varying vec3 v_normal;	\
 							varying vec3 lightdir;	\
 							varying vec3 halfvec;	\
@@ -52,7 +55,7 @@ const std::string geometry_texture_light_fs = "\
 									specularfract = max(dot(halfvecN, normalN), 0.0);	\
 									specularfract = pow(specularfract, u_shiness);	\
 								}	\
-								gl_FragColor = vec4(amb * color + diff * color * diffusefract+ spec * color * specularfract, 1.0);	\
+								gl_FragColor = vec4(amb * color * u_ambient+ diff * color * diffusefract *u_diffuse + spec * color * specularfract * u_specular, 1.0);	\
 							}  \ ";
 
 #endif
