@@ -72,12 +72,10 @@ namespace WingEngine
 
 		virtual void		draw(uint32 count) = 0;
 
-
-		virtual void		render(Renderable* renderables) = 0;
-
 	protected:
 		std::map<std::string, SmartPtr<Program>>	mPrograms;
 		SmartPtr<Program>							mCurrProgram;
+
 	};
 }
 

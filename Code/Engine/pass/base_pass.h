@@ -17,13 +17,14 @@ namespace WingEngine
 		~BasePass();
 
 		virtual void init();
-		virtual void preRender(Renderable* renderable);
+		virtual void preRender();
 		virtual void render(Renderable* renderable);
 		virtual void postRender();
 
 	protected:
 
 		Program* mProgram;
+
 		int32 mAttribColor;
 		int32 mAttribPosition;
 		int32 mAttribNormal;
@@ -39,6 +40,7 @@ namespace WingEngine
 		int32 mUniformAmbient;
 		int32 mUniformDiffuse;
 		int32 mUniformSpecular;
+
 
 	};
 

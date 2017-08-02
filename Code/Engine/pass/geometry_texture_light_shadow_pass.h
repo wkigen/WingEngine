@@ -20,11 +20,11 @@ namespace WingEngine
 		virtual void postRender();
 
 	protected:
+
 		uint32 mWidth;
 		uint32 mHeight;
 		SmartPtr<Texture> mTexture;
 		SmartPtr<RenderTarget> mRenderTarget;
-
 		SmartPtr<Texture> mDepthTexture;
 		SmartPtr<RenderTarget> mDepthRenderTarget;
 	};
