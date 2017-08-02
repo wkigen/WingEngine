@@ -20,7 +20,7 @@ namespace WingEngine
 	public:
 		~RendererSystem();
 
-		bool create(void* windowHandle,uint32 width, uint32 height);
+		bool create(void* windowHandle, uint32 width, uint32 height);
 		void destroy();
 
 		void render();
@@ -35,19 +35,30 @@ namespace WingEngine
 
 		uint32 getWidth() { return mWidth; }
 		uint32 getHeight() { return mHeight; }
+
+		void enableShadow(bool enable) { mIsShadow = enable; }
+		bool getEnableShadow() { return mIsShadow; }
+
 	private:
 		RendererSystem();
-		
+
 	private:
-		std::string								mRendererName;
-		RendererContext*						mRendererContext;
-		bool									mCreate;
-		std::map<std::string, RendererContext*> mRendererContexts;
+		bool											mCreate;
+		bool											mIsShadow;
+		Camera											mCamera;
+
+		std::string										mRendererName;
+		RendererContext*								mRendererContext;
+		std::map<std::string, RendererContext*>			mRendererContexts;
+
+		SmartPtr<BasePass>								mCurrRenderPass;
 		std::map<std::string, SmartPtr<BasePass>>		mRenderPass;
-		uint32									mWidth;
-		uint32									mHeight;
-		std::queue<Renderable*>					mRenderables;
-		Camera									mCamera;
+
+		uint32											mWidth;
+		uint32											mHeight;
+
+		std::list<SmartPtr<Renderable>>					mRenderables;
+	
 
 	};
 }

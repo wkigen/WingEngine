@@ -17,6 +17,7 @@ namespace WingEngine
 		:mCreate(false)
 		,mWidth(0)
 		,mHeight(0)
+		,mIsShadow(false)
 	{
 
 	}
@@ -68,6 +69,8 @@ namespace WingEngine
 		mRendererContext->createProgram("test", test_vs, test_fs);
 		mRendererContext->useProgram("test");
 
+		mRendererContext->enableDepth(true);
+
 		SmartPtr<GeometryColorPass> geometryPass = WING_NEW GeometryColorPass();
 		geometryPass->init();
 		mRenderPass["GeometryPass"] = geometryPass;
@@ -99,19 +102,37 @@ namespace WingEngine
 
 	void RendererSystem::render()
 	{
+		
 		mRendererContext->clear();
-		while (!mRenderables.empty())
+		if (mIsShadow)
 		{
-			mRendererContext->render(mRenderables.front());
-			mRenderables.pop();
-		};
-		mRendererContext->swapBuffers();
-	}
 
+		}
+		else
+		{
+			std::list<SmartPtr<Renderable>>::iterator beg = mRenderables.begin();
+			SmartPtr<RenderPass> lastRenderPass;
+			for (; beg != mRenderables.end(); beg++)
+			{
+				SmartPtr<RenderPass> currRenderPass = (*beg)->getRenderPass();
+				if(currRenderPass != lastRenderPass)
+					currRenderPass->preRender();
+
+				currRenderPass->render(*beg);
+
+				if (currRenderPass != lastRenderPass)
+					currRenderPass->postRender();
+
+				lastRenderPass = currRenderPass;
+			};
+			mRenderables.clear();
+			mRendererContext->swapBuffers();
+		}
+	}
 
 	void RendererSystem::addRenderable(Renderable* able)
 	{
-		mRenderables.push(able);
+		mRenderables.push_back(able);
 	}
 
 

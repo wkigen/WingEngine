@@ -78,7 +78,6 @@ namespace WingEngine
 	protected:
 		std::map<std::string, SmartPtr<Program>>	mPrograms;
 		SmartPtr<Program>							mCurrProgram;
-	
 	};
 }
 

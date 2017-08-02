@@ -10,11 +10,11 @@ public:
 	{
 
 		SmartPtr<Cube> cube = new Cube();
-		cube->setRenderPass(RendererSystem::getInstance()->getRenderPass("GeometryTextureLightShadowPass"));
+		cube->setRenderPass(RendererSystem::getInstance()->getRenderPass("GeometryTextureLightPass"));
 		SceneSystem::getInstance()->addNode("cube",cube);
 
 		SmartPtr<Plane> plane = new Plane();
-		plane->setRenderPass(RendererSystem::getInstance()->getRenderPass("GeometryTextureLightShadowPass"));
+		plane->setRenderPass(RendererSystem::getInstance()->getRenderPass("GeometryTextureLightPass"));
 		SceneSystem::getInstance()->addNode("plane", plane);
 
 		Image* redImage = ResourceSystem::getInstance()->loadResource<Image>("res/image/red.png");

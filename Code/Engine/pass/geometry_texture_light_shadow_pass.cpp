@@ -56,8 +56,6 @@ namespace WingEngine
 		Vectorf viewPosition = RendererSystem::getInstance()->getCamera()->getPosition();
 		Material* material = renderable->getMaterial();
 
-		context->enableDepth(true);
-
 		mProgram->use();
 		
 		context->bindArrayBuffers(renderable->getVertixData()->getGPUBufferId());
@@ -111,8 +109,6 @@ namespace WingEngine
 	void GeometryTextureLightShadowPass::postRender()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-
-		context->enableDepth(false);
 
 		context->bindArrayBuffers(INVALID_BUFFERS);
 		context->bindElementBuffers(INVALID_BUFFERS);

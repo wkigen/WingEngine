@@ -327,13 +327,6 @@ namespace WingRendererGL
 		glDrawElements(GL_TRIANGLES, count,GL_UNSIGNED_INT, 0);
 	}
 
-	void RendererContextGL::render(Renderable* renderable)
-	{
-		renderable->getRenderPass()->preRender(renderable);
 
-		renderable->getRenderPass()->render(renderable);
-
-		renderable->getRenderPass()->postRender();
-	}
 
 }

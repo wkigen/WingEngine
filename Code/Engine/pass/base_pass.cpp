@@ -26,27 +26,29 @@ namespace WingEngine
 		mUniformProjectdViewMatrix = context->getUniformLocation(mProgram->getProgramID(), PROJECTVIEWMARTIX);
 	}
 
-	void BasePass::preRender(Renderable* renderable)
+	void BasePass::preRender()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
-
+		
 		mProgram->use();
-		context->enableVertexAttribArray(mAttribPosition);
 
-		context->bindArrayBuffers(renderable->getVertixData()->getGPUBufferId());
-		context->bindElementBuffers(renderable->getIndeiceData()->getGPUBufferId());
-
-		context->vertexAttribPointer(mAttribPosition, 3, false, renderable->getVertixData()->getElement()->getSize(), 0);
-
-		context->setUniformMatrix44f(mUniformModelMatrix, 1, renderable->getModelViewMatrinx44());
-		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44);
 
 	}
 
 	void BasePass::render(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
+
+		context->bindArrayBuffers(renderable->getVertixData()->getGPUBufferId());
+		context->bindElementBuffers(renderable->getIndeiceData()->getGPUBufferId());
+
+		context->enableVertexAttribArray(mAttribPosition);
+		context->vertexAttribPointer(mAttribPosition, 3, false, renderable->getVertixData()->getElement()->getSize(), 0);
+
+		context->setUniformMatrix44f(mUniformModelMatrix, 1, renderable->getModelViewMatrinx44());
+		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44);
+
 		context->draw(renderable->getIndeiceData()->getDataNum());
 	}
 

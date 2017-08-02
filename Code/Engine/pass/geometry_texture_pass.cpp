@@ -28,18 +28,23 @@ namespace WingEngine
 		mUniformProjectdViewMatrix = context->getUniformLocation(mProgram->getProgramID(), PROJECTVIEWMARTIX);
 	}
 
-	void GeometryTexturePass::preRender(Renderable* renderable)
+	void GeometryTexturePass::preRender()
 	{
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+
+		mProgram->use();
+
+	}
+
+	void GeometryTexturePass::render(Renderable* renderable)
+	{
+
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
 
-		context->enableDepth(true);
-
-		mProgram->use();
-		
 		context->bindArrayBuffers(renderable->getVertixData()->getGPUBufferId());
 		context->bindElementBuffers(renderable->getIndeiceData()->getGPUBufferId());
-		
+
 		DataElement* dataElement = renderable->getVertixData()->getElement();
 		context->enableVertexAttribArray(mAttribPosition);
 		ElementFormat positionFormat = renderable->getVertixData()->getElement()->getElementFormat(DataElementName::DataElementPosition);
@@ -53,13 +58,12 @@ namespace WingEngine
 		context->setUniformMatrix44f(mUniformModelMatrix, 1, renderable->getModelViewMatrinx44());
 		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44);
 
+		context->draw(renderable->getIndeiceData()->getDataNum());
 	}
 
 	void GeometryTexturePass::postRender()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-
-		context->enableDepth(false);
 
 		context->bindArrayBuffers(INVALID_BUFFERS);
 		context->bindElementBuffers(INVALID_BUFFERS);

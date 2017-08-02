@@ -64,8 +64,6 @@ namespace WingRendererGL
 
 		virtual void  draw(uint32 count);
 
-		virtual void render(Renderable* renderables);
-
 	};
 
 

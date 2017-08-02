@@ -35,20 +35,24 @@ namespace WingEngine
 		mUniformSpecular = context->getUniformLocation(mProgram->getProgramID(), SPECULAR);
 	}
 
-	void GeometryTextureLightPass::preRender(Renderable* renderable)
+	void GeometryTextureLightPass::preRender()
+	{
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+
+		mProgram->use();
+
+	}
+
+	void GeometryTextureLightPass::render(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
 		Vectorf viewPosition = RendererSystem::getInstance()->getCamera()->getPosition();
 		Material* material = renderable->getMaterial();
 
-		context->enableDepth(true);
-
-		mProgram->use();
-		
 		context->bindArrayBuffers(renderable->getVertixData()->getGPUBufferId());
 		context->bindElementBuffers(renderable->getIndeiceData()->getGPUBufferId());
-		
+
 		DataElement* dataElement = renderable->getVertixData()->getElement();
 
 		context->enableVertexAttribArray(mAttribPosition);
@@ -60,6 +64,7 @@ namespace WingEngine
 		context->vertexAttribPointer(mAttribNormal, normalFormat.mSize, false, dataElement->getSize(), (void*)(normalFormat.mOffest*dataElement->getElementTypeSize()));
 
 		context->bindTexture(renderable->getMaterial()->getTexture()->getGPUBufferId());
+
 		context->enableVertexAttribArray(mAttribTextureCoordinate);
 		ElementFormat textureFormat = renderable->getVertixData()->getElement()->getElementFormat(DataElementName::DataElementTexture);
 		context->vertexAttribPointer(mAttribTextureCoordinate, textureFormat.mSize, false, dataElement->getSize(), (void*)(textureFormat.mOffest*dataElement->getElementTypeSize()));
@@ -79,13 +84,13 @@ namespace WingEngine
 		context->setUniform3f(mUniformDiffuse, material->getDiffuse());
 		context->setUniform3f(mUniformSpecular, material->getSpecluar());
 
+		context->draw(renderable->getIndeiceData()->getDataNum());
+
 	}
 
 	void GeometryTextureLightPass::postRender()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-
-		context->enableDepth(false);
 
 		context->bindArrayBuffers(INVALID_BUFFERS);
 		context->bindElementBuffers(INVALID_BUFFERS);
