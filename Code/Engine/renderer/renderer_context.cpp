@@ -31,12 +31,12 @@ namespace WingEngine
 
 	Program* RendererContext::getProgram(std::string name)
 	{
-		std::map<std::string, Program*>::iterator itor = mPrograms.find(name);
+		std::map<std::string, SmartPtr<Program>>::iterator itor = mPrograms.find(name);
 		if (itor != mPrograms.end())
 		{
 			return itor->second;
 		}
-		WING_LOG_ERROR("can't find [%s] program in programs list", name.c_str());
+		//WING_LOG_ERROR("can't find [%s] program in programs list", name.c_str());
 		return nullptr;
 	}
 }

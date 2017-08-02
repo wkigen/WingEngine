@@ -50,9 +50,6 @@ namespace WingEngine
 
 	void WingSystem::run()
 	{
-		Node* cube = SceneSystem::getInstance()->findNode("cube");
-		cube->rotate(Vectorf(0, 1, 0),0.001);
-
 		SceneSystem::getInstance()->addNodeToRenderer();
 	}
 }

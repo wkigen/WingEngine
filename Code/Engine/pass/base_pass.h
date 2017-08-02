@@ -3,6 +3,7 @@
 
 #include "renderer\program.h"
 #include "renderer\render_pass.h"
+#include "renderer\render_target.h"
 
 namespace WingEngine
 {
@@ -16,8 +17,9 @@ namespace WingEngine
 		~BasePass();
 
 		virtual void init();
-		virtual void bind(Renderable* renderable);
-		virtual void unBind();
+		virtual void preRender(Renderable* renderable);
+		virtual void render(Renderable* renderable);
+		virtual void postRender();
 
 	protected:
 

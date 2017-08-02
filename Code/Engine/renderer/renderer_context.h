@@ -30,7 +30,11 @@ namespace WingEngine
 		virtual void		swapBuffers() = 0;
 		virtual void		clear() = 0;
 		
-		virtual uint32		WECFormat2ORFormat(ColorFormat colorType) = 0;
+		virtual uint32		WEDType2DType(DataElementType dataElementType) = 0;
+		virtual uint32		WETFormat2TFormat(TextureFormat textureFormat) = 0;
+		virtual uint32		WECFormat2CFormat(ColorFormat colorType) = 0;
+		virtual uint32		WETFormat2TFormat(TextureType textureType) = 0;
+		virtual uint32		WEAPoint2APoint(AttachmentPoint attachmentPoint) = 0;
 
 		virtual void		addProgram(std::string name, Program* program);
 		virtual Program*	getProgram(std::string name);
@@ -41,11 +45,13 @@ namespace WingEngine
 		virtual int32		bindStaticArrayBuffers(uint64 size, void* data) = 0;
 		virtual int32		bindDynamicArrayBuffers(uint64 size, void* data) = 0;
 		virtual int32		bindElementBuffers(uint64 size, void* data) = 0;
-		virtual int32		bindTextureBuffers(ColorFormat colorType,uint32 width,uint32 height, ColorFormat format,void* pixels) = 0;
+		virtual int32		bindTextureBuffers(TextureFormat textureFormat,uint32 width,uint32 height, ColorFormat format, DataElementType dataType,void* pixels) = 0;
+		virtual int32		bindRenderTarget(AttachmentPoint attachmenPoiont,TextureType textureType,uint32 width,uint32 height,uint32 textureId) = 0;
 
 		virtual void		bindArrayBuffers(uint32 bufferId) = 0;
 		virtual void		bindElementBuffers(uint32 bufferId) = 0;
 		virtual void		bindTexture(uint32 bufferId) = 0;
+		virtual void		bindRenderTarget(uint32 renderTarget) = 0;
 
 		virtual void		enableDepth(bool enable) = 0;
 		
@@ -64,12 +70,15 @@ namespace WingEngine
 		virtual void		setUniform3f(int32 location, Vectorf v) = 0;
 		virtual void		setUniformMatrix44f(int32 location, int32 count, Matrix44 matrix) =0;
 
+		virtual void		draw(uint32 count) = 0;
+
+
 		virtual void		render(Renderable* renderables) = 0;
 
 	protected:
-		std::map<std::string, Program*> mPrograms;
-		Program* mCurrProgram;
-
+		std::map<std::string, SmartPtr<Program>>	mPrograms;
+		SmartPtr<Program>							mCurrProgram;
+	
 	};
 }
 

@@ -33,6 +33,8 @@ namespace WingEngine
 
 		RendererContext* getRendererContext() { return mRendererContext; }
 
+		uint32 getWidth() { return mWidth; }
+		uint32 getHeight() { return mHeight; }
 	private:
 		RendererSystem();
 		

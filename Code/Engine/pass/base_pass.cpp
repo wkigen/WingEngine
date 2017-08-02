@@ -26,7 +26,7 @@ namespace WingEngine
 		mUniformProjectdViewMatrix = context->getUniformLocation(mProgram->getProgramID(), PROJECTVIEWMARTIX);
 	}
 
-	void BasePass::bind(Renderable* renderable)
+	void BasePass::preRender(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
@@ -41,9 +41,16 @@ namespace WingEngine
 
 		context->setUniformMatrix44f(mUniformModelMatrix, 1, renderable->getModelViewMatrinx44());
 		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44);
+
 	}
 
-	void BasePass::unBind()
+	void BasePass::render(Renderable* renderable)
+	{
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+		context->draw(renderable->getIndeiceData()->getDataNum());
+	}
+
+	void BasePass::postRender()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 

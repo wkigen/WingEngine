@@ -10,11 +10,11 @@ public:
 	{
 
 		SmartPtr<Cube> cube = new Cube();
-		cube->setRenderPass(RendererSystem::getInstance()->getRenderPass("GeometryTextureLightPass"));
+		cube->setRenderPass(RendererSystem::getInstance()->getRenderPass("GeometryTextureLightShadowPass"));
 		SceneSystem::getInstance()->addNode("cube",cube);
 
 		SmartPtr<Plane> plane = new Plane();
-		plane->setRenderPass(RendererSystem::getInstance()->getRenderPass("GeometryTextureLightPass"));
+		plane->setRenderPass(RendererSystem::getInstance()->getRenderPass("GeometryTextureLightShadowPass"));
 		SceneSystem::getInstance()->addNode("plane", plane);
 
 		Image* redImage = ResourceSystem::getInstance()->loadResource<Image>("res/image/red.png");
@@ -44,6 +44,15 @@ public:
 		plane->setMaterial(matrial2);
 
 		return true;
+	}
+
+	virtual void frame()
+	{
+		Node* cube = SceneSystem::getInstance()->findNode("cube");
+		if (cube)
+		{
+			cube->rotate(Vectorf(0, 1, 0), 0.001);
+		}
 	}
 
 	virtual void clear()

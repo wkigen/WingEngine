@@ -28,7 +28,7 @@ namespace WingEngine
 		mUniformProjectdViewMatrix = context->getUniformLocation(mProgram->getProgramID(), PROJECTVIEWMARTIX);
 	}
 
-	void GeometryTexturePass::bind(Renderable* renderable)
+	void GeometryTexturePass::preRender(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
@@ -52,9 +52,10 @@ namespace WingEngine
 
 		context->setUniformMatrix44f(mUniformModelMatrix, 1, renderable->getModelViewMatrinx44());
 		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44);
+
 	}
 
-	void GeometryTexturePass::unBind()
+	void GeometryTexturePass::postRender()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 

@@ -1,4 +1,4 @@
-#include "geometry_texture_light_pass.h"
+#include "geometry_texture_light_shadow_pass.h"
 #include "renderer\renderer_system.h"
 #include "shader\geometry_texture_light_shader.h"
 
@@ -6,17 +6,19 @@ namespace WingEngine
 {
 
 
-	GeometryTextureLightPass::GeometryTextureLightPass()
+	GeometryTextureLightShadowPass::GeometryTextureLightShadowPass(uint32 width, uint32 height)
+		:mWidth(width)
+		,mHeight(height)
 	{
 
 	}
 
-	GeometryTextureLightPass::~GeometryTextureLightPass()
+	GeometryTextureLightShadowPass::~GeometryTextureLightShadowPass()
 	{
 
 	}
 
-	void GeometryTextureLightPass::init()
+	void GeometryTextureLightShadowPass::init()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 		mProgram = context->createProgram("geometry_texture_light", geometry_texture_light_vs, geometry_texture_light_fs);
@@ -33,9 +35,21 @@ namespace WingEngine
 		mUniformAmbient = context->getUniformLocation(mProgram->getProgramID(), AMBIENT);
 		mUniformDiffuse = context->getUniformLocation(mProgram->getProgramID(), DIFFUSE);
 		mUniformSpecular = context->getUniformLocation(mProgram->getProgramID(), SPECULAR);
+
+		mTexture = WING_NEW Texture(mWidth, mHeight,TextureTypeRGB, TextureFormatRGB, ColorFormatRGB, DataElementUByte);
+		mTexture->bindGPUBuffer();
+		mRenderTarget = WING_NEW RenderTarget(mTexture);
+		mRenderTarget->setAttachmentPoint(AttachmentPointColor0);
+		mRenderTarget->bindGPUBuffer();
+
+		mDepthTexture = WING_NEW Texture(mWidth, mHeight, TextureTypeDepth, TextureFormatDepth, ColorFormatDepth, DataElementUInt);
+		mDepthTexture->bindGPUBuffer();
+		mDepthRenderTarget = WING_NEW RenderTarget(mDepthTexture);
+		mDepthRenderTarget->setAttachmentPoint(AttachmentPointDepth);
+		mDepthRenderTarget->bindGPUBuffer();
 	}
 
-	void GeometryTextureLightPass::preRender(Renderable* renderable)
+	void GeometryTextureLightShadowPass::preRender(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
@@ -81,7 +95,20 @@ namespace WingEngine
 
 	}
 
-	void GeometryTextureLightPass::postRender()
+	void GeometryTextureLightShadowPass::render(Renderable* renderable)
+	{
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+
+		context->bindRenderTarget(mRenderTarget->getTargetId());
+		context->clear();
+		BasePass::render(renderable);
+	
+		context->bindRenderTarget(INVALID_BUFFERS);
+		context->bindTexture(mTexture->getGPUBufferId());
+		BasePass::render(renderable);
+	}
+
+	void GeometryTextureLightShadowPass::postRender()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 

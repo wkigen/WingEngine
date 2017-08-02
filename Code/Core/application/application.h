@@ -19,6 +19,7 @@ namespace WingCore
 		virtual void clear()=0;
 		
 		virtual void run()=0;
+		virtual void frame()=0;
 		virtual void stop();
 
 	protected:

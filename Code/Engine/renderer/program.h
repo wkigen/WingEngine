@@ -5,10 +5,11 @@
 #include "common\engine_defines.h"
 #include <string>
 #include "common\constant.h"
+#include "base\object.h"
 
 namespace WingEngine
 {
-	class WING_ENGINE_API Program
+	class WING_ENGINE_API Program:public WingCore::Object
 	{
 
 	public:

@@ -18,13 +18,17 @@ namespace WingRendererGL
 		virtual ~RendererContextGL();
 
 		virtual bool create(void* windowHandle, uint32 width, uint32 height);
-		virtual void destroy()=0;
+		virtual void destroy() = 0;
 
 		virtual void swapBuffers() = 0;
 
 		virtual void clear();
 
-		virtual uint32 WECFormat2ORFormat(ColorFormat colorType);
+		virtual uint32 WEDType2DType(DataElementType dataElementType);
+		virtual uint32 WETFormat2TFormat(TextureFormat textureFormat);
+		virtual uint32 WECFormat2CFormat(ColorFormat colorType);
+		virtual uint32 WETFormat2TFormat(TextureType textureType);
+		virtual uint32 WEAPoint2APoint(AttachmentPoint attachmentPoint);
 
 		virtual WingEngine::Program* createProgram(std::string name, std::string vs, std::string fs);
 		virtual void useProgram(std::string name);
@@ -32,11 +36,13 @@ namespace WingRendererGL
 		virtual int32 bindStaticArrayBuffers(uint64 size, void* data);
 		virtual int32 bindDynamicArrayBuffers(uint64 size, void* data);
 		virtual int32 bindElementBuffers(uint64 size, void* data);
-		virtual int32 bindTextureBuffers(ColorFormat colorType, uint32 width, uint32 height, ColorFormat format, void* pixels);
+		virtual int32 bindTextureBuffers(TextureFormat textureFormat,uint32 width, uint32 height, ColorFormat format, DataElementType dataType, void* pixels);
+		virtual int32 bindRenderTarget(AttachmentPoint attachmenPoiont, TextureType textureType, uint32 width, uint32 height, uint32 textureId);
 
 		virtual void bindArrayBuffers(uint32 bufferId);
 		virtual void bindElementBuffers(uint32 bufferId);
 		virtual void bindTexture(uint32 bufferId);
+		virtual void bindRenderTarget(uint32 renderTarget);
 
 		virtual void enableDepth(bool enable);
 	
@@ -55,6 +61,8 @@ namespace WingRendererGL
 		virtual void  setUniform3f(int32 location, Vectorf v);
 		virtual void  setUniform4f(int32 location, real one, real two, real three, real four);
 		virtual void  setUniformMatrix44f(int32 location,int32 count, Matrix44 matrix);
+
+		virtual void  draw(uint32 count);
 
 		virtual void render(Renderable* renderables);
 

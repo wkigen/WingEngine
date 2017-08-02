@@ -21,8 +21,9 @@ namespace WingEngine
 
 		virtual void init() = 0;
 
-		virtual void bind(Renderable* renderable) = 0;
-		virtual void unBind() = 0;
+		virtual void preRender(Renderable* renderable) = 0;
+		virtual void render(Renderable* renderable) = 0;
+		virtual void postRender() = 0;
 
 	protected:
 

@@ -7,6 +7,7 @@
 #include "pass\geometry_color_pass.h"
 #include "pass\geometry_texture_pass.h"
 #include "pass\geometry_texture_light_pass.h"
+#include "pass\geometry_texture_light_shadow_pass.h"
 
 using namespace WingCore;
 
@@ -78,6 +79,10 @@ namespace WingEngine
 		SmartPtr<GeometryTextureLightPass> geometryTextureLightPass = WING_NEW GeometryTextureLightPass();
 		geometryTextureLightPass->init();
 		mRenderPass["GeometryTextureLightPass"] = geometryTextureLightPass;
+
+		SmartPtr<GeometryTextureLightShadowPass> geometryTextureLightShadowPass = WING_NEW GeometryTextureLightShadowPass(mWidth,mHeight);
+		geometryTextureLightShadowPass->init();
+		mRenderPass["GeometryTextureLightShadowPass"] = geometryTextureLightShadowPass;
 
 		return true;
 	}

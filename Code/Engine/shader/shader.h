@@ -7,7 +7,7 @@
 #define TEXTIRECOORDINATE			"a_textureCoordinate"
 
 
-#define VIEWPOSITION				"u_viewPosition"
+#define VIEWPOSITION				"v_viewPosition"
 #define TEXTURE						"u_texture"
 #define PROJECTVIEWMARTIX			"u_projectViewMatrix"
 #define MODELVIEWMARTIX				"u_modelViewMatrix"

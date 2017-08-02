@@ -22,29 +22,119 @@ namespace WingRendererGL
 		return false;
 	}
 
+	uint32 RendererContextGL::WEDType2DType(DataElementType dataElementType)
+	{
+		switch (dataElementType)
+		{
+		case DataElementByte:
+			return GL_BYTE;
+		case DataElementUByte:
+			return GL_UNSIGNED_BYTE;
+		case DataElementShort:
+			return GL_SHORT;
+		case DataElementInt:
+			return GL_INT;
+		case DataElementUInt:
+			return GL_UNSIGNED_INT;
+		case DataElementReal:
+			return GL_FLOAT;
+		default:
+			return GL_UNSIGNED_BYTE;
+		}
+	}
+
 	void RendererContextGL::clear()
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
-	uint32 RendererContextGL::WECFormat2ORFormat(ColorFormat colorType)
+	uint32 RendererContextGL::WETFormat2TFormat(TextureFormat textureFormat)
+	{
+		switch (textureFormat)
+		{
+		case TextureFormatAlpha:
+			return GL_ALPHA;
+		case TextureFormatDepth:
+			return GL_DEPTH_COMPONENT;
+		case TextureFormatLumince:
+			return GL_LUMINANCE;
+		case TextureFormatLuminceAlpha:
+			return GL_LUMINANCE_ALPHA;
+		case TextureFormatIntensity:
+			return GL_INTENSITY;
+		case TextureFormatRGB:
+			return GL_RGB;
+		case TextureFormatRGBA:
+			return GL_RGBA;
+		}
+	}
+
+	uint32 RendererContextGL::WECFormat2CFormat(ColorFormat colorType)
 	{
 		switch (colorType)
 		{
+		case ColorFormatRGBA8:
+			return GL_RGBA8;
 		case ColorFormatRGB:
 			return GL_RGB;
 		case ColorFormatRGBA:
 			return GL_RGBA;
+		case ColorFormatDepth:
+			GL_DEPTH_COMPONENT;
 		default:
 			return GL_RGBA;
 		}
 	}
 
+	uint32 RendererContextGL::WETFormat2TFormat(TextureType textureType)
+	{
+		switch (textureType)
+		{
+		case TextureTypeRGB:
+			return GL_RGB;
+		case TextureTypeRGBA:
+			return GL_RGBA;
+		case TextureTypeDepth:
+			return GL_DEPTH_COMPONENT;
+		default:
+			return GL_RGBA;
+		}
+	}
+
+	uint32 RendererContextGL::WEAPoint2APoint(AttachmentPoint attachmentPoint)
+	{
+		switch (attachmentPoint)
+		{
+		case AttachmentPointColor0:
+			return GL_COLOR_ATTACHMENT0;
+		case AttachmentPointColor1:
+			return GL_COLOR_ATTACHMENT1;
+		case AttachmentPointColor2:
+			return GL_COLOR_ATTACHMENT2;
+		case AttachmentPointColor3:
+			return GL_COLOR_ATTACHMENT3;
+		case AttachmentPointColor4:
+			return GL_COLOR_ATTACHMENT4;
+		case AttachmentPointColor5:
+			return GL_COLOR_ATTACHMENT5;
+		case AttachmentPointDepth:
+			return GL_DEPTH_ATTACHMENT;
+		case AttachmentPointStencil:
+			return GL_STENCIL_ATTACHMENT;
+		default:
+			return GL_COLOR_ATTACHMENT0;
+		}
+	}
+
 	WingEngine::Program* RendererContextGL::createProgram(std::string name, std::string vs, std::string fs)
 	{
-		ProgramGL* program = WING_NEW ProgramGL();
-		program->create(vs, fs);
-		addProgram(name, program);
+		SmartPtr<Program> program = getProgram(name);
+		if (program == nullptr)
+		{
+			program = WING_NEW ProgramGL();
+			program->create(vs, fs);
+			addProgram(name, program);
+		}
 
 		return program;
 	}
@@ -93,15 +183,46 @@ namespace WingRendererGL
 		return bufferId;
 	}
 
-	int32 RendererContextGL::bindTextureBuffers(ColorFormat colorFormat, uint32 width, uint32 height, ColorFormat format, void* pixels)
+	int32 RendererContextGL::bindTextureBuffers(TextureFormat textureFormat, uint32 width, uint32 height, ColorFormat format, DataElementType dataType, void* pixels)
 	{
 		unsigned int textureID;
 		glGenTextures(1, &textureID);
 		glBindTexture(GL_TEXTURE_2D, textureID);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexImage2D(GL_TEXTURE_2D, 0, WECFormat2ORFormat(colorFormat), width, height, 0, WECFormat2ORFormat(format), GL_UNSIGNED_BYTE, pixels);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LEQUAL);
+		glTexImage2D(GL_TEXTURE_2D, 0, WETFormat2TFormat(textureFormat), width, height, 0, WECFormat2CFormat(format), WEDType2DType(dataType), pixels);
+		glBindTexture(GL_TEXTURE_2D, INVALID_BUFFERS);
 		return textureID;
+	}
+
+	int32 RendererContextGL::bindRenderTarget(AttachmentPoint attachmenPoiont, TextureType textureType, uint32 width, uint32 height, uint32 textureId)
+	{
+		glBindTexture(GL_TEXTURE_2D, textureId);
+
+		//unsigned int rdoID;
+		//glGenRenderbuffers(1, &rdoID);
+		//glBindRenderbuffer(GL_RENDERBUFFER, rdoID);
+		//glRenderbufferStorage(GL_RENDERBUFFER, WETFormat2TFormat(textureType), width, height);
+		
+		unsigned int fboID;
+		glGenFramebuffers(1,&fboID);
+		glBindFramebuffer(GL_FRAMEBUFFER, fboID);
+		//glFramebufferRenderbuffer(GL_FRAMEBUFFER, WEAPoint2APoint(attachmenPoiont), GL_RENDERBUFFER, rdoID);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, WEAPoint2APoint(attachmenPoiont), GL_TEXTURE_2D, textureId,0);
+
+		glBindTexture(GL_TEXTURE_2D, INVALID_BUFFERS);
+		//glBindRenderbuffer(GL_RENDERBUFFER, INVALID_BUFFERS);
+		glBindFramebuffer(GL_FRAMEBUFFER, INVALID_BUFFERS);
+
+		GLenum status = glCheckFramebufferStatusEXT(GL_FRAMEBUFFER);
+		if (status != GL_FRAMEBUFFER_COMPLETE_EXT)
+			return INVALID_BUFFERS;
+
+		return fboID;
 	}
 
 	void RendererContextGL::bindArrayBuffers(uint32 bufferId)
@@ -117,6 +238,11 @@ namespace WingRendererGL
 	void RendererContextGL::bindTexture(uint32 bufferId)
 	{
 		glBindTexture(GL_TEXTURE_2D,bufferId);
+	}
+
+	void RendererContextGL::bindRenderTarget(uint32 renderTarget)
+	{
+		glBindFramebuffer(GL_FRAMEBUFFER, renderTarget);
 	}
 
 	void RendererContextGL::enableDepth(bool enable)
@@ -196,19 +322,18 @@ namespace WingRendererGL
 		glUniformMatrix4fv(location, count,false, matrix.mData.data);
 	}
 
+	void RendererContextGL::draw(uint32 count)
+	{
+		glDrawElements(GL_TRIANGLES, count,GL_UNSIGNED_INT, 0);
+	}
+
 	void RendererContextGL::render(Renderable* renderable)
 	{
-		renderable->getRenderPass()->bind(renderable);
+		renderable->getRenderPass()->preRender(renderable);
 
-		glBindBuffer(GL_ARRAY_BUFFER, renderable->getVertixData()->getGPUBufferId());
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, renderable->getIndeiceData()->getGPUBufferId());
-		
-		glDrawElements(GL_TRIANGLES, renderable->getIndeiceData()->getDataNum(),GL_UNSIGNED_INT, 0);
+		renderable->getRenderPass()->render(renderable);
 
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-		renderable->getRenderPass()->unBind();
+		renderable->getRenderPass()->postRender();
 	}
 
 }

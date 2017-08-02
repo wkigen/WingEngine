@@ -58,6 +58,8 @@ namespace WingEngine
 				DispatchMessage(&sMsg);
 			}
 #endif
+			frame();
+
 			WingSystem::getInstance()->run();
 
 			RendererSystem::getInstance()->render();

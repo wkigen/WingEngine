@@ -139,6 +139,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="pass\base_pass.h" />
     <ClInclude Include="pass\geometry_color_pass.h" />
     <ClInclude Include="pass\geometry_texture_light_pass.h" />
+    <ClInclude Include="pass\geometry_texture_light_shadow_pass.h" />
     <ClInclude Include="pass\geometry_texture_pass.h" />
     <ClInclude Include="plugin\plugin.h" />
     <ClInclude Include="plugin\plugin_system.h" />
@@ -152,6 +153,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="renderer\renderer_context.h" />
     <ClInclude Include="renderer\renderer_system.h" />
     <ClInclude Include="renderer\render_pass.h" />
+    <ClInclude Include="renderer\render_target.h" />
     <ClInclude Include="renderer\texture.h" />
     <ClInclude Include="renderer\vertix_data.h" />
     <ClInclude Include="resource\image.h" />
@@ -184,6 +186,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClCompile Include="pass\base_pass.cpp" />
     <ClCompile Include="pass\geometry_color_pass.cpp" />
     <ClCompile Include="pass\geometry_texture_light_pass.cpp" />
+    <ClCompile Include="pass\geometry_texture_light_shadow_pass.cpp" />
     <ClCompile Include="pass\geometry_texture_pass.cpp" />
     <ClCompile Include="plugin\plugin.cpp" />
     <ClCompile Include="plugin\plugin_system.cpp" />
@@ -197,6 +200,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClCompile Include="renderer\renderer_context.cpp" />
     <ClCompile Include="renderer\renderer_system.cpp" />
     <ClCompile Include="renderer\render_pass.cpp" />
+    <ClCompile Include="renderer\render_target.cpp" />
     <ClCompile Include="renderer\texture.cpp" />
     <ClCompile Include="renderer\vertix_data.cpp" />
     <ClCompile Include="resource\image.cpp" />

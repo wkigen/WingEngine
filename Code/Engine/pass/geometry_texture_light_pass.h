@@ -15,8 +15,8 @@ namespace WingEngine
 		~GeometryTextureLightPass();
 
 		virtual void init();
-		virtual void bind(Renderable* renderable);
-		virtual void unBind();
+		virtual void preRender(Renderable* renderable);
+		virtual void postRender();
 
 	protected:
 

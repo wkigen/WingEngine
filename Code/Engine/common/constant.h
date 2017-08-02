@@ -57,8 +57,10 @@ enum DataElementName
 
 enum ColorFormat
 {
+	ColorFormatRGBA8,
 	ColorFormatRGB,
 	ColorFormatRGBA,
+	ColorFormatDepth,
 };
 
 enum LightType
@@ -67,5 +69,38 @@ enum LightType
 	LightTypePoint,
 	LightTypeDirection,
 };
+
+enum TextureType
+{
+	TextureTypeNull,
+	TextureTypeRGB,
+	TextureTypeRGBA,
+	TextureTypeDepth,
+};
+
+enum TextureFormat
+{
+	TextureFormatAlpha,
+	TextureFormatDepth,
+	TextureFormatLumince,
+	TextureFormatLuminceAlpha,	//灰度值+透明度
+	TextureFormatIntensity,		//亮度
+	TextureFormatRGB,
+	TextureFormatRGBA,
+};
+
+enum AttachmentPoint
+{
+	AttachmentPointColor0,
+	AttachmentPointColor1,
+	AttachmentPointColor2,
+	AttachmentPointColor3,
+	AttachmentPointColor4,
+	AttachmentPointColor5,
+	AttachmentPointDepth,
+	AttachmentPointStencil,
+};
+
+
 
 #endif

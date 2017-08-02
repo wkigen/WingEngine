@@ -175,6 +175,12 @@
     <ClInclude Include="pass\geometry_color_pass.h">
       <Filter>pass</Filter>
     </ClInclude>
+    <ClInclude Include="renderer\render_target.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="pass\geometry_texture_light_shadow_pass.h">
+      <Filter>pass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp">
@@ -283,6 +289,12 @@
       <Filter>pass</Filter>
     </ClCompile>
     <ClCompile Include="pass\geometry_color_pass.cpp">
+      <Filter>pass</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\render_target.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="pass\geometry_texture_light_shadow_pass.cpp">
       <Filter>pass</Filter>
     </ClCompile>
   </ItemGroup>
