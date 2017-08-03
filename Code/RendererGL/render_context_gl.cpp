@@ -126,29 +126,12 @@ namespace WingRendererGL
 		}
 	}
 
-	WingEngine::Program* RendererContextGL::createProgram(std::string name, std::string vs, std::string fs)
+	SmartPtr<Program> RendererContextGL::createProgram(std::string name, std::string vs, std::string fs)
 	{
-		SmartPtr<Program> program = getProgram(name);
-		if (program == nullptr)
-		{
-			program = WING_NEW ProgramGL();
-			program->create(vs, fs);
-			addProgram(name, program);
-		}
-
+		SmartPtr<Program> program = WING_NEW ProgramGL();	
+		program->create(vs, fs);
 		return program;
 	}
-
-	void RendererContextGL::useProgram(std::string name)
-	{
-		WingEngine::Program* program  = getProgram(name);
-		if (program != nullptr)
-		{
-			mCurrProgram = program;
-			mCurrProgram->use();
-		}
-	}
-
 
 	int32 RendererContextGL::bindStaticArrayBuffers(uint64 size, void* data)
 	{

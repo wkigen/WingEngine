@@ -10,7 +10,7 @@ const std::string geometry_texture_light_vs = "\
 							uniform mat4 u_projectViewMatrix;   \
 							uniform mat4 u_modelViewMatrix;   \
 							uniform mat4 u_transposeInverseMatrix;   \
-							uniform vec3 v_viewPosition;	\
+							uniform vec3 u_viewPosition;	\
 							varying vec2 v_textureCoordinate;	\
 							varying vec3 v_position;	\
 							varying vec3 v_normal;	\
@@ -24,7 +24,7 @@ const std::string geometry_texture_light_vs = "\
 								vec4 pos = u_modelViewMatrix * a_position ;  \
 								pos = pos / pos.w; \
 								lightdir = normalize(lightPos - pos.xyz);	\
-								vec3 eyedir = normalize(v_viewPosition - pos.xyz);	\
+								vec3 eyedir = normalize(u_viewPosition - pos.xyz);	\
 								halfvec = normalize(lightdir + eyedir);	\
 								v_normal = vec3(normalize(u_transposeInverseMatrix * a_normal));	\
 							}  \ ";

@@ -9,6 +9,7 @@
 #include <queue>
 #include "camera.h"
 #include "pass\base_pass.h"
+#include "light\light.h"
 
 namespace WingEngine
 {
@@ -20,46 +21,64 @@ namespace WingEngine
 	public:
 		~RendererSystem();
 
-		bool create(void* windowHandle, uint32 width, uint32 height);
-		void destroy();
+		bool				create(void* windowHandle, uint32 width, uint32 height);
+		void				destroy();
 
-		void render();
+		void				sort();
+		void				render();
 
-		void addRenderable(Renderable* able);
+		void				addRenderable(SmartPtr<Renderable> able);
 
-		BasePass* getRenderPass(std::string name);
+		SmartPtr<RenderPass>getRenderPass(std::string name);
 
-		Camera* getCamera() { return &mCamera; }
+		Camera*				getCamera() { return &mCamera; }
 
-		RendererContext* getRendererContext() { return mRendererContext; }
+		RendererContext*	getRendererContext() { return mRendererContext; }
 
-		uint32 getWidth() { return mWidth; }
-		uint32 getHeight() { return mHeight; }
+		uint32				getWidth() { return mWidth; }
+		uint32				getHeight() { return mHeight; }
 
-		void enableShadow(bool enable) { mIsShadow = enable; }
-		bool getEnableShadow() { return mIsShadow; }
+		void				enableShadow(bool enable) { mIsShadow = enable; }
+		bool				getEnableShadow() { return mIsShadow; }
+
+		void				enableLight(bool enable) { mIsLight = enable; }
+		bool				getEnableLight() { return mIsLight; }
+
+		SmartPtr<Program>	createProgram(std::string name,std::string verFileName, std::string fraFileName);
+		void				addProgram(std::string name, SmartPtr<Program> program);
+		void				useProgram(std::string name);
+		SmartPtr<Program>	getProgram(std::string name);
+
+		SmartPtr<Light>		getLight(std::string name);
+		void				addLight(std::string name, SmartPtr<Light> light);
 
 	private:
 		RendererSystem();
 
+		void				realRender();
 	private:
 		bool											mCreate;
 		bool											mIsShadow;
+		bool											mIsLight;
+
 		Camera											mCamera;
 
 		std::string										mRendererName;
 		RendererContext*								mRendererContext;
 		std::map<std::string, RendererContext*>			mRendererContexts;
 
-		SmartPtr<BasePass>								mCurrRenderPass;
-		std::map<std::string, SmartPtr<BasePass>>		mRenderPass;
+		SmartPtr<RenderPass>							mCurrRenderPass;
+		std::map<std::string, SmartPtr<RenderPass>>		mRenderPass;
 
 		uint32											mWidth;
 		uint32											mHeight;
 
 		std::list<SmartPtr<Renderable>>					mRenderables;
 	
+		std::map<std::string,SmartPtr<Program>>			mPrograms;
+		SmartPtr<Program>								mCurrProgram;
 
+		std::map<std::string, SmartPtr<Light>>			mLights;
 	};
 }
 

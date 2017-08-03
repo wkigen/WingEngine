@@ -1,6 +1,5 @@
 #include "base_pass.h"
 #include "renderer\renderer_system.h"
-#include "shader\base_shader.h"
 
 namespace WingEngine
 {
@@ -19,7 +18,7 @@ namespace WingEngine
 	void BasePass::init()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		mProgram = context->createProgram("base", base_vs, base_fs);
+		mProgram = RendererSystem::getInstance()->getProgram("base");
 
 		mAttribPosition = context->getAttribLocation(mProgram->getProgramID(), POSITION);
 		mUniformModelMatrix = context->getUniformLocation(mProgram->getProgramID(), MODELVIEWMARTIX);
@@ -31,7 +30,6 @@ namespace WingEngine
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 		
 		mProgram->use();
-
 
 	}
 

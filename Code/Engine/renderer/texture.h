@@ -1,5 +1,5 @@
-#ifndef _WING_ENGINE_COLOR_H_
-#define _WING_ENGINE_COLOR_H_
+#ifndef _WING_ENGINE_TEXTURE_H_
+#define _WING_ENGINE_TEXTURE_H_
 
 #include "common\engine_defines.h"
 #include "base\object.h"

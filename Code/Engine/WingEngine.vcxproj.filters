@@ -178,7 +178,10 @@
     <ClInclude Include="renderer\render_target.h">
       <Filter>renderer</Filter>
     </ClInclude>
-    <ClInclude Include="pass\geometry_texture_light_shadow_pass.h">
+    <ClInclude Include="pass\geometry_texture_light_shadow_first_pass.h">
+      <Filter>pass</Filter>
+    </ClInclude>
+    <ClInclude Include="pass\geometry_texture_light_shadow_second_pass.h">
       <Filter>pass</Filter>
     </ClInclude>
   </ItemGroup>
@@ -294,7 +297,10 @@
     <ClCompile Include="renderer\render_target.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
-    <ClCompile Include="pass\geometry_texture_light_shadow_pass.cpp">
+    <ClCompile Include="pass\geometry_texture_light_shadow_first_pass.cpp">
+      <Filter>pass</Filter>
+    </ClCompile>
+    <ClCompile Include="pass\geometry_texture_light_shadow_second_pass.cpp">
       <Filter>pass</Filter>
     </ClCompile>
   </ItemGroup>

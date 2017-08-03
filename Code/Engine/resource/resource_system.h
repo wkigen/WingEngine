@@ -41,11 +41,9 @@ namespace WingEngine
 		ResourceSystem();
 		
 
-
 	private:
 
 		bool				mCreate;
-
 
 		std::map<std::string, SmartPtr<Resource>>	mResource[ResourceTypeMax];
 		std::map<uint32, ResourceWriter*>			mResourceWriters;

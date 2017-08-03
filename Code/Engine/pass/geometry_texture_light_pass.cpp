@@ -1,6 +1,6 @@
 #include "geometry_texture_light_pass.h"
 #include "renderer\renderer_system.h"
-#include "shader\geometry_texture_light_shader.h"
+
 
 namespace WingEngine
 {
@@ -19,7 +19,7 @@ namespace WingEngine
 	void GeometryTextureLightPass::init()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		mProgram = context->createProgram("geometry_texture_light", geometry_texture_light_vs, geometry_texture_light_fs);
+		mProgram = RendererSystem::getInstance()->getProgram("geometry_texture_light");
 
 		mAttribPosition = context->getAttribLocation(mProgram->getProgramID(), POSITION);
 		mAttribNormal = context->getAttribLocation(mProgram->getProgramID(), NORMAL);

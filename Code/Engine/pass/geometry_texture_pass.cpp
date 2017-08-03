@@ -1,6 +1,6 @@
 #include "geometry_texture_pass.h"
 #include "renderer\renderer_system.h"
-#include "shader\geometry_texture_shader.h"
+
 
 namespace WingEngine
 {
@@ -19,7 +19,7 @@ namespace WingEngine
 	void GeometryTexturePass::init()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		mProgram = context->createProgram("geometry_texture", geometry_texture_vs, geometry_texture_fs);
+		mProgram = RendererSystem::getInstance()->getProgram("geometry_texture");
 
 		mAttribPosition = context->getAttribLocation(mProgram->getProgramID(), POSITION);
 		mAttribTextureCoordinate = context->getAttribLocation(mProgram->getProgramID(), TEXTIRECOORDINATE);

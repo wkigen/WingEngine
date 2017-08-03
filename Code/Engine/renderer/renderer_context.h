@@ -36,11 +36,7 @@ namespace WingEngine
 		virtual uint32		WETFormat2TFormat(TextureType textureType) = 0;
 		virtual uint32		WEAPoint2APoint(AttachmentPoint attachmentPoint) = 0;
 
-		virtual void		addProgram(std::string name, Program* program);
-		virtual Program*	getProgram(std::string name);
-
-		virtual Program*	createProgram(std::string name, std::string vs, std::string fs)=0;
-		virtual void		useProgram(std::string name)=0;
+		virtual SmartPtr<Program>	createProgram(std::string name, std::string vs, std::string fs)=0;
 
 		virtual int32		bindStaticArrayBuffers(uint64 size, void* data) = 0;
 		virtual int32		bindDynamicArrayBuffers(uint64 size, void* data) = 0;
@@ -73,8 +69,7 @@ namespace WingEngine
 		virtual void		draw(uint32 count) = 0;
 
 	protected:
-		std::map<std::string, SmartPtr<Program>>	mPrograms;
-		SmartPtr<Program>							mCurrProgram;
+
 
 	};
 }

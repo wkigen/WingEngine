@@ -17,6 +17,12 @@ public:
 		plane->setRenderPass(RendererSystem::getInstance()->getRenderPass("GeometryTextureLightPass"));
 		SceneSystem::getInstance()->addNode("plane", plane);
 
+		SmartPtr<Light> light = new PointLight();
+		light->setEnable(true);
+		light->translation(Vectorf(10.0, 10.0,0.0));
+		light->setColor(Color());
+		RendererSystem::getInstance()->addLight("mianLight",light);
+
 		Image* redImage = ResourceSystem::getInstance()->loadResource<Image>("res/image/red.png");
 		Image* whiteImage = ResourceSystem::getInstance()->loadResource<Image>("res/image/white.png");
 		Image* image = ResourceSystem::getInstance()->loadResource<Image>("res/image/test.png");

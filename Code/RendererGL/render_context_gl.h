@@ -30,8 +30,7 @@ namespace WingRendererGL
 		virtual uint32 WETFormat2TFormat(TextureType textureType);
 		virtual uint32 WEAPoint2APoint(AttachmentPoint attachmentPoint);
 
-		virtual WingEngine::Program* createProgram(std::string name, std::string vs, std::string fs);
-		virtual void useProgram(std::string name);
+		virtual SmartPtr<Program> createProgram(std::string name, std::string vs, std::string fs);
 
 		virtual int32 bindStaticArrayBuffers(uint64 size, void* data);
 		virtual int32 bindDynamicArrayBuffers(uint64 size, void* data);

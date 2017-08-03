@@ -32,11 +32,11 @@ namespace WingEngine
 
 	protected:
 
-		LightType mLightType;
-		real mRange;
-		Color mColor;
-		bool mEnable;
-		Vectorf mDirection;
+		LightType	mLightType;
+		real		mRange;
+		Color		mColor;
+		bool		mEnable;
+		Vectorf		mDirection;
 		
 
 	};

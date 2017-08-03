@@ -2,12 +2,19 @@
 #include "log\log.h"
 #include "plugin\plugin_system.h"
 #include "common\constant.h"
-#include "shader\test_shader.h"
 #include "allocator\allocator.h"
+#include "io\file_system.h"
+
+#include "shader\test_shader.h"
+#include "shader\base_shader.h"
+#include "shader\geometry_color_shader.h"
+#include "shader\geometry_texture_light_shader.h"
+#include "shader\geometry_texture_shader.h"
+
 #include "pass\geometry_color_pass.h"
 #include "pass\geometry_texture_pass.h"
 #include "pass\geometry_texture_light_pass.h"
-#include "pass\geometry_texture_light_shadow_pass.h"
+#include "pass\geometry_texture_light_shadow_first_pass.h"
 
 using namespace WingCore;
 
@@ -66,9 +73,13 @@ namespace WingEngine
 		mRendererName = mRendererContexts.begin()->first;
 		mRendererContext = mRendererContexts.begin()->second;
 
-		mRendererContext->createProgram("test", test_vs, test_fs);
-		mRendererContext->useProgram("test");
+		mPrograms["base"] = mRendererContext->createProgram("test", base_vs, base_fs);
+		mPrograms["geometry_color"] = mRendererContext->createProgram("geometry_color", geometry_color_vs, geometry_color_fs);
+		mPrograms["geometry_texture"]= mRendererContext->createProgram("geometry_texture", geometry_texture_vs, geometry_texture_fs);
+		//mPrograms["geometry_texture_light"]= mRendererContext->createProgram("geometry_texture_light", geometry_texture_light_vs, geometry_texture_light_fs);
+		mPrograms["geometry_texture_light"] = createProgram("geometry_texture_light", "res/shader/geometry_texture_light_shadow.vert", "res/shader/geometry_texture_light_shadow.frag");
 
+		useProgram("base");
 		mRendererContext->enableDepth(true);
 
 		SmartPtr<GeometryColorPass> geometryPass = WING_NEW GeometryColorPass();
@@ -83,9 +94,9 @@ namespace WingEngine
 		geometryTextureLightPass->init();
 		mRenderPass["GeometryTextureLightPass"] = geometryTextureLightPass;
 
-		SmartPtr<GeometryTextureLightShadowPass> geometryTextureLightShadowPass = WING_NEW GeometryTextureLightShadowPass(mWidth,mHeight);
+		SmartPtr<GeometryTextureLightShadowFirstPass> geometryTextureLightShadowPass = WING_NEW GeometryTextureLightShadowFirstPass(mWidth,mHeight);
 		geometryTextureLightShadowPass->init();
-		mRenderPass["GeometryTextureLightShadowPass"] = geometryTextureLightShadowPass;
+		mRenderPass["GeometryTextureLightShadowFirstPass"] = geometryTextureLightShadowPass;
 
 		return true;
 	}
@@ -99,6 +110,71 @@ namespace WingEngine
 			iter++;
 		}
 	}
+	SmartPtr<Program> RendererSystem::createProgram(std::string name, std::string verFileName, std::string fraFileName)
+	{
+		FileStream verStream,fraStream;
+		if (!FileSystem::getInstance()->openFile(verFileName, verStream, ACCESS::Read))
+			return nullptr;
+		if (!FileSystem::getInstance()->openFile(fraFileName, fraStream, ACCESS::Read))
+			return nullptr;
+
+		int8 *verStr,*fraStr;
+		uint64 verSize = verStream.getSize();
+		verStr = (int8*)WING_ALLOC(verSize +1);
+		verStream.read(verStr, verSize);
+		verStr[verSize] = '\0';
+
+		uint64 fraSize = fraStream.getSize();
+		fraStr = (int8*)WING_ALLOC(fraSize+1);
+		fraStream.read(fraStr, fraSize);
+		fraStr[fraSize] = '\0';
+
+		SmartPtr<Program> program = mRendererContext->createProgram(name, verStr, fraStr);
+		addProgram(name, program);
+
+		WING_FREE(verStr);
+		WING_FREE(fraStr);
+
+		return program;
+	}
+
+	void RendererSystem::addProgram(std::string name, SmartPtr<Program> program)
+	{
+		if (program != nullptr)
+		{
+			if (mPrograms.find(name) != mPrograms.end())
+			{
+				WING_LOG_WARN("is has same name [%s] in programs list", name.c_str());
+				return;
+			}
+			mPrograms[name] = program;
+		}
+	}
+
+	void RendererSystem::useProgram(std::string name)
+	{
+		Program* program = getProgram(name);
+		if (program != nullptr)
+		{
+			mCurrProgram = program;
+			mCurrProgram->use();
+		}
+	}
+
+	SmartPtr<Program> RendererSystem::getProgram(std::string name)
+	{
+		std::map<std::string, SmartPtr<Program>>::iterator itor = mPrograms.find(name);
+		if (itor != mPrograms.end())
+		{
+			return itor->second;
+		}
+		return nullptr;
+	}
+
+	void RendererSystem::sort()
+	{
+
+	}
 
 	void RendererSystem::render()
 	{
@@ -106,44 +182,84 @@ namespace WingEngine
 		mRendererContext->clear();
 		if (mIsShadow)
 		{
+			RenderPass* pass = getRenderPass("GeometryTextureLightShadowFirstPass");
+			GeometryTextureLightShadowFirstPass* firstPass = static_cast<GeometryTextureLightShadowFirstPass*>(pass);
+			firstPass->preRender();
+
+			realRender();
+
+			firstPass->postRender();
+			mRendererContext->swapBuffers();
+
+			Texture* depthTexture = firstPass->getDepthTexture();
+			Texture* colorTexture = firstPass->getColorTexture();
 
 		}
 		else
 		{
-			std::list<SmartPtr<Renderable>>::iterator beg = mRenderables.begin();
-			SmartPtr<RenderPass> lastRenderPass;
-			for (; beg != mRenderables.end(); beg++)
-			{
-				SmartPtr<RenderPass> currRenderPass = (*beg)->getRenderPass();
-				if(currRenderPass != lastRenderPass)
-					currRenderPass->preRender();
-
-				currRenderPass->render(*beg);
-
-				if (currRenderPass != lastRenderPass)
-					currRenderPass->postRender();
-
-				lastRenderPass = currRenderPass;
-			};
-			mRenderables.clear();
+			realRender();
 			mRendererContext->swapBuffers();
 		}
+
+		mRenderables.clear();
 	}
 
-	void RendererSystem::addRenderable(Renderable* able)
+	void RendererSystem::realRender()
+	{
+		std::list<SmartPtr<Renderable>>::iterator beg = mRenderables.begin();
+		SmartPtr<RenderPass> lastRenderPass;
+		for (; beg != mRenderables.end(); beg++)
+		{
+			SmartPtr<RenderPass> currRenderPass = (*beg)->getRenderPass();
+			if (currRenderPass != lastRenderPass)
+				currRenderPass->preRender();
+
+			currRenderPass->render(*beg);
+
+			if (currRenderPass != lastRenderPass)
+				currRenderPass->postRender();
+
+			lastRenderPass = currRenderPass;
+		};
+	}
+
+	void RendererSystem::addRenderable(SmartPtr<Renderable> able)
 	{
 		mRenderables.push_back(able);
 	}
 
 
-	BasePass* RendererSystem::getRenderPass(std::string name)
+	SmartPtr<RenderPass> RendererSystem::getRenderPass(std::string name)
 	{
-		std::map<std::string, SmartPtr<BasePass>>::iterator iter = mRenderPass.find(name);
+		std::map<std::string, SmartPtr<RenderPass>>::iterator iter = mRenderPass.find(name);
 		if (iter != mRenderPass.end())
 		{
 			return iter->second;
 		}
 		return nullptr;
+	}
+
+	SmartPtr<Light> RendererSystem::getLight(std::string name)
+	{
+		std::map<std::string, SmartPtr<Light>>::iterator iter = mLights.find(name);
+		if (iter != mLights.end())
+		{
+			return iter->second;
+		}
+		return nullptr;
+	}
+
+	void RendererSystem::addLight(std::string name, SmartPtr<Light> light)
+	{
+		if (light != nullptr)
+		{
+			if (mLights.find(name) != mLights.end())
+			{
+				WING_LOG_WARN("is has same name [%s] in light list", name.c_str());
+				return;
+			}
+			mLights[name] = light;
+		}
 	}
 
 }

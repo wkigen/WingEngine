@@ -1,27 +1,25 @@
-#include "geometry_texture_light_shadow_pass.h"
+#include "geometry_texture_light_shadow_second_pass.h"
 #include "renderer\renderer_system.h"
-#include "shader\geometry_texture_light_shader.h"
+
 
 namespace WingEngine
 {
 
 
-	GeometryTextureLightShadowPass::GeometryTextureLightShadowPass(uint32 width, uint32 height)
-		:mWidth(width)
-		,mHeight(height)
+	GeometryTextureLightShadowSecondPass::GeometryTextureLightShadowSecondPass()
 	{
 
 	}
 
-	GeometryTextureLightShadowPass::~GeometryTextureLightShadowPass()
+	GeometryTextureLightShadowSecondPass::~GeometryTextureLightShadowSecondPass()
 	{
 
 	}
 
-	void GeometryTextureLightShadowPass::init()
+	void GeometryTextureLightShadowSecondPass::init()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		mProgram = context->createProgram("geometry_texture_light", geometry_texture_light_vs, geometry_texture_light_fs);
+		mProgram = RendererSystem::getInstance()->getProgram("geometry_texture_light_shadow");
 
 		mAttribPosition = context->getAttribLocation(mProgram->getProgramID(), POSITION);
 		mAttribNormal = context->getAttribLocation(mProgram->getProgramID(), NORMAL);
@@ -35,32 +33,26 @@ namespace WingEngine
 		mUniformAmbient = context->getUniformLocation(mProgram->getProgramID(), AMBIENT);
 		mUniformDiffuse = context->getUniformLocation(mProgram->getProgramID(), DIFFUSE);
 		mUniformSpecular = context->getUniformLocation(mProgram->getProgramID(), SPECULAR);
-
-		mTexture = WING_NEW Texture(mWidth, mHeight,TextureTypeRGB, TextureFormatRGB, ColorFormatRGB, DataElementUByte);
-		mTexture->bindGPUBuffer();
-		mRenderTarget = WING_NEW RenderTarget(mTexture);
-		mRenderTarget->setAttachmentPoint(AttachmentPointColor0);
-		mRenderTarget->bindGPUBuffer();
-
-		mDepthTexture = WING_NEW Texture(mWidth, mHeight, TextureTypeDepth, TextureFormatDepth, ColorFormatDepth, DataElementUInt);
-		mDepthTexture->bindGPUBuffer();
-		mDepthRenderTarget = WING_NEW RenderTarget(mDepthTexture);
-		mDepthRenderTarget->setAttachmentPoint(AttachmentPointDepth);
-		mDepthRenderTarget->bindGPUBuffer();
 	}
 
-	void GeometryTextureLightShadowPass::preRender(Renderable* renderable)
+	void GeometryTextureLightShadowSecondPass::preRender()
+	{
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+
+		mProgram->use();
+
+	}
+
+	void GeometryTextureLightShadowSecondPass::render(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
 		Vectorf viewPosition = RendererSystem::getInstance()->getCamera()->getPosition();
 		Material* material = renderable->getMaterial();
 
-		mProgram->use();
-		
 		context->bindArrayBuffers(renderable->getVertixData()->getGPUBufferId());
 		context->bindElementBuffers(renderable->getIndeiceData()->getGPUBufferId());
-		
+
 		DataElement* dataElement = renderable->getVertixData()->getElement();
 
 		context->enableVertexAttribArray(mAttribPosition);
@@ -72,6 +64,7 @@ namespace WingEngine
 		context->vertexAttribPointer(mAttribNormal, normalFormat.mSize, false, dataElement->getSize(), (void*)(normalFormat.mOffest*dataElement->getElementTypeSize()));
 
 		context->bindTexture(renderable->getMaterial()->getTexture()->getGPUBufferId());
+
 		context->enableVertexAttribArray(mAttribTextureCoordinate);
 		ElementFormat textureFormat = renderable->getVertixData()->getElement()->getElementFormat(DataElementName::DataElementTexture);
 		context->vertexAttribPointer(mAttribTextureCoordinate, textureFormat.mSize, false, dataElement->getSize(), (void*)(textureFormat.mOffest*dataElement->getElementTypeSize()));
@@ -91,22 +84,11 @@ namespace WingEngine
 		context->setUniform3f(mUniformDiffuse, material->getDiffuse());
 		context->setUniform3f(mUniformSpecular, material->getSpecluar());
 
+		context->draw(renderable->getIndeiceData()->getDataNum());
+
 	}
 
-	void GeometryTextureLightShadowPass::render(Renderable* renderable)
-	{
-		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-
-		context->bindRenderTarget(mRenderTarget->getTargetId());
-		context->clear();
-		BasePass::render(renderable);
-	
-		context->bindRenderTarget(INVALID_BUFFERS);
-		context->bindTexture(mTexture->getGPUBufferId());
-		BasePass::render(renderable);
-	}
-
-	void GeometryTextureLightShadowPass::postRender()
+	void GeometryTextureLightShadowSecondPass::postRender()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 

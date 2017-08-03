@@ -1,6 +1,6 @@
 #include "geometry_color_pass.h"
 #include "renderer\renderer_system.h"
-#include "shader\geometry_color_shader.h"
+
 
 namespace WingEngine
 {
@@ -19,7 +19,7 @@ namespace WingEngine
 	void GeometryColorPass::init()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		mProgram = context->createProgram("geometry_color", geometry_color_vs, geometry_color_fs);
+		mProgram = RendererSystem::getInstance()->getProgram("geometry_color");
 
 		mAttribPosition = context->getAttribLocation(mProgram->getProgramID(), POSITION);
 		mAttribColor = context->getAttribLocation(mProgram->getProgramID(), COLOR);

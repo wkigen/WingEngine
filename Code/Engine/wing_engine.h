@@ -15,3 +15,6 @@
 #include "pass\geometry_texture_pass.h"
 
 #include "renderer\renderer_system.h"
+
+#include "light\light.h"
+#include "light\point_light.h"
