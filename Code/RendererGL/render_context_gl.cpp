@@ -275,9 +275,24 @@ namespace WingRendererGL
 		return location;
 	}
 
+	void RendererContextGL::setUniform1d(int32 location, int32 data)
+	{
+		glUniform1i(location, data);
+	}
+
+	void RendererContextGL::setUniform1dv(int32 location, uint32 count, int32* data)
+	{
+		glUniform1iv(location, count, data);
+	}
+
 	void RendererContextGL::setUniform1f(int32 location, real one)
 	{
 		glUniform1f(location, one);
+	}
+
+	void RendererContextGL::setUniform1fv(int32 location, uint32 count, real* data)
+	{
+		glUniform1fv(location, count, data);
 	}
 
 	void RendererContextGL::setUniform2f(int32 location,  real one, real two)
@@ -285,9 +300,19 @@ namespace WingRendererGL
 		glUniform2f(location, one,two);
 	}
 
+	void RendererContextGL::setUniform2fv(int32 location, uint32 count, real* data)
+	{
+		glUniform2fv(location, count, data);
+	}
+
 	void RendererContextGL::setUniform3f(int32 location, real one, real two, real three)
 	{
 		glUniform3f(location, one, two,three);
+	}
+
+	void RendererContextGL::setUniform3fv(int32 location, uint32 count, real* data)
+	{
+		glUniform3fv(location, count, data);
 	}
 
 	void RendererContextGL::setUniform3f(int32 location, Vectorf v)
@@ -298,6 +323,11 @@ namespace WingRendererGL
 	void RendererContextGL::setUniform4f(int32 location, real one, real two, real three, real four)
 	{
 		glUniform4f(location, one, two,three,four);
+	}
+
+	void RendererContextGL::setUniform4fv(int32 location, uint32 count, real* data)
+	{
+		glUniform4fv(location, count, data);
 	}
 
 	void RendererContextGL::setUniformMatrix44f(int32 location, int32 count, Matrix44 matrix)

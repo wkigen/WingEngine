@@ -6,6 +6,7 @@
 #define INVALID_TEXTURE -1
 #define INVALID_BUFFERS 0
 
+#define MAX_LIGHT 5
 
 enum PluginType
 {

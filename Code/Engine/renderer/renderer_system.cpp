@@ -11,6 +11,7 @@
 #include "shader\geometry_texture_light_shader.h"
 #include "shader\geometry_texture_shader.h"
 
+#include "pass\base_render_pass.h"
 #include "pass\geometry_color_pass.h"
 #include "pass\geometry_texture_pass.h"
 #include "pass\geometry_texture_light_pass.h"
@@ -76,8 +77,8 @@ namespace WingEngine
 		mPrograms["base"] = mRendererContext->createProgram("test", base_vs, base_fs);
 		mPrograms["geometry_color"] = mRendererContext->createProgram("geometry_color", geometry_color_vs, geometry_color_fs);
 		mPrograms["geometry_texture"]= mRendererContext->createProgram("geometry_texture", geometry_texture_vs, geometry_texture_fs);
-		//mPrograms["geometry_texture_light"]= mRendererContext->createProgram("geometry_texture_light", geometry_texture_light_vs, geometry_texture_light_fs);
-		mPrograms["geometry_texture_light"] = createProgram("geometry_texture_light", "res/shader/geometry_texture_light_shadow.vert", "res/shader/geometry_texture_light_shadow.frag");
+		mPrograms["geometry_texture_light"]= mRendererContext->createProgram("geometry_texture_light", geometry_texture_light_vs, geometry_texture_light_fs);
+		mPrograms["base_render"] = createProgram("base_render", "res/shader/base_render.vert", "res/shader/base_render.frag");
 
 		useProgram("base");
 		mRendererContext->enableDepth(true);
@@ -97,6 +98,10 @@ namespace WingEngine
 		SmartPtr<GeometryTextureLightShadowFirstPass> geometryTextureLightShadowPass = WING_NEW GeometryTextureLightShadowFirstPass(mWidth,mHeight);
 		geometryTextureLightShadowPass->init();
 		mRenderPass["GeometryTextureLightShadowFirstPass"] = geometryTextureLightShadowPass;
+
+		SmartPtr<BaseRenderPass> baseRenderPass = WING_NEW BaseRenderPass();
+		baseRenderPass->init();
+		mRenderPass["BaseRenderPass"] = baseRenderPass;
 
 		return true;
 	}
@@ -237,6 +242,35 @@ namespace WingEngine
 			return iter->second;
 		}
 		return nullptr;
+	}
+
+	int8 RendererSystem::getLightsData(int32* type, real* postion, real* direction, real* color)
+	{
+		int8 count = 0;
+		std::map<std::string, SmartPtr<Light>>::iterator iter = mLights.begin();
+		for (; iter != mLights.end(); iter++)
+		{
+			SmartPtr<Light> light = iter->second;
+
+			*type++ = light->getLightType();
+
+			*postion++ = light->getPosition().x;
+			*postion++ = light->getPosition().y;
+			*postion++ = light->getPosition().z;
+
+			*direction++ = light->getDirection().x;
+			*direction++ = light->getDirection().y;
+			*direction++ = light->getDirection().z;
+
+			*color++ = light->getColor().r;
+			*color++ = light->getColor().g;
+			*color++ = light->getColor().b;
+			*color++ = light->getColor().a;
+
+			count++  ;
+		}
+
+		return count;
 	}
 
 	SmartPtr<Light> RendererSystem::getLight(std::string name)

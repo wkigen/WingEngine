@@ -54,11 +54,21 @@ namespace WingRendererGL
 
 		virtual int32 getUniformLocation(int32 programId, std::string name);
 
+		virtual void  setUniform1d(int32 location, int32 data);
+		virtual void  setUniform1dv(int32 location, uint32 count, int32* data);
 		virtual void  setUniform1f(int32 location, real one);
+		virtual void  setUniform1fv(int32 location,uint32 count , real* data);
+
 		virtual void  setUniform2f(int32 location, real one, real two);
+		virtual void  setUniform2fv(int32 location, uint32 count, real* data);
+
 		virtual void  setUniform3f(int32 location, real one, real two, real three);
+		virtual void  setUniform3fv(int32 location, uint32 count, real* data);
 		virtual void  setUniform3f(int32 location, Vectorf v);
+
 		virtual void  setUniform4f(int32 location, real one, real two, real three, real four);
+		virtual void  setUniform4fv(int32 location, uint32 count, real* data);
+
 		virtual void  setUniformMatrix44f(int32 location,int32 count, Matrix44 matrix);
 
 		virtual void  draw(uint32 count);

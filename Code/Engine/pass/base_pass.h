@@ -36,6 +36,12 @@ namespace WingEngine
 		int32 mUniformTexture;
 		int32 mUniformViewPosition;
 
+		int32 mUniformLightNum;
+		int32 mUniformLightType;
+		int32 mUniformLightPosition;
+		int32 mUniformLightDirection;
+		int32 mUniformLightColor;
+
 		int32 mUniformShiness;
 		int32 mUniformAmbient;
 		int32 mUniformDiffuse;

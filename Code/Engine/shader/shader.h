@@ -14,6 +14,12 @@
 #define PROJECTMODELVIEWMARTIX		"u_projectModelViewMatrix"
 #define TRANSPOSEINVERSEMATRIX		"u_transposeInverseMatrix"
 
+#define LIGHTNUM					"u_lightNum"
+#define LIGHTTYPE					"u_lightType"
+#define LIGHTPOSITION				"u_lightPosition"
+#define LIGHTDIRECTION				"u_lightDirection"
+#define LIGHTCOLOR					"u_lightColor"
+
 #define SHINESS						"u_shiness"
 #define AMBIENT						"u_ambient"
 #define DIFFUSE						"u_diffuse"

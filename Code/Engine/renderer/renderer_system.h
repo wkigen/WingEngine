@@ -49,8 +49,10 @@ namespace WingEngine
 		void				useProgram(std::string name);
 		SmartPtr<Program>	getProgram(std::string name);
 
+		int8				getLightsData(int32* type,real* postion,real* direction,real* color);
 		SmartPtr<Light>		getLight(std::string name);
 		void				addLight(std::string name, SmartPtr<Light> light);
+		
 
 	private:
 		RendererSystem();

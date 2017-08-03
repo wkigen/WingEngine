@@ -1,11 +1,17 @@
+
 uniform sampler2D u_texture;
 
 uniform vec3 u_viewPosition;
+
+uniform int u_lightNum;
+uniform int u_lightType[5];
+uniform vec3 u_lightPosition[5];
+uniform vec3 u_lightDirection[5];
+uniform vec4 u_lightColor[5];
 uniform float u_shiness;
 uniform vec3 u_ambient;
 uniform vec3 u_diffuse;
 uniform vec3 u_specular;
-
 
 varying vec4 v_position;
 varying vec3 v_normal;
@@ -21,7 +27,7 @@ float specularfract = 0.0;
 void calLight()
 {
     vec3 normal = v_normal;
-    vec3 lightPos = vec3(5.0,5.0,0.0);
+    vec3 lightPos = u_lightPosition[0];
     vec4 pos = v_position / v_position.w;
     vec3 lightdir = normalize(lightPos - pos.xyz);
     vec3 eyedir = normalize(u_viewPosition - pos.xyz);

@@ -10,16 +10,16 @@ public:
 	{
 
 		SmartPtr<Cube> cube = new Cube();
-		cube->setRenderPass(RendererSystem::getInstance()->getRenderPass("GeometryTextureLightPass"));
+		cube->setRenderPass(RendererSystem::getInstance()->getRenderPass("BaseRenderPass"));
 		SceneSystem::getInstance()->addNode("cube",cube);
 
 		SmartPtr<Plane> plane = new Plane();
-		plane->setRenderPass(RendererSystem::getInstance()->getRenderPass("GeometryTextureLightPass"));
+		plane->setRenderPass(RendererSystem::getInstance()->getRenderPass("BaseRenderPass"));
 		SceneSystem::getInstance()->addNode("plane", plane);
 
 		SmartPtr<Light> light = new PointLight();
 		light->setEnable(true);
-		light->translation(Vectorf(10.0, 10.0,0.0));
+		light->translation(Vectorf(5.0,5.0,0.0));
 		light->setColor(Color());
 		RendererSystem::getInstance()->addLight("mianLight",light);
 
