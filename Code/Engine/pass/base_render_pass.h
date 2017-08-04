@@ -23,7 +23,8 @@ namespace WingEngine
 
 	protected:
 
-
+		int32 *mLightType;
+		real *mLightPostion, *mLightDirection, *mLightColor;
 	};
 
 

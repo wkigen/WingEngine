@@ -41,7 +41,22 @@ namespace WingEngine
 
 	void BaseRenderPass::preRender()
 	{
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+
 		mProgram->use();
+
+		mLightType = (int32*)WING_ALLOC(sizeof(uint32)  * MAX_LIGHT);
+		mLightPostion = (real*)WING_ALLOC(sizeof(real) * 3 * MAX_LIGHT);
+		mLightDirection = (real*)WING_ALLOC(sizeof(real) * 3 * MAX_LIGHT);
+		mLightColor = (real*)WING_ALLOC(sizeof(real) * 4 * MAX_LIGHT);
+		int8 lightNum = RendererSystem::getInstance()->getLightsData(mLightType, mLightPostion, mLightDirection, mLightColor);
+
+		context->setUniform1d(mUniformLightNum, lightNum);
+		context->setUniform1dv(mUniformLightType, MAX_LIGHT, mLightType);
+		context->setUniform3fv(mUniformLightPosition, MAX_LIGHT, mLightPostion);
+		context->setUniform3fv(mUniformLightDirection, MAX_LIGHT, mLightDirection);
+		context->setUniform3fv(mUniformLightColor, MAX_LIGHT, mLightColor);
+
 	}
 
 	void BaseRenderPass::render(Renderable* renderable)
@@ -80,27 +95,10 @@ namespace WingEngine
 
 		context->setUniform3f(mUniformViewPosition, viewPosition.x, viewPosition.y, viewPosition.z);
 
-
-		int32 *lightType;
-		real *lightPostion, *lightDirection, *lightColor;
-		lightType = (int32*)WING_ALLOC(sizeof(uint32)  * MAX_LIGHT);
-		lightPostion = (real*)WING_ALLOC(sizeof(real) * 3 * MAX_LIGHT);
-		lightDirection = (real*)WING_ALLOC(sizeof(real) * 3 * MAX_LIGHT);
-		lightColor = (real*)WING_ALLOC(sizeof(real) * 4 * MAX_LIGHT);
-		int8 lightNum = RendererSystem::getInstance()->getLightsData(lightType, lightPostion, lightDirection, lightColor);
-
-		context->setUniform1d(mUniformLightType, lightNum);
-		context->setUniform1dv(mUniformLightType, MAX_LIGHT, lightType);
-		context->setUniform3fv(mUniformLightPosition, MAX_LIGHT, lightPostion);
-		context->setUniform3fv(mUniformLightDirection, MAX_LIGHT, lightDirection);
-		context->setUniform3fv(mUniformLightColor, MAX_LIGHT, lightColor);
-
 		context->setUniform1f(mUniformShiness, material->getShiness());
 		context->setUniform3f(mUniformAmbient, material->getAmbient());
 		context->setUniform3f(mUniformDiffuse, material->getDiffuse());
 		context->setUniform3f(mUniformSpecular, material->getSpecluar());
-
-
 
 		context->draw(renderable->getIndeiceData()->getDataNum());
 
@@ -114,6 +112,11 @@ namespace WingEngine
 		context->bindElementBuffers(INVALID_BUFFERS);
 		context->bindTexture(INVALID_BUFFERS);
 		context->disableVertexAttribArray();
+
+		WING_FREE(mLightType);
+		WING_FREE(mLightPostion);
+		WING_FREE(mLightDirection);
+		WING_FREE(mLightColor);
 	}
 
 }
