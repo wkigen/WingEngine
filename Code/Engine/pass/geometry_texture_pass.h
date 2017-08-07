@@ -20,7 +20,7 @@ namespace WingEngine
 		virtual void postRender();
 
 	protected:
-
+		virtual void _render(Renderable* renderable);
 
 	};
 

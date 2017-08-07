@@ -79,6 +79,7 @@ namespace WingEngine
 		mPrograms["geometry_texture"]= mRendererContext->createProgram("geometry_texture", geometry_texture_vs, geometry_texture_fs);
 		mPrograms["geometry_texture_light"]= mRendererContext->createProgram("geometry_texture_light", geometry_texture_light_vs, geometry_texture_light_fs);
 		mPrograms["base_render"] = createProgram("base_render", "res/shader/base_render.vert", "res/shader/base_render.frag");
+		mPrograms["shadow_map_first"] = createProgram("base_render", "res/shader/shadow_map_first.vert", "res/shader/shadow_map_first.frag");
 
 		useProgram("base");
 		mRendererContext->enableDepth(true);
@@ -191,7 +192,11 @@ namespace WingEngine
 			GeometryTextureLightShadowFirstPass* firstPass = static_cast<GeometryTextureLightShadowFirstPass*>(pass);
 			firstPass->preRender();
 
-			realRender();
+			std::list<SmartPtr<Renderable>>::iterator beg = mRenderables.begin();
+			for (; beg != mRenderables.end(); beg++)
+			{
+				firstPass->render(*beg);
+			};
 
 			firstPass->postRender();
 			mRendererContext->swapBuffers();

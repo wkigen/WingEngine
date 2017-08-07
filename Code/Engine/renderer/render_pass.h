@@ -9,6 +9,11 @@ using namespace WingCore;
 
 namespace WingEngine
 {
+	struct RenderPassParam
+	{
+
+	};
+
 
 	class Renderable;
 
@@ -26,7 +31,7 @@ namespace WingEngine
 		virtual void postRender() = 0;
 
 	protected:
-
+		virtual void _render(Renderable* renderable) = 0;
 	};
 
 

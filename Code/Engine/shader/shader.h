@@ -25,5 +25,7 @@
 #define DIFFUSE						"u_diffuse"
 #define SPECULAR					"u_specular"
 
+#define ISSHADOW					"u_isShadow"
+
 
 #endif

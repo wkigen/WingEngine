@@ -59,7 +59,7 @@ namespace WingEngine
 
 	}
 
-	void BaseRenderPass::render(Renderable* renderable)
+	void BaseRenderPass::_render(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
@@ -71,20 +71,24 @@ namespace WingEngine
 
 		DataElement* dataElement = renderable->getVertixData()->getElement();
 
+		//顶点
 		context->enableVertexAttribArray(mAttribPosition);
 		ElementFormat positionFormat = renderable->getVertixData()->getElement()->getElementFormat(DataElementName::DataElementPosition);
 		context->vertexAttribPointer(mAttribPosition, positionFormat.mSize, false, dataElement->getSize(), (void*)(positionFormat.mOffest*dataElement->getElementTypeSize()));
 
+		//法线
 		context->enableVertexAttribArray(mAttribNormal);
 		ElementFormat normalFormat = renderable->getVertixData()->getElement()->getElementFormat(DataElementName::DataElementNormal);
 		context->vertexAttribPointer(mAttribNormal, normalFormat.mSize, false, dataElement->getSize(), (void*)(normalFormat.mOffest*dataElement->getElementTypeSize()));
 
+		//纹理
 		context->bindTexture(renderable->getMaterial()->getTexture()->getGPUBufferId());
 
 		context->enableVertexAttribArray(mAttribTextureCoordinate);
 		ElementFormat textureFormat = renderable->getVertixData()->getElement()->getElementFormat(DataElementName::DataElementTexture);
 		context->vertexAttribPointer(mAttribTextureCoordinate, textureFormat.mSize, false, dataElement->getSize(), (void*)(textureFormat.mOffest*dataElement->getElementTypeSize()));
 
+		//世界矩阵 投影矩阵
 		context->setUniformMatrix44f(mUniformModelMatrix, 1, renderable->getModelViewMatrinx44());
 		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44);
 
@@ -93,13 +97,18 @@ namespace WingEngine
 		inverseTranspose = inverseTranspose.transpose();
 		context->setUniformMatrix44f(mUniformTransposeInverseMatrix, 1, inverseTranspose);
 
-		context->setUniform3f(mUniformViewPosition, viewPosition.x, viewPosition.y, viewPosition.z);
+		context->setUniform3f(mUniformViewPosition, viewPosition);
 
 		context->setUniform1f(mUniformShiness, material->getShiness());
 		context->setUniform3f(mUniformAmbient, material->getAmbient());
 		context->setUniform3f(mUniformDiffuse, material->getDiffuse());
 		context->setUniform3f(mUniformSpecular, material->getSpecluar());
+	}
 
+	void BaseRenderPass::render(Renderable* renderable)
+	{
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+		_render(renderable);
 		context->draw(renderable->getIndeiceData()->getDataNum());
 
 	}

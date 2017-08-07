@@ -23,8 +23,14 @@ namespace WingEngine
 
 	protected:
 
-		int32 *mLightType;
-		real *mLightPostion, *mLightDirection, *mLightColor;
+		virtual void _render(Renderable* renderable);
+
+	protected:
+
+		SmartPtr<Texture>	mDepthTexture;
+		int32				*mLightType;
+		real				*mLightPostion, *mLightDirection, *mLightColor;
+
 	};
 
 

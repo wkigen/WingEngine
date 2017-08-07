@@ -22,8 +22,12 @@ namespace WingEngine
 		virtual void postRender();
 
 	protected:
+	
+		virtual void _render(Renderable* renderable);
 
-		Program* mProgram;
+	protected:
+
+		Program*			mProgram;
 
 		int32 mAttribColor;
 		int32 mAttribPosition;

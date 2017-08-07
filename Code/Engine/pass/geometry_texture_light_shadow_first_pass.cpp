@@ -20,6 +20,13 @@ namespace WingEngine
 
 	void GeometryTextureLightShadowFirstPass::init()
 	{
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+		mProgram = RendererSystem::getInstance()->getProgram("shadow_map_first");
+
+		mAttribPosition = context->getAttribLocation(mProgram->getProgramID(), POSITION);
+		mUniformModelMatrix = context->getUniformLocation(mProgram->getProgramID(), MODELVIEWMARTIX);
+		mUniformProjectdViewMatrix = context->getUniformLocation(mProgram->getProgramID(), PROJECTVIEWMARTIX);
+		mUniformViewPosition = context->getUniformLocation(mProgram->getProgramID(), VIEWPOSITION);
 
 		mTexture = WING_NEW Texture(mWidth, mHeight,TextureTypeRGB, TextureFormatRGB, ColorFormatRGB, DataElementUByte);
 		mTexture->bindGPUBuffer();
@@ -42,9 +49,28 @@ namespace WingEngine
 		context->clear();
 	}
 
+	void GeometryTextureLightShadowFirstPass::_render(Renderable* renderable)
+	{
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
+		Vectorf viewPosition = RendererSystem::getInstance()->getCamera()->getPosition();
+
+		context->bindArrayBuffers(renderable->getVertixData()->getGPUBufferId());
+		context->bindElementBuffers(renderable->getIndeiceData()->getGPUBufferId());
+
+		//世界矩阵 投影矩阵
+		context->setUniformMatrix44f(mUniformModelMatrix, 1, renderable->getModelViewMatrinx44());
+		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44);
+
+		context->setUniform3f(mUniformViewPosition, viewPosition);
+	}
+
 	void GeometryTextureLightShadowFirstPass::render(Renderable* renderable)
 	{
 	
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+		_render(renderable);
+		context->draw(renderable->getIndeiceData()->getDataNum());
 	}
 
 	void GeometryTextureLightShadowFirstPass::postRender()

@@ -34,9 +34,8 @@ namespace WingEngine
 		mProgram->use();
 
 	}
-	
 
-	void GeometryColorPass::render(Renderable* renderable)
+	void GeometryColorPass::_render(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
@@ -57,7 +56,13 @@ namespace WingEngine
 		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44);
 
 		context->bindElementBuffers(renderable->getIndeiceData()->getGPUBufferId());
+	}
+	
 
+	void GeometryColorPass::render(Renderable* renderable)
+	{
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+		_render(renderable);
 		context->draw(renderable->getIndeiceData()->getDataNum());
 	}
 

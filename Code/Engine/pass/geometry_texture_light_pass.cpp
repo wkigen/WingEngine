@@ -43,7 +43,7 @@ namespace WingEngine
 
 	}
 
-	void GeometryTextureLightPass::render(Renderable* renderable)
+	void GeometryTextureLightPass::_render(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
 		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
@@ -84,6 +84,12 @@ namespace WingEngine
 		context->setUniform3f(mUniformDiffuse, material->getDiffuse());
 		context->setUniform3f(mUniformSpecular, material->getSpecluar());
 
+	}
+
+	void GeometryTextureLightPass::render(Renderable* renderable)
+	{
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+		_render(renderable);
 		context->draw(renderable->getIndeiceData()->getDataNum());
 
 	}
