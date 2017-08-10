@@ -1,5 +1,5 @@
 uniform int u_lightNum = 0;
-uniform int u_lightType[5];
+//uniform int u_lightType[5];
 uniform vec3 u_lightPosition[5];
 
 varying vec4 v_worldPos;
@@ -16,6 +16,6 @@ void calDepth()
 void main()
 {
     calDepth();
-    gl_FragColor = vec4(depth,depth/255.0,depth/65535.0,1.0);
-    //gl_FragColor = vec4(255.0,255.0,255.0,1.0);
+    //gl_FragColor = vec4(depth,depth/255.0,depth/65535.0,1.0);
+    gl_FragColor = vec4(1.0,0.0,0.0,1.0);
 }

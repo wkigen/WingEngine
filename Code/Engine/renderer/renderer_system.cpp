@@ -26,7 +26,7 @@ namespace WingEngine
 		:mCreate(false)
 		,mWidth(0)
 		,mHeight(0)
-		,mIsShadow(false)
+		,mIsShadow(true)
 	{
 
 	}
@@ -99,13 +99,13 @@ namespace WingEngine
 		//geometryTextureLightPass->init();
 		//mRenderPass["GeometryTextureLightPass"] = geometryTextureLightPass;
 
-		//SmartPtr<GeometryTextureLightShadowFirstPass> geometryTextureLightShadowFirstPass = WING_NEW GeometryTextureLightShadowFirstPass(mWidth,mHeight);
-		//geometryTextureLightShadowFirstPass->init();
-		//mRenderPass["GeometryTextureLightShadowFirstPass"] = geometryTextureLightShadowFirstPass;
+		SmartPtr<GeometryTextureLightShadowFirstPass> geometryTextureLightShadowFirstPass = WING_NEW GeometryTextureLightShadowFirstPass(mWidth,mHeight);
+		geometryTextureLightShadowFirstPass->init();
+		mRenderPass["GeometryTextureLightShadowFirstPass"] = geometryTextureLightShadowFirstPass;
 
-		//SmartPtr<GeometryTextureLightShadowSecondPass> geometryTextureLightSecondShadowPass = WING_NEW GeometryTextureLightShadowSecondPass();
-		//geometryTextureLightSecondShadowPass->init();
-		//mRenderPass["GeometryTextureLightShadowSecondPass"] = geometryTextureLightSecondShadowPass;
+		SmartPtr<GeometryTextureLightShadowSecondPass> geometryTextureLightSecondShadowPass = WING_NEW GeometryTextureLightShadowSecondPass();
+		geometryTextureLightSecondShadowPass->init();
+		mRenderPass["GeometryTextureLightShadowSecondPass"] = geometryTextureLightSecondShadowPass;
 
 		SmartPtr<BaseRenderPass> baseRenderPass = WING_NEW BaseRenderPass();
 		baseRenderPass->init();
@@ -211,16 +211,16 @@ namespace WingEngine
 
 			SmartPtr<Texture> depthTexture = firstPass->getDepthTexture();
 			
-			//if (!fff)
-			//{
-			//	uint8* data = new uint8[800 * 600 * 3];
-			//	mRendererContext->getTextureData(depthTexture->getGPUBufferId(), ColorFormatRGB, DataElementUByte, data);
-			//	for (size_t i = 0; i < 800 * 600 * 3; i++)
-			//	{
-			//		WING_LOG_ERROR("%d", data[i]);
-			//	}
-			//	fff = true;
-			//}
+			if (!fff)
+			{
+				uint8* data = new uint8[800 * 600 * 3];
+				mRendererContext->getTextureData(depthTexture->getGPUBufferId(), ColorFormatRGB, DataElementUByte, data);
+				for (size_t i = 0; i < 800 * 600 * 3; i++)
+				{
+					WING_LOG_ERROR("%d", data[i]);
+				}
+				fff = true;
+			}
 
 
 			mRendererContext->bindRenderTarget(INVALID_BUFFERS);
@@ -235,7 +235,7 @@ namespace WingEngine
 			std::list<SmartPtr<Renderable>>::iterator beg2 = mRenderables.begin();
 			for (; beg2 != mRenderables.end(); beg2++)
 			{
-			/*	if (!fff)
+				/*if (!fff)
 				{
 					uint8* data = new uint8[800 * 600 * 3];
 					mRendererContext->getTextureData((*beg2)->getMaterial()->getTexture()->getGPUBufferId(), ColorFormatRGB, DataElementUByte, data);
@@ -245,7 +245,7 @@ namespace WingEngine
 					}
 					fff = true;
 				}*/
-				secondPass->render(*beg2);
+				//secondPass->render(*beg2);
 			};
 
 			secondPass->postRender();

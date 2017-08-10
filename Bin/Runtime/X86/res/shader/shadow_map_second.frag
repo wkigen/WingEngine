@@ -79,15 +79,15 @@ void calShadow()
     vec2 depthTexCoord = (light0pos.xy / light0pos.w + vec2(1.0,1.0))*0.5;
     float lengthToLight = distance(u_lightPosition[0].xyz,pos.xyz);
     vec4 vd = texture2D(u_texture1,depthTexCoord);
-    float depth = vd.x ;
+    float depth = vd.x +vd.y*255.0+vd.z*65535.0;
     if (lengthToLight > depth)//阴影判断  
         factorShadow = 0.5; 
 }
 
 void main()
 {
-    //calLight();
-    //calShadow();
+    calLight();
+    calShadow();
     vec3 text = texture2D(u_texture0, v_textureCoordinate).rgb;
     gl_FragColor = vec4(amb * text * u_ambient + diff * text * diffusefract *u_diffuse + spec * text * specularfract * u_specular, 1.0) * factorShadow;
     //gl_FragColor = texture2D(u_texture1, v_textureCoordinate);
