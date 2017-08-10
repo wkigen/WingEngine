@@ -16,6 +16,7 @@
 #include "pass\geometry_texture_pass.h"
 #include "pass\geometry_texture_light_pass.h"
 #include "pass\geometry_texture_light_shadow_first_pass.h"
+#include "pass\geometry_texture_light_shadow_second_pass.h"
 
 using namespace WingCore;
 
@@ -49,7 +50,8 @@ namespace WingEngine
 		Pointf eye(0, 4, 4);
 		Pointf view(0, 0, 0);
 		Vectorf up(0, 1, 0);
-		mCamera.setCamera(45,(real)mWidth /(real)mHeight, 1, 10, eye, view, up);
+		mCamera = WING_NEW Camera();
+		mCamera->setCamera(45,(real)mWidth /(real)mHeight, 1, 10, eye, view, up);
 
 		std::list<Plugin*> rendererDll = PluginSystem::getInstance()->getPlugin(PluginTypeRenderer);
 		std::list<Plugin*>::iterator iter = rendererDll.begin();
@@ -79,26 +81,31 @@ namespace WingEngine
 		mPrograms["geometry_texture"]= mRendererContext->createProgram("geometry_texture", geometry_texture_vs, geometry_texture_fs);
 		mPrograms["geometry_texture_light"]= mRendererContext->createProgram("geometry_texture_light", geometry_texture_light_vs, geometry_texture_light_fs);
 		mPrograms["base_render"] = createProgram("base_render", "res/shader/base_render.vert", "res/shader/base_render.frag");
-		mPrograms["shadow_map_first"] = createProgram("base_render", "res/shader/shadow_map_first.vert", "res/shader/shadow_map_first.frag");
+		mPrograms["shadow_map_first"] = createProgram("shadow_map_first", "res/shader/shadow_map_first.vert", "res/shader/shadow_map_first.frag");
+		mPrograms["shadow_map_second"] = createProgram("shadow_map_second", "res/shader/shadow_map_second.vert", "res/shader/shadow_map_second.frag");
 
 		useProgram("base");
 		mRendererContext->enableDepth(true);
 
-		SmartPtr<GeometryColorPass> geometryPass = WING_NEW GeometryColorPass();
-		geometryPass->init();
-		mRenderPass["GeometryPass"] = geometryPass;
+		//SmartPtr<GeometryColorPass> geometryPass = WING_NEW GeometryColorPass();
+		//geometryPass->init();
+		//mRenderPass["GeometryPass"] = geometryPass;
 
-		SmartPtr<GeometryTexturePass> geometryTexturePass = WING_NEW GeometryTexturePass();
-		geometryTexturePass->init();
-		mRenderPass["GeometryTexturePass"] = geometryTexturePass;
+		//SmartPtr<GeometryTexturePass> geometryTexturePass = WING_NEW GeometryTexturePass();
+		//geometryTexturePass->init();
+		//mRenderPass["GeometryTexturePass"] = geometryTexturePass;
 	
-		SmartPtr<GeometryTextureLightPass> geometryTextureLightPass = WING_NEW GeometryTextureLightPass();
-		geometryTextureLightPass->init();
-		mRenderPass["GeometryTextureLightPass"] = geometryTextureLightPass;
+		//SmartPtr<GeometryTextureLightPass> geometryTextureLightPass = WING_NEW GeometryTextureLightPass();
+		//geometryTextureLightPass->init();
+		//mRenderPass["GeometryTextureLightPass"] = geometryTextureLightPass;
 
-		SmartPtr<GeometryTextureLightShadowFirstPass> geometryTextureLightShadowPass = WING_NEW GeometryTextureLightShadowFirstPass(mWidth,mHeight);
-		geometryTextureLightShadowPass->init();
-		mRenderPass["GeometryTextureLightShadowFirstPass"] = geometryTextureLightShadowPass;
+		//SmartPtr<GeometryTextureLightShadowFirstPass> geometryTextureLightShadowFirstPass = WING_NEW GeometryTextureLightShadowFirstPass(mWidth,mHeight);
+		//geometryTextureLightShadowFirstPass->init();
+		//mRenderPass["GeometryTextureLightShadowFirstPass"] = geometryTextureLightShadowFirstPass;
+
+		//SmartPtr<GeometryTextureLightShadowSecondPass> geometryTextureLightSecondShadowPass = WING_NEW GeometryTextureLightShadowSecondPass();
+		//geometryTextureLightSecondShadowPass->init();
+		//mRenderPass["GeometryTextureLightShadowSecondPass"] = geometryTextureLightSecondShadowPass;
 
 		SmartPtr<BaseRenderPass> baseRenderPass = WING_NEW BaseRenderPass();
 		baseRenderPass->init();
@@ -181,7 +188,7 @@ namespace WingEngine
 	{
 
 	}
-
+	bool fff = false;
 	void RendererSystem::render()
 	{
 		
@@ -199,19 +206,57 @@ namespace WingEngine
 			};
 
 			firstPass->postRender();
-			mRendererContext->swapBuffers();
 
-			Texture* depthTexture = firstPass->getDepthTexture();
-			Texture* colorTexture = firstPass->getColorTexture();
+			///mRendererContext->swapBuffers();
 
+			SmartPtr<Texture> depthTexture = firstPass->getDepthTexture();
+			
+			//if (!fff)
+			//{
+			//	uint8* data = new uint8[800 * 600 * 3];
+			//	mRendererContext->getTextureData(depthTexture->getGPUBufferId(), ColorFormatRGB, DataElementUByte, data);
+			//	for (size_t i = 0; i < 800 * 600 * 3; i++)
+			//	{
+			//		WING_LOG_ERROR("%d", data[i]);
+			//	}
+			//	fff = true;
+			//}
+
+
+			mRendererContext->bindRenderTarget(INVALID_BUFFERS);
+
+			RenderPass* pass2 = getRenderPass("GeometryTextureLightShadowSecondPass");
+			GeometryTextureLightShadowSecondPass* secondPass = static_cast<GeometryTextureLightShadowSecondPass*>(pass2);
+
+			secondPass->setDepthTexture(depthTexture);
+
+			secondPass->preRender();
+
+			std::list<SmartPtr<Renderable>>::iterator beg2 = mRenderables.begin();
+			for (; beg2 != mRenderables.end(); beg2++)
+			{
+			/*	if (!fff)
+				{
+					uint8* data = new uint8[800 * 600 * 3];
+					mRendererContext->getTextureData((*beg2)->getMaterial()->getTexture()->getGPUBufferId(), ColorFormatRGB, DataElementUByte, data);
+					for (size_t i = 0; i < 800 * 600 * 3; i++)
+					{
+						WING_LOG_ERROR("%d", data[i]);
+					}
+					fff = true;
+				}*/
+				secondPass->render(*beg2);
+			};
+
+			secondPass->postRender();
 		}
 		else
 		{
 			realRender();
-			mRendererContext->swapBuffers();
 		}
 
 		mRenderables.clear();
+		mRendererContext->swapBuffers();
 	}
 
 	void RendererSystem::realRender()
@@ -276,6 +321,20 @@ namespace WingEngine
 		}
 
 		return count;
+	}
+
+	SmartPtr<Light> RendererSystem::getLight(uint8 index)
+	{
+		std::map<std::string, SmartPtr<Light>>::iterator iter = mLights.begin();
+		int8 count = 0;
+		for (; iter!= mLights.end(); iter++)
+		{
+			if (count == index)
+			{
+				return iter->second;
+			}
+		}
+		return nullptr;
 	}
 
 	SmartPtr<Light> RendererSystem::getLight(std::string name)

@@ -31,7 +31,7 @@ const std::string geometry_texture_light_vs = "\
 
 
 const std::string geometry_texture_light_fs = "\
-							uniform sampler2D u_texture; \
+							uniform sampler2D u_texture0; \
 							uniform float u_shiness; \
 							uniform vec3 u_ambient; \
 							uniform vec3 u_diffuse; \
@@ -45,7 +45,7 @@ const std::string geometry_texture_light_fs = "\
 							float spec = 0.3;	\
 							void main()	\
 							{	\
-								vec3 color = texture2D(u_texture, v_textureCoordinate).rgb;  \
+								vec3 color = texture2D(u_texture0, v_textureCoordinate).rgb;  \
 								vec3 lightdirN = normalize(lightdir);	\
 								vec3 normalN = normalize(v_normal);	\
 								float diffusefract = max(dot(lightdirN, normalN), 0.0);	\

@@ -22,6 +22,23 @@ namespace WingRendererGL
 		return false;
 	}
 
+	uint32 RendererContextGL::WETType2TType(TextureID textureId)
+	{
+		switch (textureId)
+		{
+		case TEXTUREID0:
+			return GL_TEXTURE0;
+		case TEXTUREID1:
+			return GL_TEXTURE1;
+		case TEXTUREID2:
+			return GL_TEXTURE2;
+		case TEXTUREID3:
+			return GL_TEXTURE3;
+		case TEXTUREID4:
+			return GL_TEXTURE4;
+		}
+	}
+
 	uint32 RendererContextGL::WEDType2DType(DataElementType dataElementType)
 	{
 		switch (dataElementType)
@@ -133,6 +150,11 @@ namespace WingRendererGL
 		return program;
 	}
 
+	void RendererContextGL::activityTexture(TextureID textureId)
+	{
+		glActiveTexture(WETType2TType(textureId));
+	}
+
 	int32 RendererContextGL::bindStaticArrayBuffers(uint64 size, void* data)
 	{
 		GLuint bufferId;
@@ -206,6 +228,13 @@ namespace WingRendererGL
 			return INVALID_BUFFERS;
 
 		return fboID;
+	}
+
+	void RendererContextGL::getTextureData(uint32 textureId, ColorFormat format, DataElementType dataType, void* pixels)
+	{
+		glBindTexture(GL_TEXTURE_2D, textureId);
+		glGetTexImage(GL_TEXTURE_2D, 0, WECFormat2CFormat(format), WEDType2DType(dataType), pixels);
+		glBindTexture(GL_TEXTURE_2D, INVALID_BUFFERS);
 	}
 
 	void RendererContextGL::bindArrayBuffers(uint32 bufferId)
@@ -330,9 +359,9 @@ namespace WingRendererGL
 		glUniform4fv(location, count, data);
 	}
 
-	void RendererContextGL::setUniformMatrix44f(int32 location, int32 count, Matrix44 matrix)
+	void RendererContextGL::setUniformMatrix44f(int32 location, int32 count, real* matrix)
 	{
-		glUniformMatrix4fv(location, count,false, matrix.mData.data);
+		glUniformMatrix4fv(location, count,false, matrix);
 	}
 
 	void RendererContextGL::draw(uint32 count)

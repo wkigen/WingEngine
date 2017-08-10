@@ -31,7 +31,7 @@ namespace WingEngine
 
 		SmartPtr<RenderPass>getRenderPass(std::string name);
 
-		Camera*				getCamera() { return &mCamera; }
+		SmartPtr<Camera>	getCamera() { return mCamera; }
 
 		RendererContext*	getRendererContext() { return mRendererContext; }
 
@@ -50,6 +50,7 @@ namespace WingEngine
 		SmartPtr<Program>	getProgram(std::string name);
 
 		int8				getLightsData(int32* type,real* postion,real* direction,real* color);
+		SmartPtr<Light>		getLight(uint8 index);
 		SmartPtr<Light>		getLight(std::string name);
 		void				addLight(std::string name, SmartPtr<Light> light);
 		
@@ -63,7 +64,7 @@ namespace WingEngine
 		bool											mIsShadow;
 		bool											mIsLight;
 
-		Camera											mCamera;
+		SmartPtr<Camera>								mCamera;
 
 		std::string										mRendererName;
 		RendererContext*								mRendererContext;

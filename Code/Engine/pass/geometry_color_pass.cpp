@@ -8,7 +8,8 @@ namespace WingEngine
 
 	GeometryColorPass::GeometryColorPass()
 	{
-
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+		mProgram = RendererSystem::getInstance()->getProgram("geometry_color");
 	}
 
 	GeometryColorPass::~GeometryColorPass()
@@ -19,7 +20,6 @@ namespace WingEngine
 	void GeometryColorPass::init()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		mProgram = RendererSystem::getInstance()->getProgram("geometry_color");
 
 		mAttribPosition = context->getAttribLocation(mProgram->getProgramID(), POSITION);
 		mAttribColor = context->getAttribLocation(mProgram->getProgramID(), COLOR);
@@ -38,7 +38,7 @@ namespace WingEngine
 	void GeometryColorPass::_render(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
+		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getProjectModelMatrix44();
 		context->bindArrayBuffers(renderable->getVertixData()->getGPUBufferId());
 		context->bindElementBuffers(renderable->getIndeiceData()->getGPUBufferId());
 
@@ -52,8 +52,8 @@ namespace WingEngine
 		ElementFormat colorFormat = renderable->getVertixData()->getElement()->getElementFormat(DataElementName::DataElementColor);
 		context->vertexAttribPointer(mAttribColor, colorFormat.mSize, false, dataElement->getSize(), (void*)(colorFormat.mOffest*dataElement->getElementTypeSize()));
 
-		context->setUniformMatrix44f(mUniformModelMatrix, 1, renderable->getModelViewMatrinx44());
-		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44);
+		context->setUniformMatrix44f(mUniformModelMatrix, 1, renderable->getModelViewMatrinx44().mData.data);
+		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44.mData.data);
 
 		context->bindElementBuffers(renderable->getIndeiceData()->getGPUBufferId());
 	}

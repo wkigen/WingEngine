@@ -17,11 +17,12 @@ public:
 		plane->setRenderPass(RendererSystem::getInstance()->getRenderPass("BaseRenderPass"));
 		SceneSystem::getInstance()->addNode("plane", plane);
 
-		SmartPtr<Light> light = new PointLight();
+		SmartPtr<Light> light = new DirectionLight();
 		light->setEnable(true);
 		light->translation(Vectorf(5.0,5.0,0.0));
-		light->setColor(Color());
-		RendererSystem::getInstance()->addLight("mianLight",light);
+		light->setColor(Color(1.0,1.0,1.0,1.0));
+		light->setDirection(Vectorf(1.0, 1.0, 0.0));
+		RendererSystem::getInstance()->addLight("mainLight",light);
 
 		Image* redImage = ResourceSystem::getInstance()->loadResource<Image>("res/image/red.png");
 		Image* whiteImage = ResourceSystem::getInstance()->loadResource<Image>("res/image/white.png");

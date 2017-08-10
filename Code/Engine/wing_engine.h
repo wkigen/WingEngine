@@ -18,3 +18,4 @@
 
 #include "light\light.h"
 #include "light\point_light.h"
+#include "light\direction_light.h"

@@ -131,6 +131,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="geometry\geometry.h" />
     <ClInclude Include="geometry\plane.h" />
     <ClInclude Include="light\light.h" />
+    <ClInclude Include="light\direction_light.h" />
     <ClInclude Include="light\point_light.h" />
     <ClInclude Include="mesh\mesh.h" />
     <ClInclude Include="mesh\mesh_define.h" />
@@ -181,6 +182,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClCompile Include="geometry\geometry.cpp" />
     <ClCompile Include="geometry\plane.cpp" />
     <ClCompile Include="light\light.cpp" />
+    <ClCompile Include="light\direction_light.cpp" />
     <ClCompile Include="light\point_light.cpp" />
     <ClCompile Include="mesh\mesh.cpp" />
     <ClCompile Include="mesh\mesh_reader.cpp" />

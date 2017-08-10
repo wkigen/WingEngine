@@ -18,13 +18,21 @@ namespace WingEngine
 
 		void		setCamera(real _fovy, real _aspect, real _near, real _far, Pointf _eye, Pointf _view, Vectorf _up);
 
-		void		translation(const Vectorf &t);
-		void		rotate(const Vectorf &t, const real angle);
+		virtual void translation(const Vectorf &t);
+		virtual void rotate(const Vectorf &t, const real angle);
 
-		Matrix44	getmProjectModelMatrix44() {return mProjectModelMatrix44; }
+		Matrix44	getProjectModelMatrix44() {return mProjectModelMatrix44; }
 
-	private:
+		Matrix44	getProjectViewMatrix44() {return mProjectViewMatrix44;}
 
+		virtual Pointf getEye() { return mEye; }
+
+	protected:
+		virtual void positionToEye();
+	protected:
+		Pointf mEye;
+		Pointf mView;
+		Vectorf mUp;
 		Matrix44 mProjectViewMatrix44,mProjectModelMatrix44;
 	};
 }

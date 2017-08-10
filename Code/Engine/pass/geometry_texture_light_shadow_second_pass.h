@@ -19,7 +19,7 @@ namespace WingEngine
 		virtual void render(Renderable* renderable);
 		virtual void postRender();
 
-		virtual void setDepthTexture(SmartPtr<Texture>) { mDepthTexture; }
+		virtual void setDepthTexture(SmartPtr<Texture> depthTexture) { mDepthTexture = depthTexture; }
 
 	protected:
 		virtual void _render(Renderable* renderable);

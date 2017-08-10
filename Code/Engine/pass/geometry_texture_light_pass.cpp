@@ -8,6 +8,8 @@ namespace WingEngine
 
 	GeometryTextureLightPass::GeometryTextureLightPass()
 	{
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+		mProgram = RendererSystem::getInstance()->getProgram("geometry_texture_light");
 
 	}
 
@@ -19,12 +21,11 @@ namespace WingEngine
 	void GeometryTextureLightPass::init()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		mProgram = RendererSystem::getInstance()->getProgram("geometry_texture_light");
 
 		mAttribPosition = context->getAttribLocation(mProgram->getProgramID(), POSITION);
 		mAttribNormal = context->getAttribLocation(mProgram->getProgramID(), NORMAL);
 		mAttribTextureCoordinate = context->getAttribLocation(mProgram->getProgramID(), TEXTIRECOORDINATE);
-		mUniformTexture = context->getUniformLocation(mProgram->getProgramID(), TEXTURE);
+		mUniformTexture = context->getUniformLocation(mProgram->getProgramID(), TEXTURE0);
 		mUniformModelMatrix = context->getUniformLocation(mProgram->getProgramID(), MODELVIEWMARTIX);
 		mUniformProjectdViewMatrix = context->getUniformLocation(mProgram->getProgramID(), PROJECTVIEWMARTIX);
 		mUniformTransposeInverseMatrix = context->getUniformLocation(mProgram->getProgramID(), TRANSPOSEINVERSEMATRIX);
@@ -46,7 +47,7 @@ namespace WingEngine
 	void GeometryTextureLightPass::_render(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
+		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getProjectModelMatrix44();
 		Vectorf viewPosition = RendererSystem::getInstance()->getCamera()->getPosition();
 		Material* material = renderable->getMaterial();
 
@@ -69,13 +70,13 @@ namespace WingEngine
 		ElementFormat textureFormat = renderable->getVertixData()->getElement()->getElementFormat(DataElementName::DataElementTexture);
 		context->vertexAttribPointer(mAttribTextureCoordinate, textureFormat.mSize, false, dataElement->getSize(), (void*)(textureFormat.mOffest*dataElement->getElementTypeSize()));
 
-		context->setUniformMatrix44f(mUniformModelMatrix, 1, renderable->getModelViewMatrinx44());
-		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44);
+		context->setUniformMatrix44f(mUniformModelMatrix, 1, renderable->getModelViewMatrinx44().mData.data);
+		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44.mData.data);
 
 		Matrix44 inverseTranspose;
 		renderable->getModelViewMatrinx44().inverse(inverseTranspose);
 		inverseTranspose = inverseTranspose.transpose();
-		context->setUniformMatrix44f(mUniformTransposeInverseMatrix, 1, inverseTranspose);
+		context->setUniformMatrix44f(mUniformTransposeInverseMatrix, 1, inverseTranspose.mData.data);
 
 		context->setUniform3f(mUniformViewPosition, viewPosition.x, viewPosition.y, viewPosition.z);
 

@@ -1,5 +1,5 @@
 
-uniform sampler2D u_texture;
+uniform sampler2D u_texture0;
 
 uniform vec3 u_viewPosition;
 
@@ -53,6 +53,7 @@ void calLight()
 
     //开始计算光照
     vec3 lightdir = getLightDirection(u_lightType[0],u_lightPosition[0],u_lightDirection[0],pos.xyz);
+
     vec3 eyedir = normalize(u_viewPosition - pos.xyz);
     vec3 halfvec = normalize(lightdir + eyedir);
 
@@ -72,6 +73,8 @@ void main()
 {
     calLight();
 
-    vec3 text = texture2D(u_texture, v_textureCoordinate).rgb;
+	
+    vec3 text = texture2D(u_texture0, v_textureCoordinate).rgb;
     gl_FragColor = vec4(amb * text * u_ambient + diff * text * diffusefract *u_diffuse + spec * text * specularfract * u_specular, 1.0);
+
 }

@@ -13,8 +13,8 @@
 *.opendb
 Code/3rdparty/tinyxml2/tinyxml2/Debugx86
 Code/3rdparty/tinyxml2/tinyxml2/Debugx64
-Code/3rdparty/LibPNGl2/Debugx86
-Code/3rdparty/LibPNGl2/Debugx64
+Code/3rdparty/LibPNG/Debugx86
+Code/3rdparty/LibPNG/Debugx64
 Code/3rdparty/zLib/Debugx86
 Code/3rdparty/zLib/Debugx64
 Code/Core/Debugx86

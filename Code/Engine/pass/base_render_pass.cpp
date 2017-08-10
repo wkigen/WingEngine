@@ -7,7 +7,8 @@ namespace WingEngine
 
 	BaseRenderPass::BaseRenderPass()
 	{
-
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+		mProgram = RendererSystem::getInstance()->getProgram("base_render");
 	}
 
 	BaseRenderPass::~BaseRenderPass()
@@ -18,12 +19,11 @@ namespace WingEngine
 	void BaseRenderPass::init()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		mProgram = RendererSystem::getInstance()->getProgram("base_render");
 
 		mAttribPosition = context->getAttribLocation(mProgram->getProgramID(), POSITION);
 		mAttribNormal = context->getAttribLocation(mProgram->getProgramID(), NORMAL);
 		mAttribTextureCoordinate = context->getAttribLocation(mProgram->getProgramID(), TEXTIRECOORDINATE);
-		mUniformTexture = context->getUniformLocation(mProgram->getProgramID(), TEXTURE);
+		mUniformTexture = context->getUniformLocation(mProgram->getProgramID(), TEXTURE0);
 		mUniformModelMatrix = context->getUniformLocation(mProgram->getProgramID(), MODELVIEWMARTIX);
 		mUniformProjectdViewMatrix = context->getUniformLocation(mProgram->getProgramID(), PROJECTVIEWMARTIX);
 		mUniformTransposeInverseMatrix = context->getUniformLocation(mProgram->getProgramID(), TRANSPOSEINVERSEMATRIX);
@@ -49,20 +49,20 @@ namespace WingEngine
 		mLightPostion = (real*)WING_ALLOC(sizeof(real) * 3 * MAX_LIGHT);
 		mLightDirection = (real*)WING_ALLOC(sizeof(real) * 3 * MAX_LIGHT);
 		mLightColor = (real*)WING_ALLOC(sizeof(real) * 4 * MAX_LIGHT);
-		int8 lightNum = RendererSystem::getInstance()->getLightsData(mLightType, mLightPostion, mLightDirection, mLightColor);
+		mLightNum = RendererSystem::getInstance()->getLightsData(mLightType, mLightPostion, mLightDirection, mLightColor);
 
-		context->setUniform1d(mUniformLightNum, lightNum);
+		context->setUniform1d(mUniformLightNum, mLightNum);
 		context->setUniform1dv(mUniformLightType, MAX_LIGHT, mLightType);
 		context->setUniform3fv(mUniformLightPosition, MAX_LIGHT, mLightPostion);
 		context->setUniform3fv(mUniformLightDirection, MAX_LIGHT, mLightDirection);
-		context->setUniform3fv(mUniformLightColor, MAX_LIGHT, mLightColor);
+		context->setUniform4fv(mUniformLightColor, MAX_LIGHT, mLightColor);
 
 	}
 
 	void BaseRenderPass::_render(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getmProjectModelMatrix44();
+		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getProjectModelMatrix44();
 		Vectorf viewPosition = RendererSystem::getInstance()->getCamera()->getPosition();
 		Material* material = renderable->getMaterial();
 
@@ -89,13 +89,13 @@ namespace WingEngine
 		context->vertexAttribPointer(mAttribTextureCoordinate, textureFormat.mSize, false, dataElement->getSize(), (void*)(textureFormat.mOffest*dataElement->getElementTypeSize()));
 
 		//世界矩阵 投影矩阵
-		context->setUniformMatrix44f(mUniformModelMatrix, 1, renderable->getModelViewMatrinx44());
-		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44);
+		context->setUniformMatrix44f(mUniformModelMatrix, 1, renderable->getModelViewMatrinx44().mData.data);
+		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44.mData.data);
 
 		Matrix44 inverseTranspose;
 		renderable->getModelViewMatrinx44().inverse(inverseTranspose);
 		inverseTranspose = inverseTranspose.transpose();
-		context->setUniformMatrix44f(mUniformTransposeInverseMatrix, 1, inverseTranspose);
+		context->setUniformMatrix44f(mUniformTransposeInverseMatrix, 1, inverseTranspose.mData.data);
 
 		context->setUniform3f(mUniformViewPosition, viewPosition);
 

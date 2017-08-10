@@ -102,6 +102,13 @@ enum AttachmentPoint
 	AttachmentPointStencil,
 };
 
-
+enum TextureID
+{
+	TEXTUREID0,
+	TEXTUREID1,
+	TEXTUREID2,
+	TEXTUREID3,
+	TEXTUREID4,
+};
 
 #endif

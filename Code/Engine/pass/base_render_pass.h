@@ -28,8 +28,7 @@ namespace WingEngine
 	protected:
 
 		SmartPtr<Texture>	mDepthTexture;
-		int32				*mLightType;
-		real				*mLightPostion, *mLightDirection, *mLightColor;
+
 
 	};
 

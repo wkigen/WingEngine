@@ -18,10 +18,10 @@ const std::string geometry_texture_vs = "\
 
 const std::string geometry_texture_fs = "\
 							varying vec2 v_textureCoordinate;	\
-							uniform sampler2D u_texture; \
+							uniform sampler2D u_texture0; \
 							void main()	\
 							{	\
-								gl_FragColor = texture2D(u_texture, v_textureCoordinate); \
+								gl_FragColor = texture2D(u_texture0, v_textureCoordinate); \
 							}  \ ";
 
 #endif

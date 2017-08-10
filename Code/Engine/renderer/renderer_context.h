@@ -30,6 +30,7 @@ namespace WingEngine
 		virtual void		swapBuffers() = 0;
 		virtual void		clear() = 0;
 		
+		virtual uint32		WETType2TType(TextureID textureId) = 0;
 		virtual uint32		WEDType2DType(DataElementType dataElementType) = 0;
 		virtual uint32		WETFormat2TFormat(TextureFormat textureFormat) = 0;
 		virtual uint32		WECFormat2CFormat(ColorFormat colorType) = 0;
@@ -37,6 +38,8 @@ namespace WingEngine
 		virtual uint32		WEAPoint2APoint(AttachmentPoint attachmentPoint) = 0;
 
 		virtual SmartPtr<Program>	createProgram(std::string name, std::string vs, std::string fs)=0;
+
+		virtual void		activityTexture(TextureID textureId) = 0;
 
 		virtual int32		bindStaticArrayBuffers(uint64 size, void* data) = 0;
 		virtual int32		bindDynamicArrayBuffers(uint64 size, void* data) = 0;
@@ -48,6 +51,7 @@ namespace WingEngine
 		virtual void		bindElementBuffers(uint32 bufferId) = 0;
 		virtual void		bindTexture(uint32 bufferId) = 0;
 		virtual void		bindRenderTarget(uint32 renderTarget) = 0;
+		virtual void		getTextureData(uint32 textureId, ColorFormat format, DataElementType dataType, void* pixels) = 0;
 
 		virtual void		enableDepth(bool enable) = 0;
 		
@@ -75,7 +79,7 @@ namespace WingEngine
 		virtual void		setUniform4f(int32 location, real one, real two, real three, real four) = 0;
 		virtual void		setUniform4fv(int32 location, uint32 count, real* data) = 0;
 
-		virtual void		setUniformMatrix44f(int32 location, int32 count, Matrix44 matrix) =0;
+		virtual void		setUniformMatrix44f(int32 location, int32 count, real* matrix) =0;
 
 		virtual void		draw(uint32 count) = 0;
 

@@ -24,6 +24,7 @@ namespace WingRendererGL
 
 		virtual void clear();
 
+		virtual uint32 WETType2TType(TextureID textureId);
 		virtual uint32 WEDType2DType(DataElementType dataElementType);
 		virtual uint32 WETFormat2TFormat(TextureFormat textureFormat);
 		virtual uint32 WECFormat2CFormat(ColorFormat colorType);
@@ -32,11 +33,14 @@ namespace WingRendererGL
 
 		virtual SmartPtr<Program> createProgram(std::string name, std::string vs, std::string fs);
 
+		virtual void activityTexture(TextureID textureId);
+
 		virtual int32 bindStaticArrayBuffers(uint64 size, void* data);
 		virtual int32 bindDynamicArrayBuffers(uint64 size, void* data);
 		virtual int32 bindElementBuffers(uint64 size, void* data);
 		virtual int32 bindTextureBuffers(TextureFormat textureFormat,uint32 width, uint32 height, ColorFormat format, DataElementType dataType, void* pixels);
 		virtual int32 bindRenderTarget(AttachmentPoint attachmenPoiont, TextureType textureType, uint32 width, uint32 height, uint32 textureId);
+		virtual void getTextureData(uint32 textureId, ColorFormat format, DataElementType dataType, void* pixels);
 
 		virtual void bindArrayBuffers(uint32 bufferId);
 		virtual void bindElementBuffers(uint32 bufferId);
@@ -69,7 +73,7 @@ namespace WingRendererGL
 		virtual void  setUniform4f(int32 location, real one, real two, real three, real four);
 		virtual void  setUniform4fv(int32 location, uint32 count, real* data);
 
-		virtual void  setUniformMatrix44f(int32 location,int32 count, Matrix44 matrix);
+		virtual void  setUniformMatrix44f(int32 location,int32 count, real* matrix);
 
 		virtual void  draw(uint32 count);
 
