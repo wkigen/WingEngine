@@ -19,18 +19,23 @@ namespace WingEngine
 		virtual void render(Renderable* renderable);
 		virtual void postRender();
 
+		virtual SmartPtr<Texture> getColorTexture() { return mColorTexture; }
+
 		virtual SmartPtr<Texture> getDepthTexture() { return mDepthTexture; }
 
 	protected:
 		virtual void _render(Renderable* renderable);
+
 	protected:
 
 		uint32 mWidth;
 		uint32 mHeight;
 
 		SmartPtr<RenderTarget> mRenderTarget;
-		SmartPtr<Texture> mDepthTexture;
+		SmartPtr<Texture> mColorTexture;
 
+		SmartPtr<RenderTarget> mDepthRenderTarget;
+		SmartPtr<Texture> mDepthTexture;
 	};
 
 

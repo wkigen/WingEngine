@@ -10,12 +10,10 @@ void calDepth()
 {
     vec4 pos = v_worldPos / v_worldPos.w;
     depth = distance(u_lightPosition[0].xyz,pos.xyz);
-    //depth = distance(vec3(10,10,10),vec3(5,5,5));
 }
 
 void main()
 {
     calDepth();
-    //gl_FragColor = vec4(depth,depth/255.0,depth/65535.0,1.0);
-    gl_FragColor = vec4(1.0,0.0,0.0,1.0);
+    gl_FragColor = vec4(depth,depth/255.0,depth/65535.0,1.0);
 }

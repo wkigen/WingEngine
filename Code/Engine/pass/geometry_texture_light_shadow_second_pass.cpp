@@ -52,14 +52,13 @@ namespace WingEngine
 			Vectorf dir(dirX, dirY, dirZ);
 			Vectorf up(0.0, 1.0, 0.0);
 
-			Vectorf right = up.cross(dir);
-			up = dir.cross(right);
-
 			Matrix44 lookat = mtxLookAt(pos, dir, up);
 			SmartPtr<Light> light = RendererSystem::getInstance()->getLight(count);
-			Matrix44 mvp = light->getModelViewMatrinx44() * lookat * camera->getProjectViewMatrix44();
+			Matrix44 vp = lookat * camera->getProjectMatrix44();
 
-			memcpy(lightMvpMatrix44, mvp.mData.data, 16 * sizeof(real));
+			memcpy(lightMvpMatrix44, vp.mData.data, 16 * sizeof(real));
+
+			count++;
 		}
 
 		context->setUniformMatrix44f(mUniformLightMVPMatrix, MAX_LIGHT, lightMvpMatrix44);

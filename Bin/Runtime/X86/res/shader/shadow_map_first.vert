@@ -1,5 +1,6 @@
 attribute vec4 a_position;
 
+uniform mat4 u_projectViewMatrix;
 uniform mat4 u_modelViewMatrix;
 uniform mat4 u_lightMVPMatrtix[5];
 

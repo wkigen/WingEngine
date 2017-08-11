@@ -25,19 +25,25 @@ namespace WingEngine
 
 		mAttribPosition = context->getAttribLocation(mProgram->getProgramID(), POSITION);
 		mUniformModelMatrix = context->getUniformLocation(mProgram->getProgramID(), MODELVIEWMARTIX);
-		//mUniformProjectdViewMatrix = context->getUniformLocation(mProgram->getProgramID(), PROJECTVIEWMARTIX);
+		mUniformProjectdViewMatrix = context->getUniformLocation(mProgram->getProgramID(), PROJECTVIEWMARTIX);
 		//mUniformViewPosition = context->getUniformLocation(mProgram->getProgramID(), VIEWPOSITION);
 		mUniformLightNum = context->getUniformLocation(mProgram->getProgramID(), LIGHTNUM);
 		//mUniformLightType = context->getUniformLocation(mProgram->getProgramID(), LIGHTTYPE);
 		mUniformLightPosition = context->getUniformLocation(mProgram->getProgramID(), LIGHTPOSITION);
 		mUniformLightMVPMatrix = context->getUniformLocation(mProgram->getProgramID(), LIGHTMVPMARTRIX);
 
-		mDepthTexture = WING_NEW Texture(mWidth, mHeight,TextureTypeRGB, TextureFormatRGB, ColorFormatRGB, DataElementUByte);
-		mDepthTexture->bindGPUBuffer();
-		mRenderTarget = WING_NEW RenderTarget(mDepthTexture);
+		mColorTexture = WING_NEW Texture(mWidth, mHeight,TextureTypeRGB, TextureFormatRGB, ColorFormatRGB, DataElementReal);
+		mColorTexture->bindGPUBuffer();
+		mRenderTarget = WING_NEW RenderTarget(mColorTexture);
 		mRenderTarget->setAttachmentPoint(AttachmentPointColor0);
 		mRenderTarget->bindGPUBuffer();
 
+
+		mDepthTexture = WING_NEW Texture(mWidth, mHeight, TextureTypeDepth, TextureFormatDepth, ColorFormatDepth, DataElementReal);
+		mDepthTexture->bindGPUBuffer();
+		mDepthRenderTarget = WING_NEW RenderTarget(mDepthTexture);
+		mDepthRenderTarget->setAttachmentPoint(AttachmentPointDepth);
+		mDepthRenderTarget->bindGPUBuffer();
 	}
 
 	void GeometryTextureLightShadowFirstPass::preRender()
@@ -75,14 +81,10 @@ namespace WingEngine
 			Vectorf dir(dirX, dirY, dirZ);
 			Vectorf up(0.0, 1.0, 0.0);
 
-			Vectorf right = up.cross(dir);
-			up = dir.cross(right);
-
 			Matrix44 lookat = mtxLookAt(pos, dir, up);
 			SmartPtr<Light> light = RendererSystem::getInstance()->getLight(count);
-			Matrix44 mvp = light->getModelViewMatrinx44() * lookat * camera->getProjectViewMatrix44();
-
-			memcpy(lightMvpMatrix44, mvp.mData.data, 16 * sizeof(real));
+			Matrix44 vp =  lookat * camera->getProjectMatrix44();
+			memcpy(lightMvpMatrix44, vp.mData.data, 16 * sizeof(real));
 
 			count++;
 		}
@@ -95,7 +97,7 @@ namespace WingEngine
 	void GeometryTextureLightShadowFirstPass::_render(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getProjectModelMatrix44();
+		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getProjectViewMatrix44();
 		Vectorf viewPosition = RendererSystem::getInstance()->getCamera()->getPosition();
 
 		context->bindArrayBuffers(renderable->getVertixData()->getGPUBufferId());
@@ -109,7 +111,7 @@ namespace WingEngine
 
 		//世界矩阵 投影矩阵
 		context->setUniformMatrix44f(mUniformModelMatrix, 1, renderable->getModelViewMatrinx44().mData.data);
-		//context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44.mData.data);
+		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44.mData.data);
 
 		//context->setUniform4f(mUniformViewPosition, viewPosition.x, viewPosition.y, viewPosition.z,1.0);
 	}

@@ -207,21 +207,18 @@ namespace WingEngine
 
 			firstPass->postRender();
 
-			///mRendererContext->swapBuffers();
-
-			SmartPtr<Texture> depthTexture = firstPass->getDepthTexture();
+			SmartPtr<Texture> depthTexture = firstPass->getColorTexture();
 			
-			if (!fff)
-			{
-				uint8* data = new uint8[800 * 600 * 3];
-				mRendererContext->getTextureData(depthTexture->getGPUBufferId(), ColorFormatRGB, DataElementUByte, data);
-				for (size_t i = 0; i < 800 * 600 * 3; i++)
-				{
-					WING_LOG_ERROR("%d", data[i]);
-				}
-				fff = true;
-			}
-
+			//if (!fff)
+			//{
+			//	real* data = new real[800 * 600 * 3];
+			//	mRendererContext->getTextureData(depthTexture->getGPUBufferId(), ColorFormatRGB, DataElementReal, data);
+			//	for (size_t i = 0; i < 800 * 600 * 3; i++)
+			//	{
+			//		WING_LOG_ERROR("%f", data[i]);
+			//	}
+			//	fff = true;
+			//}
 
 			mRendererContext->bindRenderTarget(INVALID_BUFFERS);
 
@@ -235,17 +232,7 @@ namespace WingEngine
 			std::list<SmartPtr<Renderable>>::iterator beg2 = mRenderables.begin();
 			for (; beg2 != mRenderables.end(); beg2++)
 			{
-				/*if (!fff)
-				{
-					uint8* data = new uint8[800 * 600 * 3];
-					mRendererContext->getTextureData((*beg2)->getMaterial()->getTexture()->getGPUBufferId(), ColorFormatRGB, DataElementUByte, data);
-					for (size_t i = 0; i < 800 * 600 * 3; i++)
-					{
-						WING_LOG_ERROR("%d", data[i]);
-					}
-					fff = true;
-				}*/
-				//secondPass->render(*beg2);
+				secondPass->render(*beg2);
 			};
 
 			secondPass->postRender();

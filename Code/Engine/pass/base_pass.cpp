@@ -36,7 +36,7 @@ namespace WingEngine
 	void BasePass::_render(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getProjectModelMatrix44();
+		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getProjectViewMatrix44();
 
 		context->bindArrayBuffers(renderable->getVertixData()->getGPUBufferId());
 		context->bindElementBuffers(renderable->getIndeiceData()->getGPUBufferId());

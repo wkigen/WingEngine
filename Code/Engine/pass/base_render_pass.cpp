@@ -62,7 +62,7 @@ namespace WingEngine
 	void BaseRenderPass::_render(Renderable* renderable)
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getProjectModelMatrix44();
+		Matrix44 projectMatrix44 = RendererSystem::getInstance()->getCamera()->getProjectViewMatrix44();
 		Vectorf viewPosition = RendererSystem::getInstance()->getCamera()->getPosition();
 		Material* material = renderable->getMaterial();
 

@@ -21,19 +21,17 @@ namespace WingEngine
 		virtual void translation(const Vectorf &t);
 		virtual void rotate(const Vectorf &t, const real angle);
 
-		Matrix44	getProjectModelMatrix44() {return mProjectModelMatrix44; }
+		Matrix44	getProjectMatrix44() {return mProjectMatrix44; }
 
 		Matrix44	getProjectViewMatrix44() {return mProjectViewMatrix44;}
 
 		virtual Pointf getEye() { return mEye; }
 
 	protected:
-		virtual void positionToEye();
-	protected:
 		Pointf mEye;
 		Pointf mView;
 		Vectorf mUp;
-		Matrix44 mProjectViewMatrix44,mProjectModelMatrix44;
+		Matrix44 mProjectViewMatrix44,mProjectMatrix44;
 	};
 }
 
