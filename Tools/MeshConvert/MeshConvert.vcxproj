@@ -83,7 +83,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>..\..\Bin\Lib\X86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlibstatic.lib;assimp-vc140-mt.lib;WingCoreD.lib;WingEngineD.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>zlib.lib;assimp-vc140-mt.lib;WingCoreD.lib;WingEngineD.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy Debugx86\MeshConvertD.exe ..\..\Bin\Runtime\x86\</Command>

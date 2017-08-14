@@ -11,6 +11,7 @@
 *.idb
 *.tlog
 *.opendb
+Bin
 Code/3rdparty/tinyxml2/tinyxml2/Debugx86
 Code/3rdparty/tinyxml2/tinyxml2/Debugx64
 Code/3rdparty/LibPNG/Debugx86
