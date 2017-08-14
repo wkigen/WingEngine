@@ -281,7 +281,7 @@ namespace WingEngine
 		return nullptr;
 	}
 
-	int8 RendererSystem::getLightsData(int32* type, real* postion, real* direction, real* color)
+	int8 RendererSystem::getLightsData(int32* type, real* postion, real* direction, real* color, real* shiness)
 	{
 		int8 count = 0;
 		std::map<std::string, SmartPtr<Light>>::iterator iter = mLights.begin();
@@ -303,6 +303,8 @@ namespace WingEngine
 			*color++ = light->getColor().g;
 			*color++ = light->getColor().b;
 			*color++ = light->getColor().a;
+
+			*shiness++ = light->getShiness();
 
 			count++  ;
 		}

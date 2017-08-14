@@ -13,6 +13,6 @@ void calDepth()
 
 void main()
 {
-    calDepth();
-    gl_FragColor = vec4(depth,depth/255.0,depth/65535.0,1.0);
+    //calDepth();
+    //gl_FragColor = vec4(depth,depth,depth,1.0);
 }

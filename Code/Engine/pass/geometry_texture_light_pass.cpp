@@ -80,7 +80,6 @@ namespace WingEngine
 
 		context->setUniform3f(mUniformViewPosition, viewPosition.x, viewPosition.y, viewPosition.z);
 
-		context->setUniform1f(mUniformShiness, material->getShiness());
 		context->setUniform3f(mUniformAmbient, material->getAmbient());
 		context->setUniform3f(mUniformDiffuse, material->getDiffuse());
 		context->setUniform3f(mUniformSpecular, material->getSpecluar());

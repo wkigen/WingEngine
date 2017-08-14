@@ -59,6 +59,7 @@ namespace WingEngine
 		int32 mUniformSpecular;
 
 		int32 mLightNum;
+		real *mShiness;
 		int32 *mLightType;
 		real *mLightPostion, *mLightDirection, *mLightColor;
 	};

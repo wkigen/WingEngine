@@ -19,9 +19,10 @@ public:
 
 		SmartPtr<Light> light = new DirectionLight();
 		light->setEnable(true);
-		light->translation(Vectorf(10.0,10.0,0.0));
+		light->translation(Vectorf(5.0,5.0,0.0));
 		light->setColor(Color(1.0,1.0,1.0,1.0));
 		light->setDirection(Vectorf(1.0, 1.0, 0.0));
+		light->setShiness(16);
 		RendererSystem::getInstance()->addLight("mainLight",light);
 
 		Image* redImage = ResourceSystem::getInstance()->loadResource<Image>("res/image/red.png");
@@ -33,7 +34,6 @@ public:
 		texture->bindGPUBuffer();
 		SmartPtr<Material> matrial = new Material();
 		matrial->setTexture(texture);
-		matrial->setShiness(16);
 		matrial->setAmbient(Vectorf(1, 1, 1));
 		matrial->setDiffuse(Vectorf(1, 1, 1));
 		matrial->setSpecular(Vectorf(1, 1, 1));
@@ -44,7 +44,6 @@ public:
 		texture2->bindGPUBuffer();
 		SmartPtr<Material> matrial2 = new Material();
 		matrial2->setTexture(texture2);
-		matrial2->setShiness(16);
 		matrial2->setAmbient(Vectorf(1, 1, 1));
 		matrial2->setDiffuse(Vectorf(1, 1, 1));
 		matrial2->setSpecular(Vectorf(1, 1, 1));

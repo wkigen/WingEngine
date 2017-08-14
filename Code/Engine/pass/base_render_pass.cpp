@@ -49,13 +49,15 @@ namespace WingEngine
 		mLightPostion = (real*)WING_ALLOC(sizeof(real) * 3 * MAX_LIGHT);
 		mLightDirection = (real*)WING_ALLOC(sizeof(real) * 3 * MAX_LIGHT);
 		mLightColor = (real*)WING_ALLOC(sizeof(real) * 4 * MAX_LIGHT);
-		mLightNum = RendererSystem::getInstance()->getLightsData(mLightType, mLightPostion, mLightDirection, mLightColor);
+		mShiness = (real*)WING_ALLOC(sizeof(real) * MAX_LIGHT);
+		mLightNum = RendererSystem::getInstance()->getLightsData(mLightType, mLightPostion, mLightDirection, mLightColor, mShiness);
 
 		context->setUniform1d(mUniformLightNum, mLightNum);
 		context->setUniform1dv(mUniformLightType, MAX_LIGHT, mLightType);
 		context->setUniform3fv(mUniformLightPosition, MAX_LIGHT, mLightPostion);
 		context->setUniform3fv(mUniformLightDirection, MAX_LIGHT, mLightDirection);
 		context->setUniform4fv(mUniformLightColor, MAX_LIGHT, mLightColor);
+		context->setUniform1fv(mUniformShiness, MAX_LIGHT, mShiness);
 
 	}
 
@@ -99,7 +101,6 @@ namespace WingEngine
 
 		context->setUniform3f(mUniformViewPosition, viewPosition);
 
-		context->setUniform1f(mUniformShiness, material->getShiness());
 		context->setUniform3f(mUniformAmbient, material->getAmbient());
 		context->setUniform3f(mUniformDiffuse, material->getDiffuse());
 		context->setUniform3f(mUniformSpecular, material->getSpecluar());

@@ -56,7 +56,8 @@ namespace WingEngine
 		mLightPostion = (real*)WING_ALLOC(sizeof(real) * 3 * MAX_LIGHT);
 		mLightDirection = (real*)WING_ALLOC(sizeof(real) * 3 * MAX_LIGHT);
 		mLightColor = (real*)WING_ALLOC(sizeof(real) * 4 * MAX_LIGHT);
-		mLightNum = RendererSystem::getInstance()->getLightsData(mLightType, mLightPostion, mLightDirection, mLightColor);
+		mShiness = (real*)WING_ALLOC(sizeof(real) * MAX_LIGHT);
+		mLightNum = RendererSystem::getInstance()->getLightsData(mLightType, mLightPostion, mLightDirection, mLightColor, mShiness);
 
 		context->setUniform1d(mUniformLightNum, mLightNum);
 		//context->setUniform1dv(mUniformLightType, MAX_LIGHT, mLightType);
@@ -92,6 +93,7 @@ namespace WingEngine
 
 		context->bindRenderTarget(mDepthRenderTarget->getTargetId());
 		context->clear();
+
 	}
 
 	void GeometryTextureLightShadowFirstPass::_render(Renderable* renderable)
@@ -130,6 +132,12 @@ namespace WingEngine
 		context->bindRenderTarget(INVALID_BUFFERS);
 		context->bindArrayBuffers(INVALID_BUFFERS);
 		context->bindElementBuffers(INVALID_BUFFERS);
+
+		WING_FREE(mLightType);
+		WING_FREE(mLightPostion);
+		WING_FREE(mLightDirection);
+		WING_FREE(mLightColor);
+		WING_FREE(mShiness);
 	}
 
 }

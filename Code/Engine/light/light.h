@@ -30,9 +30,12 @@ namespace WingEngine
 		virtual void setDirection(Vectorf direction) { mDirection = direction; }
 		virtual Vectorf getDirection() { return mDirection; }
 
+		virtual void setShiness(real shiness) { mShiness = shiness; }
+		virtual real getShiness() { return mShiness; }
 	protected:
 
 		LightType	mLightType;
+		uint8		mShiness;
 		real		mRange;
 		Color		mColor;
 		bool		mEnable;
