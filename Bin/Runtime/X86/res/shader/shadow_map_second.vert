@@ -1,3 +1,5 @@
+#version 130
+
 attribute vec4 a_position;
 attribute vec4 a_normal;
 attribute vec2 a_textureCoordinate;

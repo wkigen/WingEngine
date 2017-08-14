@@ -25,11 +25,11 @@ namespace WingEngine
 
 		mAttribPosition = context->getAttribLocation(mProgram->getProgramID(), POSITION);
 		mUniformModelMatrix = context->getUniformLocation(mProgram->getProgramID(), MODELVIEWMARTIX);
-		mUniformProjectdViewMatrix = context->getUniformLocation(mProgram->getProgramID(), PROJECTVIEWMARTIX);
+		//mUniformProjectdViewMatrix = context->getUniformLocation(mProgram->getProgramID(), PROJECTVIEWMARTIX);
 		//mUniformViewPosition = context->getUniformLocation(mProgram->getProgramID(), VIEWPOSITION);
 		mUniformLightNum = context->getUniformLocation(mProgram->getProgramID(), LIGHTNUM);
 		//mUniformLightType = context->getUniformLocation(mProgram->getProgramID(), LIGHTTYPE);
-		mUniformLightPosition = context->getUniformLocation(mProgram->getProgramID(), LIGHTPOSITION);
+		//mUniformLightPosition = context->getUniformLocation(mProgram->getProgramID(), LIGHTPOSITION);
 		mUniformLightMVPMatrix = context->getUniformLocation(mProgram->getProgramID(), LIGHTMVPMARTRIX);
 
 		mColorTexture = WING_NEW Texture(mWidth, mHeight,TextureTypeRGB, TextureFormatRGB, ColorFormatRGB, DataElementReal);
@@ -61,7 +61,7 @@ namespace WingEngine
 
 		context->setUniform1d(mUniformLightNum, mLightNum);
 		//context->setUniform1dv(mUniformLightType, MAX_LIGHT, mLightType);
-		context->setUniform3fv(mUniformLightPosition, MAX_LIGHT, mLightPostion);
+		//context->setUniform3fv(mUniformLightPosition, MAX_LIGHT, mLightPostion);
 
 		SmartPtr<Camera> camera = RendererSystem::getInstance()->getCamera();
 
@@ -113,7 +113,7 @@ namespace WingEngine
 
 		//世界矩阵 投影矩阵
 		context->setUniformMatrix44f(mUniformModelMatrix, 1, renderable->getModelViewMatrinx44().mData.data);
-		context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44.mData.data);
+		//context->setUniformMatrix44f(mUniformProjectdViewMatrix, 1, projectMatrix44.mData.data);
 
 		//context->setUniform4f(mUniformViewPosition, viewPosition.x, viewPosition.y, viewPosition.z,1.0);
 	}

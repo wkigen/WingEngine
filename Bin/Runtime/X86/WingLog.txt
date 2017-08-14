@@ -26,7 +26,5 @@ the opengl version is 4.2.0 - Build 10.18.10.3412
 
 
 
-can't no find uniform u_projectViewMatrix
-can't no find uniform u_lightPosition
 can't no find uniform u_lightColor
 can't no find uniform u_lightColor

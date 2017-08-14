@@ -1,3 +1,5 @@
+#version 130
+
 uniform sampler2D u_texture0;
 uniform sampler2D u_texture1;
 
@@ -31,7 +33,7 @@ float spec = 0.3;
 float diffusefract = 1.0;
 float specularfract = 0.0;
 
-float factorShadow = 0.0;  
+float factorShadow = 1.0;  
 
 //光源到物体的方向
 vec3 getLightDirection(int lightType,vec3 lightPos,vec3 lightDir,vec3 desPos)
@@ -82,15 +84,44 @@ void calLight()
 
 }
 
+// void calShadow()
+// {
+//     vec4 light0pos = u_lightMVPMatrtix[0] * v_worldPos;
+//     vec4 depthTexCoord = (light0pos / light0pos.w )*0.5+0.5;
+//     float depth = shadow2DProj(u_texture1, depthTexCoord).r+0.4;  
+//     depth = clamp(depth, 0.0, 1.0);
+//     if (depth != 1.0)//阴影判断  
+//         factorShadow = 0.5; 
+// }
+
 void calShadow()
 {
     vec4 light0pos = u_lightMVPMatrtix[0] * v_worldPos;
-    float bias = max(0.05 * (1.0 - dot(normal, lightdir)), 0.005); 
+    float bias = max(0.01 * (1.0 - dot(normal, lightdir)), 0.001); 
     vec3 projCoords = light0pos.xyz / light0pos.w ;
     projCoords = projCoords * 0.5 + 0.5;
+
+    if(projCoords.z > 1.0){
+        factorShadow = 1.0;
+        return;
+    }
+
     float closestDepth = texture2D(u_texture1, projCoords.xy).r; 
     float currentDepth = projCoords.z ;
-    factorShadow = currentDepth - bias > closestDepth ? 1.0 : 0.0;
+    //if(currentDepth - bias > closestDepth )
+    //   factorShadow = 0.0 ;
+
+    float shadow = 0.0;
+    vec2 texelSize = 1.0 / textureSize(u_texture1, 0);
+    for(int x = -1; x <= 1; ++x)
+    {
+        for(int y = -1; y <= 1; ++y)
+        {
+            float pcfDepth = texture2D(u_texture1, projCoords.xy + vec2(x, y) * texelSize).r; 
+            shadow += currentDepth - bias > pcfDepth ? 0.0 : 1.0;        
+        }    
+    }
+    factorShadow = shadow / 9.0;
 }
 
 void main()
@@ -100,6 +131,6 @@ void main()
     calShadow();
     vec3 text = texture2D(u_texture0, v_textureCoordinate).rgb;
 
-    vec3 lighting = (amb * text * u_ambient + (1.0 - factorShadow) * (diff * text * diffusefract *u_diffuse + spec * text * specularfract * u_specular)) * text;
+    vec3 lighting = (amb * text * u_ambient +  factorShadow * (diff * text * diffusefract *u_diffuse + spec * text * specularfract * u_specular)) * text;
     gl_FragColor = vec4(lighting, 1.0); 
 }
