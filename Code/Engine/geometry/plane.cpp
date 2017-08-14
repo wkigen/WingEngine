@@ -45,7 +45,7 @@ namespace WingEngine
 		setVertixData(vData);
 		setIndeiceData(iData);
 
-		scale(Vectorf(5, 5, 5));
+		scale(Vectorf(10, 10, 10));
 	}
 
 	Plane::~Plane()

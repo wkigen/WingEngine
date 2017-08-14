@@ -19,7 +19,7 @@ public:
 
 		SmartPtr<Light> light = new DirectionLight();
 		light->setEnable(true);
-		light->translation(Vectorf(5.0,5.0,0.0));
+		light->translation(Vectorf(10.0,10.0,0.0));
 		light->setColor(Color(1.0,1.0,1.0,1.0));
 		light->setDirection(Vectorf(1.0, 1.0, 0.0));
 		RendererSystem::getInstance()->addLight("mainLight",light);

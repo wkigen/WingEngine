@@ -5,6 +5,7 @@ namespace WingEngine
 {
 	Node::Node()
 		:mRenderType(RenderTypeNULL)
+		,mPosition(Vectorf())
 	{
 
 	}

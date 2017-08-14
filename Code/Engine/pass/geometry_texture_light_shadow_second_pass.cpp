@@ -33,10 +33,10 @@ namespace WingEngine
 		BaseRenderPass::preRender();
 
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		real lightMvpMatrix44[MAX_LIGHT * 16];
-
+		
 		SmartPtr<Camera> camera = RendererSystem::getInstance()->getCamera();
 
+		real lightMvpMatrix44[MAX_LIGHT * 16];
 		int32 count = 0;
 		for (uint32 ii = 0; ii < 3 * mLightNum; ii = ii + 3)
 		{
@@ -52,7 +52,7 @@ namespace WingEngine
 			Vectorf dir(dirX, dirY, dirZ);
 			Vectorf up(0.0, 1.0, 0.0);
 
-			Matrix44 lookat = mtxLookAt(pos, dir, up);
+			Matrix44 lookat = mtxLookAt(pos, dir.normalize(), up);
 			SmartPtr<Light> light = RendererSystem::getInstance()->getLight(count);
 			Matrix44 vp = lookat * camera->getProjectMatrix44();
 

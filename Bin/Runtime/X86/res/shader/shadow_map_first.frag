@@ -8,8 +8,7 @@ float depth = 0.0;
 
 void calDepth()
 {
-    vec4 pos = v_worldPos / v_worldPos.w;
-    depth = distance(u_lightPosition[0].xyz,pos.xyz);
+    depth = distance(u_lightPosition[0].xyz,v_worldPos.xyz);
 }
 
 void main()

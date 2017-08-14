@@ -47,11 +47,11 @@ namespace WingEngine
 		mWidth = width;
 		mHeight = height;
 
-		Pointf eye(0, 4, 4);
+		Pointf eye(0, 5, 5);
 		Pointf view(0, 0, 0);
 		Vectorf up(0, 1, 0);
 		mCamera = WING_NEW Camera();
-		mCamera->setCamera(45,(real)mWidth /(real)mHeight, 1, 10, eye, view, up);
+		mCamera->setCamera(45,(real)mWidth /(real)mHeight, 1, 50, eye, view, up);
 
 		std::list<Plugin*> rendererDll = PluginSystem::getInstance()->getPlugin(PluginTypeRenderer);
 		std::list<Plugin*>::iterator iter = rendererDll.begin();
@@ -207,12 +207,12 @@ namespace WingEngine
 
 			firstPass->postRender();
 
-			SmartPtr<Texture> depthTexture = firstPass->getColorTexture();
+			SmartPtr<Texture> depthTexture = firstPass->getDepthTexture();
 			
 			//if (!fff)
 			//{
 			//	real* data = new real[800 * 600 * 3];
-			//	mRendererContext->getTextureData(depthTexture->getGPUBufferId(), ColorFormatRGB, DataElementReal, data);
+			//	mRendererContext->getTextureData(depthTexture->getGPUBufferId(), ColorFormatDepth, DataElementReal, data);
 			//	for (size_t i = 0; i < 800 * 600 * 3; i++)
 			//	{
 			//		WING_LOG_ERROR("%f", data[i]);

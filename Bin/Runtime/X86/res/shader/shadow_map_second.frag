@@ -1,5 +1,5 @@
 uniform sampler2D u_texture0;
-uniform sampler2D u_texture1;
+uniform sampler2DShadow u_texture1;
 
 uniform vec3 u_viewPosition;
 
@@ -74,13 +74,11 @@ void calLight()
 
 void calShadow()
 {
-    vec4 pos = v_worldPos / v_worldPos.w;
-    vec4 light0pos = u_lightMVPMatrtix[0] * pos;
-    vec2 depthTexCoord = (light0pos.xy / light0pos.w + vec2(1.0,1.0))*0.5;
-    float lengthToLight = distance(u_lightPosition[0].xyz,pos.xyz);
-    vec4 vd = texture2D(u_texture1,depthTexCoord);
-    float depth = vd.x +vd.y*255.0+vd.z*65535.0;
-    if (lengthToLight > depth)//阴影判断  
+    vec4 light0pos = u_lightMVPMatrtix[0] * v_worldPos;
+    vec4 depthTexCoord = (light0pos / light0pos.w )*0.5+0.5;
+    float depth = shadow2DProj(u_texture1, depthTexCoord).r+0.4;  
+    depth = clamp(depth, 0.0, 1.0);
+    if (depth != 1.0)//阴影判断  
         factorShadow = 0.5; 
 }
 
@@ -90,5 +88,4 @@ void main()
     calShadow();
     vec3 text = texture2D(u_texture0, v_textureCoordinate).rgb;
     gl_FragColor = vec4(amb * text * u_ambient + diff * text * diffusefract *u_diffuse + spec * text * specularfract * u_specular, 1.0) * factorShadow;
-    //gl_FragColor = texture2D(u_texture1, v_textureCoordinate);
 }
