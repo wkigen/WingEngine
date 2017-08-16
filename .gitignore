@@ -18,6 +18,8 @@ Code/3rdparty/LibPNG/Debugx86
 Code/3rdparty/LibPNG/Debugx64
 Code/3rdparty/zLib/Debugx86
 Code/3rdparty/zLib/Debugx64
+Code/3rdparty/freetype28/objs
+Code/3rdparty/freetype28/objs
 Code/Core/Debugx86
 Code/Core/Debugx64
 Code/Engine/Debugx86
