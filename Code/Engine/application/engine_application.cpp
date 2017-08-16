@@ -3,6 +3,8 @@
 #include "plugin\plugin_system.h"
 #include "system\wing_system.h"
 #include "resource\resource_system.h"
+#include "font\font_system.h"
+
 using namespace WingCore;
 
 namespace WingEngine
@@ -27,12 +29,16 @@ namespace WingEngine
 		WingSystem::getInstance()->create();
 		ResourceSystem::getInstance()->create();
 
+		FontSystem::getInstance()->create();
+
 		RendererSystem::getInstance()->create(mWindow->getHandle(),mWindow->getWidth(),mWindow->getHeight());
 	}
 
 	void EngineApplication::destroy()
 	{
 		RendererSystem::getInstance()->destroy();
+
+		FontSystem::getInstance()->destroy();
 
 		ResourceSystem::getInstance()->destroy();
 		WingSystem::getInstance()->destroy();

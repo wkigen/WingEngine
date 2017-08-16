@@ -8,15 +8,16 @@
 
 using namespace WingCore;
 
+#define RESOURCE_TYPE(type)		const static uint32 StaticResourceType = type; 
+
 namespace WingEngine
 {
-
-#define RESOURCE_TYPE(type)		const static uint32 StaticResourceType = type; 
 
 	class WING_ENGINE_API Resource:public Object
 	{
 
 	public:
+
 		RESOURCE_TYPE(ResourceTypeNull)
 
 		Resource();

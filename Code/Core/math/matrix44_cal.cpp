@@ -59,6 +59,36 @@ namespace WingCore
 		return mtxLookAt(eyev, tmp, up);
 	}
 
+	Matrix44 mtxOrthoLh(real _width, real _height, real _nearPlane, real _farPlane)
+	{
+		real w_2(_width / 2);
+		real h_2(_height / 2);
+		return mtxOrthLRBT(-w_2, w_2, -h_2, h_2, _nearPlane, _farPlane);
+	}
+
+	Matrix44 mtxOrthoRh(real _width, real _height, real _nearPlane, real _farPlane)
+	{
+		return lhToRh(mtxOrthoLh(_width, _height, _nearPlane, _farPlane));
+	}
+
+	Matrix44 mtxOrthLRBT(real _left, real _right, real _bottom, real _top,real _nearPlane, real _farPlane)
+	{
+		real q(real(1) / (_farPlane - _nearPlane));
+		real invWidth(real(1) / (_right - _left));
+		real invHeight(real(1) / (_top - _bottom));
+
+		float m[4][4] = { 0 };
+		m[0][0] = invWidth + invWidth;
+		m[1][1] = invHeight + invHeight;
+		m[2][2] = q;
+		m[3][0] = -(_left + _right) * invWidth;
+		m[3][1] = -(_top + _bottom) * invHeight;
+		m[3][2] = -_nearPlane * q;
+		m[3][3] = 1;
+
+		return Matrix44(m);
+	}
+
 	Matrix44 mtxProjectLh(real _fovy, real _aspect, real _near, real _far)
 	{
 		const real height = 1.0f / Math<real>::tan(Math<real>::toRad(_fovy)*0.5f);

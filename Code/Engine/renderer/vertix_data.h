@@ -16,7 +16,7 @@ namespace WingEngine
 		VertixData();
 		~VertixData();
 
-		void* createData(uint64 num, DataElement* dataElement);
+		void* createData(uint64 num, DataElement* dataElement, BufferDataState mBufferDataState = BufferDataStateStaticDraw);
 
 		void* getData() { return mData; }
 
@@ -29,6 +29,7 @@ namespace WingEngine
 		void bindGPUBuffer();
 
 		uint32 getGPUBufferId() { return mGPUBufferId; }
+
 	private:
 		//data struct
 		//POSITION       NORMAL         TEXTURE_COORDINATE
@@ -38,6 +39,7 @@ namespace WingEngine
 		SmartPtr<DataElement> mDataElement;
 		uint64 mDataSize;
 		uint32 mGPUBufferId;
+		BufferDataState mBufferDataState;
 	};
 
 

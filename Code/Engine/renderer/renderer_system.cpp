@@ -18,6 +18,8 @@
 #include "pass\geometry_texture_light_shadow_first_pass.h"
 #include "pass\geometry_texture_light_shadow_second_pass.h"
 
+#include "pass\font_base_pass.h"
+
 using namespace WingCore;
 
 namespace WingEngine
@@ -51,7 +53,7 @@ namespace WingEngine
 		Pointf view(0, 0, 0);
 		Vectorf up(0, 1, 0);
 		mCamera = WING_NEW Camera();
-		mCamera->setCamera(45,(real)mWidth /(real)mHeight, 1, 50, eye, view, up);
+		mCamera->setCamera(width, height,45,(real)mWidth /(real)mHeight, 1, 50, eye, view, up);
 
 		std::list<Plugin*> rendererDll = PluginSystem::getInstance()->getPlugin(PluginTypeRenderer);
 		std::list<Plugin*>::iterator iter = rendererDll.begin();
@@ -110,6 +112,10 @@ namespace WingEngine
 		SmartPtr<BaseRenderPass> baseRenderPass = WING_NEW BaseRenderPass();
 		baseRenderPass->init();
 		mRenderPass["BaseRenderPass"] = baseRenderPass;
+
+		//SmartPtr<FontBasePass> fontBasePass = WING_NEW FontBasePass();
+		//fontBasePass->init();
+		//mRenderPass["fontBasePass"] = fontBasePass;
 
 		return true;
 	}

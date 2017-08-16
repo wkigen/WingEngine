@@ -7,7 +7,7 @@
 
 namespace WingCore
 {
-	class WING_CORE_API Reader
+	class WING_CORE_API Reader: public Object
 	{
 	public:
 		Reader();

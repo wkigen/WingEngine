@@ -78,7 +78,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>.\;..\Core\;..\3rdparty\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;..\Core\;..\3rdparty\;..\3rdparty\freetype28\include\;</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WING_DEBUG;WING_ENGINE_EXPORTS;WING_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
@@ -87,7 +87,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalLibraryDirectories>..\..\Bin\Lib\X86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WingCoreD.lib;zlib.lib;LibPNG.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>WingCoreD.lib;zlib.lib;LibPNG.lib;freetype28D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -127,7 +127,12 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="application\engine_application.h" />
     <ClInclude Include="common\constant.h" />
     <ClInclude Include="common\engine_defines.h" />
+    <ClInclude Include="font\character.h" />
+    <ClInclude Include="font\font.h" />
+    <ClInclude Include="font\font_reader.h" />
+    <ClInclude Include="font\font_system.h" />
     <ClInclude Include="geometry\cube.h" />
+    <ClInclude Include="geometry\font_plane.h" />
     <ClInclude Include="geometry\geometry.h" />
     <ClInclude Include="geometry\plane.h" />
     <ClInclude Include="light\light.h" />
@@ -139,6 +144,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="mesh\submesh.h" />
     <ClInclude Include="pass\base_pass.h" />
     <ClInclude Include="pass\base_render_pass.h" />
+    <ClInclude Include="pass\font_base_pass.h" />
     <ClInclude Include="pass\geometry_color_pass.h" />
     <ClInclude Include="pass\geometry_texture_light_shadow_second_pass.h" />
     <ClInclude Include="pass\geometry_texture_light_pass.h" />
@@ -178,7 +184,12 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp" />
+    <ClCompile Include="font\character.cpp" />
+    <ClCompile Include="font\font.cpp" />
+    <ClCompile Include="font\font_reader.cpp" />
+    <ClCompile Include="font\font_system.cpp" />
     <ClCompile Include="geometry\cube.cpp" />
+    <ClCompile Include="geometry\font_plane.cpp" />
     <ClCompile Include="geometry\geometry.cpp" />
     <ClCompile Include="geometry\plane.cpp" />
     <ClCompile Include="light\light.cpp" />
@@ -189,6 +200,7 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
     <ClCompile Include="mesh\submesh.cpp" />
     <ClCompile Include="pass\base_pass.cpp" />
     <ClCompile Include="pass\base_render_pass.cpp" />
+    <ClCompile Include="pass\font_base_pass.cpp" />
     <ClCompile Include="pass\geometry_color_pass.cpp" />
     <ClCompile Include="pass\geometry_texture_light_shadow_second_pass.cpp" />
     <ClCompile Include="pass\geometry_texture_light_pass.cpp" />

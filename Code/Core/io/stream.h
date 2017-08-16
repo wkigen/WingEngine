@@ -3,7 +3,7 @@
 
 #include "common\defines.h"
 #include "common\platform.h"
-
+#include "base\object.h"
 
 namespace WingCore
 {
@@ -28,7 +28,7 @@ namespace WingCore
 		};
 	};
 
-	struct WING_CORE_API Stream
+	struct WING_CORE_API Stream : public Object
 	{
 		virtual uint64	read(void* dst, uint64 size) { return 0; };
 		virtual uint64	write(void* src, uint64 size) { return 0; };

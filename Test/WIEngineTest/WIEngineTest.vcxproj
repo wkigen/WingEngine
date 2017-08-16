@@ -78,7 +78,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\Code\Engine;..\..\Code\Core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Code\Engine;..\..\Code\Core;..\..\Code\3rdparty\;..\..\Code\3rdparty\freetype28\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalDependencies>WingCoreD.lib;WingEngineD.lib;%(AdditionalDependencies)</AdditionalDependencies>

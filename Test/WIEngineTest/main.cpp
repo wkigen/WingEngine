@@ -8,6 +8,7 @@ class App :public EngineApplication
 public:
 	virtual bool init()
 	{
+		Font* font = ResourceSystem::getInstance()->loadResource<Font>("res/font/simhei.ttf");
 
 		SmartPtr<Cube> cube = new Cube();
 		cube->setRenderPass(RendererSystem::getInstance()->getRenderPass("BaseRenderPass"));

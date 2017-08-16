@@ -14,7 +14,6 @@ namespace WingEngine
 	{
 	public:
 		RESOURCE_TYPE(ResourceTypeMesh)
-
 	public:
 		Mesh();
 		~Mesh();

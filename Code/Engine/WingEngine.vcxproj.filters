@@ -37,6 +37,9 @@
     <Filter Include="plugin">
       <UniqueIdentifier>{73493ce1-9476-434c-a49b-b0148327e521}</UniqueIdentifier>
     </Filter>
+    <Filter Include="font">
+      <UniqueIdentifier>{441189e5-b445-4820-a2eb-5a44629e3886}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="common\engine_defines.h">
@@ -190,6 +193,24 @@
     <ClInclude Include="light\direction_light.h">
       <Filter>light</Filter>
     </ClInclude>
+    <ClInclude Include="font\font_system.h">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="font\font.h">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="font\font_reader.h">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="pass\font_base_pass.h">
+      <Filter>pass</Filter>
+    </ClInclude>
+    <ClInclude Include="geometry\font_plane.h">
+      <Filter>geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="font\character.h">
+      <Filter>font</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp">
@@ -314,6 +335,24 @@
     </ClCompile>
     <ClCompile Include="light\direction_light.cpp">
       <Filter>light</Filter>
+    </ClCompile>
+    <ClCompile Include="font\font_system.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="font\font.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="font\font_reader.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="pass\font_base_pass.cpp">
+      <Filter>pass</Filter>
+    </ClCompile>
+    <ClCompile Include="geometry\font_plane.cpp">
+      <Filter>geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="font\character.cpp">
+      <Filter>font</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

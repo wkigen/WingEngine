@@ -1,7 +1,6 @@
 #ifndef _WING_ENGINE_RESOURCE_SYSTEM_H_
 #define _WING_ENGINE_RESOURCE_SYSTEM_H_
 
-
 #include "base\smart_ptr.h"
 #include "base\singleton.h"
 #include "resource.h"
@@ -45,9 +44,9 @@ namespace WingEngine
 
 		bool				mCreate;
 
-		std::map<std::string, SmartPtr<Resource>>	mResource[ResourceTypeMax];
-		std::map<uint32, ResourceWriter*>			mResourceWriters;
-		std::map<uint32, ResourceReader*>			mResourceReaders;
+		std::map<std::string, SmartPtr<Resource>>			mResource[ResourceTypeMax];
+		std::map<uint32, SmartPtr<ResourceWriter>>			mResourceWriters;
+		std::map<uint32, SmartPtr< ResourceReader>>			mResourceReaders;
 	};
 	
 
@@ -57,7 +56,7 @@ namespace WingEngine
 	T* ResourceSystem::loadResource(std::string name)
 	{
 		uint32 type = T::StaticResourceType;
-		std::map<uint32, ResourceReader*>::iterator itor = mResourceReaders.find(type);
+		std::map<uint32, SmartPtr<ResourceReader>>::iterator itor = mResourceReaders.find(type);
 		if (itor != mResourceReaders.end())
 		{
 			FileStream stream;

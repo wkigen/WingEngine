@@ -8,6 +8,12 @@
 
 #define MAX_LIGHT 5
 
+enum BufferDataState
+{
+	BufferDataStateStaticDraw,
+	BufferDataStateDynamicDraw,
+};
+
 enum PluginType
 {
 	PluginTypeNull,
@@ -20,6 +26,7 @@ enum ResourceType
 	ResourceTypeNull,
 	ResourceTypeConfig,
 	ResourceTypeImage,
+	ResourceTypeFont,
 	ResourceTypeMesh,
 	ResourceTypeMax,
 };
@@ -30,6 +37,7 @@ enum RenderType
 	RenderTypeNULL,
 	RenderTypeGeometry,
 	RenderTypeMesh,
+	RenderTypeFont
 };
 
 

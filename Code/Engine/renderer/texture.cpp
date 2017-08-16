@@ -43,7 +43,8 @@ namespace WingEngine
 
 	Texture::~Texture()
 	{
-
+		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
+		context->deleteTexture(mGPUBufferId);
 	}
 
 	void Texture::bindGPUBuffer() 

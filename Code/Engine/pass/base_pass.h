@@ -41,6 +41,7 @@ namespace WingEngine
 
 		int32 mUniformModelMatrix;
 		int32 mUniformProjectdViewMatrix;
+		int32 mUniformOrthoViewMatrix;
 		int32 mUniformTransposeInverseMatrix;
 		int32 mAttribTextureCoordinate;
 		int32 mUniformTexture;

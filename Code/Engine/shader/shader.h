@@ -14,6 +14,7 @@
 
 #define VIEWPOSITION				"u_viewPosition"
 #define PROJECTVIEWMARTIX			"u_projectViewMatrix"
+#define ORTHOVIEWMARTIX				"u_orthoViewMatrix"
 #define MODELVIEWMARTIX				"u_modelViewMatrix"
 #define PROJECTMODELVIEWMARTIX		"u_projectModelViewMatrix"
 #define TRANSPOSEINVERSEMATRIX		"u_transposeInverseMatrix"

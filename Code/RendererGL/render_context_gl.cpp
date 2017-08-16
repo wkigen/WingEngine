@@ -155,6 +155,13 @@ namespace WingRendererGL
 		glActiveTexture(WETType2TType(textureId));
 	}
 
+	void RendererContextGL::bingSubDataBuffer(uint32 bufferId, uint64 size, void* data)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, bufferId);
+		glBufferSubData(GL_ARRAY_BUFFER, 0,size, data);
+		glBindBuffer(GL_ARRAY_BUFFER, INVALID_BUFFERS);
+	}
+
 	int32 RendererContextGL::bindStaticArrayBuffers(uint64 size, void* data)
 	{
 		GLuint bufferId;
@@ -190,7 +197,7 @@ namespace WingRendererGL
 
 	int32 RendererContextGL::bindTextureBuffers(TextureFormat textureFormat, uint32 width, uint32 height, ColorFormat format, DataElementType dataType, void* pixels)
 	{
-		unsigned int textureID;
+		uint32 textureID;
 		glGenTextures(1, &textureID);
 		glBindTexture(GL_TEXTURE_2D, textureID);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -250,6 +257,11 @@ namespace WingRendererGL
 	void RendererContextGL::bindTexture(uint32 bufferId)
 	{
 		glBindTexture(GL_TEXTURE_2D,bufferId);
+	}
+
+	void RendererContextGL::deleteTexture(uint32 bufferId)
+	{
+		glDeleteTextures(1, &bufferId);
 	}
 
 	void RendererContextGL::bindRenderTarget(uint32 renderTarget)

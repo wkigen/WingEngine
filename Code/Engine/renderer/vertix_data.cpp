@@ -15,7 +15,7 @@ namespace WingEngine
 		WING_FREE(mData)
 	}
 
-	void* VertixData::createData(uint64 num, DataElement* dataElement)
+	void* VertixData::createData(uint64 num, DataElement* dataElement, BufferDataState mBufferDataState)
 	{
 		mDataNum = num;
 		mDataElement = dataElement;
@@ -27,7 +27,14 @@ namespace WingEngine
 	void VertixData::bindGPUBuffer()
 	{
 		RendererContext* context = RendererSystem::getInstance()->getRendererContext();
-		mGPUBufferId = context->bindStaticArrayBuffers(mDataSize, mData);
+		if (mBufferDataState == BufferDataStateDynamicDraw)
+		{
+			mGPUBufferId = context->bindDynamicArrayBuffers(mDataSize, mData);
+		}
+		else
+		{
+			mGPUBufferId = context->bindStaticArrayBuffers(mDataSize, mData);
+		}
 	}
 
 }

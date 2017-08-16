@@ -35,6 +35,7 @@ namespace WingRendererGL
 
 		virtual void activityTexture(TextureID textureId);
 
+		virtual void bingSubDataBuffer(uint32 bufferId, uint64 size, void* data);
 		virtual int32 bindStaticArrayBuffers(uint64 size, void* data);
 		virtual int32 bindDynamicArrayBuffers(uint64 size, void* data);
 		virtual int32 bindElementBuffers(uint64 size, void* data);
@@ -45,6 +46,7 @@ namespace WingRendererGL
 		virtual void bindArrayBuffers(uint32 bufferId);
 		virtual void bindElementBuffers(uint32 bufferId);
 		virtual void bindTexture(uint32 bufferId);
+		virtual void deleteTexture(uint32 bufferId);
 		virtual void bindRenderTarget(uint32 renderTarget);
 
 		virtual void enableDepth(bool enable);

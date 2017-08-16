@@ -41,6 +41,7 @@ namespace WingEngine
 
 		virtual void		activityTexture(TextureID textureId) = 0;
 
+		virtual void		bingSubDataBuffer(uint32 bufferId, uint64 size, void* data) = 0;
 		virtual int32		bindStaticArrayBuffers(uint64 size, void* data) = 0;
 		virtual int32		bindDynamicArrayBuffers(uint64 size, void* data) = 0;
 		virtual int32		bindElementBuffers(uint64 size, void* data) = 0;
@@ -50,6 +51,7 @@ namespace WingEngine
 		virtual void		bindArrayBuffers(uint32 bufferId) = 0;
 		virtual void		bindElementBuffers(uint32 bufferId) = 0;
 		virtual void		bindTexture(uint32 bufferId) = 0;
+		virtual void		deleteTexture(uint32 bufferId) = 0;
 		virtual void		bindRenderTarget(uint32 renderTarget) = 0;
 		virtual void		getTextureData(uint32 textureId, ColorFormat format, DataElementType dataType, void* pixels) = 0;
 
