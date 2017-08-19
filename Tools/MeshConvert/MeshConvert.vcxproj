@@ -71,7 +71,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(Configuration)x86\</OutDir>
     <IntDir>$(Configuration)x86\</IntDir>
-    <TargetName>meshconvertD</TargetName>
+    <TargetName>$(ProjectName)D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(Configuration)x64\</OutDir>
+    <IntDir>$(Configuration)x64\</IntDir>
+    <TargetName>$(ProjectName)D</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -83,7 +88,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>..\..\Bin\Lib\X86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>zlib.lib;assimp-vc140-mt.lib;WingCoreD.lib;WingEngineD.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>zlibD.lib;assimp-vc140-mt.lib;WingCoreD.lib;WingEngineD.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy Debugx86\MeshConvertD.exe ..\..\Bin\Runtime\x86\</Command>
@@ -94,7 +99,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\Code\Core;include;..\..\Code\3rdparty\zlib;..\..\Code\3rdparty;..\..\Code\Engine;</AdditionalIncludeDirectories>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>copy Debugx64\MeshConvertD.exe ..\..\Bin\Runtime\x64\</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalLibraryDirectories>..\..\Bin\Lib\X64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>zlibD.lib;assimp-vc140-mt.lib;WingCoreD.lib;WingEngineD.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

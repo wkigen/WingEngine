@@ -69,8 +69,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(Configuration)x86\</OutDir>
-    <IntDir>$(Configuration)x86\</IntDir>
+    <OutDir>$(Configuration)$(PlatformTarget)\</OutDir>
+    <IntDir>$(Configuration)$(PlatformTarget)\</IntDir>
+    <TargetName>$(ProjectName)D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(Configuration)$(PlatformTarget)\</OutDir>
+    <IntDir>$(Configuration)$(PlatformTarget)\</IntDir>
     <TargetName>$(ProjectName)D</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -86,7 +91,7 @@
       <AdditionalLibraryDirectories>..\..\Bin\Lib\X86</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>copy Debugx86\WIEngineTestD.exe ..\..\Bin\Runtime\x86\</Command>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) ..\..\Bin\Runtime\$(PlatformTarget)\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -94,7 +99,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\Code\Engine;..\..\Code\Core;..\..\Code\3rdparty\;..\..\Code\3rdparty\freetype28\include\;</AdditionalIncludeDirectories>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>..\..\Bin\Lib\X64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>WingCoreD.lib;WingEngineD.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) ..\..\Bin\Runtime\$(PlatformTarget)\</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

@@ -23,6 +23,9 @@ namespace WingEngine
 			return false;
 		}
 		mCreate = true;
+
+		open("WingRendererGLD.dll");
+
 		return true;
 	}
 

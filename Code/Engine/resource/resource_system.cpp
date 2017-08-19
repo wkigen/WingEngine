@@ -52,7 +52,7 @@ namespace WingEngine
 	void ResourceSystem::addReader(uint32 type, ResourceReader* reader)
 	{
 		std::map<uint32, SmartPtr<ResourceReader>>::iterator itor = mResourceReaders.find(type);
-		if (itor == mResourceReaders.end())
+		if (itor != mResourceReaders.end())
 			WING_LOG_WARN("is exist reader of type[%d]", type);
 
 		mResourceReaders[type] = reader;

@@ -38,7 +38,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -69,9 +69,15 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(Configuration)x86\</OutDir>
-    <IntDir>$(Configuration)x86\</IntDir>
+    <OutDir>$(Configuration)$(PlatformTarget)\</OutDir>
+    <IntDir>$(Configuration)$(PlatformTarget)\</IntDir>
     <TargetName>$(ProjectName)D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(Configuration)$(PlatformTarget)\</OutDir>
+    <IntDir>$(Configuration)$(PlatformTarget)\</IntDir>
+    <TargetName>$(ProjectName)D</TargetName>
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -82,12 +88,12 @@
       <PreprocessorDefinitions>WING_DEBUG;WING_ENGINE_EXPORTS;WING_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
-      <Command>copy Debugx86\WingEngineD.dll ..\..\Bin\Runtime\x86\
-copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
+      <Command>copy $(OutDir)$(TargetName).lib ..\..\Bin\Lib\$(PlatformTarget)\
+copy $(OutDir)$(TargetName).dll ..\..\Bin\Runtime\$(PlatformTarget)\</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalLibraryDirectories>..\..\Bin\Lib\X86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WingCoreD.lib;zlib.lib;LibPNG.lib;freetype28D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\Bin\Lib\$(PlatformTarget)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>WingCoreD.lib;zlibD.lib;LibPNGD.lib;freetype28D.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -95,7 +101,17 @@ copy Debugx86\WingEngineD.lib ..\..\Bin\Lib\x86\</Command>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>.\;..\Core\;..\3rdparty\;..\3rdparty\freetype28\include\;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WING_DEBUG;WING_ENGINE_EXPORTS;WING_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName).lib ..\..\Bin\Lib\$(PlatformTarget)\
+copy $(OutDir)$(TargetName).dll ..\..\Bin\Runtime\$(PlatformTarget)\</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalLibraryDirectories>..\..\Bin\Lib\$(PlatformTarget)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>WingCoreD.lib;zlibD.lib;LibPNGD.lib;freetype28D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

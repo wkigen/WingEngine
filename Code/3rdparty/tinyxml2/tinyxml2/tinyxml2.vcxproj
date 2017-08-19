@@ -60,7 +60,7 @@
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Dll|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset>v140</PlatformToolset>
@@ -144,9 +144,10 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Dll|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>Debugx86</OutDir>
-    <IntDir>Debugx86</IntDir>
+    <OutDir>$(Configuration)$(PlatformTarget)\</OutDir>
+    <IntDir>$(Configuration)$(PlatformTarget)\</IntDir>
     <TargetName>$(ProjectName)D</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Lib|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -155,8 +156,10 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Dll|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)bin\$(Platform)-$(Configuration)\</OutDir>
-    <IntDir>$(SolutionDir)temp\$(Platform)-$(Configuration)\</IntDir>
+    <OutDir>$(Configuration)$(PlatformTarget)\</OutDir>
+    <IntDir>$(Configuration)$(PlatformTarget)\</IntDir>
+    <TargetName>$(ProjectName)D</TargetName>
+    <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-Lib|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -200,7 +203,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>copy Debugx86\tinyxml2D.lib ..\..\..\..\Bin\Lib\x86\</Command>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) ..\..\..\Bin\Lib\$(PlatformTarget)\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug-Lib|x64'">
@@ -228,6 +231,9 @@
       <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) ..\..\..\Bin\Lib\$(PlatformTarget)\</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-Lib|Win32'">
     <ClCompile>

@@ -12,11 +12,11 @@ public:
 
 		SmartPtr<Cube> cube = new Cube();
 		cube->setRenderPass(RendererSystem::getInstance()->getRenderPass("BaseRenderPass"));
-		SceneSystem::getInstance()->addNode("cube",cube);
+		SceneSystem::getInstance()->addNode("cube", SmartPtr<Node>(cube));
 
 		SmartPtr<Plane> plane = new Plane();
 		plane->setRenderPass(RendererSystem::getInstance()->getRenderPass("BaseRenderPass"));
-		SceneSystem::getInstance()->addNode("plane", plane);
+		SceneSystem::getInstance()->addNode("plane", SmartPtr<Node>(plane));
 
 		SmartPtr<Light> light = new DirectionLight();
 		light->setEnable(true);
