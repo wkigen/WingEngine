@@ -38,7 +38,7 @@
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
@@ -69,9 +69,15 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(Configuration)x86\</OutDir>
-    <IntDir>$(Configuration)x86\</IntDir>
+    <OutDir>$(Configuration)$(PlatformTarget)\</OutDir>
+    <IntDir>$(Configuration)$(PlatformTarget)\</IntDir>
     <TargetName>$(ProjectName)D</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(Configuration)$(PlatformTarget)\</OutDir>
+    <IntDir>$(Configuration)$(PlatformTarget)\</IntDir>
+    <TargetName>$(ProjectName)D</TargetName>
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -82,11 +88,11 @@
       <PreprocessorDefinitions>WING_DEBUG;WING_RENDERERGL_EXPORTS;WING_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <PostBuildEvent>
-      <Command>copy Debugx86\WingRendererGLD.dll ..\..\Bin\Runtime\X86\</Command>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) ..\..\Bin\Runtime\$(PlatformTarget)\</Command>
     </PostBuildEvent>
     <Link>
-      <AdditionalLibraryDirectories>..\..\Bin\Lib\X86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WingEngineD.lib;WingCoreD.lib;glew32.lib;Opengl32.lib;DelayImp.lib;gdi32.lib;psapi.lib;user32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\Bin\Lib\$(PlatformTarget)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>WingEngineD.lib;WingCoreD.lib;glew32.lib;Opengl32.lib;DelayImp.lib;gdi32.lib;psapi.lib;user32.lib;</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -94,7 +100,16 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\Core;..\Engine;..\3rdparty;</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WING_DEBUG;WING_RENDERERGL_EXPORTS;WING_PLATFORM_WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) ..\..\Bin\Runtime\$(PlatformTarget)\</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalLibraryDirectories>..\..\Bin\Lib\$(PlatformTarget)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>WingEngineD.lib;WingCoreD.lib;glew32.lib;Opengl32.lib;DelayImp.lib;gdi32.lib;psapi.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
