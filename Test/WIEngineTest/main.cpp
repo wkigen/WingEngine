@@ -8,15 +8,19 @@ class App :public EngineApplication
 public:
 	virtual bool init()
 	{
-		Font* font = ResourceSystem::getInstance()->loadResource<Font>("res/font/simhei.ttf");
+
+		SmartPtr<Font> font = ResourceSystem::getInstance()->loadResource<Font>("res/font/simhei.ttf");
+
+		//SmartPtr<FontPlane> fontPlane = WING_NEW FontPlane();
+		//SceneSystem::getInstance()->addNode("fontPlane", SmartPtr<Node>(fontPlane));
 
 		SmartPtr<Cube> cube = new Cube();
 		cube->setRenderPass(RendererSystem::getInstance()->getRenderPass("BaseRenderPass"));
-		SceneSystem::getInstance()->addNode("cube",cube);
+		SceneSystem::getInstance()->addNode("cube", SmartPtr<Node>(cube));
 
 		SmartPtr<Plane> plane = new Plane();
 		plane->setRenderPass(RendererSystem::getInstance()->getRenderPass("BaseRenderPass"));
-		SceneSystem::getInstance()->addNode("plane", plane);
+		SceneSystem::getInstance()->addNode("plane", SmartPtr<Node>(plane));
 
 		SmartPtr<Light> light = new DirectionLight();
 		light->setEnable(true);
@@ -26,9 +30,9 @@ public:
 		light->setShiness(16);
 		RendererSystem::getInstance()->addLight("mainLight",light);
 
-		Image* redImage = ResourceSystem::getInstance()->loadResource<Image>("res/image/red.png");
-		Image* whiteImage = ResourceSystem::getInstance()->loadResource<Image>("res/image/white.png");
-		Image* image = ResourceSystem::getInstance()->loadResource<Image>("res/image/test.png");
+		SmartPtr<Image> redImage = ResourceSystem::getInstance()->loadResource<Image>("res/image/red.png");
+		SmartPtr<Image> whiteImage = ResourceSystem::getInstance()->loadResource<Image>("res/image/white.png");
+		SmartPtr<Image> image = ResourceSystem::getInstance()->loadResource<Image>("res/image/test.png");
 
 		//---matrial
 		SmartPtr<Texture> texture = new Texture(redImage);
@@ -55,7 +59,7 @@ public:
 
 	virtual void frame()
 	{
-		Node* cube = SceneSystem::getInstance()->findNode("cube");
+		SmartPtr<Node> cube = SceneSystem::getInstance()->findNode("cube");
 		if (cube)
 		{
 			cube->rotate(Vectorf(0, 1, 0), 0.001);

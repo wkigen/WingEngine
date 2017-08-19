@@ -42,7 +42,7 @@ namespace WingEngine
 	{
 		if (mCreate)
 		{
-			WING_LOG_WARN("DllSystem has been create");
+			WING_LOG_WARN("RendererSystem has been create");
 			return false;
 		}
 		mCreate = true;
@@ -194,11 +194,11 @@ namespace WingEngine
 	{
 
 	}
-	bool fff = false;
+	
 	void RendererSystem::render()
 	{
-		
 		mRendererContext->clear();
+
 		if (mIsShadow)
 		{
 			RenderPass* pass = getRenderPass("GeometryTextureLightShadowFirstPass");
@@ -214,17 +214,6 @@ namespace WingEngine
 			firstPass->postRender();
 
 			SmartPtr<Texture> depthTexture = firstPass->getDepthTexture();
-			
-			//if (!fff)
-			//{
-			//	real* data = new real[800 * 600 * 3];
-			//	mRendererContext->getTextureData(depthTexture->getGPUBufferId(), ColorFormatDepth, DataElementReal, data);
-			//	for (size_t i = 0; i < 800 * 600 * 3; i++)
-			//	{
-			//		WING_LOG_ERROR("%f", data[i]);
-			//	}
-			//	fff = true;
-			//}
 
 			mRendererContext->bindRenderTarget(INVALID_BUFFERS);
 

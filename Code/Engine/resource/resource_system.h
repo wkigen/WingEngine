@@ -22,19 +22,19 @@ namespace WingEngine
 		friend class Singleton<ResourceSystem>;
 
 	public:
-		virtual ~ResourceSystem();
+		~ResourceSystem();
 
 		bool create();
 		void destroy();
 
 		template<class T>
-		T* loadResource(std::string name);
+		SmartPtr<T> loadResource(std::string name);
 
 		template<class T>
-		T* getResource(std::string name);
+		SmartPtr<T> getResource(std::string name);
 
-		void addWriter(uint32 type, ResourceWriter* writer);
-		void addReader(uint32 type, ResourceReader* reader);
+		void addWriter(uint32 type, SmartPtr<ResourceWriter> writer);
+		void addReader(uint32 type, SmartPtr<ResourceReader> reader);
 		
 	private:
 		ResourceSystem();
@@ -46,14 +46,14 @@ namespace WingEngine
 
 		std::map<std::string, SmartPtr<Resource>>			mResource[ResourceTypeMax];
 		std::map<uint32, SmartPtr<ResourceWriter>>			mResourceWriters;
-		std::map<uint32, SmartPtr< ResourceReader>>			mResourceReaders;
+		std::map<uint32, SmartPtr<ResourceReader>>			mResourceReaders;
 	};
 	
 
 
 
 	template<class T>
-	T* ResourceSystem::loadResource(std::string name)
+	SmartPtr<T> ResourceSystem::loadResource(std::string name)
 	{
 		uint32 type = T::StaticResourceType;
 		std::map<uint32, SmartPtr<ResourceReader>>::iterator itor = mResourceReaders.find(type);
@@ -62,27 +62,27 @@ namespace WingEngine
 			FileStream stream;
 			if (FileSystem::getInstance()->openFile(name, stream,ACCESS::Read))
 			{
-				T* resource = WING_NEW T();
+				SmartPtr<T> resource = WING_NEW T();
 				itor->second->setStream(&stream);
 				itor->second->readResource(resource);
-				mResource[type][name] = (Resource*)resource;
+				mResource[type][name] = resource;
 				return resource;
 			}
 		}
 		else
 		{
-			WING_LOG_WARN("is't exist reader of type[%d]", type);
+			WING_LOG_WARN("isn't exist reader of type[%d]", type);
 		}
 		return nullptr;
 	}
 
 	template<class T>
-	T* ResourceSystem::getResource(std::string name)
+	SmartPtr<T> ResourceSystem::getResource(std::string name)
 	{
 		uint32 type = T::StaticResourceType;
 		std::map<std::string, SmartPtr<Resource>>::iterator itor = mResource[type].find(name);
 		if (itor != mResource[type].end()) {
-			return (T*)itor->second.getPtr();
+			return itor->second;
 		}
 		return nullptr;
 
