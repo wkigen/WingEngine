@@ -211,6 +211,9 @@
     <ClInclude Include="font\character.h">
       <Filter>font</Filter>
     </ClInclude>
+    <ClInclude Include="renderer\render_layer.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\engine_application.cpp">
@@ -353,6 +356,9 @@
     </ClCompile>
     <ClCompile Include="font\character.cpp">
       <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\render_layer.cpp">
+      <Filter>renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

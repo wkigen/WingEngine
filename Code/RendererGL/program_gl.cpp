@@ -13,7 +13,7 @@ namespace WingRendererGL
 
 		glGetShaderiv(obj, GL_INFO_LOG_LENGTH, &infologLength);
 
-		if (infologLength > 0)
+		if (infologLength > 1)
 		{
 			infoLog = (char *)WING_ALLOC(infologLength);
 			glGetShaderInfoLog(obj, infologLength, &charsWritten, infoLog);
@@ -31,7 +31,7 @@ namespace WingRendererGL
 
 		glGetProgramiv(obj, GL_INFO_LOG_LENGTH, &infologLength);
 
-		if (infologLength > 0)
+		if (infologLength > 1)
 		{
 			infoLog = (char *)WING_ALLOC(infologLength);
 			glGetProgramInfoLog(obj, infologLength, &charsWritten, infoLog);

@@ -23,6 +23,7 @@ namespace WingEngine
 		void setDefaultConfig();
 
 		void run();
+
 	private:
 		WingSystem();
 

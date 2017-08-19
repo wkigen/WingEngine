@@ -28,14 +28,12 @@ namespace WingEngine
 		}
 		mCreate = true;
 
-		//todo
-		PluginSystem::getInstance()->open("WingRendererGLD.dll");
-
 		return true;
 	}
 
 	void WingSystem::destroy()
 	{
+
 	}
 
 	void WingSystem::setDefaultConfig()

@@ -38,7 +38,7 @@ namespace WingEngine
 		WING_DELETE(mRootNode);
 	}
 
-	void SceneSystem::addNode(std::string name, Node* node)
+	void SceneSystem::addNode(std::string name, SmartPtr<Node> node)
 	{
 		if (findNode(name) == nullptr)
 		{
@@ -51,7 +51,7 @@ namespace WingEngine
 	}
 
 
-	Node* SceneSystem::findNode(std::string name)
+	SmartPtr<Node> SceneSystem::findNode(std::string name)
 	{
 		std::map<std::string, SmartPtr<Node>>::iterator iter = mNode.find(name);
 		if (iter == mNode.end())

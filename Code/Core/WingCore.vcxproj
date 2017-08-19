@@ -133,6 +133,7 @@ copy Debugx86\WingCoreD.lib ..\..\Bin\Lib\x86\</Command>
     <ClInclude Include="base\smart_ptr.h" />
     <ClInclude Include="common\defines.h" />
     <ClInclude Include="common\platform.h" />
+    <ClInclude Include="console\console.h" />
     <ClInclude Include="dll\dll.h" />
     <ClInclude Include="error\error.h" />
     <ClInclude Include="io\file_stream.h" />
@@ -157,6 +158,7 @@ copy Debugx86\WingCoreD.lib ..\..\Bin\Lib\x86\</Command>
   <ItemGroup>
     <ClCompile Include="application\application.cpp" />
     <ClCompile Include="base\object.cpp" />
+    <ClCompile Include="console\console.cpp" />
     <ClCompile Include="dll\dll.cpp" />
     <ClCompile Include="io\file_stream.cpp" />
     <ClCompile Include="io\file_system.cpp" />

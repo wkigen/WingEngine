@@ -37,7 +37,7 @@ enum RenderType
 	RenderTypeNULL,
 	RenderTypeGeometry,
 	RenderTypeMesh,
-	RenderTypeFont
+	RenderTypeFont,
 };
 
 

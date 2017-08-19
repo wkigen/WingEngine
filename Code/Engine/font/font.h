@@ -35,7 +35,6 @@ namespace WingEngine
 		virtual void addCharacters(int8 text, SmartPtr<Character> character);
 		virtual SmartPtr<Character> getCharacters(int8 text);
 
-
 	private:
 		std::map<int8, SmartPtr<Character>> mCharacters;
 

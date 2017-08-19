@@ -23,10 +23,12 @@ namespace WingEngine
 	{
 		Application::create();
 
+		WingSystem::getInstance()->create();
+
 		FileSystem::getInstance()->create();
+
 		PluginSystem::getInstance()->create();
 
-		WingSystem::getInstance()->create();
 		ResourceSystem::getInstance()->create();
 
 		FontSystem::getInstance()->create();
@@ -41,12 +43,15 @@ namespace WingEngine
 		FontSystem::getInstance()->destroy();
 
 		ResourceSystem::getInstance()->destroy();
-		WingSystem::getInstance()->destroy();
-
+	
 		PluginSystem::getInstance()->destroy();
+
 		FileSystem::getInstance()->detroy();
 
+		WingSystem::getInstance()->destroy();
+
 		Application::destroy();
+
 	}
 
 	void EngineApplication::run()

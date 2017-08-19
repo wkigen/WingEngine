@@ -34,6 +34,9 @@
     <Filter Include="application">
       <UniqueIdentifier>{2da6a12d-a466-47a0-899d-a2140d77ab69}</UniqueIdentifier>
     </Filter>
+    <Filter Include="console">
+      <UniqueIdentifier>{3096bab2-1354-4841-bae5-71aa9b4fc842}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="allocator\allocator.h">
@@ -120,6 +123,9 @@
     <ClInclude Include="math\quaternion.h">
       <Filter>math</Filter>
     </ClInclude>
+    <ClInclude Include="console\console.h">
+      <Filter>console</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dll\dll.cpp">
@@ -169,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="base\object.cpp">
       <Filter>base</Filter>
+    </ClCompile>
+    <ClCompile Include="console\console.cpp">
+      <Filter>console</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

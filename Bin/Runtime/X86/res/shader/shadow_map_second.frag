@@ -84,16 +84,6 @@ void calLight()
 
 }
 
-// void calShadow()
-// {
-//     vec4 light0pos = u_lightMVPMatrtix[0] * v_worldPos;
-//     vec4 depthTexCoord = (light0pos / light0pos.w )*0.5+0.5;
-//     float depth = shadow2DProj(u_texture1, depthTexCoord).r+0.4;  
-//     depth = clamp(depth, 0.0, 1.0);
-//     if (depth != 1.0)//阴影判断  
-//         factorShadow = 0.5; 
-// }
-
 void calShadow()
 {
     vec4 light0pos = u_lightMVPMatrtix[0] * v_worldPos;
@@ -108,8 +98,6 @@ void calShadow()
 
     float closestDepth = texture2D(u_texture1, projCoords.xy).r; 
     float currentDepth = projCoords.z ;
-    //if(currentDepth - bias > closestDepth )
-    //   factorShadow = 0.0 ;
 
     float shadow = 0.0;
     vec2 texelSize = 1.0 / textureSize(u_texture1, 0);

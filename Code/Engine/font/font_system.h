@@ -28,6 +28,8 @@ namespace WingEngine
 		
 		SmartPtr<FontPlane> getFontPlane(std::string text);
 
+		void getCharacters(std::string text, std::list<SmartPtr<Character>> chars);
+
 	private:
 		FontSystem();
 

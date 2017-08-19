@@ -22,9 +22,9 @@ namespace WingEngine
 		bool create();
 		void destroy();
 
-		void addNode(std::string name, Node* node);
+		void addNode(std::string name, SmartPtr<Node> node);
 
-		Node* findNode(std::string name);
+		SmartPtr<Node> findNode(std::string name);
 
 		void removeNode(std::string name);
 
