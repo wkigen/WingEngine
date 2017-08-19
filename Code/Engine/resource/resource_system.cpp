@@ -28,9 +28,9 @@ namespace WingEngine
 		SmartPtr<ImageReader> imageReader = WING_NEW ImageReader();
 		SmartPtr<FontReader> fontReader = WING_NEW FontReader();
 
-		mResourceReaders[ResourceTypeMesh]= meshReader;
-		mResourceReaders[ResourceTypeImage] = imageReader;
-		mResourceReaders[ResourceTypeFont] = fontReader;
+		addReader(ResourceTypeMesh, meshReader);
+		addReader(ResourceTypeImage, imageReader);
+		addReader(ResourceTypeFont, fontReader);
 
 		return true;
 	}
@@ -40,7 +40,7 @@ namespace WingEngine
 
 	}
 
-	void ResourceSystem::addWriter(uint32 type, SmartPtr<ResourceWriter> writer)
+	void ResourceSystem::addWriter(uint32 type, ResourceWriter* writer)
 	{
 		std::map<uint32, SmartPtr<ResourceWriter>>::iterator itor = mResourceWriters.find(type);
 		if (itor == mResourceWriters.end())
@@ -49,10 +49,10 @@ namespace WingEngine
 		mResourceWriters[type] = writer;
 	}
 
-	void ResourceSystem::addReader(uint32 type, SmartPtr<ResourceReader> reader)
+	void ResourceSystem::addReader(uint32 type, ResourceReader* reader)
 	{
 		std::map<uint32, SmartPtr<ResourceReader>>::iterator itor = mResourceReaders.find(type);
-		if (itor != mResourceReaders.end())
+		if (itor == mResourceReaders.end())
 			WING_LOG_WARN("is exist reader of type[%d]", type);
 
 		mResourceReaders[type] = reader;

@@ -18,7 +18,7 @@ namespace WingEngine
 	{
 		if (mCreate)
 		{
-			WING_LOG_WARN("FontSystem has been create");
+			WING_LOG_WARN("DllSystem has been create");
 			return false;
 		}
 		mCreate = true;
@@ -71,18 +71,4 @@ namespace WingEngine
 		return fontPlane;
 	}
 
-	void FontSystem::getCharacters(std::string text, std::list<SmartPtr<Character>> chars)
-	{
-		if (mCurrFont == nullptr)
-		{
-			WING_LOG_WARN("not font can be read");
-			return;
-		}
-
-		for (uint8 i = 0; i < text.size(); i++)
-		{
-			SmartPtr<Character> character = mCurrFont->getCharacters(text.at(i));
-			chars.push_back(character);
-		}
-	}
 }

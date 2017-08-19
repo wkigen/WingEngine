@@ -19,13 +19,10 @@ namespace WingEngine
 	{
 		if (mCreate)
 		{
-			WING_LOG_WARN("PluginSystem has been create");
+			WING_LOG_WARN("DllSystem has been create");
 			return false;
 		}
 		mCreate = true;
-
-		open("WingRendererGLD.dll");
-
 		return true;
 	}
 
