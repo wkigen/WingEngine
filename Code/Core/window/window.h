@@ -10,10 +10,11 @@ namespace WingCore
 #define WING_WINDOW_WIDTH	800
 #define WING_WINDOW_HEIGHT	600
 
-
 	class WING_CORE_API Window
 	{
+
 	public:
+
 		Window();
 		virtual ~Window();
 
@@ -25,7 +26,9 @@ namespace WingCore
 		inline void* getHandle() { return mHandle; };
 		inline uint32 getWidth() { return mWidth; };
 		inline uint32 getHeight() { return mHeight; };
+
 	protected:
+
 		void*	mHandle;
 		uint32	mWidth;
 		uint32	mHeight;

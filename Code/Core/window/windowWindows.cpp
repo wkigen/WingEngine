@@ -5,14 +5,20 @@ namespace WingCore
 
 	long CALLBACK WndProc(HWND hwnd,UINT message,WPARAM wParam,LPARAM lParam)
 	{
+		int fff = 1 + 2;
 		switch (message)
 		{
 		case WM_DESTROY:
 			PostQuitMessage(0);
+			break;
+		case WM_SIZE:
+			RECT rc;
+			GetClientRect(hwnd, &rc);
+			break;
 		default:
-			return DefWindowProc(hwnd, message, wParam, lParam);
+			break;
 		}
-		return (0);
+		return DefWindowProc(hwnd, message, wParam, lParam);;
 	}
 
 	WindowWindows::WindowWindows()
@@ -44,7 +50,7 @@ namespace WingCore
 
 		mHandle = (void*)CreateWindow("WingEngine"
 			, "WingEngine"
-			, WS_SYSMENU |WS_MAXIMIZEBOX | WS_MINIMIZEBOX |WS_VISIBLE&~WS_SIZEBOX
+			, WS_OVERLAPPEDWINDOW
 			, 0
 			, 0
 			, mWidth
@@ -56,6 +62,8 @@ namespace WingCore
 		);
 
 		adjust(mWidth,mHeight);
+
+		MoveWindow((HWND)mHandle, GetSystemMetrics(SM_CXSCREEN) / 2 - mWidth / 2, GetSystemMetrics(SM_CYSCREEN) / 2 - mHeight / 2, mWidth, mHeight, FALSE);
 
 		return true;
 	}

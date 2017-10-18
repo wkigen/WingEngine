@@ -75,10 +75,13 @@ namespace WingEngine
 
 			RendererSystem::getInstance()->render();
 
-			
 		}
-
 		
+	}
+
+	void EngineApplication::adjust(uint32 _width, uint32 _height)
+	{
+
 	}
 
 }

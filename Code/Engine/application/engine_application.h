@@ -22,6 +22,7 @@ namespace WingEngine
 
 		virtual void run();
 
+		virtual void adjust(uint32 _width, uint32 _height);
 	private:
 
 	};

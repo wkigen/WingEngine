@@ -22,7 +22,9 @@ namespace WingCore
 		virtual void frame()=0;
 		virtual void stop();
 
+		virtual void adjust(uint32 _width, uint32 _height) = 0;
 	protected:
+
 		bool	mExit;
 		Window* mWindow;
 
